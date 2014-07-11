@@ -1,4 +1,5 @@
 <?php
+// Procedural approach
 class Keykeeper {
     public function __construct($whattoopen, $close = false ) {
         $whattoopen = strtolower($whattoopen);
@@ -58,8 +59,8 @@ $b = new Keykeeper($openthe[1]);
 $c = new Keykeeper($openthe[2]);
 $d = new Keykeeper($openthe[3]);
 $e = new Keykeeper($openthe[0],true);
-$f = new Keykeeper($openthe[1],true);
-$g = new Keykeeper($openthe[2],true);
+$f = new Keykeeper($openthe[1],1);
+$g = new Keykeeper($openthe[2],"yes");
 $h = new Keykeeper($openthe[3],true);
 
 ?>
