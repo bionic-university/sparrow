@@ -1,0 +1,15 @@
+BionicUniversity\Bundle\WallBundle\Entity\Post:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        text:
+            type: text
+        createdAt:
+            type: datetime
+    lifecycleCallbacks: {  }
