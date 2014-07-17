@@ -1,3 +1,7 @@
+bionic_university_wall:
+    resource: "@BionicUniversityWallBundle/Resources/config/routing.yml"
+    prefix:   /
+
 bionic_university_community:
     resource: "@BionicUniversityCommunityBundle/Resources/config/routing.yml"
     prefix:   /
