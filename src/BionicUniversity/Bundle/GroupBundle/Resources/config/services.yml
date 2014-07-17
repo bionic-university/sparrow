@@ -1,7 +1,0 @@
-parameters:
-#    bionic_university_group.example.class: BionicUniversity\Bundle\GroupBundle\Example
-
-services:
-#    bionic_university_group.example:
-#        class: %bionic_university_group.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
