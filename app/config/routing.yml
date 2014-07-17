@@ -1,8 +1,4 @@
-bionic_university_messages:
-    resource: "@BionicUniversityMessagesBundle/Resources/config/routing.yml"
-    prefix:   /
-
-bionic_university_group:
-    resource: "@BionicUniversityGroupBundle/Resources/config/routing.yml"
+bionic_university_community:
+    resource: "@BionicUniversityCommunityBundle/Resources/config/routing.yml"
     prefix:   /
 
