@@ -1,0 +1,4 @@
+bionic_university_community:
+    resource: "@BionicUniversityCommunityBundle/Resources/config/routing.yml"
+    prefix:   /
+

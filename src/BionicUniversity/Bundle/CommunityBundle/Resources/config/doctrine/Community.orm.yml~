@@ -1,0 +1,19 @@
+BionicUniversity\Bundle\CommunityBundle\Entity\Community:
+    type: entity
+    table: community
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '50'
+        description:
+            type: string
+            length: 255
+        createdAt:
+            type: datetime
+    lifecycleCallbacks: {  }
