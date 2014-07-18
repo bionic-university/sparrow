@@ -7,9 +7,6 @@
 !app/logs/.gitkeep
 /vendor/
 /bin/
-<<<<<<< HEAD
-.idea/
 .DS_Store/
-=======
-/.idea/
->>>>>>> 2a05b1812838ff96664595feb0023c7767b9242f
+.idea/
+*~
