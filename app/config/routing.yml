@@ -1,10 +1,11 @@
-<<<<<<< HEAD
+bionic_university_message:
+    resource: "@BionicUniversityMessageBundle/Resources/config/routing.yml"
+
 bionic_university_wall:
     resource: "@BionicUniversityWallBundle/Resources/config/routing.yml"
-=======
+
 bionic_university_user:
     resource: "@BionicUniversityUserBundle/Resources/config/routing.yml"
->>>>>>> aa00269d7cd15508373a8976bcb25a667d403be8
     prefix:   /
 
 bionic_university_community:
