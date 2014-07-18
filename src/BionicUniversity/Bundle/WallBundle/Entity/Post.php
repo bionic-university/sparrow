@@ -2,8 +2,6 @@
 
 namespace BionicUniversity\Bundle\WallBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Post
  */
@@ -24,11 +22,10 @@ class Post
      */
     private $createdAt;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -38,7 +35,7 @@ class Post
     /**
      * Set text
      *
-     * @param string $text
+     * @param  string $text
      * @return Post
      */
     public function setText($text)
@@ -51,7 +48,7 @@ class Post
     /**
      * Get text
      *
-     * @return string 
+     * @return string
      */
     public function getText()
     {
@@ -61,7 +58,7 @@ class Post
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return Post
      */
     public function setCreatedAt($createdAt)
@@ -74,7 +71,7 @@ class Post
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {

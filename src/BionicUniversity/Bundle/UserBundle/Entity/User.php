@@ -2,8 +2,6 @@
 
 namespace BionicUniversity\Bundle\UserBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * User
  */
@@ -34,11 +32,10 @@ class User
      */
     private $sex;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -48,7 +45,7 @@ class User
     /**
      * Set firstName
      *
-     * @param string $firstName
+     * @param  string $firstName
      * @return User
      */
     public function setFirstName($firstName)
@@ -61,7 +58,7 @@ class User
     /**
      * Get firstName
      *
-     * @return string 
+     * @return string
      */
     public function getFirstName()
     {
@@ -71,7 +68,7 @@ class User
     /**
      * Set lastName
      *
-     * @param string $lastName
+     * @param  string $lastName
      * @return User
      */
     public function setLastName($lastName)
@@ -84,7 +81,7 @@ class User
     /**
      * Get lastName
      *
-     * @return string 
+     * @return string
      */
     public function getLastName()
     {
@@ -94,7 +91,7 @@ class User
     /**
      * Set position
      *
-     * @param string $position
+     * @param  string $position
      * @return User
      */
     public function setPosition($position)
@@ -107,7 +104,7 @@ class User
     /**
      * Get position
      *
-     * @return string 
+     * @return string
      */
     public function getPosition()
     {
@@ -117,7 +114,7 @@ class User
     /**
      * Set sex
      *
-     * @param string $sex
+     * @param  string $sex
      * @return User
      */
     public function setSex($sex)
@@ -130,7 +127,7 @@ class User
     /**
      * Get sex
      *
-     * @return string 
+     * @return string
      */
     public function getSex()
     {

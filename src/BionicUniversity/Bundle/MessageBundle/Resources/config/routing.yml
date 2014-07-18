@@ -5,4 +5,3 @@ bionic_university_message_homepage:
 BionicUniversityMessageBundle_message:
         resource: "@BionicUniversityMessageBundle/Resources/config/routing/message.yml"
         prefix:   /message
-

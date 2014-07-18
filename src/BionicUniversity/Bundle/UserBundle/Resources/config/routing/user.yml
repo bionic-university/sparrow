@@ -28,6 +28,3 @@ user_delete:
     path:     /{id}/delete
     defaults: { _controller: "BionicUniversityUserBundle:User:delete" }
     requirements: { _method: post|delete }
-
-
-

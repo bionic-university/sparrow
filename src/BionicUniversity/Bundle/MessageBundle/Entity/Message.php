@@ -2,8 +2,6 @@
 
 namespace BionicUniversity\Bundle\MessageBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Message
  */
@@ -29,11 +27,10 @@ class Message
      */
     private $body;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -43,7 +40,7 @@ class Message
     /**
      * Set author
      *
-     * @param string $author
+     * @param  string  $author
      * @return Message
      */
     public function setAuthor($author)
@@ -56,7 +53,7 @@ class Message
     /**
      * Get author
      *
-     * @return string 
+     * @return string
      */
     public function getAuthor()
     {
@@ -66,7 +63,7 @@ class Message
     /**
      * Set reciever
      *
-     * @param string $reciever
+     * @param  string  $reciever
      * @return Message
      */
     public function setReciever($reciever)
@@ -79,7 +76,7 @@ class Message
     /**
      * Get reciever
      *
-     * @return string 
+     * @return string
      */
     public function getReciever()
     {
@@ -89,7 +86,7 @@ class Message
     /**
      * Set body
      *
-     * @param string $body
+     * @param  string  $body
      * @return Message
      */
     public function setBody($body)
@@ -102,7 +99,7 @@ class Message
     /**
      * Get body
      *
-     * @return string 
+     * @return string
      */
     public function getBody()
     {

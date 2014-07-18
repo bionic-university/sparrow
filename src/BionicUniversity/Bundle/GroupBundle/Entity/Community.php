@@ -2,8 +2,6 @@
 
 namespace BionicUniversity\Bundle\GroupBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Community
  */
@@ -24,11 +22,10 @@ class Community
      */
     private $description;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -38,7 +35,7 @@ class Community
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string    $name
      * @return Community
      */
     public function setName($name)
@@ -51,7 +48,7 @@ class Community
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -61,7 +58,7 @@ class Community
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string    $description
      * @return Community
      */
     public function setDescription($description)
@@ -74,7 +71,7 @@ class Community
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {

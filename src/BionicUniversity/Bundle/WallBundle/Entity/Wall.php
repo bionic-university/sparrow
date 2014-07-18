@@ -2,8 +2,6 @@
 
 namespace BionicUniversity\Bundle\WallBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Wall
  */
@@ -14,11 +12,10 @@ class Wall
      */
     private $id;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
