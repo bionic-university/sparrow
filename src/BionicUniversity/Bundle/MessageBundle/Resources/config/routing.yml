@@ -1,0 +1,8 @@
+bionic_university_message_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: BionicUniversityMessageBundle:Default:index }
+
+BionicUniversityMessageBundle_message:
+        resource: "@BionicUniversityMessageBundle/Resources/config/routing/message.yml"
+        prefix:   /message
+

@@ -1,7 +1,0 @@
-parameters:
-#    bionic_university_messages.example.class: BionicUniversity\Bundle\MessagesBundle\Example
-
-services:
-#    bionic_university_messages.example:
-#        class: %bionic_university_messages.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
