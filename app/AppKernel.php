@@ -17,11 +17,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new BionicUniversity\Bundle\CommunityBundle\BionicUniversityCommunityBundle(),
-<<<<<<< HEAD
             new BionicUniversity\Bundle\WallBundle\BionicUniversityWallBundle(),
-=======
             new BionicUniversity\Bundle\UserBundle\BionicUniversityUserBundle(),
->>>>>>> aa00269d7cd15508373a8976bcb25a667d403be8
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
