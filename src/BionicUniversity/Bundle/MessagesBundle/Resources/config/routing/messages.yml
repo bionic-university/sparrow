@@ -1,0 +1,30 @@
+messages:
+    path:     /
+    defaults: { _controller: "BionicUniversityMessagesBundle:Messages:index" }
+
+messages_show:
+    path:     /{id}/show
+    defaults: { _controller: "BionicUniversityMessagesBundle:Messages:show" }
+
+messages_new:
+    path:     /new
+    defaults: { _controller: "BionicUniversityMessagesBundle:Messages:new" }
+
+messages_create:
+    path:     /create
+    defaults: { _controller: "BionicUniversityMessagesBundle:Messages:create" }
+    requirements: { _method: post }
+
+messages_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BionicUniversityMessagesBundle:Messages:edit" }
+
+messages_update:
+    path:     /{id}/update
+    defaults: { _controller: "BionicUniversityMessagesBundle:Messages:update" }
+    requirements: { _method: post|put }
+
+messages_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BionicUniversityMessagesBundle:Messages:delete" }
+    requirements: { _method: post|delete }
