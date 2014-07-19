@@ -1,6 +1,5 @@
 BionicUniversity\Bundle\MessageBundle\Entity\Message:
     type: entity
-    table: null
     id:
         id:
             type: integer
@@ -11,12 +10,9 @@ BionicUniversity\Bundle\MessageBundle\Entity\Message:
         author:
             type: string
             length: 255
-            column: Author
-        reciever:
+        receiver:
             type: string
             length: 255
-            column: Reciever
         body:
             type: text
-            column: Body
     lifecycleCallbacks: {  }

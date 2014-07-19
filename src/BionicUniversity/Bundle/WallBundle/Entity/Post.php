@@ -21,6 +21,10 @@ class Post
      * @var \DateTime
      */
     private $createdAt;
+    /**
+     * @var Wall
+     */
+    private $wall;
 
     /**
      * Get id
@@ -76,5 +80,10 @@ class Post
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    public function getWall()
+    {
+        return $this->wall;
     }
 }

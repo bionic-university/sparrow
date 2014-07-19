@@ -7,4 +7,8 @@ BionicUniversity\Bundle\WallBundle\Entity\Wall:
             id: true
             generator:
                 strategy: AUTO
+    oneToMany:
+        posts:
+            targetEntity: BionicUniversity\Bundle\WallBundle\Entity\Post
+            mappedBy: wall
     lifecycleCallbacks: {  }

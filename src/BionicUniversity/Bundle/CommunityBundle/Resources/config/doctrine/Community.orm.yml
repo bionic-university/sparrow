@@ -1,6 +1,5 @@
 BionicUniversity\Bundle\CommunityBundle\Entity\Community:
     type: entity
-    table: community
     id:
         id:
             type: integer
@@ -14,4 +13,3 @@ BionicUniversity\Bundle\CommunityBundle\Entity\Community:
         description:
             type: string
             length: 255
-    lifecycleCallbacks: {  }

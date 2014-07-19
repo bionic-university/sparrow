@@ -5,6 +5,11 @@ namespace BionicUniversity\Bundle\MessageBundle\Entity;
 /**
  * Message
  */
+
+/**
+ * Class Message
+ * @package BionicUniversity\Bundle\MessageBundle\Entity
+ */
 class Message
 {
     /**
@@ -20,12 +25,13 @@ class Message
     /**
      * @var string
      */
-    private $reciever;
+    private $receiver;
 
     /**
      * @var string
      */
     private $body;
+
 
     /**
      * Get id
@@ -40,7 +46,7 @@ class Message
     /**
      * Set author
      *
-     * @param  string  $author
+     * @param  string $author
      * @return Message
      */
     public function setAuthor($author)
@@ -61,32 +67,32 @@ class Message
     }
 
     /**
-     * Set reciever
+     * Set receiver
      *
-     * @param  string  $reciever
+     * @param  string $receiver
      * @return Message
      */
-    public function setReciever($reciever)
+    public function setReceiver($receiver)
     {
-        $this->reciever = $reciever;
+        $this->receiver = $receiver;
 
         return $this;
     }
 
     /**
-     * Get reciever
+     * Get receiver
      *
      * @return string
      */
-    public function getReciever()
+    public function getReceiver()
     {
-        return $this->reciever;
+        return $this->receiver;
     }
 
     /**
      * Set body
      *
-     * @param  string  $body
+     * @param  string $body
      * @return Message
      */
     public function setBody($body)
@@ -105,4 +111,6 @@ class Message
     {
         return $this->body;
     }
+
+
 }
