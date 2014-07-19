@@ -1,7 +1,6 @@
 <?php
 
 namespace BionicUniversity\Bundle\UserBundle\Entity;
-use Doctrine\Common\Collections\ArrayCollection;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -42,14 +41,27 @@ class User
      * @var ArrayCollection
      */
     private $outcomingMessages;
-
-
     /**
      * @var ArrayCollection
      */
-    
     private $memberships;
 
+    public function __construct()
+    {
+        $this->incomingMessages = new ArrayCollection();
+        $this->outcomingMessages = new ArrayCollection();
+        $this->memberships = new ArrayCollection();
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getMemberships()
+    {
+        return $this->memberships;
+    }
+
+    
     /**
      * Get id
      *
