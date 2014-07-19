@@ -1,0 +1,16 @@
+BionicUniversity\Bundle\CommunityBundle\Entity\Membership:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        user:
+            targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
+            inversedBy: memberships
+        community:
+            targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Community
+            inversedBy: memberships
