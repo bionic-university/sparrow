@@ -23,9 +23,25 @@ class Community
     private $createdAt;
 
     /**
+     * @return string
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
      * @var string
      */
     private $description;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getMemberships()
+    {
+        return $this->memberships;
+    }
 
     /**
      * @var ArrayCollection
@@ -33,6 +49,10 @@ class Community
     private $memberships;
 
 
+    private function __construct()
+    {
+        $this->memberships = new ArrayCollection();
+    }
     /**
      * Get id
      *
