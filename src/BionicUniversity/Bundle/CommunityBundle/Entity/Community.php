@@ -59,6 +59,24 @@ class Community
     }
 
     /**
+     * @param \BionicUniversity\Bundle\WallBundle\Entity\Wall $wall
+     */
+    public function setWall(Wall $wall)
+    {
+        $this->wall = $wall;
+    }
+
+    /**
+     * @param string $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+
+
+    /**
      * Get id
      *
      * @return integer

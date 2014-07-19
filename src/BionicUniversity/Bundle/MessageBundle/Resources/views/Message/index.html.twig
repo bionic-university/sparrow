@@ -17,8 +17,8 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('message_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.author }}</td>
-                <td>{{ entity.reciever }}</td>
+                <td>{{ entity.fromUser }}</td>
+                <td>{{ entity.toUser }}</td>
                 <td>{{ entity.body }}</td>
                 <td>
                 <ul>

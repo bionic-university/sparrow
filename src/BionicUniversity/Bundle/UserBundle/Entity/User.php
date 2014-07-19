@@ -53,6 +53,11 @@ class User
         $this->memberships = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
+
     /**
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
@@ -61,7 +66,7 @@ class User
         return $this->memberships;
     }
 
-    
+
     /**
      * Get id
      *
