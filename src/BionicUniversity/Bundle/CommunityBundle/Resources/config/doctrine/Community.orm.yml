@@ -13,3 +13,7 @@ BionicUniversity\Bundle\CommunityBundle\Entity\Community:
         description:
             type: string
             length: 255
+    oneToMany:
+        community:
+        targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Memberships
+        inversedBy: memberships

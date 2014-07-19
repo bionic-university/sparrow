@@ -1,6 +1,7 @@
 <?php
 
 namespace BionicUniversity\Bundle\CommunityBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Community
@@ -25,6 +26,12 @@ class Community
      * @var string
      */
     private $description;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $memberships;
+
 
     /**
      * Get id

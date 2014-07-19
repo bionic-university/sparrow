@@ -20,4 +20,9 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         sex:
             type: string
             length: '6'
+    oneToMany:
+        user:
+        targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Memberships
+        inversedBy: memberships
+
     lifecycleCallbacks: {  }

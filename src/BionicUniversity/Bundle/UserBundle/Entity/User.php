@@ -1,6 +1,7 @@
 <?php
 
 namespace BionicUniversity\Bundle\UserBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User
@@ -31,6 +32,12 @@ class User
      * @var string
      */
     private $sex;
+
+    /**
+     * @var ArrayCollection
+     */
+    
+    private $memberships;
 
     /**
      * Get id
