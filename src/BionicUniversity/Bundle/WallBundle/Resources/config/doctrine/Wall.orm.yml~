@@ -1,4 +1,4 @@
-﻿BionicUniversity\Bundle\WallBundle\Entity\Wall:
+BionicUniversity\Bundle\WallBundle\Entity\Wall:
     type: entity
     table: null
     id:
@@ -11,7 +11,5 @@
         posts:
             targetEntity: BionicUniversity\Bundle\WallBundle\Entity\Post
             mappedBy: wall
-    oneToOne:    
-        community:
-            targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Community           
-
+        community
+    lifecycleCallbacks: {  }

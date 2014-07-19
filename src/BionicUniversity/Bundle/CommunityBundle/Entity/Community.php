@@ -1,6 +1,7 @@
 <?php
 
 namespace BionicUniversity\Bundle\CommunityBundle\Entity;
+use BionicUniversity\Bundle\WallBundle\Entity\Wall;
 
 /**
  * Community
@@ -25,6 +26,11 @@ class Community
      * @var string
      */
     private $description;
+
+    /**
+     * @var Wall
+     */
+    private $wall;
 
     /**
      * Get id
@@ -80,5 +86,16 @@ class Community
     public function getDescription()
     {
         return $this->description;
+    }
+
+    public function setWall($wall)
+    {
+        $this->wall = $wall;
+        return $this;
+    }
+
+    public function getWall()
+    {
+        return $this->wall;
     }
 }
