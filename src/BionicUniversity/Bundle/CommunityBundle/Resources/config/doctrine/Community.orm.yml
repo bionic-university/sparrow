@@ -14,6 +14,6 @@ BionicUniversity\Bundle\CommunityBundle\Entity\Community:
             type: string
             length: 255
     oneToMany:
-        community:
-        targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Memberships
-        inversedBy: memberships
+        memberships:
+            targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Community
+            mappedBy: community
