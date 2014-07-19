@@ -3,6 +3,8 @@
 namespace BionicUniversity\Bundle\UserBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * User
  */
@@ -32,6 +34,15 @@ class User
      * @var string
      */
     private $sex;
+    /**
+     * @var ArrayCollection
+     */
+    private $incomingMessages;
+    /**
+     * @var ArrayCollection
+     */
+    private $outcomingMessages;
+
 
     /**
      * @var ArrayCollection
@@ -140,4 +151,22 @@ class User
     {
         return $this->sex;
     }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getIncomingMessages()
+    {
+        return $this->incomingMessages;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getOutcomingMessages()
+    {
+        return $this->outcomingMessages;
+    }
+
+
 }
