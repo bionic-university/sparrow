@@ -44,7 +44,7 @@ class MessageController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('Message_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('message_show', array('id' => $entity->getId())));
         }
 
         return $this->render('BionicUniversityMessageBundle:Message:new.html.twig', array(
@@ -63,7 +63,7 @@ class MessageController extends Controller
     private function createCreateForm(Message $entity)
     {
         $form = $this->createForm(new MessageType(), $entity, array(
-            'action' => $this->generateUrl('Message_create'),
+            'action' => $this->generateUrl('message_create'),
             'method' => 'POST',
         ));
 
@@ -143,7 +143,7 @@ class MessageController extends Controller
     private function createEditForm(Message $entity)
     {
         $form = $this->createForm(new MessageType(), $entity, array(
-            'action' => $this->generateUrl('Message_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('message_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -172,7 +172,7 @@ class MessageController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('Message_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('message_edit', array('id' => $id)));
         }
 
         return $this->render('BionicUniversityMessageBundle:Message:edit.html.twig', array(
@@ -202,7 +202,7 @@ class MessageController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('Message'));
+        return $this->redirect($this->generateUrl('message'));
     }
 
     /**
@@ -215,7 +215,7 @@ class MessageController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('Message_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('message_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
