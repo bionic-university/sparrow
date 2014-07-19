@@ -20,4 +20,11 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         sex:
             type: string
             length: '6'
+    oneToMany:
+        incomingMessages:
+            targetEntity: BionicUniversity\Bundle\MessageBundle\Entity\Message
+            mappedBy: toUser
+        outcomingMessages:
+            targetEntity: BionicUniversity\Bundle\MessageBundle\Entity\Message
+            mappedBy: fromUser
     lifecycleCallbacks: {  }

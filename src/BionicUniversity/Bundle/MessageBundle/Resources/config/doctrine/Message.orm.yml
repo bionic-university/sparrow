@@ -7,12 +7,12 @@ BionicUniversity\Bundle\MessageBundle\Entity\Message:
             generator:
                 strategy: AUTO
     fields:
-        author:
-            type: string
-            length: 255
-        receiver:
-            type: string
-            length: 255
         body:
             type: text
-    lifecycleCallbacks: {  }
+    manyToOne:
+        toUser:
+            targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
+            inversedBy: incomingMessages
+        fromUser:
+            targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
+            inversedBy: outcomingMessages

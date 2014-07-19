@@ -5,6 +5,7 @@ namespace BionicUniversity\Bundle\MessageBundle\Entity;
 /**
  * Message
  */
+use BionicUniversity\Bundle\UserBundle\Entity\User;
 
 /**
  * Class Message
@@ -18,14 +19,14 @@ class Message
     private $id;
 
     /**
-     * @var string
+     * @var User
      */
-    private $author;
+    private $fromUser;
 
     /**
-     * @var string
+     * @var User
      */
-    private $receiver;
+    private $toUser;
 
     /**
      * @var string
@@ -41,52 +42,6 @@ class Message
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set author
-     *
-     * @param  string $author
-     * @return Message
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
-     * Set receiver
-     *
-     * @param  string $receiver
-     * @return Message
-     */
-    public function setReceiver($receiver)
-    {
-        $this->receiver = $receiver;
-
-        return $this;
-    }
-
-    /**
-     * Get receiver
-     *
-     * @return string
-     */
-    public function getReceiver()
-    {
-        return $this->receiver;
     }
 
     /**
@@ -110,6 +65,38 @@ class Message
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * @param \BionicUniversity\Bundle\UserBundle\Entity\User $fromUser
+     */
+    public function setFromUser($fromUser)
+    {
+        $this->fromUser = $fromUser;
+    }
+
+    /**
+     * @return \BionicUniversity\Bundle\UserBundle\Entity\User
+     */
+    public function getFromUser()
+    {
+        return $this->fromUser;
+    }
+
+    /**
+     * @param \BionicUniversity\Bundle\UserBundle\Entity\User $toUser
+     */
+    public function setToUser($toUser)
+    {
+        $this->toUser = $toUser;
+    }
+
+    /**
+     * @return \BionicUniversity\Bundle\UserBundle\Entity\User
+     */
+    public function getToUser()
+    {
+        return $this->toUser;
     }
 
 
