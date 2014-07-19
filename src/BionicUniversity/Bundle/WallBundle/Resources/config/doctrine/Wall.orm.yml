@@ -1,4 +1,4 @@
-﻿BionicUniversity\Bundle\WallBundle\Entity\Wall:
+BionicUniversity\Bundle\WallBundle\Entity\Wall:
     type: entity
     table: null
     id:
@@ -13,5 +13,4 @@
             mappedBy: wall
     oneToOne:    
         community:
-            targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Community           
-
+            targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Community

@@ -16,5 +16,4 @@ BionicUniversity\Bundle\WallBundle\Entity\Post:
         wall:
             targetEntity: BionicUniversity\Bundle\WallBundle\Entity\Wall
             inversedBy: posts
-            cascade: [persist, update, delete]
     lifecycleCallbacks: {  }

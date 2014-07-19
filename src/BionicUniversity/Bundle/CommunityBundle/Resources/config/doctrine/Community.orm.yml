@@ -1,4 +1,4 @@
-﻿BionicUniversity\Bundle\CommunityBundle\Entity\Community:
+BionicUniversity\Bundle\CommunityBundle\Entity\Community:
     type: entity
     id:
         id:
