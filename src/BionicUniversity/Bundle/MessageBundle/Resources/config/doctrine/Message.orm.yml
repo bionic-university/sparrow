@@ -1,0 +1,22 @@
+BionicUniversity\Bundle\MessageBundle\Entity\Message:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        author:
+            type: string
+            length: 255
+            column: Author
+        reciever:
+            type: string
+            length: 255
+            column: Reciever
+        body:
+            type: text
+            column: Body
+    lifecycleCallbacks: {  }

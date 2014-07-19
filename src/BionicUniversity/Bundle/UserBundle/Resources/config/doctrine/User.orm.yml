@@ -1,0 +1,23 @@
+BionicUniversity\Bundle\UserBundle\Entity\User:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        firstName:
+            type: string
+            length: '50'
+        lastName:
+            type: string
+            length: '50'
+        position:
+            type: string
+            length: '100'
+        sex:
+            type: string
+            length: '6'
+    lifecycleCallbacks: {  }
