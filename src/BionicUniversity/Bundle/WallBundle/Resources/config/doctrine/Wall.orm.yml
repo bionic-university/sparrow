@@ -11,4 +11,6 @@ BionicUniversity\Bundle\WallBundle\Entity\Wall:
         posts:
             targetEntity: BionicUniversity\Bundle\WallBundle\Entity\Post
             mappedBy: wall
-    lifecycleCallbacks: {  }
+    oneToOne:    
+        community:
+            targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Community

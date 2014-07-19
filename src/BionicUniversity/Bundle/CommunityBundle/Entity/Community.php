@@ -1,7 +1,8 @@
 <?php
 
 namespace BionicUniversity\Bundle\CommunityBundle\Entity;
-use Doctrine\Common\Collections\ArrayCollection;
+
+use BionicUniversity\Bundle\WallBundle\Entity\Wall;
 
 /**
  * Community
@@ -28,10 +29,34 @@ class Community
     private $description;
 
     /**
-     * @var ArrayCollection
+     * @var Wall
      */
+    private $wall;
     private $memberships;
 
+    /**
+     * @return string
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMemberships()
+    {
+        return $this->memberships;
+    }
+
+    /**
+     * @return \BionicUniversity\Bundle\WallBundle\Entity\Wall
+     */
+    public function getWall()
+    {
+        return $this->wall;
+    }
 
     /**
      * Get id
@@ -46,7 +71,7 @@ class Community
     /**
      * Set name
      *
-     * @param  string    $name
+     * @param  string $name
      * @return Community
      */
     public function setName($name)
@@ -69,7 +94,7 @@ class Community
     /**
      * Set description
      *
-     * @param  string    $description
+     * @param  string $description
      * @return Community
      */
     public function setDescription($description)

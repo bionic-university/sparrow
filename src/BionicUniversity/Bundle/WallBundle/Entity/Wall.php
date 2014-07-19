@@ -2,6 +2,7 @@
 
 namespace BionicUniversity\Bundle\WallBundle\Entity;
 
+use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -17,6 +18,10 @@ class Wall
      * @var ArrayCollection
      */
     private $posts;
+    /**
+     * @var Community
+     */
+    private $community;
 
     public function __construct()
     {
@@ -39,5 +44,14 @@ class Wall
     public function getPosts()
     {
         return $this->posts;
+    }
+
+    public function setCommunity($community)
+    {
+        $this->community= $community;
+    }
+    public function getCommunity()
+    {
+        return $this->community;
     }
 }

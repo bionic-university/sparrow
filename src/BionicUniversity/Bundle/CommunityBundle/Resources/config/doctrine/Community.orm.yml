@@ -13,6 +13,9 @@ BionicUniversity\Bundle\CommunityBundle\Entity\Community:
         description:
             type: string
             length: 255
+    oneToOne:
+        wall:
+            targetEntity: BionicUniversity\Bundle\WallBundle\Entity\Wall
     oneToMany:
         memberships:
             targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Community
