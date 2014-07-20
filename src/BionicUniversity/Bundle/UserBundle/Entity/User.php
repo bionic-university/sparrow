@@ -34,6 +34,11 @@ class User extends BaseUser
      * @var string
      */
     private $sex;
+
+    /**
+     * @var string
+     */
+    private $department;
     /**
      * @var ArrayCollection
      */
@@ -46,6 +51,11 @@ class User extends BaseUser
      * @var ArrayCollection
      */
     private $memberships;
+
+    /**
+     * @var \DateTime
+     */
+    private $dateOfBirth;
 
     public function __construct()
     {
@@ -172,6 +182,29 @@ class User extends BaseUser
     }
 
     /**
+     * Set department
+     *
+     * @param string $department
+     * @return User
+     */
+    public function setDepartment($department)
+    {
+        $this->department = $department;
+
+        return $this;
+    }
+
+    /**
+     * Get department
+     *
+     * @return string
+     */
+    public function getDepartment()
+    {
+        return $this->department;
+    }
+
+    /**
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function getIncomingMessages()
@@ -188,4 +221,96 @@ class User extends BaseUser
     }
 
 
+
+    /**
+     * Add incomingMessages
+     *
+     * @param \BionicUniversity\Bundle\MessageBundle\Entity\Message $incomingMessages
+     * @return User
+     */
+    public function addIncomingMessage(\BionicUniversity\Bundle\MessageBundle\Entity\Message $incomingMessages)
+    {
+        $this->incomingMessages[] = $incomingMessages;
+
+        return $this;
+    }
+
+    /**
+     * Remove incomingMessages
+     *
+     * @param \BionicUniversity\Bundle\MessageBundle\Entity\Message $incomingMessages
+     */
+    public function removeIncomingMessage(\BionicUniversity\Bundle\MessageBundle\Entity\Message $incomingMessages)
+    {
+        $this->incomingMessages->removeElement($incomingMessages);
+    }
+
+    /**
+     * Add outcomingMessages
+     *
+     * @param \BionicUniversity\Bundle\MessageBundle\Entity\Message $outcomingMessages
+     * @return User
+     */
+    public function addOutcomingMessage(\BionicUniversity\Bundle\MessageBundle\Entity\Message $outcomingMessages)
+    {
+        $this->outcomingMessages[] = $outcomingMessages;
+
+        return $this;
+    }
+
+    /**
+     * Remove outcomingMessages
+     *
+     * @param \BionicUniversity\Bundle\MessageBundle\Entity\Message $outcomingMessages
+     */
+    public function removeOutcomingMessage(\BionicUniversity\Bundle\MessageBundle\Entity\Message $outcomingMessages)
+    {
+        $this->outcomingMessages->removeElement($outcomingMessages);
+    }
+
+    /**
+     * Add memberships
+     *
+     * @param \BionicUniversity\Bundle\UserBundle\Entity\User $memberships
+     * @return User
+     */
+    public function addMembership(\BionicUniversity\Bundle\UserBundle\Entity\User $memberships)
+    {
+        $this->memberships[] = $memberships;
+
+        return $this;
+    }
+
+    /**
+     * Remove memberships
+     *
+     * @param \BionicUniversity\Bundle\UserBundle\Entity\User $memberships
+     */
+    public function removeMembership(\BionicUniversity\Bundle\UserBundle\Entity\User $memberships)
+    {
+        $this->memberships->removeElement($memberships);
+    }
+
+    /**
+     * Set dateOfBirth
+     *
+     * @param \DateTime $dateOfBirth
+     * @return User
+     */
+    public function setDateOfBirth($dateOfBirth)
+    {
+        $this->dateOfBirth = $dateOfBirth;
+
+        return $this;
+    }
+
+    /**
+     * Get dateOfBirth
+     *
+     * @return \DateTime 
+     */
+    public function getDateOfBirth()
+    {
+        return $this->dateOfBirth;
+    }
 }
