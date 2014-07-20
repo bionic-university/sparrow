@@ -17,9 +17,6 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         position:
             type: string
             length: '100'
-        sex:
-            type: string
-            length: '6'
         department:
             type: string
             length: '100'
