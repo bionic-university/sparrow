@@ -1,7 +1,3 @@
-bionic_university_user_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: BionicUniversityUserBundle:Default:index }
-
-BionicUniversityUserBundle_user:
-        resource: "@BionicUniversityUserBundle/Resources/config/routing/user.yml"
-        prefix:   /user
+BionicUniversityUserBundle_admin_user:
+        resource: "@BionicUniversityUserBundle/Resources/config/routing/admin/user.yml"
+        prefix:   /admin/user
