@@ -29,6 +29,7 @@ class UserController extends Controller
             'entities' => $entities,
         ));
     }
+
     /**
      * Creates a new User entity.
      *
@@ -41,15 +42,15 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $entity->setUsername($entity->getEmail());
-            $entity->setEnabled(false);
+            $entity->setPlainPassword(' ');
+            $userManager->updateUser($entity, true);
             return $this->redirect($this->generateUrl('user_show', array('id' => $entity->getId())));
         }
 
         return $this->render('BionicUniversityUserBundle:User/Admin:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -79,11 +80,11 @@ class UserController extends Controller
     public function newAction()
     {
         $entity = new User();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('BionicUniversityUserBundle:User/Admin:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -104,7 +105,7 @@ class UserController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('BionicUniversityUserBundle:User/Admin:show.html.twig', array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -127,19 +128,19 @@ class UserController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('BionicUniversityUserBundle:User/Admin:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a User entity.
-    *
-    * @param User $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a User entity.
+     *
+     * @param User $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(User $entity)
     {
         $form = $this->createForm(new UserType(), $entity, array(
@@ -151,6 +152,7 @@ class UserController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing User entity.
      *
@@ -176,11 +178,12 @@ class UserController extends Controller
         }
 
         return $this->render('BionicUniversityUserBundle:User/Admin:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a User entity.
      *
@@ -218,7 +221,6 @@ class UserController extends Controller
             ->setAction($this->generateUrl('user_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }
