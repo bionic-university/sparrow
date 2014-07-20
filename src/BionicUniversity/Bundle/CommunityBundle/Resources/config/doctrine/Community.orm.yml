@@ -13,9 +13,13 @@ BionicUniversity\Bundle\CommunityBundle\Entity\Community:
         description:
             type: string
             length: 255
+        createdAt:
+            type: date
     oneToOne:
         wall:
             targetEntity: BionicUniversity\Bundle\WallBundle\Entity\Wall
+        owner:
+            targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
     oneToMany:
         memberships:
             targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Community
