@@ -18,5 +18,5 @@ BionicUniversity\Bundle\CommunityBundle\Entity\Community:
             targetEntity: BionicUniversity\Bundle\WallBundle\Entity\Wall
     oneToMany:
         memberships:
-            targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Community
+            targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Membership
             mappedBy: community

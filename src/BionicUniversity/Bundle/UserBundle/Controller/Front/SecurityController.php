@@ -16,7 +16,7 @@ class SecurityController extends Base
             return parent::loginAction($request);
         }
         return $this->redirect($this->getRouter()->generate('user_profile', [
-                'id' => $this->getSecurityContext()->getToken()->getUser()
+                'id' => $this->getSecurityContext()->getToken()->getUser()->getId()
             ]
         ));
     }
