@@ -1,6 +1,6 @@
 <?php
 
-namespace BionicUniversity\Bundle\UserBundle\Controller;
+namespace BionicUniversity\Bundle\UserBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,7 +25,7 @@ class UserController extends Controller
 
         $entities = $em->getRepository('BionicUniversityUserBundle:User')->findAll();
 
-        return $this->render('BionicUniversityUserBundle:User:index.html.twig', array(
+        return $this->render('BionicUniversityUserBundle:User/Admin:index.html.twig', array(
             'entities' => $entities,
         ));
     }
@@ -47,7 +47,7 @@ class UserController extends Controller
             return $this->redirect($this->generateUrl('user_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('BionicUniversityUserBundle:User:new.html.twig', array(
+        return $this->render('BionicUniversityUserBundle:User/Admin:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -81,7 +81,7 @@ class UserController extends Controller
         $entity = new User();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('BionicUniversityUserBundle:User:new.html.twig', array(
+        return $this->render('BionicUniversityUserBundle:User/Admin:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -103,7 +103,7 @@ class UserController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BionicUniversityUserBundle:User:show.html.twig', array(
+        return $this->render('BionicUniversityUserBundle:User/Admin:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -126,7 +126,7 @@ class UserController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BionicUniversityUserBundle:User:edit.html.twig', array(
+        return $this->render('BionicUniversityUserBundle:User/Admin:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -175,7 +175,7 @@ class UserController extends Controller
             return $this->redirect($this->generateUrl('user_edit', array('id' => $id)));
         }
 
-        return $this->render('BionicUniversityUserBundle:User:edit.html.twig', array(
+        return $this->render('BionicUniversityUserBundle:User/Admin:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
