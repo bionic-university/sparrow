@@ -2,6 +2,7 @@
 
 namespace BionicUniversity\Bundle\CommunityBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use BionicUniversity\Bundle\WallBundle\Entity\Wall;
 
 /**
