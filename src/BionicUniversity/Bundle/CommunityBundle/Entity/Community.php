@@ -32,10 +32,24 @@ class Community
      * @var Wall
      */
     private $wall;
+
+    /**
+     * @var Membership
+     */
     private $memberships;
 
     /**
-     * @return string
+     * @var User
+     */
+    private $owner;
+
+    public function __construct()
+    {
+        $this->createdAt = new \dateTime();
+    }
+
+    /**
+     * @return \dateTime
      */
     public function getCreatedAt()
     {
@@ -67,11 +81,35 @@ class Community
     }
 
     /**
+     * @return \BionicUniversity\Bundle\UserBundle\Entity\User
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @param \BionicUniversity\Bundle\UserBundle\Entity\User $owner
+     */
+    public function setOwner(User $owner)
+    {
+        $this->owner = $owner;
+    }
+
+    /**
      * @param string $createdAt
      */
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @param string $memberships
+     */
+    public function setMemberships($memberships)
+    {
+        $this->memberships = $memberships;
     }
 
 
