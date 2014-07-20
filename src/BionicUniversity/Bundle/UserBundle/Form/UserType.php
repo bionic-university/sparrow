@@ -8,9 +8,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
-     * @param array                $options
+     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -18,8 +18,11 @@ class UserType extends AbstractType
             ->add('firstName')
             ->add('lastName')
             ->add('position')
+            ->add('department')
             ->add('sex')
-        ;
+            ->add('dateOfBirth', null, [
+                'widget' => 'single_text'
+            ]);
     }
 
     /**

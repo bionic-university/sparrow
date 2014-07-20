@@ -20,6 +20,11 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         sex:
             type: string
             length: '6'
+        department:
+            type: string
+            length: '100'
+        dateOfBirth:
+            type: date
     oneToMany:
         incomingMessages:
             targetEntity: BionicUniversity\Bundle\MessageBundle\Entity\Message

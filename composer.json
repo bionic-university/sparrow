@@ -22,9 +22,6 @@
         "twbs/bootstrap": "v3.0.0",
         "friendsofsymfony/user-bundle": "~2.0@dev"
     },
-    "require-dev": {
-        "sensio/generator-bundle": "~2.3"
-    },
     "scripts": {
         "post-root-package-install": [
             "SymfonyStandard\\Composer::hookRootPackageInstall"
