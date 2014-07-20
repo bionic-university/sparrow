@@ -10,16 +10,17 @@ class UserType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array                $options
+     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('firstName')
             ->add('lastName')
+            ->add('email')
             ->add('position')
             ->add('department')
-            ->add('sex')
+            ->add('enabled')
             ->add('gender', 'choice', array(
                 'choices' => array ( 'm'  =>  'Male' ,  'f'  =>  'Female' ),
                 'empty_value' => 'Choose user gender',

@@ -35,15 +35,15 @@ class UserController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new User();
+        $userManager = $this->get('fos_user.user_manager');
+        $entity = $userManager->createUser();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-
+            $entity->setUsername($entity->getEmail());
+            $entity->setEnabled(false);
             return $this->redirect($this->generateUrl('user_show', array('id' => $entity->getId())));
         }
 
