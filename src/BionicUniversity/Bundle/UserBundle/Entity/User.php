@@ -10,6 +10,8 @@ use FOS\UserBundle\Model\User as BaseUser;
  */
 class User extends BaseUser
 {
+    const GENDER_MALE = 'm';
+    const GENDER_FEMALE = 'f';
     /**
      * @var integer
      */

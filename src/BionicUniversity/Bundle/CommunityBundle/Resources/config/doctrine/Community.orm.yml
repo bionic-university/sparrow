@@ -22,5 +22,5 @@ BionicUniversity\Bundle\CommunityBundle\Entity\Community:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
     oneToMany:
         memberships:
-            targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Community
+            targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Membership
             mappedBy: community

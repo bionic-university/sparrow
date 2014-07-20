@@ -1,0 +1,3 @@
+user_profile:
+    path:     /id{id}
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:profile" }
