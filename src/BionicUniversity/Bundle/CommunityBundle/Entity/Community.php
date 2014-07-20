@@ -34,7 +34,7 @@ class Community
     private $wall;
 
     /**
-     * @var Membership
+     * @var ArrayCollection
      */
     private $memberships;
 
