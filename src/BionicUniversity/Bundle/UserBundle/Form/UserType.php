@@ -20,7 +20,6 @@ class UserType extends AbstractType
             ->add('email')
             ->add('position')
             ->add('department')
-            ->add('enabled')
             ->add('gender', 'choice', array(
                 'choices' => array ( 'm'  =>  'Male' ,  'f'  =>  'Female' ),
                 'empty_value' => 'Choose user gender',
