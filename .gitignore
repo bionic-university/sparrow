@@ -6,6 +6,7 @@
 !app/cache/.gitkeep
 !app/logs/.gitkeep
 /vendor/
+/web/vendor
 /bin/
 .DS_Store/
 /.idea/
