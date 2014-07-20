@@ -25,6 +25,9 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
             length: '100'
         dateOfBirth:
             type: date
+        gender:
+            type: string
+            length: '6'
     oneToMany:
         incomingMessages:
             targetEntity: BionicUniversity\Bundle\MessageBundle\Entity\Message

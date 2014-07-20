@@ -22,7 +22,13 @@ class UserType extends AbstractType
             ->add('sex')
             ->add('dateOfBirth', null, [
                 'widget' => 'single_text'
-            ]);
+            ])
+            ->add('gender', 'choice', array(
+                'choices' => array ( 'm'  =>  'Male' ,  'f'  =>  'Female' ),
+                'empty_value' => 'Choose user gender',
+                'empty_data' => null
+                )
+            );
     }
 
     /**
