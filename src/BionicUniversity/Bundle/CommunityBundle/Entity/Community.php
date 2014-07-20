@@ -58,7 +58,7 @@ class Community
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getMemberships()
     {
@@ -103,14 +103,6 @@ class Community
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
-    }
-
-    /**
-     * @param string $memberships
-     */
-    public function setMemberships($memberships)
-    {
-        $this->memberships = $memberships;
     }
 
 
@@ -170,4 +162,28 @@ class Community
     {
         return $this->description;
     }
+
+    /**
+     * Add memberships
+     *
+     * @param \BionicUniversity\Bundle\CommunityBundle\Entity\Community $memberships
+     * @return Community
+     */
+    public function addMembership(\BionicUniversity\Bundle\CommunityBundle\Entity\Community $memberships)
+    {
+        $this->memberships[] = $memberships;
+
+        return $this;
+    }
+
+    /**
+     * Remove memberships
+     *
+     * @param \BionicUniversity\Bundle\CommunityBundle\Entity\Community $memberships
+     */
+    public function removeMembership(\BionicUniversity\Bundle\CommunityBundle\Entity\Community $memberships)
+    {
+        $this->memberships->removeElement($memberships);
+    }
+
 }
