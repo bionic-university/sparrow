@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>Post list</h1>
 
-    <table class="records_list">
+    <table class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -19,8 +19,8 @@
                 <td>{{ entity.text }}</td>
                 <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
-                <ul>
-                    <li>
+                <ul class="list-unstyled">
+                    <li class="list-unstyled">
                         <a href="{{ path('post_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
@@ -34,7 +34,7 @@
     </table>
 
         <ul>
-        <li>
+        <li class="list-unstyled">
             <a href="{{ path('post_new') }}">
                 Create a new entry
             </a>
