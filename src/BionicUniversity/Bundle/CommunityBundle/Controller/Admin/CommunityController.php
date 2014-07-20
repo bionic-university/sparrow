@@ -1,6 +1,6 @@
 <?php
 
-namespace BionicUniversity\Bundle\CommunityBundle\Controller;
+namespace BionicUniversity\Bundle\CommunityBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,7 +25,7 @@ class CommunityController extends Controller
 
         $entities = $em->getRepository('BionicUniversityCommunityBundle:Community')->findAll();
 
-        return $this->render('BionicUniversityCommunityBundle:Community:index.html.twig', array(
+        return $this->render('BionicUniversityCommunityBundle:Community/Admin:index.html.twig', array(
             'entities' => $entities,
         ));
     }
@@ -47,7 +47,7 @@ class CommunityController extends Controller
             return $this->redirect($this->generateUrl('community_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('BionicUniversityCommunityBundle:Community:new.html.twig', array(
+        return $this->render('BionicUniversityCommunityBundle:Community/Admin:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -81,7 +81,7 @@ class CommunityController extends Controller
         $entity = new Community();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('BionicUniversityCommunityBundle:Community:new.html.twig', array(
+        return $this->render('BionicUniversityCommunityBundle:Community/Admin:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -103,7 +103,7 @@ class CommunityController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BionicUniversityCommunityBundle:Community:show.html.twig', array(
+        return $this->render('BionicUniversityCommunityBundle:Community/Admin:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -126,7 +126,7 @@ class CommunityController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BionicUniversityCommunityBundle:Community:edit.html.twig', array(
+        return $this->render('BionicUniversityCommunityBundle:Community/Admin:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -175,7 +175,7 @@ class CommunityController extends Controller
             return $this->redirect($this->generateUrl('community_edit', array('id' => $id)));
         }
 
-        return $this->render('BionicUniversityCommunityBundle:Community:edit.html.twig', array(
+        return $this->render('BionicUniversityCommunityBundle:Community/Admin:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

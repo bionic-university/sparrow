@@ -2,6 +2,7 @@
 
 namespace BionicUniversity\Bundle\CommunityBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use BionicUniversity\Bundle\WallBundle\Entity\Wall;
 
 /**
@@ -19,7 +20,7 @@ class Community
      */
     private $name;
     /**
-     * @var string
+     * @var \DateTime
      */
     private $createdAt;
 
@@ -29,13 +30,28 @@ class Community
     private $description;
 
     /**
-     * @var Wall
+     * @var ArrayCollection
      */
     private $wall;
+
+    /**
+     * @var ArrayCollection
+     */
     private $memberships;
 
     /**
-     * @return string
+     * @var User
+     */
+    private $owner;
+
+    public function __construct()
+    {
+        $this->createdAt = new \dateTime();
+        $this->memberships = new ArrayCollection();
+    }
+
+    /**
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -43,7 +59,7 @@ class Community
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getMemberships()
     {
@@ -67,7 +83,23 @@ class Community
     }
 
     /**
-     * @param string $createdAt
+     * @return \BionicUniversity\Bundle\UserBundle\Entity\User
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @param \BionicUniversity\Bundle\UserBundle\Entity\User $owner
+     */
+    public function setOwner(User $owner)
+    {
+        $this->owner = $owner;
+    }
+
+    /**
+     * @param \DateTime $createdAt
      */
     public function setCreatedAt($createdAt)
     {
@@ -131,4 +163,28 @@ class Community
     {
         return $this->description;
     }
+
+    /**
+     * Add memberships
+     *
+     * @param \BionicUniversity\Bundle\CommunityBundle\Entity\Community $memberships
+     * @return Community
+     */
+    public function addMembership(\BionicUniversity\Bundle\CommunityBundle\Entity\Community $memberships)
+    {
+        $this->memberships[] = $memberships;
+
+        return $this;
+    }
+
+    /**
+     * Remove memberships
+     *
+     * @param \BionicUniversity\Bundle\CommunityBundle\Entity\Community $memberships
+     */
+    public function removeMembership(\BionicUniversity\Bundle\CommunityBundle\Entity\Community $memberships)
+    {
+        $this->memberships->removeElement($memberships);
+    }
+
 }
