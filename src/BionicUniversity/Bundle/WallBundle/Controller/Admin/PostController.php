@@ -16,6 +16,10 @@ class PostController extends Controller
 {
 
     /**
+     *
+     */
+
+    /**
      * Lists all Post entities.
      *
      */

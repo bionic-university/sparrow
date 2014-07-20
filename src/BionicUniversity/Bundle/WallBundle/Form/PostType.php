@@ -16,7 +16,6 @@ class PostType extends AbstractType
     {
         $builder
             ->add('text')
-            ->add('createdAt')
         ;
     }
 
