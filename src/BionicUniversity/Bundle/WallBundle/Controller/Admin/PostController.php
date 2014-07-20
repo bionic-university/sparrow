@@ -1,6 +1,6 @@
 <?php
 
-namespace BionicUniversity\Bundle\WallBundle\Controller;
+namespace BionicUniversity\Bundle\WallBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,7 +25,7 @@ class PostController extends Controller
 
         $entities = $em->getRepository('BionicUniversityWallBundle:Post')->findAll();
 
-        return $this->render('BionicUniversityWallBundle:Post:index.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Post/Admin:index.html.twig', array(
             'entities' => $entities,
         ));
     }
@@ -47,7 +47,7 @@ class PostController extends Controller
             return $this->redirect($this->generateUrl('post_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('BionicUniversityWallBundle:Post:new.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Post/Admin:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -81,7 +81,7 @@ class PostController extends Controller
         $entity = new Post();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('BionicUniversityWallBundle:Post:new.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Post/Admin:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -103,7 +103,7 @@ class PostController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BionicUniversityWallBundle:Post:show.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Post/Admin:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -126,7 +126,7 @@ class PostController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BionicUniversityWallBundle:Post:edit.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Post/Admin:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -175,7 +175,7 @@ class PostController extends Controller
             return $this->redirect($this->generateUrl('post_edit', array('id' => $id)));
         }
 
-        return $this->render('BionicUniversityWallBundle:Post:edit.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Post/Admin:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
