@@ -52,6 +52,7 @@ class User extends BaseUser
         $this->incomingMessages = new ArrayCollection();
         $this->outcomingMessages = new ArrayCollection();
         $this->memberships = new ArrayCollection();
+        $this->groups = ['ROLE_USER'];
     }
 
     public function __toString()
