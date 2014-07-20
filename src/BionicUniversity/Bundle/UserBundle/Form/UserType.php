@@ -10,7 +10,7 @@ class UserType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -20,6 +20,12 @@ class UserType extends AbstractType
             ->add('position')
             ->add('department')
             ->add('sex')
+            ->add('gender', 'choice', array(
+                'choices' => array ( 'm'  =>  'Male' ,  'f'  =>  'Female' ),
+                'empty_value' => 'Choose user gender',
+                'empty_data' => null
+                )
+            )
             ->add('dateOfBirth', 'birthday', [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',

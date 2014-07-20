@@ -39,6 +39,12 @@ class User extends BaseUser
      * @var string
      */
     private $department;
+
+    /**
+     * @var string
+     */
+    private $gender;
+
     /**
      * @var ArrayCollection
      */
@@ -312,5 +318,21 @@ class User extends BaseUser
     public function getDateOfBirth()
     {
         return $this->dateOfBirth;
+    }
+
+    /**
+     * @param string $gender
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGender()
+    {
+        return $this->gender;
     }
 }
