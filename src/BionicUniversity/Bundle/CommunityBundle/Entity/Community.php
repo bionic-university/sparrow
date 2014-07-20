@@ -19,7 +19,7 @@ class Community
      */
     private $name;
     /**
-     * @var string
+     * @var \dateTime
      */
     private $createdAt;
 
@@ -98,7 +98,7 @@ class Community
     }
 
     /**
-     * @param string $createdAt
+     * @param \dateTime $createdAt
      */
     public function setCreatedAt($createdAt)
     {
