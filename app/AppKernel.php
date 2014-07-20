@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
 
             new BionicUniversity\Bundle\CommunityBundle\BionicUniversityCommunityBundle(),
             new BionicUniversity\Bundle\WallBundle\BionicUniversityWallBundle(),
