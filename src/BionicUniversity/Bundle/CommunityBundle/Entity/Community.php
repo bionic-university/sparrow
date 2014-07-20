@@ -19,7 +19,7 @@ class Community
      */
     private $name;
     /**
-     * @var \dateTime
+     * @var \DateTime
      */
     private $createdAt;
 
@@ -50,7 +50,7 @@ class Community
     }
 
     /**
-     * @return \dateTime
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -98,7 +98,7 @@ class Community
     }
 
     /**
-     * @param \dateTime $createdAt
+     * @param \DateTime $createdAt
      */
     public function setCreatedAt($createdAt)
     {
