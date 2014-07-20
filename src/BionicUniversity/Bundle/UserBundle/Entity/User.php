@@ -3,16 +3,17 @@
 namespace BionicUniversity\Bundle\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User
  */
-class User
+class User extends BaseUser
 {
     /**
      * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -51,6 +52,7 @@ class User
         $this->incomingMessages = new ArrayCollection();
         $this->outcomingMessages = new ArrayCollection();
         $this->memberships = new ArrayCollection();
+        $this->groups = ['ROLE_USER'];
     }
 
     public function __toString()
