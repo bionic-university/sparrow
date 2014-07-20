@@ -20,8 +20,9 @@ class UserType extends AbstractType
             ->add('position')
             ->add('department')
             ->add('sex')
-            ->add('dateOfBirth', null, [
-                'widget' => 'single_text'
+            ->add('dateOfBirth', 'birthday', [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
             ]);
     }
 
