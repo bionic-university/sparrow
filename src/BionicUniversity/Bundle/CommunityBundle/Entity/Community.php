@@ -29,7 +29,7 @@ class Community
     private $description;
 
     /**
-     * @var Wall
+     * @var ArrayCollection
      */
     private $wall;
 
@@ -46,6 +46,7 @@ class Community
     public function __construct()
     {
         $this->createdAt = new \dateTime();
+        $this->memberships = new ArrayCollection();
     }
 
     /**
