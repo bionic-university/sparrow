@@ -1,15 +1,14 @@
 {% extends "::front.html.twig" %}
     {% block heading_profile %}
-        {{ entity.name}}
+        {{ entity.name }}
     {% endblock heading_profile %}
-    {% block profile%}
+    {% block profile %}
         <div class="row">
-            <aside class="col-md-2" style="background-color: indianred; height: 200px;">
+            <aside class="avatar col-md-2">
             </aside>
             <section class="col-md-10" >
                 <ul class="list">
                     <li class="list-item">{{ entity.description}}</li>
-                    <li class="list-item">{{ entity.owner}}</li>
                 </ul>
             </section>
         </div>

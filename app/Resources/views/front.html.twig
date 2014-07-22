@@ -3,7 +3,7 @@
     {% block navigation %}
     <nav class="navbar navbar-default">
         <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
+            <li><a href={{ path('user_login') }}>Home</a></li>
             <li><a href="#">News</a></li>
             <li><a href="#">Contacts</a></li>
             <li><a href="#">Help</a></li>
@@ -16,27 +16,23 @@
         {% block menu %}
             <aside class="col-md-3">
                 <ul class="list-group submenu">
-                    <li class="list-group-item"><a href="/id{{ entity.id }}">My profile</a></li>
-                    <li class="list-group-item"><a href="#">Messages</a></li>
+                    <li class="list-group-item"><a href="{{ path('user_login') }}">My profile</a></li>
+                    <li class="list-group-item"><a href="{{ path('messages') }}">Messages</a></li>
                     <li class="list-group-item"><a href="#">Friends</a></li>
-                    <li class="list-group-item"><a href="/communities">Communities</a></li>
+                    <li class="list-group-item"><a href={{ path('communities') }}>Communities</a></li>
                     <li class="list-group-item"><a href="#">Settings</a></li>
                 </ul>
             </aside>
         {% endblock menu %}
-        <div class="heading" style="height: 30px; background-color: lightgrey;">
+        <div class="profile">
             {% block heading_profile %}{% endblock heading_profile %}
         </div>
-        <section class="col-md-9" style="height: 200px">
+        <section class="col-md-9">
             {% block profile %}{% endblock profile %}
         </section>
-
     </div>
-    <div class="heading" style="height: 50px; background-color: lightgrey;">
+    <div class="wall">
         {% block heading_wall %}{% endblock heading_wall %}
     </div>
 <footer></footer>
-
-
-
 {% endblock body %}

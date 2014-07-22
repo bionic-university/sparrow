@@ -29,6 +29,10 @@ class MessageController extends Controller
             'entities' => $entities,
         ));
     }
+    public function messagesAction()
+    {
+        return $this->render('BionicUniversityMessageBundle:Message:Front/messages.html.twig');
+    }
     /**
      * Creates a new Message entity.
      *
