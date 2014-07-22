@@ -1,5 +1,42 @@
 {% extends "::base.html.twig" %}
 {% block body %}
-    {% block content %}
-    {% endblock content %}
+    {% block navigation %}
+    <nav class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li class="active"><a href="/news">News</a></li>
+            <li><a href="/contacts">Contacts</a></li>
+            <li><a href="/help">Help</a></li>
+            <li><a href="/about/">About us</a></li>
+            <li><a href="/logout">Log out</a></li>
+        </ul>
+    </nav>
+    {% endblock navigation %}
+    <div class="row">
+        {% block menu %}
+            <aside class="col-md-3">
+                <ul class="list-group submenu">
+                    <li class="list-group-item"><a href="/id{{ entity.id }}">My profile</a></li>
+                    <li class="list-group-item"><a href="/messages">Messages</a></li>
+                    <li class="list-group-item"><a href="/friends">Friends</a></li>
+                    <li class="list-group-item"><a href="/communities">Communities</a></li>
+                    <li class="list-group-item"><a href="/settings">Settings</a></li>
+                </ul>
+            </aside>
+        {% endblock menu %}
+        <div class="heading" style="height: 30px; background-color: lightgrey;">
+            {% block heading_profile %}{% endblock heading_profile %}
+        </div>
+        <section class="col-md-9" style="height: 200px">
+            {% block profile %}{% endblock profile %}
+        </section>
+
+    </div>
+    <div class="heading" style="height: 50px; background-color: lightgrey;">
+        {% block heading_wall %}{% endblock heading_wall %}
+    </div>
+<footer></footer>
+
+
+
 {% endblock body %}

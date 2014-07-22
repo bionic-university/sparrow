@@ -1,3 +1,6 @@
 BionicUniversityCommunityBundle_admin_community:
         resource: "@BionicUniversityCommunityBundle/Resources/config/routing/admin/community.yml"
         prefix:   /admin/community
+BionicUniversityCommunityBundle_user_community:
+        resource: "@BionicUniversityCommunityBundle/Resources/config/routing/front/community.yml"
+        prefix:   /community
