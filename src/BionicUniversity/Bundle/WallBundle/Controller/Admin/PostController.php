@@ -1,41 +1,45 @@
 <?php
 
-namespace BionicUniversity\Bundle\CommunityBundle\Controller;
+namespace BionicUniversity\Bundle\WallBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
-use BionicUniversity\Bundle\CommunityBundle\Form\CommunityType;
+use BionicUniversity\Bundle\WallBundle\Entity\Post;
+use BionicUniversity\Bundle\WallBundle\Form\PostType;
 
 /**
- * Community controller.
+ * Post controller.
  *
  */
-class CommunityController extends Controller
+class PostController extends Controller
 {
 
     /**
-     * Lists all Community entities.
+     *
+     */
+
+    /**
+     * Lists all Post entities.
      *
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('BionicUniversityCommunityBundle:Community')->findAll();
+        $entities = $em->getRepository('BionicUniversityWallBundle:Post')->findAll();
 
-        return $this->render('BionicUniversityCommunityBundle:Community:index.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Post/Admin:index.html.twig', array(
             'entities' => $entities,
         ));
     }
     /**
-     * Creates a new Community entity.
+     * Creates a new Post entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity = new Community();
+        $entity = new Post();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -44,26 +48,26 @@ class CommunityController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('community_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('post_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('BionicUniversityCommunityBundle:Community:new.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Post/Admin:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Creates a form to create a Community entity.
+     * Creates a form to create a Post entity.
      *
-     * @param Community $entity The entity
+     * @param Post $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Community $entity)
+    private function createCreateForm(Post $entity)
     {
-        $form = $this->createForm(new CommunityType(), $entity, array(
-            'action' => $this->generateUrl('community_create'),
+        $form = $this->createForm(new PostType(), $entity, array(
+            'action' => $this->generateUrl('post_create'),
             'method' => 'POST',
         ));
 
@@ -73,60 +77,60 @@ class CommunityController extends Controller
     }
 
     /**
-     * Displays a form to create a new Community entity.
+     * Displays a form to create a new Post entity.
      *
      */
     public function newAction()
     {
-        $entity = new Community();
+        $entity = new Post();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('BionicUniversityCommunityBundle:Community:new.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Post/Admin:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a Community entity.
+     * Finds and displays a Post entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BionicUniversityCommunityBundle:Community')->find($id);
+        $entity = $em->getRepository('BionicUniversityWallBundle:Post')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Community entity.');
+            throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BionicUniversityCommunityBundle:Community:show.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Post/Admin:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing Community entity.
+     * Displays a form to edit an existing Post entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BionicUniversityCommunityBundle:Community')->find($id);
+        $entity = $em->getRepository('BionicUniversityWallBundle:Post')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Community entity.');
+            throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BionicUniversityCommunityBundle:Community:edit.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Post/Admin:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -134,16 +138,16 @@ class CommunityController extends Controller
     }
 
     /**
-    * Creates a form to edit a Community entity.
+    * Creates a form to edit a Post entity.
     *
-    * @param Community $entity The entity
+    * @param Post $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Community $entity)
+    private function createEditForm(Post $entity)
     {
-        $form = $this->createForm(new CommunityType(), $entity, array(
-            'action' => $this->generateUrl('community_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new PostType(), $entity, array(
+            'action' => $this->generateUrl('post_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -152,17 +156,17 @@ class CommunityController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Community entity.
+     * Edits an existing Post entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BionicUniversityCommunityBundle:Community')->find($id);
+        $entity = $em->getRepository('BionicUniversityWallBundle:Post')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Community entity.');
+            throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -172,17 +176,17 @@ class CommunityController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('community_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('post_edit', array('id' => $id)));
         }
 
-        return $this->render('BionicUniversityCommunityBundle:Community:edit.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Post/Admin:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
-     * Deletes a Community entity.
+     * Deletes a Post entity.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -192,21 +196,21 @@ class CommunityController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('BionicUniversityCommunityBundle:Community')->find($id);
+            $entity = $em->getRepository('BionicUniversityWallBundle:Post')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Community entity.');
+                throw $this->createNotFoundException('Unable to find Post entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('community'));
+        return $this->redirect($this->generateUrl('post'));
     }
 
     /**
-     * Creates a form to delete a Community entity by id.
+     * Creates a form to delete a Post entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -215,7 +219,7 @@ class CommunityController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('community_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('post_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

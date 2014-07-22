@@ -10,6 +10,8 @@ use FOS\UserBundle\Model\User as BaseUser;
  */
 class User extends BaseUser
 {
+    const GENDER_MALE = 'm';
+    const GENDER_FEMALE = 'f';
     /**
      * @var integer
      */
@@ -33,12 +35,13 @@ class User extends BaseUser
     /**
      * @var string
      */
-    private $sex;
+    private $department;
 
     /**
      * @var string
      */
-    private $department;
+    private $gender;
+
     /**
      * @var ArrayCollection
      */
@@ -59,6 +62,7 @@ class User extends BaseUser
 
     public function __construct()
     {
+        parent::__construct();
         $this->incomingMessages = new ArrayCollection();
         $this->outcomingMessages = new ArrayCollection();
         $this->memberships = new ArrayCollection();
@@ -158,28 +162,6 @@ class User extends BaseUser
         return $this->position;
     }
 
-    /**
-     * Set sex
-     *
-     * @param  string $sex
-     * @return User
-     */
-    public function setSex($sex)
-    {
-        $this->sex = $sex;
-
-        return $this;
-    }
-
-    /**
-     * Get sex
-     *
-     * @return string
-     */
-    public function getSex()
-    {
-        return $this->sex;
-    }
 
     /**
      * Set department
@@ -312,5 +294,21 @@ class User extends BaseUser
     public function getDateOfBirth()
     {
         return $this->dateOfBirth;
+    }
+
+    /**
+     * @param string $gender
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGender()
+    {
+        return $this->gender;
     }
 }

@@ -1,7 +1,3 @@
-bionic_university_community_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: BionicUniversityCommunityBundle:Default:index }
-
-BionicUniversityCommunityBundle_community:
-        resource: "@BionicUniversityCommunityBundle/Resources/config/routing/community.yml"
-        prefix:   /community
+BionicUniversityCommunityBundle_admin_community:
+        resource: "@BionicUniversityCommunityBundle/Resources/config/routing/admin/community.yml"
+        prefix:   /admin/community

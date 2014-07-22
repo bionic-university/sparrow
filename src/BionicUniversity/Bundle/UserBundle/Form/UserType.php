@@ -2,6 +2,7 @@
 
 namespace BionicUniversity\Bundle\UserBundle\Form;
 
+use BionicUniversity\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -17,11 +18,18 @@ class UserType extends AbstractType
         $builder
             ->add('firstName')
             ->add('lastName')
+            ->add('email')
             ->add('position')
             ->add('department')
-            ->add('sex')
-            ->add('dateOfBirth', null, [
-                'widget' => 'single_text'
+            ->add('gender', 'choice', array(
+                    'choices' => array(User::GENDER_MALE => 'Male', User::GENDER_FEMALE => 'Female'),
+                    'empty_value' => 'Choose user gender',
+                    'empty_data' => null
+                )
+            )
+            ->add('dateOfBirth', 'birthday', [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
             ]);
     }
 

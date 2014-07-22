@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>Community</h1>
 
-    <table class="record_properties">
+    <table class="record_properties table table-striped table-bordered table-hover">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -16,6 +16,14 @@
             <tr>
                 <th>Description</th>
                 <td>{{ entity.description }}</td>
+            </tr>
+            <tr>
+                <th>Created at</th>
+                <td>{{ entity.createdAt|date }}</td>
+            </tr>
+            <tr>
+                <th>Owner</th>
+                <td>{{ entity.owner }}</td>
             </tr>
         </tbody>
     </table>

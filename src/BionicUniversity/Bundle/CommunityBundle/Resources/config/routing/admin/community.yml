@@ -1,0 +1,30 @@
+community:
+    path:     /
+    defaults: { _controller: "BionicUniversityCommunityBundle:Admin/Community:index" }
+
+community_show:
+    path:     /{id}/show
+    defaults: { _controller: "BionicUniversityCommunityBundle:Admin/Community:show" }
+
+community_new:
+    path:     /new
+    defaults: { _controller: "BionicUniversityCommunityBundle:Admin/Community:new" }
+
+community_create:
+    path:     /create
+    defaults: { _controller: "BionicUniversityCommunityBundle:Admin/Community:create" }
+    requirements: { _method: post }
+
+community_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BionicUniversityCommunityBundle:Admin/Community:edit" }
+
+community_update:
+    path:     /{id}/update
+    defaults: { _controller: "BionicUniversityCommunityBundle:Admin/Community:update" }
+    requirements: { _method: post|put }
+
+community_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BionicUniversityCommunityBundle:Admin/Community:delete" }
+    requirements: { _method: post|delete }
