@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use BionicUniversity\Bundle\WallBundle\Entity\News;
-use BionicUniversity\Bundle\WallBundle\Form\PostType;
+use BionicUniversity\Bundle\WallBundle\Form\NewsType;
 
 /**
  * News controller.
@@ -66,7 +66,7 @@ class NewsController extends Controller
      */
     private function createCreateForm(News $entity)
     {
-        $form = $this->createForm(new PostType(), $entity, array(
+        $form = $this->createForm(new NewsType(), $entity, array(
             'action' => $this->generateUrl('news_create'),
             'method' => 'POST',
         ));
@@ -146,7 +146,7 @@ class NewsController extends Controller
      */
     private function createEditForm(News $entity)
     {
-        $form = $this->createForm(new PostType(), $entity, array(
+        $form = $this->createForm(new NewsType(), $entity, array(
             'action' => $this->generateUrl('news_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
