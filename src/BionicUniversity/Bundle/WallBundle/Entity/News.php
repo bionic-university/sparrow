@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 /**
  * Post
  */
-class Post
+class News
 {
     /**
      * @var integer
@@ -35,7 +35,7 @@ class Post
 
     public function __construct(){
 
-      $this->createdAt = new \DateTime();
+        $this->createdAt = new \DateTime();
 
     }
 
@@ -50,17 +50,10 @@ class Post
     }
 
     /**
-     * Set text
-     *
-     * @param  string $text
-     * @return Post
-     */
-
-    /**
      * Set title
      *
      * @param  string $title
-     * @return Post
+     * @return News
      */
     public function  setTitle($title)
     {
@@ -79,6 +72,12 @@ class Post
         return $this->title;
     }
 
+    /**
+     * Set text
+     *
+     * @param  string $text
+     * @return News
+     */
     public function  setText($text)
     {
         $this->text = $text;
@@ -100,7 +99,7 @@ class Post
      * Set createdAt
      *
      * @param  \DateTime $createdAt
-     * @return Post
+     * @return News
      */
     public function setCreatedAt($createdAt)
     {

@@ -14,10 +14,12 @@ class Wall
      * @var integer
      */
     private $id;
+
     /**
      * @var ArrayCollection
      */
     private $posts;
+
     /**
      * @var Community
      */
