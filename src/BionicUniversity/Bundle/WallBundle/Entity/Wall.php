@@ -21,6 +21,11 @@ class Wall
     private $posts;
 
     /**
+     * @var ArrayCollection
+     */
+    private $news;
+
+    /**
      * @var Community
      */
     private $community;
@@ -28,6 +33,7 @@ class Wall
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+        $this->news = new ArrayCollection();
     }
 
     /**
@@ -46,6 +52,14 @@ class Wall
     public function getPosts()
     {
         return $this->posts;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getNews()
+    {
+        return $this->news;
     }
 
     public function setCommunity($community)
