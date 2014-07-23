@@ -14,17 +14,10 @@ class Wall
      * @var integer
      */
     private $id;
-
     /**
      * @var ArrayCollection
      */
     private $posts;
-
-    /**
-     * @var ArrayCollection
-     */
-    private $news;
-
     /**
      * @var Community
      */
@@ -35,31 +28,20 @@ class Wall
         $this->posts = new ArrayCollection();
         $this->news = new ArrayCollection();
     }
-
     /**
      * Get id
-     *
      * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
-
     /**
      * @return ArrayCollection
      */
     public function getPosts()
     {
         return $this->posts;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getNews()
-    {
-        return $this->news;
     }
 
     public function setCommunity($community)

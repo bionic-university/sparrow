@@ -5,41 +5,31 @@ namespace BionicUniversity\Bundle\WallBundle\Controller\Admin;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use BionicUniversity\Bundle\WallBundle\Entity\News;
-use BionicUniversity\Bundle\WallBundle\Form\NewsType;
+use BionicUniversity\Bundle\WallBundle\Entity\Article;
+use BionicUniversity\Bundle\WallBundle\Form\ArticleType;
 
 /**
- * News controller.
- *
+ * Article controller.
  */
-class NewsController extends Controller
+class ArticleController extends Controller
 {
-
     /**
-     *
-     */
-
-    /**
-     * Lists all News entities.
-     *
+     * Lists all Article entities.
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('BionicUniversityWallBundle:News')->findAll();
-
-        return $this->render('BionicUniversityWallBundle:News/Admin:index.html.twig', array(
+        $entities = $em->getRepository('BionicUniversityWallBundle:Article')->findAll();
+        return $this->render('BionicUniversityWallBundle:Article/Admin:index.html.twig', array(
             'entities' => $entities,
         ));
     }
     /**
-     * Creates a new News entity.
-     *
+     * Creates a new Article entity.
      */
     public function createAction(Request $request)
     {
-        $entity = new News();
+        $entity = new Article();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -48,26 +38,24 @@ class NewsController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('news_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('article_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('BionicUniversityWallBundle:News/Admin:new.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Article/Admin:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Creates a form to create a News entity.
-     *
-     * @param News $entity The entity
-     *
+     * Creates a form to create a Article entity.
+     * @param Article $entity The entity
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(News $entity)
+    private function createCreateForm(Article $entity)
     {
-        $form = $this->createForm(new NewsType(), $entity, array(
-            'action' => $this->generateUrl('news_create'),
+        $form = $this->createForm(new ArticleType(), $entity, array(
+            'action' => $this->generateUrl('article_create'),
             'method' => 'POST',
         ));
 
@@ -77,60 +65,60 @@ class NewsController extends Controller
     }
 
     /**
-     * Displays a form to create a new News entity.
+     * Displays a form to create a new Article entity.
      *
      */
     public function newAction()
     {
-        $entity = new News();
+        $entity = new Article();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('BionicUniversityWallBundle:News/Admin:new.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Article/Admin:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a News entity.
+     * Finds and displays a Article entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BionicUniversityWallBundle:News')->find($id);
+        $entity = $em->getRepository('BionicUniversityWallBundle:Article')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find News entity.');
+            throw $this->createNotFoundException('Unable to find Article entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BionicUniversityWallBundle:News/Admin:show.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Article/Admin:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing News entity.
+     * Displays a form to edit an existing Article entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BionicUniversityWallBundle:News')->find($id);
+        $entity = $em->getRepository('BionicUniversityWallBundle:Article')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find News entity.');
+            throw $this->createNotFoundException('Unable to find Article entity.');
         }
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BionicUniversityWallBundle:News/Admin:edit.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Article/Admin:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -138,16 +126,16 @@ class NewsController extends Controller
     }
 
     /**
-     * Creates a form to edit a News entity.
+     * Creates a form to edit a Article entity.
      *
-     * @param News $entity The entity
+     * @param Article $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createEditForm(News $entity)
+    private function createEditForm(Article $entity)
     {
-        $form = $this->createForm(new NewsType(), $entity, array(
-            'action' => $this->generateUrl('news_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new ArticleType(), $entity, array(
+            'action' => $this->generateUrl('article_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -156,17 +144,15 @@ class NewsController extends Controller
         return $form;
     }
     /**
-     * Edits an existing News entity.
-     *
+     * Edits an existing Article entity.
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('BionicUniversityWallBundle:News')->find($id);
+        $entity = $em->getRepository('BionicUniversityWallBundle:Article')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find News entity.');
+            throw $this->createNotFoundException('Unable to find Article entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -176,18 +162,17 @@ class NewsController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('news_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('article_edit', array('id' => $id)));
         }
 
-        return $this->render('BionicUniversityWallBundle:News/Admin:edit.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Article/Admin:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
-     * Deletes a News entity.
-     *
+     * Deletes a Article entity.
      */
     public function deleteAction(Request $request, $id)
     {
@@ -196,30 +181,28 @@ class NewsController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('BionicUniversityWallBundle:News')->find($id);
+            $entity = $em->getRepository('BionicUniversityWallBundle:Article')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find News entity.');
+                throw $this->createNotFoundException('Unable to find Article entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('news'));
+        return $this->redirect($this->generateUrl('article'));
     }
 
     /**
-     * Creates a form to delete a News entity by id.
-     *
+     * Creates a form to delete a Article entity by id.
      * @param mixed $id The entity id
-     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('news_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('article_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

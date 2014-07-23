@@ -14,11 +14,6 @@ use BionicUniversity\Bundle\WallBundle\Form\PostType;
  */
 class PostController extends Controller
 {
-
-    /**
-     *
-     */
-
     /**
      * Lists all Post entities.
      *

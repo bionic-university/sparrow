@@ -1,4 +1,4 @@
-BionicUniversity\Bundle\WallBundle\Entity\News:
+BionicUniversity\Bundle\WallBundle\Entity\Article:
     type: entity
     table: null
     id:
