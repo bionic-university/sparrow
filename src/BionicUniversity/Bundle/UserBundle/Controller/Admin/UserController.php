@@ -2,6 +2,8 @@
 
 namespace BionicUniversity\Bundle\UserBundle\Controller\Admin;
 
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Event\FormEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -45,6 +47,9 @@ class UserController extends Controller
             $entity->setUsername($entity->getEmail());
             $entity->setPlainPassword(' ');
             $userManager->updateUser($entity, true);
+            $event = new FormEvent($form,$request);
+            $dispatcher = $this->container->get('event_dispatcher');
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS,$event);
             return $this->redirect($this->generateUrl('user_show', array('id' => $entity->getId())));
         }
 
