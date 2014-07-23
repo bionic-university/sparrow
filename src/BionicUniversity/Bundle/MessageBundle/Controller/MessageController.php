@@ -25,9 +25,13 @@ class MessageController extends Controller
 
         $entities = $em->getRepository('BionicUniversityMessageBundle:Message')->findAll();
 
-        return $this->render('BionicUniversityMessageBundle:Message:index.html.twig', array(
+        return $this->render('BionicUniversityMessageBundle:Message:Admin/index.html.twig', array(
             'entities' => $entities,
         ));
+    }
+    public function messagesAction()
+    {
+        return $this->render('BionicUniversityMessageBundle:Message:Front/messages.html.twig');
     }
     /**
      * Creates a new Message entity.
@@ -47,7 +51,7 @@ class MessageController extends Controller
             return $this->redirect($this->generateUrl('message_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('BionicUniversityMessageBundle:Message:new.html.twig', array(
+        return $this->render('BionicUniversityMessageBundle:Message:Admin/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -81,7 +85,7 @@ class MessageController extends Controller
         $entity = new Message();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('BionicUniversityMessageBundle:Message:new.html.twig', array(
+        return $this->render('BionicUniversityMessageBundle:Message:Admin/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -103,7 +107,7 @@ class MessageController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BionicUniversityMessageBundle:Message:show.html.twig', array(
+        return $this->render('BionicUniversityMessageBundle:Message:Admin/show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -126,7 +130,7 @@ class MessageController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BionicUniversityMessageBundle:Message:edit.html.twig', array(
+        return $this->render('BionicUniversityMessageBundle:Message:Admin/edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -175,7 +179,7 @@ class MessageController extends Controller
             return $this->redirect($this->generateUrl('message_edit', array('id' => $id)));
         }
 
-        return $this->render('BionicUniversityMessageBundle:Message:edit.html.twig', array(
+        return $this->render('BionicUniversityMessageBundle:Message:Admin/edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

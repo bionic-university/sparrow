@@ -1,0 +1,12 @@
+.avatar{
+    background-color: indianred;
+    height: 200px;
+}
+.wall{
+height: 50px;
+background-color: lightgrey;
+}
+.profile{
+height: 30px;
+background-color: lightgrey;
+}

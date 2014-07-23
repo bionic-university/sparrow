@@ -7,6 +7,12 @@ class UserController extends Controller
 {
     public function profileAction($id)
     {
-        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find User entity.');
+        }
+
+        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array('entity'=> $entity));
     }
 }
