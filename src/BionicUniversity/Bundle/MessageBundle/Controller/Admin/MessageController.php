@@ -1,6 +1,6 @@
 <?php
 
-namespace BionicUniversity\Bundle\MessageBundle\Controller;
+namespace BionicUniversity\Bundle\MessageBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,10 +28,6 @@ class MessageController extends Controller
         return $this->render('BionicUniversityMessageBundle:Message:Admin/index.html.twig', array(
             'entities' => $entities,
         ));
-    }
-    public function messagesAction()
-    {
-        return $this->render('BionicUniversityMessageBundle:Message:Front/messages.html.twig');
     }
     /**
      * Creates a new Message entity.
