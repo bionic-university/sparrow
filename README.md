@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/bionic-university/sparrow.png?label=ready&title=Ready)](https://waffle.io/bionic-university/sparrow)
 Sparrow internal social network based on Symfony2 Standard Edition
 ========================
 
