@@ -1,0 +1,16 @@
+{% block create_message %}
+    <form role="form" action="{{ path('message_create_front') }}" method="POST">
+        <div class="form-group">
+            <label for="toUser">To:</label>
+            <select class="form-control" name="toUser">
+                {% for toUser in toUsers  %}
+                    <option>{{ toUser.id }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="text">Text:</label>
+            <textarea class="form-control" rows="3" name="text"></textarea>
+        </div>
+    </form>
+{% endblock create_message %}

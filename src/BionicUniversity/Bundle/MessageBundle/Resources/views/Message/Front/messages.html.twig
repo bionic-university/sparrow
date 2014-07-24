@@ -3,63 +3,45 @@
         Type a message
     {% endblock heading_profile %}
     {% block profile %}
-       {% block create_message %}
-        <form role="form" action="{{ path('message_create_front') }}" method="POST">
-            <div class="form-group">
-               <label for="toUser">To:</label>
-                <select class="form-control" name="toUser">
-                    {% for toUser in toUsers  %}
-                    <option>{{ toUser.id }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="text">Text:</label>
-                <textarea class="form-control" rows="3" name="text"></textarea>
-            </div>
-               <button type="submit" class="btn btn-primary">Send</button>
-
-           </form>
-       {% endblock create_message %}
+       {{ form(form) }}
     {% endblock profile %}
     {% block heading_wall %}
         <h1>My messages</h1>
+        {% block messages %}
+            <ul class="nav nav-tabs" role="tablist" id="myTab">
+                <li><a href="#incoming" role="tab" data-toggle="tab">Incoming</a></li>
+                <li><a href="#outcoming" role="tab" data-toggle="tab">Outcoming</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="incoming">
+                    <ul>
+                        {% for in_mess_one in in_mess %}
+                            <div class="panel panel-info messages_panel">
+                                <div class="panel-heading">
+                                    <li class="messages_list">From: {{ in_mess_one.fromUser }}</li>
+                                </div>
+                                <div class="panel-body"><li class="messages_list">{{ in_mess_one.body }}</li></div>
+                            </div>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="tab-pane" id="outcoming">
+                    <ul>
+                        {% for out_mess_one in out_mess %}
+                            <div class="panel panel-info messages_panel">
+                                <div class="panel-heading">
+                                    <li class="messages_list">To: {{ out_mess_one.toUser }}</li>
+                                </div>
+                                <div class="panel-body"><li class="messages_list">{{ out_mess_one.body }}</li></div>
+                            </div>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endblock messages %}
     {% endblock heading_wall %}
 {% block body %}
     {{ parent() }}
-    {% block messages %}
-        <ul class="nav nav-tabs" role="tablist" id="myTab">
-            <li><a href="#incoming" role="tab" data-toggle="tab">Incoming</a></li>
-            <li><a href="#outcoming" role="tab" data-toggle="tab">Outcoming</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="incoming">
-                <ul>
-                    {% for in_mess_one in in_mess %}
-                        <div class="panel panel-info messages_panel">
-                            <div class="panel-heading">
-                                <li class="messages_list">From: {{ in_mess_one.fromUser }}</li>
-                            </div>
-                            <div class="panel-body"><li class="messages_list">{{ in_mess_one.body }}</li></div>
-                        </div>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="tab-pane" id="outcoming">
-                <ul>
-                    {% for out_mess_one in out_mess %}
-                        <div class="panel panel-info messages_panel">
-                            <div class="panel-heading">
-                                <li class="messages_list">To: {{ out_mess_one.toUser }}</li>
-                            </div>
-                            <div class="panel-body"><li class="messages_list">{{ out_mess_one.body }}</li></div>
-                        </div>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-
-    {% endblock messages %}
 {% endblock body %}
 {% block javascripts %}
     <script>$(document).ready($('#myTab a').tab('show'))</script>
