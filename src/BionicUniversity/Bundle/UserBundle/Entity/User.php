@@ -82,7 +82,6 @@ class User extends BaseUser
         return $this->memberships;
     }
 
-
     /**
      * Get id
      *
@@ -162,11 +161,10 @@ class User extends BaseUser
         return $this->position;
     }
 
-
     /**
      * Set department
      *
-     * @param string $department
+     * @param  string $department
      * @return User
      */
     public function setDepartment($department)
@@ -202,12 +200,10 @@ class User extends BaseUser
         return $this->outcomingMessages;
     }
 
-
-
     /**
      * Add incomingMessages
      *
-     * @param \BionicUniversity\Bundle\MessageBundle\Entity\Message $incomingMessages
+     * @param  \BionicUniversity\Bundle\MessageBundle\Entity\Message $incomingMessages
      * @return User
      */
     public function addIncomingMessage(\BionicUniversity\Bundle\MessageBundle\Entity\Message $incomingMessages)
@@ -230,7 +226,7 @@ class User extends BaseUser
     /**
      * Add outcomingMessages
      *
-     * @param \BionicUniversity\Bundle\MessageBundle\Entity\Message $outcomingMessages
+     * @param  \BionicUniversity\Bundle\MessageBundle\Entity\Message $outcomingMessages
      * @return User
      */
     public function addOutcomingMessage(\BionicUniversity\Bundle\MessageBundle\Entity\Message $outcomingMessages)
@@ -253,7 +249,7 @@ class User extends BaseUser
     /**
      * Add memberships
      *
-     * @param \BionicUniversity\Bundle\UserBundle\Entity\User $memberships
+     * @param  \BionicUniversity\Bundle\UserBundle\Entity\User $memberships
      * @return User
      */
     public function addMembership(\BionicUniversity\Bundle\UserBundle\Entity\User $memberships)
@@ -276,7 +272,7 @@ class User extends BaseUser
     /**
      * Set dateOfBirth
      *
-     * @param \DateTime $dateOfBirth
+     * @param  \DateTime $dateOfBirth
      * @return User
      */
     public function setDateOfBirth($dateOfBirth)
@@ -289,7 +285,7 @@ class User extends BaseUser
     /**
      * Get dateOfBirth
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateOfBirth()
     {

@@ -1,6 +1,7 @@
-bionic_university_wall_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: BionicUniversityWallBundle:Default:index }
 BionicUniversityWallBundle_post:
     resource: "@BionicUniversityWallBundle/Resources/config/routing/admin/post.yml"
     prefix:   /admin/post
+
+BionicUniversityWallBundle_article:
+    resource: "@BionicUniversityWallBundle/Resources/config/routing/admin/article.yml"
+    prefix:   /admin/article

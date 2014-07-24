@@ -6,9 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class PostType extends AbstractType
+class ArticleType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
@@ -19,22 +19,20 @@ class PostType extends AbstractType
             ->add('text')
         ;
     }
-
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BionicUniversity\Bundle\WallBundle\Entity\Post'
+            'data_class' => 'BionicUniversity\Bundle\WallBundle\Entity\Article'
         ));
     }
-
     /**
      * @return string
      */
     public function getName()
     {
-        return 'bionicuniversity_bundle_wallbundle_post';
+        return 'bionicuniversity_bundle_wallbundle_article';
     }
 }

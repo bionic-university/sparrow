@@ -1,4 +1,4 @@
-BionicUniversity\Bundle\WallBundle\Entity\Post:
+BionicUniversity\Bundle\WallBundle\Entity\Article:
     type: entity
     table: null
     id:
@@ -14,8 +14,4 @@ BionicUniversity\Bundle\WallBundle\Entity\Post:
             type: text
         createdAt:
             type: datetime
-    manyToOne:
-        wall:
-            targetEntity: BionicUniversity\Bundle\WallBundle\Entity\Wall
-            inversedBy: posts
     lifecycleCallbacks: {  }

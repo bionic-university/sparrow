@@ -45,6 +45,7 @@ class UserController extends Controller
             $entity->setUsername($entity->getEmail());
             $entity->setPlainPassword(' ');
             $userManager->updateUser($entity, true);
+
             return $this->redirect($this->generateUrl('user_show', array('id' => $entity->getId())));
         }
 

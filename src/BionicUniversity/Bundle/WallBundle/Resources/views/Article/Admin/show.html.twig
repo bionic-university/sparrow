@@ -1,9 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Post</h1>
+    <h1>Article</h1>
 
-    <table class="record_properties table table-striped table-bordered table-hover">
+    <table class="record_properties">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -26,12 +26,12 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('post') }}">
+        <a href="{{ path('article') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('post_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('article_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>
