@@ -24,20 +24,20 @@ class MessageController extends Controller
         $user=$this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $list_of_users=$em->getRepository('BionicUniversityUserBundle:User')->findAll();
+        $listOfUsers=$em->getRepository('BionicUniversityUserBundle:User')->findAll();
 
         $outcomingMessages=$em->getRepository('BionicUniversityMessageBundle:Message')->findByFromUser($user->getId());
         $incomingMessages=$em->getRepository('BionicUniversityMessageBundle:Message')->findByToUser($user->getId());
-
 
         return $this->render('BionicUniversityMessageBundle:Message:Front/messages.html.twig',
             array(
                 'out_mess'=>$outcomingMessages,
                 'in_mess'=>$incomingMessages,
-                'toUsers'=> $list_of_users,
+                'toUsers'=> $listOfUsers
                  )
         );
     }
+
     /**
      * Creates a new Message entity.
      *
@@ -57,7 +57,8 @@ class MessageController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($entity);
         $em->flush();
-        return $this->messagesAction();
+
+        return $this->redirect($this->generateUrl('messages'));
     }
 
 }

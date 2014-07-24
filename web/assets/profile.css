@@ -13,9 +13,9 @@ background-color: lightgrey;
 .profile{
 width: 90%;
 }
-.mes_list{
+.messages_list{
     list-style-type: none;
 }
-.mes_panel{
+.messages_panel{
     width:90%;
 }
