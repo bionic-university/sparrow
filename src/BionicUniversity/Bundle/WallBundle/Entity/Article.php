@@ -1,7 +1,6 @@
 <?php
 
 namespace BionicUniversity\Bundle\WallBundle\Entity;
-use Doctrine\DBAL\Types\DateTimeType;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
@@ -45,12 +44,13 @@ class Article
 
     /**
      * Set title
-     * @param  string $title
+     * @param  string  $title
      * @return Article
      */
-    public function  setTitle($title)
+    public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
     /**
@@ -63,12 +63,13 @@ class Article
     }
     /**
      * Set text
-     * @param  string $text
+     * @param  string  $text
      * @return Article
      */
-    public function  setText($text)
+    public function setText($text)
     {
         $this->text = $text;
+
         return $this;
     }
     /**
@@ -87,6 +88,7 @@ class Article
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
     /**

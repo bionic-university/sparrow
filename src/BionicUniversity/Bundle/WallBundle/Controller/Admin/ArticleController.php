@@ -20,6 +20,7 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('BionicUniversityWallBundle:Article')->findAll();
+
         return $this->render('BionicUniversityWallBundle:Article/Admin:index.html.twig', array(
             'entities' => $entities,
         ));
@@ -49,7 +50,7 @@ class ArticleController extends Controller
 
     /**
      * Creates a form to create a Article entity.
-     * @param Article $entity The entity
+     * @param  Article                      $entity The entity
      * @return \Symfony\Component\Form\Form The form
      */
     private function createCreateForm(Article $entity)
@@ -196,7 +197,7 @@ class ArticleController extends Controller
 
     /**
      * Creates a form to delete a Article entity by id.
-     * @param mixed $id The entity id
+     * @param  mixed                        $id The entity id
      * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm($id)

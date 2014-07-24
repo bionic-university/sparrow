@@ -1,6 +1,5 @@
 <?php
 
-
 namespace BionicUniversity\Bundle\UserBundle\Util;
 
 use BionicUniversity\Bundle\UserBundle\Entity\User;
@@ -23,11 +22,11 @@ class UserManipulator
     /**
      * Creates a user and returns it.
      *
-     * @param string $username
-     * @param string $firstName
-     * @param string $lastName
-     * @param string $password
-     * @param string $email
+     * @param string  $username
+     * @param string  $firstName
+     * @param string  $lastName
+     * @param string  $password
+     * @param string  $email
      * @param Boolean $active
      * @param Boolean $superadmin
      *
