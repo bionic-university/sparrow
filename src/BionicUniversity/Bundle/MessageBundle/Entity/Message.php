@@ -2,10 +2,7 @@
 
 namespace BionicUniversity\Bundle\MessageBundle\Entity;
 
-/**
- * Message
- */
-use BionicUniversity\Bundle\UserBundle\Entity\User;
+use BionicUniversity\Bundle\UserBundle\Entity;
 
 /**
  * Class Message
