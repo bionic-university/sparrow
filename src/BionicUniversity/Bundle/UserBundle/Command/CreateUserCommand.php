@@ -101,8 +101,8 @@ EOT
                 }
             );
             $input->setArgument('firstname', $firstname);
-        }   
-        
+        }
+
         if (!$input->getArgument('lastname')) {
             $lastname = $this->getHelper('dialog')->askAndValidate(
                 $output,

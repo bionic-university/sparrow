@@ -1,0 +1,38 @@
+{% extends "::front.html.twig" %}
+    {% block heading_profile %}
+        {{ app.User.getFirstName }}
+        {{ app.User.getLastName }}
+    {% endblock heading_profile %}
+    {% block profile %}
+        <div class="row">
+            <aside class="avatar col-md-2">
+            </aside>
+            <section class="col-md-10" >
+                <ul class="list">
+                    <li class="list-item">{{ app.User.getPosition}}</li>
+                    <li class="list-item">{{ app.User.getGender}}</li>
+                    <li class="list-item">{{ app.User.getDepartment}}</li>
+                </ul>
+            </section>
+        </div>
+    {% endblock profile %}
+    {% block heading_wall %}
+        <h1>My communities</h1>
+        {% block communities %}
+            <div class="tab-content">
+                <ul>
+                    {% for membership in my_memberships %}
+                        <div class="panel panel-info communities_panel">
+                            <div class="panel-heading">
+                                <li class="communities_list">From: {{ membership.getCommunity.getName }}</li>
+                            </div>
+                            <div class="panel-body"><li class="communities_list">{{ membership.getCommunity.getDescription }}</li></div>
+                        </div>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endblock communities %}
+    {% endblock heading_wall %}
+{% block body %}
+    {{ parent() }}
+{% endblock body %}

@@ -1,5 +1,41 @@
 {% extends "::base.html.twig" %}
 {% block body %}
-    {% block content %}
-    {% endblock content %}
+    {% block navigation %}
+    <nav class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            <li><a href={{ path('user_login') }}>Home</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Contacts</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="/logout">Log out</a></li>
+        </ul>
+    </nav>
+    {% endblock navigation %}
+    <div class="row">
+        {% block menu %}
+            <aside class="col-md-3">
+                <ul class="list-group submenu">
+                    <li class="list-group-item"><a href="{{ path('user_login') }}">My profile</a></li>
+                    <li class="list-group-item"><a href="{{ path('messages') }}">Messages</a></li>
+                    <li class="list-group-item"><a href="#">Friends</a></li>
+                    <li class="list-group-item"><a href={{ path('communities') }}>Communities</a></li>
+                    <li class="list-group-item"><a href="{{ path('user_setting') }}">Settings</a></li>
+
+                </ul>
+            </aside>
+        {% endblock menu %}
+        <div class="profile_head">
+            {% block heading_profile %}{% endblock heading_profile %}
+        </div>
+        <section class="col-md-9">
+            <div class="profile">
+            {% block profile %}{% endblock profile %}
+            </div>
+        </section>
+    </div>
+    <div class="wall_head">
+        {% block heading_wall %}{% endblock heading_wall %}
+    </div>
+<footer></footer>
 {% endblock body %}

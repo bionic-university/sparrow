@@ -2,7 +2,6 @@
 
 namespace BionicUniversity\Bundle\UserBundle\Form;
 
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -21,13 +20,10 @@ class CreatePasswordType extends AbstractType
             ->add('save', 'submit', array(
                 'attr' => array('id' => '_submit')));
 
-
-
     }
     public function getName()
     {
         return 'BionicUniversity_UserBundle_CreatePasswordType';
     }
 
-
-} 
+}

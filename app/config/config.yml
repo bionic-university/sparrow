@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-
+    - { resource: "@BionicUniversityMessageBundle/Resources/config/services.yml" }
 framework:
     #esi:             ~
     translator:      { fallback: "%locale%" }
@@ -28,6 +28,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - 'BionicUniversityMessageBundle:Message/Form:messageFields.html.twig'
 
 # Assetic Configuration
 assetic:

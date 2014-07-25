@@ -15,6 +15,7 @@ class SecurityController extends Base
         if (false === $this->getSecurityContext()->isGranted('ROLE_USER')) {
             return parent::loginAction($request);
         }
+
         return $this->redirect($this->getRouter()->generate('user_profile', [
                 'id' => $this->getSecurityContext()->getToken()->getUser()->getId()
             ]
@@ -37,7 +38,7 @@ class SecurityController extends Base
 
     /**
      * @param $url
-     * @param int $status
+     * @param  int              $status
      * @return RedirectResponse
      */
     private function redirect($url, $status = 302)
@@ -63,8 +64,8 @@ class SecurityController extends Base
 
     /**
      * @param $view
-     * @param array $parameters
-     * @param Response $response
+     * @param  array    $parameters
+     * @param  Response $response
      * @return mixed
      */
     private function render($view, array $parameters = array(), Response $response = null)

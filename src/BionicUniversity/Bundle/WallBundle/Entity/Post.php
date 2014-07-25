@@ -1,7 +1,6 @@
 <?php
 
 namespace BionicUniversity\Bundle\WallBundle\Entity;
-use Doctrine\DBAL\Types\DateTimeType;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
@@ -17,6 +16,11 @@ class Post
     /**
      * @var string
      */
+    private $title;
+
+    /**
+     * @var string
+     */
     private $text;
 
     /**
@@ -28,8 +32,8 @@ class Post
      */
     private $wall;
 
-    public function __construct(){
-
+    public function __construct()
+    {
       $this->createdAt = new \DateTime();
 
     }
@@ -50,7 +54,31 @@ class Post
      * @param  string $text
      * @return Post
      */
-    public function  setText($text)
+
+    /**
+     * Set title
+     *
+     * @param  string $title
+     * @return Post
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function setText($text)
     {
         $this->text = $text;
 

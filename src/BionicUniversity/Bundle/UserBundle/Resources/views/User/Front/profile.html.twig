@@ -1,5 +1,24 @@
-{% extends '::front.html.twig' %}
+{% extends "::front.html.twig" %}
+    {% block heading_profile %}
+        {{ entity.firstName }}
+        {{ entity.lastName }}
+    {% endblock heading_profile %}
+    {% block profile %}
+       
+        <div class="row">
+            <aside class="avatar col-md-2">
+            </aside>
+            <section class="col-md-10" >
+                <ul class="list">
+                    <li class="list-item">{{ entity.position}}</li>
+                    <li class="list-item">{{ entity.gender}}</li>
+                    <li class="list-item">{{ entity.department}}</li>
+                </ul>
+            </section>
+        </div>
+    {% endblock profile %}
+    {% block heading_wall %}
+        <h1>My blog</h1>
+    {% endblock heading_wall %}
 
-{% block content %}
-    I am profile
-{% endblock %}
+

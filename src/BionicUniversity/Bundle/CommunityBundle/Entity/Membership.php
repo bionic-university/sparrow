@@ -2,6 +2,8 @@
 
 namespace BionicUniversity\Bundle\CommunityBundle\Entity;
 
+use BionicUniversity\Bundle\UserBundle\Entity\User;
+
 /**
  * Memberships
  */
@@ -11,7 +13,15 @@ class Membership
      * @var integer
      */
     private $id;
+
+    /**
+     * @var User
+     */
     private $user;
+
+    /**
+     * @var Community
+     */
     private $community;
 
     /**
@@ -25,9 +35,9 @@ class Membership
     }
 
     /**
-     * @param mixed $community
+     * @param Community $community
      */
-    public function setCommunity($community)
+    public function setCommunity(Community $community)
     {
         $this->community = $community;
     }
@@ -41,9 +51,9 @@ class Membership
     }
 
     /**
-     * @param mixed $user
+     * @param User $user
      */
-    public function setUser($user)
+    public function setUser(User $user)
     {
         $this->user = $user;
     }
@@ -55,6 +65,5 @@ class Membership
     {
         return $this->user;
     }
-
 
 }

@@ -8,6 +8,8 @@ BionicUniversity\Bundle\WallBundle\Entity\Post:
             generator:
                 strategy: AUTO
     fields:
+        title:
+            type: string
         text:
             type: text
         createdAt:

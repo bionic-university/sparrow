@@ -1,0 +1,18 @@
+{% extends "::front.html.twig" %}
+    {% block heading_profile %}
+        {{ entity.name }}
+    {% endblock heading_profile %}
+    {% block profile %}
+        <div class="row">
+            <aside class="avatar col-md-2">
+            </aside>
+            <section class="col-md-10" >
+                <ul class="list">
+                    <li class="list-item">{{ entity.description}}</li>
+                </ul>
+            </section>
+        </div>
+    {% endblock profile %}
+    {% block heading_wall %}
+        <h1>My blog</h1>
+    {% endblock heading_wall %}

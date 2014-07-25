@@ -4,6 +4,7 @@ namespace BionicUniversity\Bundle\CommunityBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use BionicUniversity\Bundle\WallBundle\Entity\Wall;
+use BionicUniversity\Bundle\UserBundle\Entity\User;
 
 /**
  * Community
@@ -19,6 +20,7 @@ class Community
      * @var string
      */
     private $name;
+
     /**
      * @var \DateTime
      */
@@ -106,8 +108,6 @@ class Community
         $this->createdAt = $createdAt;
     }
 
-
-
     /**
      * Get id
      *
@@ -121,7 +121,7 @@ class Community
     /**
      * Set name
      *
-     * @param  string $name
+     * @param  string    $name
      * @return Community
      */
     public function setName($name)
@@ -144,7 +144,7 @@ class Community
     /**
      * Set description
      *
-     * @param  string $description
+     * @param  string    $description
      * @return Community
      */
     public function setDescription($description)
@@ -167,7 +167,7 @@ class Community
     /**
      * Add memberships
      *
-     * @param \BionicUniversity\Bundle\CommunityBundle\Entity\Community $memberships
+     * @param  \BionicUniversity\Bundle\CommunityBundle\Entity\Community $memberships
      * @return Community
      */
     public function addMembership(\BionicUniversity\Bundle\CommunityBundle\Entity\Community $memberships)

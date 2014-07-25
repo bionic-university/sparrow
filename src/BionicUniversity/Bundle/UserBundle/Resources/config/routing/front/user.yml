@@ -1,7 +1,13 @@
 user_profile:
     path:     /id{id}
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:profile" }
-
+user_setting:
+    path:     /settings
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:edit" }
+user_update:
+    path: /{id}/update
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:update" }
+    requirements: { _method: post|put }
 fos_user_registration_confirmed:
     path:   /confirmed
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:createPassword" }

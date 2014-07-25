@@ -4,9 +4,9 @@ namespace BionicUniversity\Bundle\UserBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use BionicUniversity\Bundle\UserBundle\Entity\User;
 use BionicUniversity\Bundle\UserBundle\Form\UserType;
-
 
 /**
  * User controller.
@@ -51,6 +51,7 @@ class UserController extends Controller
             $this->get('fos_user.mailer')->sendConfirmationEmailMessage($entity);
             $this->get('session')->set('fos_user_send_confirmation_email/email', $entity->getEmail());
             $userManager->updateUser($entity);
+
             return $this->redirect($this->generateUrl('user_show', array('id' => $entity->getId())));
         }
 
@@ -229,7 +230,4 @@ class UserController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm();
     }
-
-
-
 }

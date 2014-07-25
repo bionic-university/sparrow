@@ -26,18 +26,16 @@ class Wall
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+        $this->news = new ArrayCollection();
     }
-
     /**
      * Get id
-     *
      * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
-
     /**
      * @return ArrayCollection
      */
