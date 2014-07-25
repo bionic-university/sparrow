@@ -78,8 +78,7 @@ fos_user:
             confirmation:
                 enabled:    true
                 from_email:
-                    address:    pepa1346@fsdfsdf.fd
-                    sender_name:    Demo Registration
+                    sender_name:    Sparrow registration confirmation
 
 mopa_bootstrap:
     form: ~  # Adds twig form theme  support

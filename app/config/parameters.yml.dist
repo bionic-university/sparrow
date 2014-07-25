@@ -8,9 +8,9 @@ parameters:
 
     mailer_transport:  gmail
     mailer_host:       ~
-    mailer_user:       pepa1346
-    mailer_password:        cd0b789c3aa6f6e2
-    mailer_sender:      pepa1346@mail.com
+    mailer_user:       ~
+    mailer_password:        ~
+    mailer_sender:      ~
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
