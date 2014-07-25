@@ -16,14 +16,15 @@
 <section class="container">
     <div class="login">
         <h1>Login to Sparrow</h1>
+        {% block fos_user_content %}
         {% block profile %}
         {% block login_form %}
-        {% if error %}
+        {% if error is defined %}
             <div>{{ error|trans }}</div>
         {% endif %}
         <form method="post" action="{{ path("fos_user_security_check") }}">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
-            <p><input type="text" id="username" name="_username" value="" placeholder="Username or Email"></p>
+            <p><input type="text" id="username" name="_username" value="" placeholder="Username"></p>
             <p><input type="password" id="password" name="_password" value="" placeholder="Password"></p>
             <p class="remember_me">
                 <label>
@@ -37,10 +38,11 @@
         </form>
         {% endblock login_form %}
         {% endblock profile %}
+        {% endblock fos_user_content %}
     </div>
 
     <div class="login-help">
-        <p>Forgot your password? <a href="http://www.lumosity.com/">Train your memory</a>.</p>
+        <p>Forgot your password? <a href="{{ path("fos_user_resetting_request") }}">Reset your password</a>.</p>
     </div>
 </section>
 
