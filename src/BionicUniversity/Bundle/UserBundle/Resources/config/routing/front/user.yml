@@ -1,3 +1,7 @@
 user_profile:
     path:     /id{id}
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:profile" }
+
+fos_user_registration_confirmed:
+    path:   /confirmed
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:createPassword" }

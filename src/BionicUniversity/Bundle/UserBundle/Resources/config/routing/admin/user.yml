@@ -29,7 +29,4 @@ user_delete:
     defaults: { _controller: "BionicUniversityUserBundle:Admin/User:delete" }
     requirements: { _method: post|delete }
 
-fos_user_registration_confirmed:
-    path:   /confirmed
-    defaults: { _controller: "BionicUniversityUserBundle:Admin/User:createPassword" }
 
