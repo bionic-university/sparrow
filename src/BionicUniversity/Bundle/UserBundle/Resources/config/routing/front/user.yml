@@ -8,3 +8,6 @@ user_update:
     path: /{id}/update
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:update" }
     requirements: { _method: post|put }
+fos_user_registration_confirmed:
+    path:   /confirmed
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:createPassword" }

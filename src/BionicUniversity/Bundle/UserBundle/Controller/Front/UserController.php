@@ -1,8 +1,9 @@
 <?php
 namespace BionicUniversity\Bundle\UserBundle\Controller\Front;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use BionicUniversity\Bundle\UserBundle\Form\CreatePasswordType;
 
 use BionicUniversity\Bundle\UserBundle\Entity\User;
 use BionicUniversity\Bundle\UserBundle\Form\UserSettingsType;
@@ -11,6 +12,34 @@ class UserController extends Controller
 {
     public function profileAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find User entity.');
+        }
+
+        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array('entity'=> $entity));
+    }
+
+    public function createPasswordAction(Request $request)
+    {
+        $entity = $this->getUser();
+        $form = $this->createForm(new CreatePasswordType(), $entity, array(
+            'action' => $this->generateUrl('fos_user_registration_confirmed'),
+            'method' => 'POST'
+        ));
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $userManager = $this->get("fos_user.user_manager");
+            $userManager->updateUser($this->getUser());
+
+            return $this->redirect($this->generateUrl('user_profile',array(
+                'id' => $this->getUser()->getId())));
+        }
+
+        return $this->render("BionicUniversityUserBundle:User/Front:create_password.html.twig", array(
+            'form' => $form->createView()
+        ));
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
         if (!$entity) {
