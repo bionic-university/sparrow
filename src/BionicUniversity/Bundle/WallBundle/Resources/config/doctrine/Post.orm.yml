@@ -15,6 +15,9 @@ BionicUniversity\Bundle\WallBundle\Entity\Post:
         createdAt:
             type: datetime
     manyToOne:
+        author:
+            targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
+            inversedBy: posts
         wall:
             targetEntity: BionicUniversity\Bundle\WallBundle\Entity\Wall
             inversedBy: posts

@@ -53,6 +53,10 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      */
+    private $posts;
+    /**
+     * @var ArrayCollection
+     */
     private $memberships;
 
     /**
@@ -63,6 +67,7 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        $this->posts = new ArrayCollection();
         $this->incomingMessages = new ArrayCollection();
         $this->outcomingMessages = new ArrayCollection();
         $this->memberships = new ArrayCollection();
@@ -199,6 +204,13 @@ class User extends BaseUser
     {
         return $this->outcomingMessages;
     }
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
 
     /**
      * Add incomingMessages
@@ -209,7 +221,6 @@ class User extends BaseUser
     public function addIncomingMessage(\BionicUniversity\Bundle\MessageBundle\Entity\Message $incomingMessages)
     {
         $this->incomingMessages[] = $incomingMessages;
-
         return $this;
     }
 
@@ -232,7 +243,6 @@ class User extends BaseUser
     public function addOutcomingMessage(\BionicUniversity\Bundle\MessageBundle\Entity\Message $outcomingMessages)
     {
         $this->outcomingMessages[] = $outcomingMessages;
-
         return $this;
     }
 
@@ -244,6 +254,25 @@ class User extends BaseUser
     public function removeOutcomingMessage(\BionicUniversity\Bundle\MessageBundle\Entity\Message $outcomingMessages)
     {
         $this->outcomingMessages->removeElement($outcomingMessages);
+    }
+    /**
+     * Add posts
+     * @param  \BionicUniversity\Bundle\WallBundle\Entity\Post $posts
+     * @return User
+     */
+    public function addPosts(\BionicUniversity\Bundle\WallBundle\Entity\Post $posts)
+    {
+        $this->posts[] = $posts;
+        return $this;
+    }
+
+    /**
+     * Remove posts
+     * @param \BionicUniversity\Bundle\WallBundle\Entity\Post $posts
+     */
+    public function removePosts(\BionicUniversity\Bundle\WallBundle\Entity\Post $posts)
+    {
+        $this->posts->removeElement($posts);
     }
 
     /**
