@@ -15,4 +15,9 @@ class UserController extends Controller
 
         return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array('entity'=> $entity));
     }
+
+    public function searchAction()
+    {
+        return $this->render('BionicUniversityUserBundle:User/Front:search.html.twig');
+    }
 }

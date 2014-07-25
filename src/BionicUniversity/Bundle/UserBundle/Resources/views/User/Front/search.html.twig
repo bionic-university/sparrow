@@ -1,0 +1,27 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+    <div>
+        <form><label>
+            First Name
+                <input type="search" name="first_name"><br>
+            </label><br>
+            <label>
+                Last Name
+            <input type="search" name="last_name"><br>
+            </label>
+            <br>
+            <label>Department</label>
+            <select name="dept">
+                <option value="Accountancy">Accountancy</option>
+                <option value="IT">IT</option>
+                <option value="Legal">Legal</option>
+                <option value="Administration">Administration</option>
+            </select>
+            <br><label>Gender : </label>
+            <input type="radio" name="gender" value="male">&nbspMale
+            <input type="radio" name="gender" value="female">&nbspFemale<br>
+            <input type="submit" value="Search">
+        </form>
+    </div>
+{% endblock %}
+
