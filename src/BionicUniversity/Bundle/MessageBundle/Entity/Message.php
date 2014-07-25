@@ -69,7 +69,7 @@ class Message
     /**
      * Set body
      *
-     * @param  string $body
+     * @param  string  $body
      * @return Message
      */
     public function setBody($body)
@@ -120,6 +120,5 @@ class Message
     {
         return $this->toUser;
     }
-
 
 }

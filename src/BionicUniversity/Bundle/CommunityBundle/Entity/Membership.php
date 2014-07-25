@@ -66,5 +66,4 @@ class Membership
         return $this->user;
     }
 
-
 }

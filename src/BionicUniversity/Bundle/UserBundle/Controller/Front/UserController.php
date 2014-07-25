@@ -6,8 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 use BionicUniversity\Bundle\UserBundle\Entity\User;
 use BionicUniversity\Bundle\UserBundle\Form\UserSettingsType;
-use BionicUniversity\Bundle\UserBundle\Controller\Front\SecurityController;
-
 
 class UserController extends Controller
 {
@@ -21,9 +19,6 @@ class UserController extends Controller
 
         return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array('entity'=> $entity));
     }
-
-
-
 
     public function editAction()
     {
@@ -63,7 +58,6 @@ class UserController extends Controller
 
         return $form;
     }
-
 
     public function updateAction(Request $request, $id)
     {

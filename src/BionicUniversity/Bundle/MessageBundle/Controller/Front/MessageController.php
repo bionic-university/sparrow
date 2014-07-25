@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use BionicUniversity\Bundle\MessageBundle\Entity\Message;
-use BionicUniversity\Bundle\MessageBundle\Form\Type\MessageType;
 
 /**
  * Message controller.
