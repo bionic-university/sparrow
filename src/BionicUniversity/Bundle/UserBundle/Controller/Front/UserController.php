@@ -5,7 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 use BionicUniversity\Bundle\UserBundle\Entity\User;
-use BionicUniversity\Bundle\UserBundle\Form\UserEditType;
+use BionicUniversity\Bundle\UserBundle\Form\UserSettingsType;
 use BionicUniversity\Bundle\UserBundle\Controller\Front\SecurityController;
 
 
@@ -54,7 +54,7 @@ class UserController extends Controller
      */
     private function createEditForm(User $entity)
     {
-        $form = $this->createForm(new UserEditType(), $entity, array(
+        $form = $this->createForm(new UserSettingsType(), $entity, array(
             'action' => $this->generateUrl('user_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));

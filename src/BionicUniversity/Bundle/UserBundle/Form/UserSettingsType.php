@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UserEditType extends AbstractType
+class UserSettingsType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -25,13 +25,11 @@ class UserEditType extends AbstractType
                     'choices' => array(User::GENDER_MALE => 'Male', User::GENDER_FEMALE => 'Female'),
                     'empty_value' => 'Choose user gender',
                     'empty_data' => null,
-                    'disabled' => 'disabled'
                 )
             )
             ->add('dateOfBirth', 'birthday', [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
-                'disabled' => 'disabled'
             ]);
     }
 
