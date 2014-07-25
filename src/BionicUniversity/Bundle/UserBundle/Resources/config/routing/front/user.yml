@@ -2,7 +2,7 @@ user_profile:
     path:     /id{id}
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:profile" }
 user_setting:
-    path:     /settings{id}
+    path:     /settings
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:edit" }
 user_update:
     path: /{id}/update

@@ -25,8 +25,10 @@ class UserController extends Controller
 
 
 
-    public function editAction($id)
+    public function editAction()
     {
+        $id = $this->getUser()->getId();
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
