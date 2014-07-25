@@ -2,7 +2,7 @@
 
 namespace BionicUniversity\Bundle\CommunityBundle\Entity;
 
-use BionicUniversity\Bundle\UserBundle\Entity;
+use BionicUniversity\Bundle\UserBundle\Entity\User;
 
 /**
  * Memberships

@@ -28,8 +28,8 @@ class MessageController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $outcomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByFromUser($user->getId());
-        $incomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByToUser($user->getId());
+        $outcomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByFromUser($user, ['createdAt'=>'desc']);
+        $incomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByToUser($user, ['createdAt'=>'desc']);
 
         return $this->render('BionicUniversityMessageBundle:Message:Front/messages.html.twig',
             array(

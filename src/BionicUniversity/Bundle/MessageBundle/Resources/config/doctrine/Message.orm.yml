@@ -9,6 +9,8 @@ BionicUniversity\Bundle\MessageBundle\Entity\Message:
     fields:
         body:
             type: text
+        createdAt:
+            type: datetime
     manyToOne:
         toUser:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User

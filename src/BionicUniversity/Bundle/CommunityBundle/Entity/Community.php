@@ -4,6 +4,7 @@ namespace BionicUniversity\Bundle\CommunityBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use BionicUniversity\Bundle\WallBundle\Entity\Wall;
+use BionicUniversity\Bundle\UserBundle\Entity\User;
 
 /**
  * Community
@@ -19,6 +20,7 @@ class Community
      * @var string
      */
     private $name;
+
     /**
      * @var \DateTime
      */

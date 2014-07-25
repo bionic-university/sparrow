@@ -24,9 +24,9 @@
                     {% for membership in my_memberships %}
                         <div class="panel panel-info communities_panel">
                             <div class="panel-heading">
-                                <li class="communities_list">From: {{ membership.getCommunity }}</li>
+                                <li class="communities_list">From: {{ membership.getCommunity.getName }}</li>
                             </div>
-                            <div class="panel-body"><li class="communities_list">{{ membership.getCommunity }}</li></div>
+                            <div class="panel-body"><li class="communities_list">{{ membership.getCommunity.getDescription }}</li></div>
                         </div>
                     {% endfor %}
                 </ul>
