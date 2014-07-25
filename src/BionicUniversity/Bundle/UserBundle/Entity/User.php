@@ -63,7 +63,7 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-     concolsdoctrine:   $this->incomingMessages = new ArrayCollection();
+        $this->incomingMessages = new ArrayCollection();
         $this->outcomingMessages = new ArrayCollection();
         $this->memberships = new ArrayCollection();
         $this->groups = ['ROLE_USER'];

@@ -2,13 +2,12 @@
 
 namespace BionicUniversity\Bundle\UserBundle\Controller\Admin;
 
-use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use BionicUniversity\Bundle\UserBundle\Entity\User;
 use BionicUniversity\Bundle\UserBundle\Form\UserType;
+use BionicUniversity\Bundle\UserBundle\Form\CreatePasswordType;
 
 /**
  * User controller.
@@ -46,10 +45,13 @@ class UserController extends Controller
         if ($form->isValid()) {
             $entity->setUsername($entity->getEmail());
             $entity->setPlainPassword(' ');
-            $userManager->updateUser($entity, true);
-            $event = new FormEvent($form,$request);
-            $dispatcher = $this->container->get('event_dispatcher');
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS,$event);
+            $entity->setEnabled(false);
+            if (null === $entity->getConfirmationToken()) {
+                $entity->setConfirmationToken($this->get('fos_user.util.token_generator')->generateToken());
+            }
+            $this->get('fos_user.mailer')->sendConfirmationEmailMessage($entity);
+            $this->get('session')->set('fos_user_send_confirmation_email/email', $entity->getEmail());
+            $userManager->updateUser($entity);
             return $this->redirect($this->generateUrl('user_show', array('id' => $entity->getId())));
         }
 
@@ -227,5 +229,25 @@ class UserController extends Controller
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm();
+    }
+
+
+    public function createPasswordAction(Request $request)
+    {
+        $entity = $this->getUser();
+        $form = $this->createForm(new CreatePasswordType(), $entity, array(
+            'action' => $this->generateUrl('fos_user_registration_confirmed'),
+            'method' => 'POST'
+        ));
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $userManager = $this->get("fos_user.user_manager");
+            $userManager->updateUser($this->getUser());
+            return $this->redirect($this->generateUrl('user_profile',array(
+                'id' => $this->getUser()->getId())));
+        }
+        return $this->render("BionicUniversityUserBundle:User/Admin:create_password.html.twig", array(
+            'form' => $form->createView()
+        ));
     }
 }
