@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.css') }}"/>
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.css') }}"/>
             <link rel="stylesheet" href="{{ asset('assets/profile.css') }}"/>
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -12,9 +12,9 @@
     </head>
     <body>
         {% block body %}{% endblock %}
+        <script type="text/javascript" src="{{ asset('vendor/jquery/dist/jquery.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
         {% block javascripts %}
-            <script type="text/javascript" src="{{ asset('vendor/jquery/dist/jquery.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
         {% endblock %}
     </body>
 </html>
