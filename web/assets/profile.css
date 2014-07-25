@@ -2,11 +2,20 @@
     background-color: indianred;
     height: 200px;
 }
-.wall{
+.wall_head{
 height: 50px;
 background-color: lightgrey;
 }
-.profile{
+.profile_head{
 height: 30px;
 background-color: lightgrey;
+}
+.profile{
+width: 90%;
+}
+.messages_list{
+    list-style-type: none;
+}
+.messages_panel{
+    width:90%;
 }

@@ -24,14 +24,16 @@
                 </ul>
             </aside>
         {% endblock menu %}
-        <div class="profile">
+        <div class="profile_head">
             {% block heading_profile %}{% endblock heading_profile %}
         </div>
         <section class="col-md-9">
+            <div class="profile">
             {% block profile %}{% endblock profile %}
+            </div>
         </section>
     </div>
-    <div class="wall">
+    <div class="wall_head">
         {% block heading_wall %}{% endblock heading_wall %}
     </div>
 <footer></footer>
