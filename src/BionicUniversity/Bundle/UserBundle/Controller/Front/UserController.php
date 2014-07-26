@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
-        $post = $em->getRepository('BionicUniversityWallBundle:Post');
+        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findAll();
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
