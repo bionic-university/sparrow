@@ -17,13 +17,16 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
-        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findAll();
+        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findBy([]);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array('entity' => $entity));
+        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array(
+            'entity' => $entity,
+            'post' => $posts,
+        ));
     }
 
     public function createPasswordAction(Request $request)
