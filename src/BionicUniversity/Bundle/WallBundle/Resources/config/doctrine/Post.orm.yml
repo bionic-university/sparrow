@@ -17,8 +17,8 @@ BionicUniversity\Bundle\WallBundle\Entity\Post:
     manyToOne:
         author:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
-            inversedBy: posts
+            inversedBy: post
         wall:
             targetEntity: BionicUniversity\Bundle\WallBundle\Entity\Wall
-            inversedBy: posts
+            inversedBy: post
     lifecycleCallbacks: {  }
