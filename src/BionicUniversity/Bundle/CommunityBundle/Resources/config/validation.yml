@@ -1,0 +1,12 @@
+BionicUniversity\CommunityBundle\Entity\Community:
+    properties:
+        name:
+            - NotBlank: ~
+        description:
+            - NotBlank: ~
+BionicUniversity\CommunityBundle\Entity\Membership:
+    properties:
+        user:
+            - NotBlank: ~
+        community:
+            - NotBlank: ~
