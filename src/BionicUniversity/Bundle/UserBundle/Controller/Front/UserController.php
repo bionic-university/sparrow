@@ -20,27 +20,16 @@ class UserController extends Controller
 
     public function searchAction()
     {
-
-    }
-        public function newAction()
-    {
-        // create a task and give it some dummy data for this example
-        $task = new Task();
-        $task->setTask('Write a blog post');
-        $task->setDueDate(new \DateTime('tomorrow'));
-
-        $form = $this->createFormBuilder($task)
-            ->add('task', 'text')
-            ->add('dueDate', 'date')
-            ->add('save', 'submit')
+        $form = $this->createFormBuilder()
+            ->add('name', 'text')
+            ->add('lastname', 'text')
+            ->add('search', 'submit')
             ->getForm();
-
-        return $this->render('BionicUniversityUserBundle:User/Front:new', array(
-            'form' => $form->createView(),
-        ));
+        return $this->render('BionicUniversityUserBundle:User/Front:search.html.twig');
     }
 
 
-        //return $this->render('BionicUniversityUserBundle:User/Front:search.html.twig');
+
+        //
     }
 
