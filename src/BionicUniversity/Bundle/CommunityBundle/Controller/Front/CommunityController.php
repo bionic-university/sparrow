@@ -23,19 +23,27 @@ class CommunityController extends Controller
         $user = $this->getUser();
 
         $em = $this->getDoctrine()->getManager();
+
         $myMemberships = $em->getRepository('BionicUniversityCommunityBundle:Membership')->findByUser($user);
         $all = $em->getRepository('BionicUniversityCommunityBundle:Community')->findAll();
         $allCommunities=array();
-        foreach ($all as $community)
+
+        if(null != $myMemberships)
         {
-            foreach($myMemberships as $membership)
+            foreach($all as $community => $data)
             {
-                if($community->getId() != $membership->getCommunity()->getId())
+                foreach($myMemberships as $membership)
                 {
-                    array_push($allCommunities,$community);
+                    if($data->getId() === $membership->getCommunity()->getId())
+                    {
+                        unset($all[$community]);
+                    }
                 }
             }
+
         }
+
+        $allCommunities=$all;
 
         return $this->render('BionicUniversityCommunityBundle:Community/Front:communities.html.twig', array('my_memberships'=>$myMemberships,'all_communities'=>$allCommunities));
     }
