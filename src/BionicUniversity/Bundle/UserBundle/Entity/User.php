@@ -13,46 +13,57 @@ class User extends BaseUser
 {
     const GENDER_MALE = 'm';
     const GENDER_FEMALE = 'f';
+
     /**
      * @var integer
      */
     protected $id;
+
     /**
      * @var string
      */
     private $firstName;
+
     /**
      * @var string
      */
     private $lastName;
+
     /**
      * @var string
      */
     private $position;
+
     /**
      * @var string
      */
     private $department;
+
     /**
      * @var string
      */
     private $gender;
+
     /**
      * @var ArrayCollection
      */
     private $incomingMessages;
+
     /**
      * @var ArrayCollection
      */
     private $outcomingMessages;
+
     /**
      * @var ArrayCollection
      */
     private $post;
+
     /**
      * @var ArrayCollection
      */
     private $memberships;
+
     /**
      * @var \DateTime
      */
@@ -98,6 +109,7 @@ class User extends BaseUser
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
+
         return $this;
     }
 
@@ -118,6 +130,7 @@ class User extends BaseUser
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
+
         return $this;
     }
 
@@ -138,6 +151,7 @@ class User extends BaseUser
     public function setPosition($position)
     {
         $this->position = $position;
+
         return $this;
     }
 
@@ -159,6 +173,7 @@ class User extends BaseUser
     public function setDepartment($department)
     {
         $this->department = $department;
+
         return $this;
     }
 
@@ -187,6 +202,7 @@ class User extends BaseUser
     {
         return $this->outcomingMessages;
     }
+
     /**
      * @return ArrayCollection
      */
@@ -203,6 +219,7 @@ class User extends BaseUser
     public function addIncomingMessage(\BionicUniversity\Bundle\MessageBundle\Entity\Message $incomingMessages)
     {
         $this->incomingMessages[] = $incomingMessages;
+
         return $this;
     }
 
@@ -224,6 +241,7 @@ class User extends BaseUser
     public function addOutcomingMessage(\BionicUniversity\Bundle\MessageBundle\Entity\Message $outcomingMessages)
     {
         $this->outcomingMessages[] = $outcomingMessages;
+
         return $this;
     }
 
@@ -235,6 +253,7 @@ class User extends BaseUser
     {
         $this->outcomingMessages->removeElement($outcomingMessages);
     }
+
     /**
      * Add posts
      * @param  Post $post
@@ -243,6 +262,7 @@ class User extends BaseUser
     public function addPosts(Post $post)
     {
         $this->post[] = $post;
+
         return $this;
     }
 
@@ -263,6 +283,7 @@ class User extends BaseUser
     public function addMembership(\BionicUniversity\Bundle\UserBundle\Entity\User $memberships)
     {
         $this->memberships[] = $memberships;
+
         return $this;
     }
 
@@ -274,6 +295,7 @@ class User extends BaseUser
     {
         $this->memberships->removeElement($memberships);
     }
+
     /**
      * Set dateOfBirth
      * @param  \DateTime $dateOfBirth
@@ -282,8 +304,10 @@ class User extends BaseUser
     public function setDateOfBirth($dateOfBirth)
     {
         $this->dateOfBirth = $dateOfBirth;
+
         return $this;
     }
+
     /**
      * Get dateOfBirth
      * @return \DateTime
@@ -292,6 +316,7 @@ class User extends BaseUser
     {
         return $this->dateOfBirth;
     }
+
     /**
      * @param string $gender
      */
