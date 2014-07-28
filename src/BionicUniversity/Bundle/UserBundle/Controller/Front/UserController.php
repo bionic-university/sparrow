@@ -33,7 +33,7 @@ class UserController extends Controller
     private function createSearchForm()
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('search', array('id' => $id)))
+            ->setAction($this->generateUrl('search'))
             ->setMethod('POST')
             ->add('submit', 'submit', array('label' => 'Search'))
             ->getForm();
