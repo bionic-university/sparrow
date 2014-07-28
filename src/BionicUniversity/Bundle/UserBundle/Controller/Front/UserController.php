@@ -55,7 +55,7 @@ class UserController extends Controller
     private function createEditForm(User $entity)
     {
         $form = $this->createForm(new UserSettingsType(), $entity, array(
-            'action' => $this->generateUrl('user_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('user_front_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 

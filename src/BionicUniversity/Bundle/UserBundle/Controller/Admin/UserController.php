@@ -175,7 +175,7 @@ class UserController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('user_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('user')); //deleted string, array('id' => $id)
         }
 
         return $this->render('BionicUniversityUserBundle:User/Admin:edit.html.twig', array(
@@ -183,6 +183,7 @@ class UserController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
+
     }
 
     /**
