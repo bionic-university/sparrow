@@ -1,6 +1,8 @@
 <?php
 
 namespace BionicUniversity\Bundle\WallBundle\Entity;
+use BionicUniversity\Bundle\UserBundle\BionicUniversityUserBundle;
+use BionicUniversity\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
@@ -12,22 +14,22 @@ class Post
      * @var integer
      */
     private $id;
+
     /**
-     * @var string
+     * @var User
      */
     private $author;
-    /**
-     * @var string
-     */
-    private $title;
+
     /**
      * @var string
      */
     private $text;
+
     /**
      * @var \DateTime
      */
     private $createdAt;
+
     /**
      * @var Wall
      */
@@ -45,6 +47,7 @@ class Post
     {
         return $this->id;
     }
+
     /**
      * Set text
      * @param  string $text
@@ -55,24 +58,7 @@ class Post
         $this->text = $text;
         return $this;
     }
-    /**
-     * Set title
-     * @param  string $title
-     * @return Post
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-        return $this;
-    }
-    /**
-     * Get title
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
+
     /**
      * Get text
      * @return string
@@ -81,6 +67,7 @@ class Post
     {
         return $this->text;
     }
+
     /**
      * Set createdAt
      * @param  \DateTime $createdAt
@@ -91,6 +78,7 @@ class Post
         $this->createdAt = $createdAt;
         return $this;
     }
+
     /**
      * Get createdAt
      * @return \DateTime
@@ -99,6 +87,7 @@ class Post
     {
         return $this->createdAt;
     }
+
     /**
      * Get wall
      * @return Wall
@@ -107,14 +96,23 @@ class Post
     {
         return $this->wall;
     }
+
     /**
      * Set author
-     * @param  string $author
-     * @return Post
+     * @param  User $author
+     * @return User
      */
-    public function setAuthor($author)
+    public function setAuthor(User $author)
     {
         $this->author = $author;
         return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }

@@ -17,15 +17,18 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
-        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findBy([]);
+        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findByAuthor($entity);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
+        $form = $this->createPostForm();
+
         return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array(
             'entity' => $entity,
             'post' => $posts,
+            'form' => $form->createView(),
         ));
     }
 
@@ -128,10 +131,10 @@ class UserController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createPostForm(Post $entity)
+    private function createPostForm()
     {
-        $form = $this->createForm(new PostType(), $entity, array(
-            'action' => $this->generateUrl('user_profile'),
+        $form = $this->createForm(new PostType(), null, array(
+            'action' => $this->generateUrl('create_post'),
             'method' => 'POST',
         ));
 
