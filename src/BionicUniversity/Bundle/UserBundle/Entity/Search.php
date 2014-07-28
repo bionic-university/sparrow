@@ -8,28 +8,13 @@ namespace BionicUniversity\Bundle\UserBundle\Entity;
  * Time: 14:27
  */
 
-Class Search {
-    protected $task;
+Class Search
+{
+    public $firstName;
 
-    protected $dueDate;
+    public $lastName;
 
-    public function getTask()
-    {
-        return $this->task;
-    }
+    public $gender;
 
-    public function setTask($task)
-    {
-        $this->task = $task;
-    }
-
-    public function getDueDate()
-    {
-        return $this->dueDate;
-    }
-
-    public function setDueDate(\DateTime $dueDate = null)
-    {
-        $this->dueDate = $dueDate;
-    }
+    public $department;
 }
