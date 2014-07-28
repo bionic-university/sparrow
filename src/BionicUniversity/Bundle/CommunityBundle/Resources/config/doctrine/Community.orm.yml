@@ -24,3 +24,4 @@ BionicUniversity\Bundle\CommunityBundle\Entity\Community:
         memberships:
             targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Membership
             mappedBy: community
+            cascade: ['remove']

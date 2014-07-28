@@ -19,17 +19,37 @@
     {% block heading_wall %}
         <h1>My communities</h1>
         {% block communities %}
+            <ul class="nav nav-tabs" role="tablist" id="myTab">
+                <li><a href="#my" role="tab" data-toggle="tab">My communities</a></li>
+                <li><a href="#all" role="tab" data-toggle="tab">All communities</a></li>
+            </ul>
             <div class="tab-content">
-                <ul>
-                    {% for membership in my_memberships %}
-                        <div class="panel panel-info communities_panel">
-                            <div class="panel-heading">
-                                <li class="communities_list">From: {{ membership.getCommunity.getName }}</li>
+                <div class="tab-pane active" id="my">
+                    <ul>
+                        {% for membership in my_memberships %}
+                            <div class="panel panel-danger communities_panel">
+                                <div class="panel-heading">
+                                    <li class="communities_list"><a href="{{ path('community_profile',{'id':membership.getcommunity.getid}) }}"> Name: {{ membership.getcommunity.getname }}</a></li>
+                                </div>
+                                <div class="panel-body"><li class="communities_list">{{ membership.getcommunity.getdescription }}</li></div>
+                                <div class="btn btn-default"><a href="{{ path('leave_community',{ 'id': membership.getid }) }}">Leave</a></div>
                             </div>
-                            <div class="panel-body"><li class="communities_list">{{ membership.getCommunity.getDescription }}</li></div>
-                        </div>
-                    {% endfor %}
-                </ul>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="tab-pane" id="all">
+                    <ul>
+                        {% for community in all_communities %}
+                            <div class="panel panel-danger communities_panel">
+                                <div class="panel-heading">
+                                    <li class="communities_list"><a href="{{ path('community_profile',{'id':community.getid}) }}"> Name: {{ community.getname }}</a></li>
+                                </div>
+                                <div class="panel-body"><li class="communities_list">{{ community.getdescription }}</li></div>
+                                <div class="btn btn-default"><a href="{{ path('join_community',{ 'id': community.getid }) }}">Enter</a></div>
+                            </div>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         {% endblock communities %}
     {% endblock heading_wall %}

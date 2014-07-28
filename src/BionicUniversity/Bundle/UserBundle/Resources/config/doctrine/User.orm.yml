@@ -35,4 +35,5 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         memberships:
             targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Membership
             mappedBy: user
+            cascade: ['remove']
     lifecycleCallbacks: {  }

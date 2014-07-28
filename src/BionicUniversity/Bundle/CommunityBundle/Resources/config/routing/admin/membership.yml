@@ -1,0 +1,30 @@
+membership:
+    path:     /
+    defaults: { _controller: "BionicUniversityCommunityBundle:Admin/Membership:index" }
+
+membership_show:
+    path:     /{id}/show
+    defaults: { _controller: "BionicUniversityCommunityBundle:Admin/Membership:show" }
+
+membership_new:
+    path:     /new
+    defaults: { _controller: "BionicUniversityCommunityBundle:Admin/Membership:new" }
+
+membership_create:
+    path:     /create
+    defaults: { _controller: "BionicUniversityCommunityBundle:Admin/Membership:create" }
+    requirements: { _method: post }
+
+membership_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BionicUniversityCommunityBundle:Admin/Membership:edit" }
+
+membership_update:
+    path:     /{id}/update
+    defaults: { _controller: "BionicUniversityCommunityBundle:Admin/Membership:update" }
+    requirements: { _method: post|put }
+
+membership_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BionicUniversityCommunityBundle:Admin/Membership:delete" }
+    requirements: { _method: post|delete }
