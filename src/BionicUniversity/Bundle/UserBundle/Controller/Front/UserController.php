@@ -20,14 +20,24 @@ class UserController extends Controller
 
     public function searchAction()
     {
-        $form = $this->createFormBuilder()
+        $this->createSearchForm();
+       /* $form = $this->createFormBuilder()
             ->add('name', 'text')
             ->add('lastname', 'text')
             ->add('search', 'submit')
             ->getForm();
         return $this->render('BionicUniversityUserBundle:User/Front:search.html.twig');
+       */
     }
 
+    private function createSearchForm()
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('search', array('id' => $id)))
+            ->setMethod('POST')
+            ->add('submit', 'submit', array('label' => 'Search'))
+            ->getForm();
+    }
 
 
         //
