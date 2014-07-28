@@ -1,7 +1,8 @@
 {% extends "::base.html.twig" %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('assets/profile.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/page.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/page.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/blog.css') }}"/>
 {% endblock %}
 {% block body %}
     {% block navigation %}
@@ -59,9 +60,10 @@
                     <div class="profile">
                     {% block profile %}{% endblock profile %}
                     </div>
-                    <div class="wall_head">
+                    <div class="blog-header">
                         {% block heading_wall %}{% endblock heading_wall %}
                     </div>
+
                     </div>
 
             </div>
