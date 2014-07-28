@@ -112,4 +112,96 @@ class UserController extends Controller
             'edit_form' => $editForm->createView(),
         ));
     }
+
+    public function friendsAction()
+    {
+        $user = $this->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $myFriendshipsSender = $em->getRepository('BionicUniversityUserBundle:Friendship')->findByUserSender($user);
+        $myFriendshipsReceiver = $em->getRepository('BionicUniversityUserBundle:Friendship')->findByUserReceiver($user);
+        $myFriendshipsAll=array_merge($myFriendshipsSender, $myFriendshipsReceiver);
+
+        foreach($myFriendshipsAll as $friendship => $data)
+        {
+            if($data->getAcceptanceStatus()==0)
+            {
+                unset($myFriendshipsAll[$friendship]);
+            }
+        }
+
+        $myFriends=array();
+        foreach($myFriendshipsAll as $friendship)
+        {
+            if($friendship->getUserSender() != $user)
+            {
+                array_push($myFriends, $friendship->getUserSender());
+            }
+            if($friendship->getUserReceiver() != $user)
+            {
+                array_push($myFriends, $friendship->getUserReceiver());
+            }
+        }
+
+        $allPeople = $em->getRepository('BionicUniversityUserBundle:User')->findAll();
+
+        foreach($allPeople as $man => $data)
+        {
+            foreach($myFriendshipsAll as $friendship)
+            {
+                if($friendship->getUserSender() == $data)
+                {
+                    unset($allPeople[$man]);
+                }
+                if($friendship->getUserReceiver() == $data)
+                {
+                    unset($allPeople[$man]);
+                }
+            }
+        }
+
+
+        return $this->render('BionicUniversityUserBundle:User/Front:friends.html.twig', array('my_friends'=>$myFriends,'all_people'=>$allPeople));
+    }
+
+    //==========================================================================
+    //==========================================================================
+//    public function addAction($id)
+//    {
+//        $entity = new Friendship();
+//        $entity->setUserSender($this->getUser());
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $userReceiver = $em->getRepository('BionicUniversityUserBundle:User')->findOneById($id);
+//        $entity->setUserReceiver($userReceiver);
+//        $entity->setAcceptanceStatus(0);
+//
+//        $em->persist($entity);
+//        $em->flush();
+//
+//        return $this->redirect($this->generateUrl('communities'));
+//    }
+//
+//    public function removeAction($id)
+//    {
+//
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $removeUser = $em->getRepository('BionicUniversityUserBundle:User')->findById($id);
+//        $thisUser = $this->getUser();
+//
+//        $friendshipSender = $em->getRepository('BionicUniversityUserBundle:Friendship')->findByUserSender($id);
+//        $friendshipReceiver = $em->getRepository('BionicUniversityUserBundle:Friendship')->findByUserReceiver($id);
+//
+//        if($friendshipReceiver->getUserSender() == $removeUser && $friendshipReceiver->getUserReceiver() == $thisUser){
+//            $em->remove($friendshipReceiver);
+//            $em->flush();
+//        }
+//
+//
+//        return $this->redirect($this->generateUrl('friends'));
+//    }
+    //==========================================================================
+    //==========================================================================
 }

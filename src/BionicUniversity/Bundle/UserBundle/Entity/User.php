@@ -56,6 +56,15 @@ class User extends BaseUser
     private $memberships;
 
     /**
+     * @var ArrayCollection
+     */
+    private $friendshipsSender;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $friendshipsReceiver;
+    /**
      * @var \DateTime
      */
     private $dateOfBirth;
@@ -66,6 +75,8 @@ class User extends BaseUser
         $this->incomingMessages = new ArrayCollection();
         $this->outcomingMessages = new ArrayCollection();
         $this->memberships = new ArrayCollection();
+        $this->friendshipsSender = new ArrayCollection();
+        $this->friendshipsReceiver = new ArrayCollection();
         $this->groups = ['ROLE_USER'];
     }
 
@@ -90,6 +101,38 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $friendshipsSender
+     */
+    public function setFriendshipsSender($friendshipsSender)
+    {
+        $this->friendshipsSender = $friendshipsSender;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getFriendshipsSender()
+    {
+        return $this->friendshipsSender;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $friendshipsReceiver
+     */
+    public function setFriendshipsReceiver($friendshipsReceiver)
+    {
+        $this->friendshipsReceiver = $friendshipsReceiver;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getFriendshipsReceiver()
+    {
+        return $this->friendshipsReceiver;
     }
 
     /**

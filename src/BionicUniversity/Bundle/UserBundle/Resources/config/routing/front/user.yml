@@ -11,3 +11,12 @@ user_update:
 fos_user_registration_confirmed:
     path:   /confirmed
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:createPassword" }
+friends:
+    path: /friends
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:friends" }
+add_friend:
+    path: /add/{id}
+    defaults: { _controller:"BionicUniversityUserBundle:Front/User:add" }
+remove_friend:
+    path: /remove/{id}
+    defaults: { _controller:"BionicUniversityUserBundle:Front/User:remove" }

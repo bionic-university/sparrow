@@ -1,0 +1,20 @@
+BionicUniversity\Bundle\UserBundle\Entity\Friendship:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        acceptanceStatus:
+            type: integer
+    manyToOne:
+        userSender:
+            targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
+            inversedBy: friendshipsSender
+        userReceiver:
+            targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
+            inversedBy: friendshipsReceiver
+
