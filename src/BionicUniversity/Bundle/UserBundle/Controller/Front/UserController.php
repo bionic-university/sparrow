@@ -3,8 +3,7 @@ namespace BionicUniversity\Bundle\UserBundle\Controller\Front;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BionicUniversity\Bundle\UserBundle\Controller\Admin;
-use BionicUniversity\Bundle\UserBundle\Entity\Search;
-
+use BionicUniversity\Bundle\UserBundle\Entity\User;
 class UserController extends Controller
 {
     public function profileAction($id)
@@ -20,17 +19,34 @@ class UserController extends Controller
 
     public function searchAction()
     {
-        $search = new Search();
-        $search->firstName = 'Hello';
-
-        $form = $this->createFormBuilder($search)
-            ->add('firstName', 'text')
-            ->add('lastName', 'text')
-            ->add('department', 'text')
-            ->add('gender', 'text')
+            $form = $this->createFormBuilder()
+            ->add('firstName', 'text', [
+                'mapped' => false
+            ])
+            ->add('lastName', 'text', [
+                'mapped' => false
+            ])
+            ->add('department', 'text', [
+                'mapped' => false
+            ])
+            ->add('email', 'text', [
+                'mapped' => false
+            ])
+            ->add('gender', 'choice', array(
+                'choices' => array(User::GENDER_MALE => 'Male', User::GENDER_FEMALE => 'Female'),
+                'empty_value' => 'Choose user gender',
+                'empty_data' => null))
             ->add('Search', 'submit')
             ->getForm();
+
+        //$form->handleRequest($request);
+
+        if ($form->isValid())
+        {
+
+        }
         return $this->render('BionicUniversityUserBundle:User/Front:search.html.twig', array('form' => $form->createView(),));
+
        // $em = $this->getDoctrine()->getManager();
 
         // $entity = $em->getRepository('BionicUniversityUserBundle:User')->findOneByfirstName();
