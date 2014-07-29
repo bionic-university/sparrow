@@ -31,7 +31,6 @@ class UserController extends Controller
             'post' => $posts,
             'form' => $form->createView(),
             'csrfToken' => $csrfToken,
-            //'wall' => $this->findWall(),
         ));
     }
 
@@ -106,19 +105,19 @@ class UserController extends Controller
         }
 
         $editForm = $this->createEditForm($entity);
-//        $editForm->handleRequest($request);
-        var_dump($editForm->submit($request)->isValid());
-        die();
         if ($editForm->isValid()) {
             $em->flush();
 
             return $this->redirect($this->generateUrl('user_profile', array('id' => $id)));
         }
 
-        return $this->render('BionicUniversityUserBundle:User/Front:edit.html.twig', array(
+        return $this->redirect($this->generateUrl('user_profile', array('id' => $id)));
+
+        /*return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array(
             'entity' => $entity,
             'edit_form' => $editForm->createView(),
-        ));
+            'form' => $postForm->createView(),
+        ));*/
     }
 
     /**
