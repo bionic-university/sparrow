@@ -14,3 +14,4 @@ BionicUniversity\Bundle\CommunityBundle\Entity\Membership:
         community:
             targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Community
             inversedBy: memberships
+

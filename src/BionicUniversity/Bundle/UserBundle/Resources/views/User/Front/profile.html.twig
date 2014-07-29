@@ -1,7 +1,7 @@
 {% extends "::front.html.twig" %}
     {% block heading_profile %}
-        {{ app.security.token.user.firstName }}
-        {{ app.security.token.user.lastName }}
+        {{ entity.firstName }}
+        {{ entity.lastName }}
     {% endblock heading_profile %}
     {% block profile %}
        
@@ -10,9 +10,9 @@
             </aside>
             <section class="col-md-10" >
                 <ul class="list">
-                    <li class="list-item">{{ app.security.token.user.position}}</li>
-                    <li class="list-item">{{ app.security.token.user.gender}}</li>
-                    <li class="list-item">{{ app.security.token.user.department}}</li>
+                    <li class="list-item">Position: {{ app.security.token.user.position}}</li>
+                    <li class="list-item">Gender: {{ app.security.token.user.gender}}</li>
+                    <li class="list-item">Department: {{ app.security.token.user.department}}</li>
                 </ul>
             </section>
         </div>
