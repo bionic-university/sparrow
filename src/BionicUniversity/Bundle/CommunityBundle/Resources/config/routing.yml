@@ -1,9 +1,18 @@
 BionicUniversityCommunityBundle_admin_community:
         resource: "@BionicUniversityCommunityBundle/Resources/config/routing/admin/community.yml"
         prefix:   /admin/community
+BionicUniversityCommunityBundle_admin_membership:
+        resource: "@BionicUniversityCommunityBundle/Resources/config/routing/admin/membership.yml"
+        prefix:   /admin/membership
 BionicUniversityCommunityBundle_user_community:
         resource: "@BionicUniversityCommunityBundle/Resources/config/routing/front/community.yml"
         prefix:   /community
 communities:
     path: /communities
     defaults: { _controller:"BionicUniversityCommunityBundle:Front/Community:communities" }
+join_community:
+    path: /join/{id}
+    defaults: { _controller:"BionicUniversityCommunityBundle:Front/Community:join" }
+leave_community:
+    path: /leave/{id}
+    defaults: { _controller:"BionicUniversityCommunityBundle:Front/Community:leave" }

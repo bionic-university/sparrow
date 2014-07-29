@@ -40,13 +40,6 @@ class UserController extends Controller
         return $this->render("BionicUniversityUserBundle:User/Front:create_password.html.twig", array(
             'form' => $form->createView()
         ));
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
-        }
-
-        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array('entity'=> $entity));
     }
 
     public function editAction()

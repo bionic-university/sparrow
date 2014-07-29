@@ -19,3 +19,12 @@ width: 90%;
 .messages_panel{
     width:90%;
 }
+.communities_list{
+    list-style-type: none;
+}
+.communities_panel{
+    width:90%;
+}
+.communities_panel a{
+    text-decoration: none;
+}
