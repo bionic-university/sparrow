@@ -39,6 +39,7 @@ class Post
     {
       $this->createdAt = new \DateTime();
     }
+
     /**
      * Get id
      * @return integer
@@ -56,6 +57,7 @@ class Post
     public function setText($text)
     {
         $this->text = $text;
+        
         return $this;
     }
 
@@ -76,6 +78,7 @@ class Post
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -105,6 +108,7 @@ class Post
     public function setAuthor(User $author)
     {
         $this->author = $author;
+
         return $this;
     }
 
