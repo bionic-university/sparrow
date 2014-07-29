@@ -16,14 +16,13 @@ BionicUniversity\Bundle\CommunityBundle\Entity\Community:
         createdAt:
             type: date
     oneToOne:
-        wall:
-            targetEntity: BionicUniversity\Bundle\WallBundle\Entity\Wall
         owner:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
     oneToMany:
         memberships:
             targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Membership
             mappedBy: community
+            cascade: ['remove']
         posts:
             targetEntity: BionicUniversity\Bundle\WallBundle\Entity\Post
-            mappedBy: community            cascade: ['remove']
+            mappedBy: community

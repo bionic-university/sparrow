@@ -85,7 +85,7 @@ class UserController extends Controller
     private function createEditForm(User $entity)
     {
         $form = $this->createForm(new UserSettingsType(), $entity, array(
-            'action' => $this->generateUrl('user_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('user_front_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -111,13 +111,7 @@ class UserController extends Controller
             return $this->redirect($this->generateUrl('user_profile', array('id' => $id)));
         }
 
-        return $this->redirect($this->generateUrl('user_profile', array('id' => $id)));
-
-        /*return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array(
-            'entity' => $entity,
-            'edit_form' => $editForm->createView(),
-            'form' => $postForm->createView(),
-        ));*/
+        return $this->redirect($this->generateUrl('user_setting', array('id' => $id)));
     }
 
     /**
