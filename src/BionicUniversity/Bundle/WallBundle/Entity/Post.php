@@ -1,7 +1,8 @@
 <?php
 
 namespace BionicUniversity\Bundle\WallBundle\Entity;
-
+use BionicUniversity\Bundle\UserBundle\BionicUniversityUserBundle;
+use BionicUniversity\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
@@ -15,14 +16,9 @@ class Post
     private $id;
 
     /**
-     * @var string
+     * @var User
      */
     private $author;
-
-    /**
-     * @var string
-     */
-    private $title;
 
     /**
      * @var string
@@ -41,7 +37,7 @@ class Post
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
+      $this->createdAt = new \DateTime();
     }
 
     /**
@@ -61,29 +57,8 @@ class Post
     public function setText($text)
     {
         $this->text = $text;
-
+        
         return $this;
-    }
-
-    /**
-     * Set title
-     * @param  string $title
-     * @return Post
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
     }
 
     /**
@@ -127,13 +102,21 @@ class Post
 
     /**
      * Set author
-     * @param  string $author
-     * @return Post
+     * @param  User $author
+     * @return User
      */
-    public function setAuthor($author)
+    public function setAuthor(User $author)
     {
         $this->author = $author;
 
         return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }

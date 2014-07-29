@@ -1,0 +1,7 @@
+create_post:
+    path:     /create
+    defaults: { _controller: "BionicUniversityWallBundle:Front/Post:create" }
+
+delete_post:
+    path:     /delete/{id}
+    defaults: { _controller: "BionicUniversityWallBundle:Front/Post:delete" }
