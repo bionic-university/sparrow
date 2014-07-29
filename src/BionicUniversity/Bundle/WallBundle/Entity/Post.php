@@ -1,6 +1,7 @@
 <?php
 
 namespace BionicUniversity\Bundle\WallBundle\Entity;
+
 use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
@@ -16,6 +17,11 @@ class Post
     /**
      * @var string
      */
+    private $author;
+
+    /**
+     * @var string
+     */
     private $title;
 
     /**
@@ -27,6 +33,7 @@ class Post
      * @var \DateTime
      */
     private $createdAt;
+
     /**
      * @var Wall
      */
@@ -34,13 +41,11 @@ class Post
 
     public function __construct()
     {
-      $this->createdAt = new \DateTime();
-
+        $this->createdAt = new \DateTime();
     }
 
     /**
      * Get id
-     *
      * @return integer
      */
     public function getId()
@@ -50,14 +55,18 @@ class Post
 
     /**
      * Set text
-     *
      * @param  string $text
      * @return Post
      */
+    public function setText($text)
+    {
+        $this->text = $text;
+
+        return $this;
+    }
 
     /**
      * Set title
-     *
      * @param  string $title
      * @return Post
      */
@@ -70,7 +79,6 @@ class Post
 
     /**
      * Get title
-     *
      * @return string
      */
     public function getTitle()
@@ -78,16 +86,8 @@ class Post
         return $this->title;
     }
 
-    public function setText($text)
-    {
-        $this->text = $text;
-
-        return $this;
-    }
-
     /**
      * Get text
-     *
      * @return string
      */
     public function getText()
@@ -97,7 +97,6 @@ class Post
 
     /**
      * Set createdAt
-     *
      * @param  \DateTime $createdAt
      * @return Post
      */
@@ -110,7 +109,6 @@ class Post
 
     /**
      * Get createdAt
-     *
      * @return \DateTime
      */
     public function getCreatedAt()
@@ -118,8 +116,24 @@ class Post
         return $this->createdAt;
     }
 
+    /**
+     * Get wall
+     * @return Wall
+     */
     public function getWall()
     {
         return $this->wall;
+    }
+
+    /**
+     * Set author
+     * @param  string $author
+     * @return Post
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+
+        return $this;
     }
 }

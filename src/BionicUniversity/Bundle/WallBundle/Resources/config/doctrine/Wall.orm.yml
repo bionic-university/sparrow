@@ -8,7 +8,7 @@ BionicUniversity\Bundle\WallBundle\Entity\Wall:
             generator:
                 strategy: AUTO
     oneToMany:
-        posts:
+        post:
             targetEntity: BionicUniversity\Bundle\WallBundle\Entity\Post
             mappedBy: wall
     oneToOne:
