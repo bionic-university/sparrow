@@ -8,4 +8,4 @@ BionicUniversityWallBundle_article:
 
 BionicUniversityWallBundle_post:
     resource: "@BionicUniversityWallBundle/Resources/config/routing/front/post.yml"
-    prefix:   /post
+    prefix:   /

@@ -1,7 +1,7 @@
 {% extends "::front.html.twig" %}
     {% block heading_profile %}
-        {{ entity.firstName }}
-        {{ entity.lastName }}
+        {{ app.security.token.user.firstName }}
+        {{ app.security.token.user.lastName }}
     {% endblock heading_profile %}
     {% block profile %}
        
@@ -10,9 +10,9 @@
             </aside>
             <section class="col-md-10" >
                 <ul class="list">
-                    <li class="list-item">{{ entity.position}}</li>
-                    <li class="list-item">{{ entity.gender}}</li>
-                    <li class="list-item">{{ entity.department}}</li>
+                    <li class="list-item">{{ app.security.token.user.position}}</li>
+                    <li class="list-item">{{ app.security.token.user.gender}}</li>
+                    <li class="list-item">{{ app.security.token.user.department}}</li>
                 </ul>
             </section>
         </div>
@@ -27,6 +27,11 @@
                 {% for post_body in post %}
                     <div class="">
                         <li class="">{{ post_body.text }}</li>
+                        {% if app.security.token.user == post_body.author %}
+                            <a href="{{ path('delete_post', {'id': post_body.id, '_token': csrfToken}) }}">
+                                Delete
+                            </a>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </ul>

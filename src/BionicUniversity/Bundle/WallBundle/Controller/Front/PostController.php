@@ -59,4 +59,26 @@ class PostController extends Controller
 
         return $form;
     }
+
+    /**
+     * Deletes a Post entity.
+     */
+    public function deleteAction($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('BionicUniversityWallBundle:Post')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Community entity.');
+        }
+        if (false === $this->get('form.csrf_provider')->isCsrfTokenValid('delete_post', $request->get('_token'))) {
+            throw $this->createAccessDeniedException('Invalid CSRF token.');
+        }
+        $em->remove($entity);
+        $em->flush();
+
+        $UserId = $this->getUser()->getId();
+
+        return $this->redirect($this->generateUrl('user_profile' , ['id'=>$UserId]));
+    }
 }

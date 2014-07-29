@@ -24,11 +24,14 @@ class UserController extends Controller
         }
 
         $form = $this->createPostForm();
+        $csrfToken = $this->get('form.csrf_provider')->generateCsrfToken('delete_post');
 
         return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array(
             'entity' => $entity,
             'post' => $posts,
             'form' => $form->createView(),
+            'csrfToken' => $csrfToken,
+            //'wall' => $this->findWall(),
         ));
     }
 
