@@ -1,5 +1,6 @@
 BionicUniversity\Bundle\UserBundle\Entity\Friendship:
     type: entity
+    repositoryClass: BionicUniversity\Bundle\UserBundle\Doctrine\ORM\FriendshipRepository
     table: null
     id:
         id:
@@ -17,7 +18,3 @@ BionicUniversity\Bundle\UserBundle\Entity\Friendship:
         userReceiver:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
             inversedBy: invites
-
-BionicUniversity\Bundle\UserBundle\Doctrine\ORM\FriendshipRepository:
-    type: entity
-    repositoryClass: BionicUniversity\Bundle\UserBundle\Doctrine\ORM\FriendshipRepository

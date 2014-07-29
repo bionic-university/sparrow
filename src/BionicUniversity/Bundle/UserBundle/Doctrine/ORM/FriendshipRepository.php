@@ -1,10 +1,10 @@
 <?php
 
-namespace BionicUniversity\Bundle\UserBundle\Doctrine\ORM\FriendshipRepository;
+namespace BionicUniversity\Bundle\UserBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityRepository;
 
-class UserRepository extends EntityRepository
+class FriendshipRepository extends EntityRepository
 {
     public function findFriendshipByUsers($firstUser, $secondUser)
     {
