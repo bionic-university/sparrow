@@ -1,12 +1,13 @@
-{% extends 'BionicUniversityUserBundle:User/Admin:_form.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>User edit</h1>
+    <h1>Membership edit</h1>
+
     {{ form(edit_form) }}
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('user') }}">
+        <a href="{{ path('membership') }}">
             Back to the list
         </a>
     </li>
