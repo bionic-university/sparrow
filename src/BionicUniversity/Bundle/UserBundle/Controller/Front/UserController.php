@@ -173,7 +173,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $removeUser = $em->getRepository("BionicUniversityUserBundle:User")->find($id);
-        $friendship = $em->findFriendshipByUsers($this->getUser(), $removeUser);
+        $friendship = $em->getRepository("BionicUniversityUserBundle:Friendship")->findFriendshipByUsers($this->getUser(), $removeUser);
         $em->remove($friendship);
 
         return $this->redirect($this->generateUrl("user_friends"));
