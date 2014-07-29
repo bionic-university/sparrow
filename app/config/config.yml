@@ -83,3 +83,7 @@ fos_user:
 
 mopa_bootstrap:
     form: ~  # Adds twig form theme  support
+
+# app/config/config.yml
+genemu_form:
+    select2: ~

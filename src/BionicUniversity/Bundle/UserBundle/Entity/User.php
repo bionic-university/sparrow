@@ -77,6 +77,7 @@ class User extends BaseUser
         $this->outcomingMessages = new ArrayCollection();
         $this->memberships = new ArrayCollection();
         $this->groups = ['ROLE_USER'];
+        $this->interests = new ArrayCollection();
     }
 
     public function __toString()
@@ -331,5 +332,76 @@ class User extends BaseUser
     public function getGender()
     {
         return $this->gender;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $interests;
+
+
+    /**
+     * Add post
+     *
+     * @param \BionicUniversity\Bundle\WallBundle\Entity\Post $post
+     * @return User
+     */
+    public function addPost(\BionicUniversity\Bundle\WallBundle\Entity\Post $post)
+    {
+        $this->post[] = $post;
+
+        return $this;
+    }
+
+    /**
+     * Remove post
+     *
+     * @param \BionicUniversity\Bundle\WallBundle\Entity\Post $post
+     */
+    public function removePost(\BionicUniversity\Bundle\WallBundle\Entity\Post $post)
+    {
+        $this->post->removeElement($post);
+    }
+
+    /**
+     * Get post
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPost()
+    {
+        return $this->post;
+    }
+
+    /**
+     * Add interests
+     *
+     * @param \BionicUniversity\Bundle\UserBundle\Entity\Interest $interests
+     * @return User
+     */
+    public function addInterest(\BionicUniversity\Bundle\UserBundle\Entity\Interest $interests)
+    {
+        $this->interests[] = $interests;
+
+        return $this;
+    }
+
+    /**
+     * Remove interests
+     *
+     * @param \BionicUniversity\Bundle\UserBundle\Entity\Interest $interests
+     */
+    public function removeInterest(\BionicUniversity\Bundle\UserBundle\Entity\Interest $interests)
+    {
+        $this->interests->removeElement($interests);
+    }
+
+    /**
+     * Get interests
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getInterests()
+    {
+        return $this->interests;
     }
 }

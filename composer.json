@@ -20,7 +20,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "mopa/bootstrap-bundle": "v3.0.0-beta3",
         "twbs/bootstrap": "v3.0.0",
-        "friendsofsymfony/user-bundle": "~2.0@dev"
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "genemu/form-bundle": "2.2.*"
     },
     "scripts": {
         "post-root-package-install": [
