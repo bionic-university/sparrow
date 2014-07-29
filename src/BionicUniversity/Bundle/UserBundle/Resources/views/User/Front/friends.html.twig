@@ -32,7 +32,7 @@
                                     <li class="communities_list"><a href="{{ path('user_profile',{'id':friend.getid}) }}"> Name: {{ friend.getfirstname }}</a></li>
                                 </div>
                                 <div class="panel-body"><li class="communities_list">{{ friend.getdepartment }}</li></div>
-                                <div class="btn btn-default"><a href="{{ path('remove_friend',{ 'id': friend.getid }) }}">Remove</a></div>
+                                <div class="btn btn-default"><a href="{{ path('user_remove_friend',{ 'id': friend.getid }) }}">Remove</a></div>
                             </div>
                         {% endfor %}
                     </ul>
@@ -45,7 +45,7 @@
                                     <li class="communities_list"><a href="{{ path('user_profile',{'id':man.getid}) }}"> Name: {{ man.getfirstname }}</a></li>
                                 </div>
                                 <div class="panel-body"><li class="communities_list">{{ man.getdepartment }}</li></div>
-                                <div class="btn btn-default"><a href="{{ path('add_friend',{ 'id': man.getid }) }}">Add to friends</a></div>
+                                <div class="btn btn-default"><a href="{{ path('user_add_friend',{ 'id': man.getid }) }}">Add to friends</a></div>
                             </div>
                         {% endfor %}
                     </ul>

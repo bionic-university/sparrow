@@ -75,8 +75,8 @@ class User extends BaseUser
         $this->incomingMessages = new ArrayCollection();
         $this->outcomingMessages = new ArrayCollection();
         $this->memberships = new ArrayCollection();
-        $this->requests = new ArrayCollection();
-        $this->invites = new ArrayCollection();
+        $this->$requests = new ArrayCollection();
+        $this->$invites = new ArrayCollection();
         $this->groups = ['ROLE_USER'];
     }
 
@@ -319,70 +319,4 @@ class User extends BaseUser
         return $this->gender;
     }
   
-
-    /**
-     * Add requests
-     *
-     * @param \BionicUniversity\Bundle\UserBundle\Entity\Friendship $requests
-     * @return User
-     */
-    public function addRequest(\BionicUniversity\Bundle\UserBundle\Entity\Friendship $requests)
-    {
-        $this->requests[] = $requests;
-
-        return $this;
-    }
-
-    /**
-     * Remove requests
-     *
-     * @param \BionicUniversity\Bundle\UserBundle\Entity\Friendship $requests
-     */
-    public function removeRequest(\BionicUniversity\Bundle\UserBundle\Entity\Friendship $requests)
-    {
-        $this->requests->removeElement($requests);
-    }
-
-    /**
-     * Get requests
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getRequests()
-    {
-        return $this->requests;
-    }
-
-    /**
-     * Add invites
-     *
-     * @param \BionicUniversity\Bundle\UserBundle\Entity\Friendship $invites
-     * @return User
-     */
-    public function addInvite(\BionicUniversity\Bundle\UserBundle\Entity\Friendship $invites)
-    {
-        $this->invites[] = $invites;
-
-        return $this;
-    }
-
-    /**
-     * Remove invites
-     *
-     * @param \BionicUniversity\Bundle\UserBundle\Entity\Friendship $invites
-     */
-    public function removeInvite(\BionicUniversity\Bundle\UserBundle\Entity\Friendship $invites)
-    {
-        $this->invites->removeElement($invites);
-    }
-
-    /**
-     * Get invites
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getInvites()
-    {
-        return $this->invites;
-    }
 }

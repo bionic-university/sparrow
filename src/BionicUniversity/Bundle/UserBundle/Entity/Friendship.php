@@ -1,7 +1,6 @@
 <?php
-namespace BionicUniversity\Bundle\UserBundle\Entity;
 
-use BionicUniversity\Bundle\UserBundle\Entity\User;
+namespace BionicUniversity\Bundle\UserBundle\Entity;
 
 /**
  * Friendships
@@ -55,35 +54,34 @@ class Friendship
     }
 
     /**
-     * @param User $userSender
+     * @param User $userReceiver
      */
-    public function setUserSender(User $userSender)
-    {
-        $this->userSender = $userSender;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUserSender()
-    {
-        return $this->userSender;
-    }
-
-    /**
-     * @param User $user
-     */
-    public function setUserReceiver(User $userReceiver)
+    public function setUserReceiver($userReceiver)
     {
         $this->userReceiver = $userReceiver;
     }
 
     /**
-     * @return mixed
+     * @param User $userSender
+     */
+    public function setUserSender($userSender)
+    {
+        $this->userSender = $userSender;
+    }
+
+    /**
+     * @return User
      */
     public function getUserReceiver()
     {
         return $this->userReceiver;
     }
 
+    /**
+     * @return User
+     */
+    public function getUserSender()
+    {
+        return $this->userSender;
+    }
 }

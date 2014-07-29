@@ -13,8 +13,11 @@ BionicUniversity\Bundle\UserBundle\Entity\Friendship:
     manyToOne:
         userSender:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
-            inversedBy: friendshipsSender
+            inversedBy: requests
         userReceiver:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
-            inversedBy: friendshipsReceiver
+            inversedBy: invites
 
+BionicUniversity\Bundle\UserBundle\Doctrine\ORM\FriendshipRepository:
+    type: entity
+    repositoryClass: BionicUniversity\Bundle\UserBundle\Doctrine\ORM\FriendshipRepository
