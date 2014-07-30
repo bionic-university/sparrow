@@ -105,6 +105,7 @@ class UserController extends Controller
         }
 
         $editForm = $this->createEditForm($entity);
+        $editForm->handleRequest($request);
         if ($editForm->isValid()) {
             $em->flush();
 
