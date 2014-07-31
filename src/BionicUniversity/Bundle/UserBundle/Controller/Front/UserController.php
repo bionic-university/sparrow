@@ -23,6 +23,7 @@ class UserController extends Controller
             ->add('firstName', 'text', [
                 'mapped' => false
             ])
+
             ->add('lastName', 'text', [
                 'mapped' => false
             ])
