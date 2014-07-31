@@ -3,6 +3,7 @@
 namespace BionicUniversity\Bundle\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
@@ -12,6 +13,7 @@ class User extends BaseUser
 {
     const GENDER_MALE = 'm';
     const GENDER_FEMALE = 'f';
+
     /**
      * @var integer
      */
@@ -46,10 +48,17 @@ class User extends BaseUser
      * @var ArrayCollection
      */
     private $incomingMessages;
+
     /**
      * @var ArrayCollection
      */
     private $outcomingMessages;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $post;
+
     /**
      * @var ArrayCollection
      */
@@ -72,6 +81,7 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        $this->posts = new ArrayCollection();
         $this->incomingMessages = new ArrayCollection();
         $this->outcomingMessages = new ArrayCollection();
         $this->memberships = new ArrayCollection();
@@ -95,7 +105,6 @@ class User extends BaseUser
 
     /**
      * Get id
-     *
      * @return integer
      */
     public function getId()
@@ -105,7 +114,6 @@ class User extends BaseUser
 
     /**
      * Set firstName
-     *
      * @param  string $firstName
      * @return User
      */
@@ -118,7 +126,6 @@ class User extends BaseUser
 
     /**
      * Get firstName
-     *
      * @return string
      */
     public function getFirstName()
@@ -128,7 +135,6 @@ class User extends BaseUser
 
     /**
      * Set lastName
-     *
      * @param  string $lastName
      * @return User
      */
@@ -141,7 +147,6 @@ class User extends BaseUser
 
     /**
      * Get lastName
-     *
      * @return string
      */
     public function getLastName()
@@ -151,7 +156,6 @@ class User extends BaseUser
 
     /**
      * Set position
-     *
      * @param  string $position
      * @return User
      */
@@ -174,7 +178,6 @@ class User extends BaseUser
 
     /**
      * Set department
-     *
      * @param  string $department
      * @return User
      */
@@ -212,8 +215,15 @@ class User extends BaseUser
     }
 
     /**
+     * @return ArrayCollection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
      * Add incomingMessages
-     *
      * @param  \BionicUniversity\Bundle\MessageBundle\Entity\Message $incomingMessages
      * @return User
      */
@@ -236,7 +246,6 @@ class User extends BaseUser
 
     /**
      * Add outcomingMessages
-     *
      * @param  \BionicUniversity\Bundle\MessageBundle\Entity\Message $outcomingMessages
      * @return User
      */
@@ -249,7 +258,6 @@ class User extends BaseUser
 
     /**
      * Remove outcomingMessages
-     *
      * @param \BionicUniversity\Bundle\MessageBundle\Entity\Message $outcomingMessages
      */
     public function removeOutcomingMessage($outcomingMessages)
@@ -258,8 +266,28 @@ class User extends BaseUser
     }
 
     /**
+     * Add posts
+     * @param  Post $post
+     * @return Post
+     */
+    public function addPosts(Post $post)
+    {
+        $this->post[] = $post;
+
+        return $this;
+    }
+
+    /**
+     * Remove posts
+     * @param Post $post
+     */
+    public function removePosts(Post $post)
+    {
+        $this->post->removeElement($post);
+    }
+
+    /**
      * Add memberships
-     *
      * @param  \BionicUniversity\Bundle\UserBundle\Entity\User $memberships
      * @return User
      */
@@ -272,7 +300,6 @@ class User extends BaseUser
 
     /**
      * Remove memberships
-     *
      * @param \BionicUniversity\Bundle\UserBundle\Entity\User $memberships
      */
     public function removeMembership($memberships)
@@ -282,7 +309,6 @@ class User extends BaseUser
 
     /**
      * Set dateOfBirth
-     *
      * @param  \DateTime $dateOfBirth
      * @return User
      */
@@ -295,7 +321,6 @@ class User extends BaseUser
 
     /**
      * Get dateOfBirth
-     *
      * @return \DateTime
      */
     public function getDateOfBirth()

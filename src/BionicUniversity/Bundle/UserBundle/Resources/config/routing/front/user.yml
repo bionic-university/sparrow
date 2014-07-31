@@ -4,7 +4,7 @@ user_profile:
 user_setting:
     path:     /settings
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:edit" }
-user_update:
+user_front_update:
     path: /{id}/update
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:update" }
     requirements: { _method: post|put }

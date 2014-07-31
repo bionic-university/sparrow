@@ -5,10 +5,14 @@ namespace BionicUniversity\Bundle\UserBundle\Controller\Front;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BionicUniversity\Bundle\UserBundle\Form\CreatePasswordType;
+
 use BionicUniversity\Bundle\UserBundle\Entity\User;
 use BionicUniversity\Bundle\UserBundle\Entity\Friendship;
 use BionicUniversity\Bundle\UserBundle\Form\UserSettingsType;
 use BionicUniversity\Bundle\UserBundle\Doctrine\ORM\FriendshipRepository;
+
+use BionicUniversity\Bundle\WallBundle\Entity\Post;
+use BionicUniversity\Bundle\WallBundle\Form\PostType;
 
 class UserController extends Controller
 {
@@ -16,11 +20,22 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
+        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findByAuthor($entity);
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', ['entity'=> $entity]);
+        $form = $this->createPostForm();
+        $csrfToken = $this->get('form.csrf_provider')->generateCsrfToken('delete_post');
+
+        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array(
+            'entity' => $entity,
+            'post' => $posts,
+            'form' => $form->createView(),
+            'csrfToken' => $csrfToken,
+            //'wall' => $this->findWall(),
+        ));
     }
 
     public function createPasswordAction(Request $request)
@@ -80,16 +95,21 @@ class UserController extends Controller
         ]);
         $form->add('submit', 'submit', ['label' => 'Update']);
 
+        $form->add('submit', 'submit', array('label' => 'Update'));
+
         return $form;
     }
 
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
+
         $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
+
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
         if ($editForm->isValid()) {

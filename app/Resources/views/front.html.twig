@@ -1,41 +1,77 @@
 {% extends "::base.html.twig" %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/profile.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/page.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/blog.css') }}"/>
+{% endblock %}
 {% block body %}
     {% block navigation %}
-    <nav class="navbar navbar-default">
-        <ul class="nav navbar-nav">
-            <li><a href={{ path('user_login') }}>Home</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Contacts</a></li>
-            <li><a href="#">Help</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="/logout">Log out</a></li>
-        </ul>
-    </nav>
-    {% endblock navigation %}
-    <div class="row">
-        {% block menu %}
-            <aside class="col-md-3">
-                <ul class="list-group submenu">
-                    <li class="list-group-item"><a href="{{ path('user_login') }}">My profile</a></li>
-                    <li class="list-group-item"><a href="{{ path('messages') }}">Messages</a></li>
-                    <li class="list-group-item"><a href="{{ path('user_friends') }}">Friends</a></li>
-                    <li class="list-group-item"><a href={{ path('communities') }}>Communities</a></li>
-                    <li class="list-group-item"><a href="{{ path('user_setting') }}">Settings</a></li>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
 
-                </ul>
-            </aside>
-        {% endblock menu %}
-        <div class="profile_head">
-            {% block heading_profile %}{% endblock heading_profile %}
-        </div>
-        <section class="col-md-9">
-            <div class="profile">
-            {% block profile %}{% endblock profile %}
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Sparrow</a>
             </div>
-        </section>
+            <div class="navbar-collapse collapse" >
+                <ul class="nav navbar-nav">
+                    <li><a href={{ path('user_login') }}>Home</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Contacts</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="/logout">Log out</a></li>
+                </ul>
+                {% if app.security.isGranted("ROLE_SUPER_ADMIN") %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#" style="margin-right: ">To admin</a></li>
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
     </div>
-    <div class="wall_head">
-        {% block heading_wall %}{% endblock heading_wall %}
+    {% endblock navigation %}
+    <div class="container-fluid">
+
+       {#<div class="jumbotron">#}
+
+            <div class="row">
+                {% block menu %}
+                <div class="col-sm-3 col-md-2 sidebar">
+                    <ul class="nav nav-sidebar">
+                            <li class="list-group-item"><a href="{{ path('user_login') }}">My profile</a></li>
+                            <li class="list-group-item"><a href="{{ path('messages') }}">Messages</a></li>
+                            <li class="list-group-item"><a href="#">Friends</a></li>
+                            <li class="list-group-item"><a href={{ path('communities') }}>Communities</a></li>
+                            <li class="list-group-item"><a href="{{ path('user_setting') }}">Settings</a></li>
+                        </ul>
+                </div>
+                {% endblock menu %}
+                <div class="col-sm-9 col-md-offset-2 main">
+                    <h1 class="page-header ">
+                        {% block heading_profile %}{% endblock heading_profile %}
+                    </h1>
+
+                    <div class="profile">
+                    {% block profile %}{% endblock profile %}
+                    </div>
+                    <div class="blog-header">
+                        {% block heading_wall %}{% endblock heading_wall %}
+                    </div>
+
+                    </div>
+
+            </div>
+
+
+
+       {#</div>#}
+
     </div>
 <footer></footer>
 {% endblock body %}
