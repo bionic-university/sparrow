@@ -4,11 +4,19 @@
         {{ entity.lastName }}
     {% endblock heading_profile %}
     {% block profile %}
-       
         <div class="row">
-            <aside class="avatar col-md-2">
+            <aside class=" col-md-3">
+                {% if entity.avatar == false %}
+                <form action="{{ oneup_uploader_endpoint('avatar') }}" class="dropzone square drop_avatar">
+                    <div class="fallback">
+                    <input name="file" type="file" multiple />
+                    </div>
+                </form>
+                {% else %}
+                    <img src="{{ asset('uploads/avatar/') }}{{ entity.avatar }}" class="avatar" alt="Your avatar">
+                {% endif %}
             </aside>
-            <section class="col-md-10" >
+            <section class="col-md-9" >
                 <ul class="list">
                     <li class="list-item"> Position: {{ entity.position}}</li>
                     <li class="list-item"> Gender: {{ entity.gender}}</li>
@@ -20,5 +28,7 @@
     {% block heading_wall %}
         <h1>My blog</h1>
     {% endblock heading_wall %}
-
+{% block javascripts %}
+    <script type="text/javascript" src="{{  asset('vendor/dropzone/downloads/dropzone.js') }}"></script>
+{% endblock javascripts %}
 

@@ -12,10 +12,16 @@ class User extends BaseUser
 {
     const GENDER_MALE = 'm';
     const GENDER_FEMALE = 'f';
+
     /**
      * @var integer
      */
     protected $id;
+
+    /**
+     * @var string
+     */
+    private $avatar;
 
     /**
      * @var string
@@ -46,10 +52,12 @@ class User extends BaseUser
      * @var ArrayCollection
      */
     private $incomingMessages;
+
     /**
      * @var ArrayCollection
      */
     private $outcomingMessages;
+
     /**
      * @var ArrayCollection
      */
@@ -307,4 +315,21 @@ class User extends BaseUser
     {
         return $this->gender;
     }
+
+    /**
+     * @param string $avatar
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
 }

@@ -25,6 +25,10 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         gender:
             type: string
             length: '6'
+        avatar:
+            type: string
+            length: '255'
+            nullable: true
     oneToMany:
         incomingMessages:
             targetEntity: BionicUniversity\Bundle\MessageBundle\Entity\Message
