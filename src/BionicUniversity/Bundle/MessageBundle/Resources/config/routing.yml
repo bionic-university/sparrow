@@ -1,6 +1,0 @@
-BionicUniversityMessageBundle_message:
-        resource: "@BionicUniversityMessageBundle/Resources/config/routing/admin/message.yml"
-        prefix:   /admin/message
-list_of_messages:
-        resource: "@BionicUniversityMessageBundle/Resources/config/routing/front/message.yml"
-        prefix:   /

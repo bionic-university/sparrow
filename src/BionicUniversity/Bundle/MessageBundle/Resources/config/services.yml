@@ -1,9 +1,0 @@
-parameters:
-    bionic_university_message.form.type.send_message.class: BionicUniversity\Bundle\MessageBundle\Form\Type\SendMessageType
-
-services:
-    bionic_university_message.form.type.send_message:
-        class: %bionic_university_message.form.type.send_message.class%
-        arguments: [@security.context]
-        tags:
-            - { name: form.type, alias: send_message }

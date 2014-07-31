@@ -1,7 +1,0 @@
-parameters:
-#    bionic_university_wall.example.class: BionicUniversity\Bundle\WallBundle\Example
-
-services:
-#    bionic_university_wall.example:
-#        class: %bionic_university_wall.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

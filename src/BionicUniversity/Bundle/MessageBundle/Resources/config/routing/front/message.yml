@@ -1,7 +1,0 @@
-messages:
-    path:     /messages
-    defaults: { _controller: "BionicUniversityMessageBundle:Front/Message:messages",  }
-message_create_front:
-    path:     /create
-    defaults: { _controller: "BionicUniversityMessageBundle:Front/Message:create" }
-    requirements: { _method: post }

@@ -1,7 +1,0 @@
-parameters:
-    bionic.user.util.user_manipulator.class: BionicUniversity\Bundle\UserBundle\Util\UserManipulator
-
-services:
-    bionic.user.util.user_manipulator:
-        class: %bionic.user.util.user_manipulator.class%
-        arguments: [ @fos_user.user_manager ]
