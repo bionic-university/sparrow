@@ -4,6 +4,8 @@ namespace BionicUniversity\Bundle\UserBundle\Controller\Front;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BionicUniversity\Bundle\UserBundle\Controller\Admin;
 use BionicUniversity\Bundle\UserBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Request;
+
 class UserController extends Controller
 {
     public function profileAction($id)
@@ -17,35 +19,44 @@ class UserController extends Controller
         return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array('entity'=> $entity));
     }
 
-    public function searchAction()
+    public function searchAction(Request $request)
     {
             $form = $this->createFormBuilder()
-            ->add('firstName', 'text', [
-                'mapped' => false
-            ])
+            ->setAction($this->generateUrl('user_search'))
 
+            ->add('firstName', 'text', [
+            ])
             ->add('lastName', 'text', [
-                'mapped' => false
             ])
             ->add('department', 'text', [
-                'mapped' => false
             ])
-            ->add('email', 'text', [
-                'mapped' => false
+            ->add('email', 'email', [
             ])
             ->add('gender', 'choice', array(
                 'choices' => array(User::GENDER_MALE => 'Male', User::GENDER_FEMALE => 'Female'),
                 'empty_value' => 'Choose user gender',
-                'empty_data' => null))
+                'empty_data' => null,
+                    ))
             ->add('Search', 'submit')
             ->getForm();
 
-        //$form->handleRequest($request);
+        $form->handleRequest($request);
 
         if ($form->isValid())
         {
+            $em = $this->getDoctrine()->getManager();
+            $search_name = $request->request->get("form")['firstName'];
+            $search_lname = $request->request->get("form")['lastName'];
+            $search_dep = $request->request->get("form")['department'];
+            $search_email = $request->request->get("form")['email'];
+            $search_gender = $request->request->get("form")['gender'];
 
+
+            $entity = $em->getRepository('BionicUniversityUserBundle:User')->findUsers($search_name, $search_lname, $search_gender, $search_dep, $search_email);
+
+            return $this->render('BionicUniversityUserBundle:User/Front:resultsearch.html.twig', array('users' => $entity));
         }
+
         return $this->render('BionicUniversityUserBundle:User/Front:search.html.twig', array('form' => $form->createView(),));
 
        // $em = $this->getDoctrine()->getManager();
