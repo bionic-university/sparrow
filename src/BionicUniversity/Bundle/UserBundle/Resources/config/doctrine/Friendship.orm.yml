@@ -1,0 +1,20 @@
+BionicUniversity\Bundle\UserBundle\Entity\Friendship:
+    type: entity
+    repositoryClass: BionicUniversity\Bundle\UserBundle\Doctrine\ORM\FriendshipRepository
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        acceptanceStatus:
+            type: integer
+    manyToOne:
+        userSender:
+            targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
+            inversedBy: requests
+        userReceiver:
+            targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
+            inversedBy: invites
