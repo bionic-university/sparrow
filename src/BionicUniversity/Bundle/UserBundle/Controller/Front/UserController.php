@@ -31,7 +31,6 @@ class UserController extends Controller
             'post' => $posts,
             'form' => $form->createView(),
             'csrfToken' => $csrfToken,
-            //'wall' => $this->findWall(),
         ));
     }
 
@@ -106,14 +105,14 @@ class UserController extends Controller
         }
 
         $editForm = $this->createEditForm($entity);
-//        $editForm->handleRequest($request);
-        var_dump($editForm->submit($request)->isValid());
-        die();
+        $editForm->handleRequest($request);
         if ($editForm->isValid()) {
             $em->flush();
 
             return $this->redirect($this->generateUrl('user_profile', array('id' => $id)));
         }
+
+        return $this->redirect($this->generateUrl('user_setting', array('id' => $id)));
     }
 
     /**
