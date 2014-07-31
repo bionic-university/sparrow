@@ -16,7 +16,19 @@ user_friends:
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:friends" }
 user_add_friend:
     path: /add/{id}
-    defaults: { _controller:"BionicUniversityUserBundle:Front/User:addFriend" }
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:addFriend" }
 user_remove_friend:
     path: /remove/{id}
-    defaults: { _controller:"BionicUniversityUserBundle:Front/User:removeFriend" }
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:removeFriend" }
+user_all_people:
+    path: /allpeople
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:allPeople" }
+user_confirm_friend:
+    path: /confirmed/{id}
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:confirmFriend" }
+user_friend_requests:
+    path: /requests
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:friendRequests" }
+user_friend_invites:
+    path: /invites
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:friendInvites" }
