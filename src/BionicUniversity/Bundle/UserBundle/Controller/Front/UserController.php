@@ -34,7 +34,6 @@ class UserController extends Controller
             'post' => $posts,
             'form' => $form->createView(),
             'csrfToken' => $csrfToken,
-            //'wall' => $this->findWall(),
         ));
     }
 

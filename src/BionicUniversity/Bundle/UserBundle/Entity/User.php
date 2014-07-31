@@ -57,7 +57,7 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      */
-    private $post;
+    private $posts;
 
     /**
      * @var ArrayCollection
@@ -270,9 +270,9 @@ class User extends BaseUser
      * @param  Post $post
      * @return Post
      */
-    public function addPosts(Post $post)
+    public function addPost(Post $post)
     {
-        $this->post[] = $post;
+        $this->posts[] = $post;
 
         return $this;
     }
@@ -283,7 +283,7 @@ class User extends BaseUser
      */
     public function removePosts(Post $post)
     {
-        $this->post->removeElement($post);
+        $this->posts->removeElement($post);
     }
 
     /**

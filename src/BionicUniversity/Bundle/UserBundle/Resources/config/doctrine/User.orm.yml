@@ -32,7 +32,7 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         outcomingMessages:
             targetEntity: BionicUniversity\Bundle\MessageBundle\Entity\Message
             mappedBy: fromUser
-        post:
+        posts:
             targetEntity: BionicUniversity\Bundle\WallBundle\Entity\Post
             mappedBy: author
         memberships:
