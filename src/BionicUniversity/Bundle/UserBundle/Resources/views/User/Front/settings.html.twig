@@ -12,4 +12,9 @@
         </li>
 
     </ul>
+
 {% endblock profile %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ form_javascript(edit_form) }}
+{% endblock %}

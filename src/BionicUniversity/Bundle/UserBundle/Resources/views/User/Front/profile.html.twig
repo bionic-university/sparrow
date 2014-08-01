@@ -13,6 +13,15 @@
                     <li class="list-item">Position: {{ app.security.token.user.position}}</li>
                     <li class="list-item">Gender: {{ app.security.token.user.gender}}</li>
                     <li class="list-item">Department: {{ app.security.token.user.department}}</li>
+                    <li class="list-item">Interests:
+                        <ul>
+                            {% if entity.interests != 'none' %}
+                                {% for interest in entity.interests %}
+                                    <li><a href="{{ path('user_profile', { 'id': entity.id, 'strSearch': interest.name }) }}">{{ interest.name }}</a></li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </li>
                 </ul>
             </section>
         </div>

@@ -98,7 +98,6 @@ class UserController extends Controller
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
 
         if (!$entity) {
@@ -106,9 +105,8 @@ class UserController extends Controller
         }
 
         $editForm = $this->createEditForm($entity);
-//        $editForm->handleRequest($request);
-        var_dump($editForm->submit($request)->isValid());
-        die();
+        $editForm->handleRequest($request);
+
         if ($editForm->isValid()) {
             $em->flush();
 
