@@ -3,12 +3,12 @@
         Type a message
     {% endblock heading_profile %}
     {% block profile %}
-       {{ form(form) }}
+        {{ form(form) }}
     {% endblock profile %}
     {% block heading_wall %}
         <h1>My messages</h1>
         {% block messages %}
-            <ul class="nav nav-tabs" role="tablist" id="myTab">
+            <ul class="nav nav-tabs" role="tablist">
                 <li><a href="#incoming" role="tab" data-toggle="tab">Incoming</a></li>
                 <li><a href="#outcoming" role="tab" data-toggle="tab">Outcoming</a></li>
             </ul>
@@ -20,7 +20,15 @@
                                 <div class="panel-heading">
                                     <li class="messages_list">From: {{ in_mess_one.fromUser }}</li>
                                 </div>
-                                <div class="panel-body"><li class="messages_list">{{ in_mess_one.body }}</li></div>
+                                <div class="panel-body">
+                                    <li class="messages_list">{{ in_mess_one.body }}</li>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    No messages recieved yet
+                                </div>
                             </div>
                         {% endfor %}
                     </ul>
@@ -32,7 +40,15 @@
                                 <div class="panel-heading">
                                     <li class="messages_list">To: {{ out_mess_one.toUser }}</li>
                                 </div>
-                                <div class="panel-body"><li class="messages_list">{{ out_mess_one.body }}</li></div>
+                                <div class="panel-body">
+                                    <li class="messages_list">{{ out_mess_one.body }}</li>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    No messages sent yet
+                                </div>
                             </div>
                         {% endfor %}
                     </ul>
@@ -40,10 +56,8 @@
             </div>
         {% endblock messages %}
     {% endblock heading_wall %}
-{% block body %}
-    {{ parent() }}
-{% endblock body %}
+
 {% block javascripts %}
-    <script>$(document).ready($('#myTab a').tab('show'))</script>
     {{ parent() }}
+    <script>$(document).ready($('#myTab a').tab('show'))</script>
 {% endblock javascripts %}

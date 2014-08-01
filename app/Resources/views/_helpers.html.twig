@@ -1,0 +1,12 @@
+{% macro user(user) %}
+    <div class="panel panel-danger communities_panel">
+        <div class="panel-heading">
+            <li class="communities_list"><a href="{{ path('user_profile',{'id':user.id}) }}">
+                    Name: {{ user.firstName }}</a></li>
+        </div>
+        <div class="panel-body">
+            <li class="communities_list">{{ user.department }}</li>
+        </div>
+        <div class="btn btn-default"><a href="{{ path('user_remove_friend',{ 'id': user.id }) }}">Remove</a></div>
+    </div>
+{% endmacro %}

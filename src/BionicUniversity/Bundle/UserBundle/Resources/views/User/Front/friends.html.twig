@@ -1,43 +1,37 @@
 {% extends "::front.html.twig" %}
-    {% block heading_profile %}
-        {{ app.User.getFirstName }}
-        {{ app.User.getLastName }}
-    {% endblock heading_profile %}
-    {% block profile %}
-        <div class="row">
-            <aside class="avatar col-md-2">
-            </aside>
-            <section class="col-md-10" >
-                <ul class="list">
-                    <li class="list-item">{{ app.User.getPosition}}</li>
-                    <li class="list-item">{{ app.User.getGender}}</li>
-                    <li class="list-item">{{ app.User.getDepartment}}</li>
-                </ul>
-            </section>
-        </div>
-    {% endblock profile %}
+{% import '_helpers.html.twig' as helpers %}
     {% block heading_wall %}
         <h1>My friends</h1>
         {% block friends %}
-            <ul class="nav nav-tabs" role="tablist" id="myTab">
-                <li><a href="#my" role="tab" data-toggle="tab">My friends</a></li>
-                <li><a href="/allpeople" role="tab" data-toggle="tab">All people</a></li>
-                <li><a href="/invites" role="tab" data-toggle="tab">Invites</a></li>
-                <li><a href="/requests" role="tab" data-toggle="tab">Requests</a></li>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active"><a href="#my_friends" role="tab" data-toggle="tab">My friends</a></li>
+                <li><a href="#all" role="tab" data-toggle="tab">All people</a></li>
+                <li><a href="#invites" role="tab" data-toggle="tab">Invites</a></li>
+                <li><a href="#requests" role="tab" data-toggle="tab">Requests</a></li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane active" id="my">
-                    <ul>
-                        {% for friend in my_friends %}
-                            <div class="panel panel-danger communities_panel">
-                                <div class="panel-heading">
-                                    <li class="communities_list"><a href="{{ path('user_profile',{'id':friend.getid}) }}"> Name: {{ friend.getfirstname }}</a></li>
-                                </div>
-                                <div class="panel-body"><li class="communities_list">{{ friend.getdepartment }}</li></div>
-                                <div class="btn btn-default"><a href="{{ path('user_remove_friend',{ 'id': friend.getid }) }}">Remove</a></div>
+                <div class="tab-pane active" id="my_friends">
+                    {% for friend in my_friends %}
+                        {{ helpers.user(friend) }}
+                    {% else %}
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                No friends yet. You can try to search someone
                             </div>
-                        {% endfor %}
-                    </ul>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="tab-pane" id="all">
+                    {% for friend in all_people %}
+                        {{ helpers.user(friend) }}
+                    {% else %}
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                No users exist yet. You are the first one!
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
 
             </div>
