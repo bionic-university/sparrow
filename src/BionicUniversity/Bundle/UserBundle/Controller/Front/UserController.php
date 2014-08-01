@@ -1,4 +1,5 @@
 <?php
+
 namespace BionicUniversity\Bundle\UserBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -94,8 +95,6 @@ class UserController extends Controller
         ]);
         $form->add('submit', 'submit', ['label' => 'Update']);
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
         return $form;
     }
 
@@ -116,40 +115,53 @@ class UserController extends Controller
 
             return $this->redirect($this->generateUrl('user_profile', ['id' => $id]));
         }
+
+        return $this->render('BionicUniversityUserBundle:User/Admin:edit.html.twig', [
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
+        ]);
     }
 
     public function friendsAction()
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $myRequests = $em->getRepository('BionicUniversityUserBundle:Friendship')->findByUserSender($user);
-        $myInvites = $em->getRepository('BionicUniversityUserBundle:Friendship')->findByUserReceiver($user);
-        $myFriendshipsAll = array_merge($myInvites, $myRequests);
+        $myFriendships = $em->getRepository("BionicUniversityUserBundle:Friendship")->findFriends($user);
         $myFriends = [];
-        /**@var Friendship $friendship */
-        foreach ($myRequests as $friendship) {
-            if ($friendship->getAcceptanceStatus() == 1 && $friendship->getUserSender() == $user) {
+        /**
+         * #@var Friendship $friendship
+         */
+        foreach($myFriendships as $friendship)
+        {
+            if($friendship->getUserReceiver() == $user)
+            {
                 array_push($myFriends, $friendship->getUserSender());
             }
-        }
-        foreach ($myInvites as $friendship) {
-            if ($friendship->getAcceptanceStatus() == 1 && $friendship->getUserReceiver() == $user) {
+            else
+            {
                 array_push($myFriends, $friendship->getUserReceiver());
             }
+
         }
+        return $this->render('BionicUniversityUserBundle:User/Front:friends.html.twig', ['my_friends' => $myFriends]);
+    }
 
         $allPeople = $em->getRepository('BionicUniversityUserBundle:User')->findAll();
-        foreach ($allPeople as $man => $data) {
-            foreach ($myFriendshipsAll as $friendship) {
-                if ($friendship->getUserSender() == $data) {
+        foreach($allPeople as $man => $data)
+        {
+            foreach($myFriendshipsAll as $friendship)
+            {
+                if($friendship->getUserSender() == $data)
+                {
                     unset($allPeople[$man]);
                 }
-                if ($friendship->getUserReceiver() == $data) {
+                if($friendship->getUserReceiver() == $data)
+                {
                     unset($allPeople[$man]);
                 }
             }
         }
-        return $this->render('BionicUniversityUserBundle:User/Front:friends.html.twig', ['my_friends' => $myFriends, 'all_people' => $allPeople]);
+        return $this->render('BionicUniversityUserBundle:User/Front:friends.html.twig', ['my_friends'=>$myFriends,'all_people'=>$allPeople]);
     }
 
     public function addFriendAction($id)
@@ -183,6 +195,73 @@ class UserController extends Controller
         $em->remove($friendship);
 
         return $this->redirect($this->generateUrl("user_friends"));
+    }
+
+    public function confirmFriendAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        /**
+         * @var Friendship $entity
+         */
+        $entity = $em->getRepository("BionicUniversityUserBundle:Friendship")->findUnconfirmedFriends($id, $this->getUser());
+        $entity->setAcceptanceStatus(1);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl("user_friends"));
+    }
+
+    public function friendRequestsAction()
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        /**
+         * @var User $entity
+         */
+        $entity = $em->getRepository("BionicUniversityUserBundle:User")->find($this->getUser());
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find User entity.');
+        }
+        $requests = $entity->getRequests();
+        $unconfirmedRequests = [];
+        /**
+         * @var Friendship $friendship
+         */
+        foreach($requests as $friendship)
+        {
+            if($friendship->getUserSender() == $user && $friendship->getAcceptanceStatus() != 1)
+            {
+                array_push($unconfirmedRequests, $friendship->getUserReceiver());
+            }
+        }
+
+        return $this->render('BionicUniversityUserBundle:User/Front:requests.html.twig', ['requests' => $unconfirmedRequests]);
+    }
+
+    public function  friendInvitesAction()
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        /**
+         * @var User $entity
+         */
+        $entity = $em->getRepository("BionicUniversityUserBundle:User")->find($user);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find User entity.');
+        }
+        $invites = $entity->getInvites();
+        $unconfirmedInvites = [];
+        /**
+         * @var Friendship $friendship
+         */
+        foreach($invites as $friendship)
+        {
+            if($friendship->getUserReceiver() == $user && $friendship->getAcceptanceStatus() != 1)
+            {
+                array_push($unconfirmedInvites, $friendship->getUserSender());
+            }
+        }
+
+        return $this->render('@BionicUniversityUser/User/Front/invites.html.twig', ['invites' => $unconfirmedInvites]);
     }
 
     /**
