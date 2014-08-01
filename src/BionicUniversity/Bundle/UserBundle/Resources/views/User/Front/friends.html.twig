@@ -33,6 +33,28 @@
                         </div>
                     {% endfor %}
                 </div>
+                <div class="tab-pane" id="invites">
+                    {% for friend in invites %}
+                        {{ helpers.user(friend) }}
+                    {% else %}
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                No invites recieved yet!
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="tab-pane" id="requests">
+                    {% for friend in requests %}
+                        {{ helpers.user(friend) }}
+                    {% else %}
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                No requests sent yet!
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
 
             </div>
         {% endblock friends %}

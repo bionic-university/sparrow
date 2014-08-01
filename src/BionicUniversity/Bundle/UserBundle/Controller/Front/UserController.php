@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
-        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findByAuthor($entity);
+        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findByAuthor($entity, ['createdAt'=>'desc']);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
@@ -163,7 +163,7 @@ class UserController extends Controller
             'my_friends' => $myFriends,
             'all_people' => $em->getRepository("BionicUniversityUserBundle:User")->findAll(),
             'requests' => $unconfirmedRequests,
-            'invutes' => $unconfirmedInvites
+            'invites' => $unconfirmedInvites
         ]);
     }
 

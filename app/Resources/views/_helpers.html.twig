@@ -7,6 +7,12 @@
         <div class="panel-body">
             <li class="communities_list">{{ user.department }}</li>
         </div>
-        <div class="btn btn-default"><a href="{{ path('user_remove_friend',{ 'id': user.id }) }}">Remove</a></div>
+        {% if user.isFriendOf(app.security.token.user) %}
+            <div class="btn btn-default"><a href="{{ path('user_remove_friend',{ 'id': user.id }) }}">Remove</a></div>
+        {% else %}
+            <div class="btn btn-default"><a href="{{ path('user_add_friend',{ 'id': user.id }) }}">Add to friends</a>
+            </div>
+
+        {% endif %}
     </div>
 {% endmacro %}

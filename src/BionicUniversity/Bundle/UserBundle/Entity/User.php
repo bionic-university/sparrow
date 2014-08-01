@@ -362,12 +362,11 @@ class User extends BaseUser
     {
         return $this->gender;
     }
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $interests;
-
-
 
 
     /**
@@ -383,7 +382,7 @@ class User extends BaseUser
     /**
      * Get post
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPost()
     {
@@ -416,13 +415,13 @@ class User extends BaseUser
     /**
      * Get interests
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getInterests()
     {
         return $this->interests;
     }
-  
+
 
     /**
      * Add requests
@@ -450,7 +449,7 @@ class User extends BaseUser
     /**
      * Get requests
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getRequests()
     {
@@ -483,7 +482,7 @@ class User extends BaseUser
     /**
      * Get invites
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getInvites()
     {
@@ -504,6 +503,26 @@ class User extends BaseUser
     public function getAvatar()
     {
         return $this->avatar;
+    }
+
+    public function isFriendOf(User $user)
+    {
+        return count($this->getFriends()->filter(function ($element) use ($user) {
+            return $element->getId() === $user->getId();
+        })) > 0;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection|ArrayCollection
+     */
+    public function getFriends()
+    {
+        $friendships = new ArrayCollection(array_merge($this->invites->toArray(), $this->requests->toArray()));
+        return $friendships->filter(function ($element) {
+
+            /**@var Friendship $element */
+            $element->getAcceptanceStatus() === Friendship::CONFIRMED;
+        });
     }
 
 }
