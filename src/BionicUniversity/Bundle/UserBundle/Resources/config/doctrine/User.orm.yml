@@ -36,8 +36,19 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         outcomingMessages:
             targetEntity: BionicUniversity\Bundle\MessageBundle\Entity\Message
             mappedBy: fromUser
+        posts:
+            targetEntity: BionicUniversity\Bundle\WallBundle\Entity\Post
+            mappedBy: author
         memberships:
             targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Membership
             mappedBy: user
+            cascade: ['remove']
+        requests:
+            targetEntity: BionicUniversity\Bundle\UserBundle\Entity\Friendship
+            mappedBy: userSender
+            cascade: ['remove']
+        invites:
+            targetEntity: BionicUniversity\Bundle\UserBundle\Entity\Friendship
+            mappedBy: userReceiver
             cascade: ['remove']
     lifecycleCallbacks: {  }
