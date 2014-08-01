@@ -55,7 +55,8 @@ class UserController extends Controller
              */
             $entity = $em->getRepository('BionicUniversityUserBundle:User')->findUsers($search_name, $search_lname, $search_gender, $search_dep, $search_email);
            // var_dump($entity->getFirstName());
-
+             if ($entity === null) {return $this->render('BionicUniversityUserBundle:User/Front:noresult.html.twig');}
+             else
             return $this->render('BionicUniversityUserBundle:User/Front:resultsearch.html.twig', array('users' => $entity));
         }
 
