@@ -3,18 +3,27 @@
 namespace BionicUniversity\Bundle\UserBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class FriendshipRepository extends EntityRepository
 {
     public function findFriendshipByUsers($firstUser, $secondUser)
     {
-        $repository = $this->getEntityManager()->getRepository("BionicUniversityUserBundle:Friendship")->createQueryBuilder('friendship')
-        ->where('(friendship.userSender = :firstUser AND friendship.userReceiver = :secondUser) OR (friendship.userSender = :secondUser AND friendship.userReceiver = :firstUser)')
-        ->setParameter('firstUser', $firstUser)
-        ->setParameter('secondUser',$secondUser)
-        ->getQuery();
+        try
+        {
+            $repository = $this->getEntityManager()->getRepository("BionicUniversityUserBundle:Friendship")->createQueryBuilder('friendship')
+                ->where('(friendship.userSender = :firstUser AND friendship.userReceiver = :secondUser) OR (friendship.userSender = :secondUser AND friendship.userReceiver = :firstUser)')
+                ->setParameter('firstUser', $firstUser)
+                ->setParameter('secondUser',$secondUser)
+                ->getQuery();
 
-        return $repository->getSingleResult();
+            return $repository->getSingleResult();
+        }
+        catch(Exception $e)
+        {
+            return $e;
+        }
+
     }
 
     public function findFriends($user)
