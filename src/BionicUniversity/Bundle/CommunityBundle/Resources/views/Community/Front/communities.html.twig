@@ -5,9 +5,18 @@
     {% endblock heading_profile %}
     {% block profile %}
         <div class="row">
-            <aside class="avatar col-md-2">
+            <aside class="avatar col-md-3">
+                {% if app.user.avatar == false %}
+                    <form action="{{ oneup_uploader_endpoint('avatar') }}" class="dropzone square drop_avatar">
+                        <div class="fallback">
+                            <input name="file" type="file" multiple />
+                        </div>
+                    </form>
+                {% else %}
+                    <img src="{{ asset('uploads/avatar/') }}{{ app.user.avatar }}" class="avatar" alt="Your avatar">
+                {% endif %}
             </aside>
-            <section class="col-md-10" >
+            <section class="col-md-9" >
                 <ul class="list">
                     <li class="list-item">{{ app.User.getPosition}}</li>
                     <li class="list-item">{{ app.User.getGender}}</li>

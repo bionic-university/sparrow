@@ -39,7 +39,7 @@ class ArticleController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('article_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_article_show', array('id' => $entity->getId())));
         }
 
         return $this->render('BionicUniversityWallBundle:Article/Admin:new.html.twig', array(
@@ -56,7 +56,7 @@ class ArticleController extends Controller
     private function createCreateForm(Article $entity)
     {
         $form = $this->createForm(new ArticleType(), $entity, array(
-            'action' => $this->generateUrl('article_create'),
+            'action' => $this->generateUrl('admin_article_create'),
             'method' => 'POST',
         ));
 
@@ -136,7 +136,7 @@ class ArticleController extends Controller
     private function createEditForm(Article $entity)
     {
         $form = $this->createForm(new ArticleType(), $entity, array(
-            'action' => $this->generateUrl('article_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('admin_article_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -163,7 +163,7 @@ class ArticleController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('article_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admin_article_edit', array('id' => $id)));
         }
 
         return $this->render('BionicUniversityWallBundle:Article/Admin:edit.html.twig', array(
@@ -192,7 +192,7 @@ class ArticleController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('article'));
+        return $this->redirect($this->generateUrl('admin_article'));
     }
 
     /**
@@ -203,7 +203,7 @@ class ArticleController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('article_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('admin_article_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

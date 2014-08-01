@@ -1,7 +1,12 @@
 parameters:
     bionic.user.util.user_manipulator.class: BionicUniversity\Bundle\UserBundle\Util\UserManipulator
-
+    bionic_university_user.event_listener.upload_listener.class: BionicUniversity\Bundle\UserBundle\EventListener\UploadListener
 services:
     bionic.user.util.user_manipulator:
         class: %bionic.user.util.user_manipulator.class%
         arguments: [ @fos_user.user_manager ]
+    bionic_university_user.event_listener.upload_listener:
+        class: %bionic_university_user.event_listener.upload_listener.class%
+        arguments: [@doctrine, @doctrine.orm.entity_manager, @security.context]
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }

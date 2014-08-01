@@ -21,7 +21,7 @@
             <div class="navbar-collapse collapse" >
                 <ul class="nav navbar-nav">
                     <li><a href={{ path('user_login') }}>Home</a></li>
-                    <li><a href="#">News</a></li>
+                    <li><a href="{{ path('front_article') }}">News</a></li>
                     <li><a href="#">Contacts</a></li>
                     <li><a href="#">Help</a></li>
                     <li><a href="#">About us</a></li>
@@ -29,7 +29,7 @@
                 </ul>
                 {% if app.security.isGranted("ROLE_SUPER_ADMIN") %}
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" style="margin-right: ">To admin</a></li>
+                        <li><a href="{{ path('admin_page') }}" style="margin-right: ">To admin</a></li>
                     </ul>
                 {% endif %}
             </div>

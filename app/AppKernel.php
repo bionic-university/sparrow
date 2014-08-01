@@ -25,11 +25,13 @@ class AppKernel extends Kernel
             new BionicUniversity\Bundle\WallBundle\BionicUniversityWallBundle(),
             new BionicUniversity\Bundle\UserBundle\BionicUniversityUserBundle(),
             new BionicUniversity\Bundle\MessageBundle\BionicUniversityMessageBundle(),
+            new Oneup\UploaderBundle\OneupUploaderBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
+
         }
 
         return $bundles;

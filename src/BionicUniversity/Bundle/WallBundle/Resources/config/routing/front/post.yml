@@ -1,5 +1,5 @@
 create_post:
-    path:     /create
+    path:     /post/create
     defaults: { _controller: "BionicUniversityWallBundle:Front/Post:create" }
 
 delete_post:
