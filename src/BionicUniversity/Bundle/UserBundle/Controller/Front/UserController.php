@@ -122,6 +122,7 @@ class UserController extends Controller
         ]);
     }
 
+
     public function friendsAction()
     {
         $user = $this->getUser();
@@ -131,10 +132,14 @@ class UserController extends Controller
         /**
          * #@var Friendship $friendship
          */
-        foreach ($myFriendships as $friendship) {
-            if ($friendship->getUserReceiver() == $user) {
+        foreach($myFriendships as $friendship)
+        {
+            if($friendship->getUserReceiver() == $user)
+            {
                 array_push($myFriends, $friendship->getUserSender());
-            } else {
+            }
+            else
+            {
                 array_push($myFriends, $friendship->getUserReceiver());
             }
 
@@ -142,6 +147,15 @@ class UserController extends Controller
         return $this->render('BionicUniversityUserBundle:User/Front:friends.html.twig', ['my_friends' => $myFriends]);
     }
 
+    public function allPeopleAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository("BionicUniversityUserBundle:User")->findAll();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find User entity.');
+        }
+        return $this->render('BionicUniversityUserBundle:User/Front:all_people.html.twig', ['all_people' => $entity]);
+    }
 
     public function addFriendAction($id)
     {
@@ -172,6 +186,7 @@ class UserController extends Controller
         $removeUser = $em->getRepository("BionicUniversityUserBundle:User")->find($id);
         $friendship = $em->getRepository("BionicUniversityUserBundle:Friendship")->findFriendshipByUsers($this->getUser(), $removeUser);
         $em->remove($friendship);
+        $em->flush();
 
         return $this->redirect($this->generateUrl("user_friends"));
     }
@@ -242,7 +257,6 @@ class UserController extends Controller
 
         return $this->render('@BionicUniversityUser/User/Front/invites.html.twig', ['invites' => $unconfirmedInvites]);
     }
-
     /**
      * Creates a form to create user posts.
      *
