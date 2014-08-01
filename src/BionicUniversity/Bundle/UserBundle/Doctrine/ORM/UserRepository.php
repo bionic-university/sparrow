@@ -13,7 +13,7 @@ class UserRepository extends EntityRepository
         $query = $repository->createQueryBuilder('user')
             ->where('user.firstName = :name and user.lastName = :lname and user.email = :email and user.gender = :gender and user.department = :dept ')
             ->setParameters(array ('name'=> $search_name, 'lname'=> $search_lname, 'email' => $search_email, 'dept' => $search_dep, 'gender' => $search_gender))
-            ->getQuery();git 
+            ->getQuery();
 
         return $query->getSingleResult();
     }
