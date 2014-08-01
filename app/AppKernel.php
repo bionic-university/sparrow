@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new FOS\UserBundle\FOSUserBundle(),
 
+            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new BionicUniversity\Bundle\CommunityBundle\BionicUniversityCommunityBundle(),
             new BionicUniversity\Bundle\WallBundle\BionicUniversityWallBundle(),
             new BionicUniversity\Bundle\UserBundle\BionicUniversityUserBundle(),

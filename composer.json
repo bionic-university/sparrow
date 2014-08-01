@@ -21,7 +21,8 @@
         "mopa/bootstrap-bundle": "v3.0.0-beta3",
         "twbs/bootstrap": "v3.0.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "oneup/uploader-bundle": "~1.3"
+        "oneup/uploader-bundle": "~1.3",
+        "genemu/form-bundle": "2.2.*"
     },
     "scripts": {
         "post-root-package-install": [

@@ -93,6 +93,7 @@ class User extends BaseUser
         $this->requests = new ArrayCollection();
         $this->invites = new ArrayCollection();
         $this->groups = ['ROLE_USER'];
+        $this->interests = new ArrayCollection();
     }
 
     public function __toString()
@@ -339,7 +340,6 @@ class User extends BaseUser
 
     /**
      * Get dateOfBirth
-     *
      * @return \DateTime
      */
     public function getDateOfBirth()
@@ -361,6 +361,66 @@ class User extends BaseUser
     public function getGender()
     {
         return $this->gender;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $interests;
+
+
+
+
+    /**
+     * Remove post
+     *
+     * @param \BionicUniversity\Bundle\WallBundle\Entity\Post $post
+     */
+    public function removePost(\BionicUniversity\Bundle\WallBundle\Entity\Post $post)
+    {
+        $this->post->removeElement($post);
+    }
+
+    /**
+     * Get post
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPost()
+    {
+        return $this->post;
+    }
+
+    /**
+     * Add interests
+     *
+     * @param \BionicUniversity\Bundle\UserBundle\Entity\Interest $interests
+     * @return User
+     */
+    public function addInterest(\BionicUniversity\Bundle\UserBundle\Entity\Interest $interests)
+    {
+        $this->interests[] = $interests;
+
+        return $this;
+    }
+
+    /**
+     * Remove interests
+     *
+     * @param \BionicUniversity\Bundle\UserBundle\Entity\Interest $interests
+     */
+    public function removeInterest(\BionicUniversity\Bundle\UserBundle\Entity\Interest $interests)
+    {
+        $this->interests->removeElement($interests);
+    }
+
+    /**
+     * Get interests
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getInterests()
+    {
+        return $this->interests;
     }
   
 
