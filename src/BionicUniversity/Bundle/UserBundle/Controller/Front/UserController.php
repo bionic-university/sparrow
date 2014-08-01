@@ -50,9 +50,11 @@ class UserController extends Controller
             $search_dep = $request->request->get("form")['department'];
             $search_email = $request->request->get("form")['email'];
             $search_gender = $request->request->get("form")['gender'];
-
-
+            /**
+             * @var User $entity
+             */
             $entity = $em->getRepository('BionicUniversityUserBundle:User')->findUsers($search_name, $search_lname, $search_gender, $search_dep, $search_email);
+           // var_dump($entity->getFirstName());
 
             return $this->render('BionicUniversityUserBundle:User/Front:resultsearch.html.twig', array('users' => $entity));
         }

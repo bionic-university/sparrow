@@ -8,19 +8,13 @@ class UserRepository extends EntityRepository
 {
     public function findUsers($search_name, $search_lname, $search_gender, $search_dep, $search_email)
     {
-         $repository = $this->getDoctrine()->getRepository('BionicUniversityUserBundle:User');
+         $repository = $this->getEntityManager()->getRepository('BionicUniversityUserBundle:User');
 
-//        $sss = $repository->findOneByFirstName($search_name);
-
-        /*$query = $repository->createQueryBuilder('p')
-            ->where('p.price > :price')
-            ->setParameter('price', '19.99')
-            ->orderBy('p.price', 'ASC')
+        $query = $repository->createQueryBuilder('user')
+            ->where('user.firstName = :name')
+            ->setParameter('name', $search_name)
             ->getQuery();
 
-        $search_result = $query->getResult();
-        */
-
-  //      return $sss;
+        return $query->getSingleResult();
     }
 }
