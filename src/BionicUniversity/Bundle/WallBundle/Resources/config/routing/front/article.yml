@@ -1,0 +1,16 @@
+front_article:
+    path:     /
+    defaults: { _controller: "BionicUniversityWallBundle:Front/Article:index" }
+
+front_article_show:
+    path:     /article/{id}/show
+    defaults: { _controller: "BionicUniversityWallBundle:Front/Article:show" }
+
+front_article_new:
+    path:     /article/new
+    defaults: { _controller: "BionicUniversityWallBundle:Front/Article:new" }
+
+front_article_create:
+    path:     /article/create
+    defaults: { _controller: "BionicUniversityWallBundle:Front/Article:create" }
+    requirements: { _method: post }

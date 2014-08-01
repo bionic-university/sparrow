@@ -3,7 +3,7 @@
 namespace BionicUniversity\Bundle\CommunityBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use BionicUniversity\Bundle\WallBundle\Entity\Wall;
+use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use BionicUniversity\Bundle\UserBundle\Entity\User;
 
 /**
@@ -34,7 +34,7 @@ class Community
     /**
      * @var ArrayCollection
      */
-    private $wall;
+    private $posts;
 
     /**
      * @var ArrayCollection
@@ -50,6 +50,7 @@ class Community
     {
         $this->createdAt = new \dateTime();
         $this->memberships = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
     /**
@@ -66,22 +67,6 @@ class Community
     public function getMemberships()
     {
         return $this->memberships;
-    }
-
-    /**
-     * @return \BionicUniversity\Bundle\WallBundle\Entity\Wall
-     */
-    public function getWall()
-    {
-        return $this->wall;
-    }
-
-    /**
-     * @param \BionicUniversity\Bundle\WallBundle\Entity\Wall $wall
-     */
-    public function setWall(Wall $wall)
-    {
-        $this->wall = $wall;
     }
 
     /**
@@ -187,4 +172,26 @@ class Community
         $this->memberships->removeElement($memberships);
     }
 
+    /**
+     * Add posts
+     *
+     * @param  \BionicUniversity\Bundle\WallBundle\Entity\Post $posts
+     * @return Post
+     */
+    public function addPost(Post $post)
+    {
+        $this->posts[] = $post;
+
+        return $this;
+    }
+
+    /**
+     * Remove memberships
+     *
+     * @param \BionicUniversity\Bundle\WallBundle\Entity\Post $posts
+     */
+    public function removePost(Post $post)
+    {
+        $this->posts->removeElement($post);
+    }
 }
