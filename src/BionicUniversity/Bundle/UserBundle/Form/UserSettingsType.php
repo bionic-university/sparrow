@@ -30,7 +30,14 @@ class UserSettingsType extends AbstractType
             ->add('dateOfBirth', 'birthday', [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
-            ]);
+            ])
+            ->add('interests', 'genemu_jqueryselect2_entity',
+                [
+                    'multiple' =>true,
+                    'class' => 'BionicUniversity\Bundle\UserBundle\Entity\Interest',
+                    'property' =>'name'
+                ]
+            );
     }
 
     /**

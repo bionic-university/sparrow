@@ -1,6 +1,11 @@
 .avatar{
-    background-color: indianred;
+    width: 200px;
     height: 200px;
+}
+.drop_avatar{
+    width: 200px;
+    height: 200px;
+    background-color: lightgrey;
 }
 .wall_head{
 height: 50px;

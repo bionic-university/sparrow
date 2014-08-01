@@ -4,10 +4,31 @@ user_profile:
 user_setting:
     path:     /settings
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:edit" }
-user_front_update:
+user_update:
     path: /{id}/update
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:update" }
     requirements: { _method: post|put }
 fos_user_registration_confirmed:
     path:   /confirmed
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:createPassword" }
+user_friends:
+    path: /friends
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:friends" }
+user_add_friend:
+    path: /add/{id}
+    defaults: { _controller:"BionicUniversityUserBundle:Front/User:addFriend" }
+user_remove_friend:
+    path: /remove/{id}
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:removeFriend" }
+user_all_people:
+    path: /allpeople
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:allPeople" }
+user_confirm_friend:
+    path: /confirmed/{id}
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:confirmFriend" }
+user_friend_requests:
+    path: /requests
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:friendRequests" }
+user_friend_invites:
+    path: /invites
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:friendInvites" }

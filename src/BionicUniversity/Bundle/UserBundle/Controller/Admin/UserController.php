@@ -231,4 +231,10 @@ class UserController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm();
     }
+
+    public function showAdminPageAction()
+    {
+        return $this->render('BionicUniversityUserBundle:User/Admin:adminPage.html.twig');
+    }
+
 }

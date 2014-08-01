@@ -1,6 +1,6 @@
-{% extends '::base.html.twig' %}
+{% extends '::front.html.twig' %}
 
-{% block body -%}
+{% block profile -%}
     <h1>Article</h1>
 
     <table class="record_properties">
@@ -24,17 +24,11 @@
         </tbody>
     </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_article') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('admin_article_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li >{{ form(delete_form) }}</li>
-</ul>
-{% endblock %}
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('front_article') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+{% endblock profile %}

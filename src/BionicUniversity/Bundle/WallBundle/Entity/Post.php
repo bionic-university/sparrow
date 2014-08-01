@@ -1,8 +1,8 @@
 <?php
 
 namespace BionicUniversity\Bundle\WallBundle\Entity;
-use BionicUniversity\Bundle\UserBundle\BionicUniversityUserBundle;
 use BionicUniversity\Bundle\UserBundle\Entity\User;
+use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
@@ -31,9 +31,9 @@ class Post
     private $createdAt;
 
     /**
-     * @var Wall
+     * @var Community
      */
-    private $wall;
+    private $community;
 
     public function __construct()
     {
@@ -57,7 +57,7 @@ class Post
     public function setText($text)
     {
         $this->text = $text;
-        
+
         return $this;
     }
 
@@ -92,12 +92,12 @@ class Post
     }
 
     /**
-     * Get wall
-     * @return Wall
+     * Get community
+     * @return Community
      */
-    public function getWall()
+    public function getCommunity()
     {
-        return $this->wall;
+        return $this->community;
     }
 
     /**

@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
-use BionicUniversity\Bundle\UserBundle\Entity\User;
 use BionicUniversity\Bundle\WallBundle\Form\PostType;
 
 /**

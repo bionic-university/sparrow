@@ -4,15 +4,32 @@
         {{ entity.lastName }}
     {% endblock heading_profile %}
     {% block profile %}
-       
         <div class="row">
-            <aside class="avatar col-md-2">
+            <aside class=" col-md-3">
+                {% if entity.avatar == false %}
+                <form action="{{ oneup_uploader_endpoint('avatar') }}" class="dropzone square drop_avatar">
+                    <div class="fallback">
+                    <input name="file" type="file" multiple />
+                    </div>
+                </form>
+                {% else %}
+                    <img src="{{ asset('uploads/avatar/') }}{{ entity.avatar }}" class="avatar" alt="Your avatar">
+                {% endif %}
             </aside>
-            <section class="col-md-10" >
+            <section class="col-md-9" >
                 <ul class="list">
                     <li class="list-item">Position: {{ app.security.token.user.position}}</li>
                     <li class="list-item">Gender: {{ app.security.token.user.gender}}</li>
                     <li class="list-item">Department: {{ app.security.token.user.department}}</li>
+                    <li class="list-item">Interests:
+                        <ul>
+                            {% if entity.interests != 'none' %}
+                                {% for interest in entity.interests %}
+                                    <li><a href="{{ path('user_profile', { 'id': entity.id, 'strSearch': interest.name }) }}">{{ interest.name }}</a></li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </li>
                 </ul>
             </section>
         </div>
@@ -37,5 +54,7 @@
             </ul>
         </div>
     {% endblock heading_wall %}
-
+{% block javascripts %}
+    <script type="text/javascript" src="{{  asset('vendor/dropzone/downloads/dropzone.js') }}"></script>
+{% endblock javascripts %}
 
