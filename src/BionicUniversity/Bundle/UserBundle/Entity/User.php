@@ -525,4 +525,17 @@ class User extends BaseUser
         });
     }
 
+    public function hasInvited(User $user)
+    {
+        return count($this->requests->filter(function ($element) use ($user) {
+            return $element->getUserReceiver()->getId() === $user->getId() && $element->getAcceptanceStatus() === Friendship::UNCONFIRMED;
+        }));
+    }
+
+    public function wasInvitedBy(User $user)
+    {
+        return count($this->invites->filter(function ($element) use ($user) {
+            return $element->getUserSender()->getId() === $user->getId() && $element->getAcceptanceStatus() === Friendship::UNCONFIRMED;
+        }));
+    }
 }
