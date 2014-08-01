@@ -35,6 +35,7 @@ class PostController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Post();
+        $entity->setAuthor($this->getUser());
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -43,7 +44,7 @@ class PostController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('post_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_post_show', array('id' => $entity->getId())));
         }
 
         return $this->render('BionicUniversityWallBundle:Post/Admin:new.html.twig', array(
@@ -62,7 +63,7 @@ class PostController extends Controller
     private function createCreateForm(Post $entity)
     {
         $form = $this->createForm(new PostType(), $entity, array(
-            'action' => $this->generateUrl('post_create'),
+            'action' => $this->generateUrl('admin_post_create'),
             'method' => 'POST',
         ));
 
@@ -142,7 +143,7 @@ class PostController extends Controller
     private function createEditForm(Post $entity)
     {
         $form = $this->createForm(new PostType(), $entity, array(
-            'action' => $this->generateUrl('post_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('admin_post_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -171,7 +172,7 @@ class PostController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('post_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admin_post_edit', array('id' => $id)));
         }
 
         return $this->render('BionicUniversityWallBundle:Post/Admin:edit.html.twig', array(
@@ -201,7 +202,7 @@ class PostController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('post'));
+        return $this->redirect($this->generateUrl('admin_post'));
     }
 
     /**
@@ -214,7 +215,7 @@ class PostController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('post_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('admin_post_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

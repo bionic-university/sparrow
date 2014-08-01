@@ -5,9 +5,15 @@ namespace BionicUniversity\Bundle\UserBundle\Controller\Front;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BionicUniversity\Bundle\UserBundle\Form\CreatePasswordType;
+
 use BionicUniversity\Bundle\UserBundle\Entity\User;
+use BionicUniversity\Bundle\UserBundle\Entity\Avatar;
 use BionicUniversity\Bundle\UserBundle\Entity\Friendship;
 use BionicUniversity\Bundle\UserBundle\Form\UserSettingsType;
+use BionicUniversity\Bundle\UserBundle\Doctrine\ORM\FriendshipRepository;
+
+use BionicUniversity\Bundle\WallBundle\Entity\Post;
+use BionicUniversity\Bundle\WallBundle\Form\PostType;
 
 class UserController extends Controller
 {
@@ -15,11 +21,21 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
+        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findByAuthor($entity);
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', ['entity'=> $entity]);
+        $form = $this->createPostForm();
+        $csrfToken = $this->get('form.csrf_provider')->generateCsrfToken('delete_post');
+
+        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array(
+            'entity' => $entity,
+            'post' => $posts,
+            'form' => $form->createView(),
+            'csrfToken' => $csrfToken,
+        ));
     }
 
     public function createPasswordAction(Request $request)
@@ -85,10 +101,13 @@ class UserController extends Controller
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
+
         $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
+
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
         if ($editForm->isValid()) {
@@ -127,14 +146,22 @@ class UserController extends Controller
         return $this->render('BionicUniversityUserBundle:User/Front:friends.html.twig', ['my_friends' => $myFriends]);
     }
 
-    public function allPeopleAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository("BionicUniversityUserBundle:User")->findAll();
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
+        $allPeople = $em->getRepository('BionicUniversityUserBundle:User')->findAll();
+        foreach($allPeople as $man => $data)
+        {
+            foreach($myFriendshipsAll as $friendship)
+            {
+                if($friendship->getUserSender() == $data)
+                {
+                    unset($allPeople[$man]);
+                }
+                if($friendship->getUserReceiver() == $data)
+                {
+                    unset($allPeople[$man]);
+                }
+            }
         }
-        return $this->render('BionicUniversityUserBundle:User/Front:all_people.html.twig', ['all_people' => $entity]);
+        return $this->render('BionicUniversityUserBundle:User/Front:friends.html.twig', ['my_friends'=>$myFriends,'all_people'=>$allPeople]);
     }
 
     public function addFriendAction($id)
@@ -166,7 +193,6 @@ class UserController extends Controller
         $removeUser = $em->getRepository("BionicUniversityUserBundle:User")->find($id);
         $friendship = $em->getRepository("BionicUniversityUserBundle:Friendship")->findFriendshipByUsers($this->getUser(), $removeUser);
         $em->remove($friendship);
-        $em->flush();
 
         return $this->redirect($this->generateUrl("user_friends"));
     }
@@ -236,5 +262,24 @@ class UserController extends Controller
         }
 
         return $this->render('@BionicUniversityUser/User/Front/invites.html.twig', ['invites' => $unconfirmedInvites]);
+    }
+
+    /**
+     * Creates a form to create user posts.
+     *
+     * @param Post $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createPostForm()
+    {
+        $form = $this->createForm(new PostType(), null, array(
+            'action' => $this->generateUrl('create_post'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
     }
 }

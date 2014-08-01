@@ -83,3 +83,11 @@ fos_user:
 
 mopa_bootstrap:
     form: ~  # Adds twig form theme  support
+
+oneup_uploader:
+    mappings:
+        avatar:
+            frontend: dropzone
+
+genemu_form:
+    select2: ~

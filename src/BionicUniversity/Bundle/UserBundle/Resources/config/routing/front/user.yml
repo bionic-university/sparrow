@@ -16,7 +16,7 @@ user_friends:
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:friends" }
 user_add_friend:
     path: /add/{id}
-    defaults: { _controller: "BionicUniversityUserBundle:Front/User:addFriend" }
+    defaults: { _controller:"BionicUniversityUserBundle:Front/User:addFriend" }
 user_remove_friend:
     path: /remove/{id}
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:removeFriend" }

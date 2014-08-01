@@ -1,7 +1,15 @@
-BionicUniversityWallBundle_post:
+BionicUniversityWallBundle_admin_post:
     resource: "@BionicUniversityWallBundle/Resources/config/routing/admin/post.yml"
     prefix:   /admin/post
 
-BionicUniversityWallBundle_article:
+BionicUniversityWallBundle_post:
+    resource: "@BionicUniversityWallBundle/Resources/config/routing/front/post.yml"
+    prefix:   /
+
+BionicUniversityWallBundle_admin_article:
     resource: "@BionicUniversityWallBundle/Resources/config/routing/admin/article.yml"
     prefix:   /admin/article
+
+BionicUniversityWallBundle_front_article:
+    resource: "@BionicUniversityWallBundle/Resources/config/routing/front/article.yml"
+    prefix:   /news

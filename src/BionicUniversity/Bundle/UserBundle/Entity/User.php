@@ -3,6 +3,7 @@
 namespace BionicUniversity\Bundle\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
@@ -12,10 +13,16 @@ class User extends BaseUser
 {
     const GENDER_MALE = 'm';
     const GENDER_FEMALE = 'f';
+
     /**
      * @var integer
      */
     protected $id;
+
+    /**
+     * @var string
+     */
+    private $avatar;
 
     /**
      * @var string
@@ -46,10 +53,17 @@ class User extends BaseUser
      * @var ArrayCollection
      */
     private $incomingMessages;
+
     /**
      * @var ArrayCollection
      */
     private $outcomingMessages;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $posts;
+
     /**
      * @var ArrayCollection
      */
@@ -72,12 +86,14 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        $this->posts = new ArrayCollection();
         $this->incomingMessages = new ArrayCollection();
         $this->outcomingMessages = new ArrayCollection();
         $this->memberships = new ArrayCollection();
         $this->requests = new ArrayCollection();
         $this->invites = new ArrayCollection();
         $this->groups = ['ROLE_USER'];
+        $this->interests = new ArrayCollection();
     }
 
     public function __toString()
@@ -212,6 +228,14 @@ class User extends BaseUser
     }
 
     /**
+     * @return ArrayCollection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
      * Add incomingMessages
      *
      * @param  \BionicUniversity\Bundle\MessageBundle\Entity\Message $incomingMessages
@@ -258,6 +282,27 @@ class User extends BaseUser
     }
 
     /**
+     * Add posts
+     * @param  Post $post
+     * @return Post
+     */
+    public function addPost(Post $post)
+    {
+        $this->posts[] = $post;
+
+        return $this;
+    }
+
+    /**
+     * Remove posts
+     * @param Post $post
+     */
+    public function removePosts(Post $post)
+    {
+        $this->posts->removeElement($post);
+    }
+
+    /**
      * Add memberships
      *
      * @param  \BionicUniversity\Bundle\UserBundle\Entity\User $memberships
@@ -275,7 +320,7 @@ class User extends BaseUser
      *
      * @param \BionicUniversity\Bundle\UserBundle\Entity\User $memberships
      */
-    public function removeMembership($memberships)
+    public function removeMembership(\BionicUniversity\Bundle\UserBundle\Entity\User $memberships)
     {
         $this->memberships->removeElement($memberships);
     }
@@ -295,7 +340,6 @@ class User extends BaseUser
 
     /**
      * Get dateOfBirth
-     *
      * @return \DateTime
      */
     public function getDateOfBirth()
@@ -317,6 +361,66 @@ class User extends BaseUser
     public function getGender()
     {
         return $this->gender;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $interests;
+
+
+
+
+    /**
+     * Remove post
+     *
+     * @param \BionicUniversity\Bundle\WallBundle\Entity\Post $post
+     */
+    public function removePost(\BionicUniversity\Bundle\WallBundle\Entity\Post $post)
+    {
+        $this->post->removeElement($post);
+    }
+
+    /**
+     * Get post
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPost()
+    {
+        return $this->post;
+    }
+
+    /**
+     * Add interests
+     *
+     * @param \BionicUniversity\Bundle\UserBundle\Entity\Interest $interests
+     * @return User
+     */
+    public function addInterest(\BionicUniversity\Bundle\UserBundle\Entity\Interest $interests)
+    {
+        $this->interests[] = $interests;
+
+        return $this;
+    }
+
+    /**
+     * Remove interests
+     *
+     * @param \BionicUniversity\Bundle\UserBundle\Entity\Interest $interests
+     */
+    public function removeInterest(\BionicUniversity\Bundle\UserBundle\Entity\Interest $interests)
+    {
+        $this->interests->removeElement($interests);
+    }
+
+    /**
+     * Get interests
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getInterests()
+    {
+        return $this->interests;
     }
   
 
@@ -385,4 +489,21 @@ class User extends BaseUser
     {
         return $this->invites;
     }
+
+    /**
+     * @param string $avatar
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
 }

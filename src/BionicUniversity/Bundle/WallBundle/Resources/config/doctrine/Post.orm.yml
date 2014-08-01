@@ -8,14 +8,15 @@ BionicUniversity\Bundle\WallBundle\Entity\Post:
             generator:
                 strategy: AUTO
     fields:
-        title:
-            type: string
         text:
             type: text
         createdAt:
             type: datetime
     manyToOne:
-        wall:
-            targetEntity: BionicUniversity\Bundle\WallBundle\Entity\Wall
+        author:
+            targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
+            inversedBy: posts
+        community:
+            targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Community
             inversedBy: posts
     lifecycleCallbacks: {  }
