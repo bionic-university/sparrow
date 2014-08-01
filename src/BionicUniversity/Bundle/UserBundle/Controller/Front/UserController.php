@@ -124,40 +124,32 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $myRequests = $em->getRepository('BionicUniversityUserBundle:Friendship')->findByUserSender($user);
         $myInvites = $em->getRepository('BionicUniversityUserBundle:Friendship')->findByUserReceiver($user);
-        $myFriendshipsAll=array_merge($myInvites, $myRequests);
+        $myFriendshipsAll = array_merge($myInvites, $myRequests);
         $myFriends = [];
         /**@var Friendship $friendship */
-        foreach($myRequests as $friendship)
-        {
-            if($friendship->getAcceptanceStatus() == 1 && $friendship->getUserSender() == $user)
-            {
+        foreach ($myRequests as $friendship) {
+            if ($friendship->getAcceptanceStatus() == 1 && $friendship->getUserSender() == $user) {
                 array_push($myFriends, $friendship->getUserSender());
             }
         }
-        foreach($myInvites as $friendship)
-        {
-            if($friendship->getAcceptanceStatus() == 1 && $friendship->getUserReceiver() == $user)
-            {
+        foreach ($myInvites as $friendship) {
+            if ($friendship->getAcceptanceStatus() == 1 && $friendship->getUserReceiver() == $user) {
                 array_push($myFriends, $friendship->getUserReceiver());
             }
         }
 
         $allPeople = $em->getRepository('BionicUniversityUserBundle:User')->findAll();
-        foreach($allPeople as $man => $data)
-        {
-            foreach($myFriendshipsAll as $friendship)
-            {
-                if($friendship->getUserSender() == $data)
-                {
+        foreach ($allPeople as $man => $data) {
+            foreach ($myFriendshipsAll as $friendship) {
+                if ($friendship->getUserSender() == $data) {
                     unset($allPeople[$man]);
                 }
-                if($friendship->getUserReceiver() == $data)
-                {
+                if ($friendship->getUserReceiver() == $data) {
                     unset($allPeople[$man]);
                 }
             }
         }
-        return $this->render('BionicUniversityUserBundle:User/Front:friends.html.twig', ['my_friends'=>$myFriends,'all_people'=>$allPeople]);
+        return $this->render('BionicUniversityUserBundle:User/Front:friends.html.twig', ['my_friends' => $myFriends, 'all_people' => $allPeople]);
     }
 
     public function addFriendAction($id)
@@ -191,5 +183,24 @@ class UserController extends Controller
         $em->remove($friendship);
 
         return $this->redirect($this->generateUrl("user_friends"));
+    }
+
+    /**
+     * Creates a form to create user posts.
+     *
+     * @param Post $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createPostForm()
+    {
+        $form = $this->createForm(new PostType(), null, array(
+            'action' => $this->generateUrl('create_post'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
     }
 }

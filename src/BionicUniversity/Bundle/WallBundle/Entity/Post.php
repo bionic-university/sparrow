@@ -1,7 +1,6 @@
 <?php
 
 namespace BionicUniversity\Bundle\WallBundle\Entity;
-use BionicUniversity\Bundle\UserBundle\BionicUniversityUserBundle;
 use BionicUniversity\Bundle\UserBundle\Entity\User;
 use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
 use Symfony\Component\Validator\Constraints\DateTime;

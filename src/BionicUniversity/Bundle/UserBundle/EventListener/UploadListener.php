@@ -3,7 +3,6 @@ namespace BionicUniversity\Bundle\UserBundle\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Oneup\UploaderBundle\Event\PostPersistEvent;
-use Oneup\UploaderBundle\Uploader\File\FilesystemFile;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class UploadListener
