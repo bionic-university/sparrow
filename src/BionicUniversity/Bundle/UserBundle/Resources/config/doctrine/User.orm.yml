@@ -25,6 +25,12 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         gender:
             type: string
             length: '6'
+        avatar:
+            type: string
+            length: '255'
+            nullable: true
+
+
     manyToMany:
         interests:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\Interest
@@ -37,10 +43,6 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
                 inverseJoinColumns:
                     interest_id:
                         referencedColumnName: id
-        avatar:
-            type: string
-            length: '255'
-            nullable: true
     oneToMany:
         incomingMessages:
             targetEntity: BionicUniversity\Bundle\MessageBundle\Entity\Message

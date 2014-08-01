@@ -131,14 +131,10 @@ class UserController extends Controller
         /**
          * #@var Friendship $friendship
          */
-        foreach($myFriendships as $friendship)
-        {
-            if($friendship->getUserReceiver() == $user)
-            {
+        foreach ($myFriendships as $friendship) {
+            if ($friendship->getUserReceiver() == $user) {
                 array_push($myFriends, $friendship->getUserSender());
-            }
-            else
-            {
+            } else {
                 array_push($myFriends, $friendship->getUserReceiver());
             }
 
@@ -146,23 +142,6 @@ class UserController extends Controller
         return $this->render('BionicUniversityUserBundle:User/Front:friends.html.twig', ['my_friends' => $myFriends]);
     }
 
-        $allPeople = $em->getRepository('BionicUniversityUserBundle:User')->findAll();
-        foreach($allPeople as $man => $data)
-        {
-            foreach($myFriendshipsAll as $friendship)
-            {
-                if($friendship->getUserSender() == $data)
-                {
-                    unset($allPeople[$man]);
-                }
-                if($friendship->getUserReceiver() == $data)
-                {
-                    unset($allPeople[$man]);
-                }
-            }
-        }
-        return $this->render('BionicUniversityUserBundle:User/Front:friends.html.twig', ['my_friends'=>$myFriends,'all_people'=>$allPeople]);
-    }
 
     public function addFriendAction($id)
     {
