@@ -21,11 +21,20 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
 
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+
+            new Oneup\UploaderBundle\OneupUploaderBundle(),
+
+            new Sonata\CoreBundle\SonataCoreBundle(),
+            new Sonata\BlockBundle\SonataBlockBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+
+            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new Sonata\AdminBundle\SonataAdminBundle(),
+
             new BionicUniversity\Bundle\CommunityBundle\BionicUniversityCommunityBundle(),
             new BionicUniversity\Bundle\WallBundle\BionicUniversityWallBundle(),
             new BionicUniversity\Bundle\UserBundle\BionicUniversityUserBundle(),
             new BionicUniversity\Bundle\MessageBundle\BionicUniversityMessageBundle(),
-            new Oneup\UploaderBundle\OneupUploaderBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -39,6 +48,6 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+        $loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yml');
     }
 }

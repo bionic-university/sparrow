@@ -368,7 +368,6 @@ class User extends BaseUser
      */
     private $interests;
 
-
     /**
      * Remove post
      *
@@ -392,7 +391,7 @@ class User extends BaseUser
     /**
      * Add interests
      *
-     * @param \BionicUniversity\Bundle\UserBundle\Entity\Interest $interests
+     * @param  \BionicUniversity\Bundle\UserBundle\Entity\Interest $interests
      * @return User
      */
     public function addInterest(\BionicUniversity\Bundle\UserBundle\Entity\Interest $interests)
@@ -422,11 +421,10 @@ class User extends BaseUser
         return $this->interests;
     }
 
-
     /**
      * Add requests
      *
-     * @param \BionicUniversity\Bundle\UserBundle\Entity\Friendship $requests
+     * @param  \BionicUniversity\Bundle\UserBundle\Entity\Friendship $requests
      * @return User
      */
     public function addRequest(\BionicUniversity\Bundle\UserBundle\Entity\Friendship $requests)
@@ -459,7 +457,7 @@ class User extends BaseUser
     /**
      * Add invites
      *
-     * @param \BionicUniversity\Bundle\UserBundle\Entity\Friendship $invites
+     * @param  \BionicUniversity\Bundle\UserBundle\Entity\Friendship $invites
      * @return User
      */
     public function addInvite(\BionicUniversity\Bundle\UserBundle\Entity\Friendship $invites)
@@ -518,6 +516,7 @@ class User extends BaseUser
     public function getFriends()
     {
         $friendships = new ArrayCollection(array_merge($this->invites->toArray(), $this->requests->toArray()));
+
         return $friendships->filter(function ($element) {
 
             /**@var Friendship $element */

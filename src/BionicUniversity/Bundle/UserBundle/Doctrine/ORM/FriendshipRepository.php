@@ -9,8 +9,7 @@ class FriendshipRepository extends EntityRepository
 {
     public function findFriendshipByUsers($firstUser, $secondUser)
     {
-        try
-        {
+        try {
             $repository = $this->getEntityManager()->getRepository("BionicUniversityUserBundle:Friendship")->createQueryBuilder('friendship')
                 ->where('(friendship.userSender = :firstUser AND friendship.userReceiver = :secondUser) OR (friendship.userSender = :secondUser AND friendship.userReceiver = :firstUser)')
                 ->setParameter('firstUser', $firstUser)
@@ -18,9 +17,7 @@ class FriendshipRepository extends EntityRepository
                 ->getQuery();
 
             return $repository->getSingleResult();
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             return $e;
         }
 
@@ -45,4 +42,4 @@ class FriendshipRepository extends EntityRepository
 
         return $repository->getSingleResult();
     }
-} 
+}

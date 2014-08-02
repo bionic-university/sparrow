@@ -14,4 +14,12 @@ services:
     twig.extension.routing:
         class: %twig.extension.routing.class%
         public: false
-        arguments: [@router, @form.csrf_provider]
+        arguments: [@router]
+        calls:
+            - [setCsrfProvider, ["@form.csrf_provider"]]
+
+    bionic_university_user.admin.user:
+        class: BionicUniversity\Bundle\UserBundle\Admin\UserAdmin
+        arguments: [~, BionicUniversity\Bundle\UserBundle\Entity\User, SonataAdminBundle:CRUD, @fos_user.mailer, @fos_user.util.token_generator, @session, @fos_user.user_manager]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: User}

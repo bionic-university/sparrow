@@ -19,14 +19,14 @@ class MessageController extends Controller
      * Lists all Message entities.
      *
      */
-    public function messagesAction()
+    public function messagesAction(Request $request)
     {
         $entity = new Message();
         $form = $this->createCreateForm($entity);
 
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-
+        $form->handleRequest($request);
         $outcomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByFromUser($user, ['createdAt'=>'desc']);
         $incomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByToUser($user, ['createdAt'=>'desc']);
 
@@ -68,8 +68,7 @@ class MessageController extends Controller
     private function createCreateForm(Message $entity)
     {
         $form = $this->createForm('send_message', $entity, array(
-            'action' => $this->generateUrl('message_create_front'),
-            'method' => 'POST',
+            'action' => $this->generateUrl('message_create_front')
         ));
 
         $form->add('submit', 'submit', array('label' => 'Create', 'attr'=>['class' => 'btn btn-success pull-right']));
