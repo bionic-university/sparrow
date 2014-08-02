@@ -10,9 +10,19 @@ BionicUniversityCommunityBundle_user_community:
 communities:
     path: /communities
     defaults: { _controller:"BionicUniversityCommunityBundle:Front/Community:communities" }
+
 join_community:
     path: /join/{id}
     defaults: { _controller:"BionicUniversityCommunityBundle:Front/Community:join" }
+
 leave_community:
     path: /leave/{id}
     defaults: { _controller:"BionicUniversityCommunityBundle:Front/Community:leave" }
+
+create_community_post:
+    path:     /community/post/{id}/create
+    defaults: { _controller:"BionicUniversityCommunityBundle:Front/Post:create" }
+
+delete_community_post:
+    path:     /community/post/delete/{id}
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/Post:delete" }

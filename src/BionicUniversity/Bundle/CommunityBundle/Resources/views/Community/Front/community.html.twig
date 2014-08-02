@@ -14,5 +14,33 @@
         </div>
     {% endblock profile %}
     {% block heading_wall %}
-        <h1>My blog</h1>
+        <div class="row">
+            {% for user in users %}
+                <div class="col-md-offset-2 col-md-8">
+                    {% if app.security.token.user == entity.owner or user%}
+                        {{ form(form) }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <div>
+            <h2>Recent posts</h2>
+            {% for post_body in post %}
+                <div class="panel panel-default">
+                    <div class="panel-body">{{ post_body.text|raw }}
+                        {% if app.security.token.user == post_body.author %}
+                            <a class="pull-right" href="{{ path('delete_community_post', {'id': post_body.id}) }}">
+                                Delete
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        No posts added yet
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     {% endblock heading_wall %}
