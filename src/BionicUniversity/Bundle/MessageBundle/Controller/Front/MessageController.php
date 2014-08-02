@@ -5,7 +5,6 @@ namespace BionicUniversity\Bundle\MessageBundle\Controller\Front;
 use BionicUniversity\Bundle\MessageBundle\BionicUniversityMessageBundle;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use BionicUniversity\Bundle\MessageBundle\Entity\Message;
 
 /**
@@ -21,14 +20,14 @@ class MessageController extends Controller
      */
     public function messagesAction()
     {
-        $entity = new Message();
-        $form = $this->createCreateForm($entity);
+        $user=$this->getUser();
 
-        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-
         $outcomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByFromUser($user, ['createdAt'=>'desc']);
         $incomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByToUser($user, ['createdAt'=>'desc']);
+
+        $entity = new Message();
+        $form = $this->createCreateForm($entity);
 
         return $this->render('BionicUniversityMessageBundle:Message:Front/messages.html.twig',
             array(
@@ -45,13 +44,14 @@ class MessageController extends Controller
      */
     public function createAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $entity = new Message();
         $entity->setFromUser($this->getUser());
 
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
-        $em = $this->getDoctrine()->getManager();
         $em->persist($entity);
         $em->flush();
 

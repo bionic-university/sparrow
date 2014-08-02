@@ -18,10 +18,16 @@
                         {% for in_mess_one in in_mess %}
                             <div class="panel panel-info messages_panel">
                                 <div class="panel-heading">
-                                    <li class="messages_list">From: {{ in_mess_one.fromUser }}</li>
+                                    {% if in_mess_one.fromuser.avatar == null %}
+                                    <li class="messages_list"><a href="{{ path('user_profile',{'id':in_mess_one.fromuser.id}) }}">{{ in_mess_one.fromuser }}</a></li>
+                                    {% else %}
+                                    <li class="messages_list"><img src="{{ asset('uploads/avatar/') }}{{ in_mess_one.fromuser.avatar }}" class="avatar_mini" alt="ava"><a href="{{ path('user_profile',{'id':in_mess_one.fromuser.id}) }}">{{ in_mess_one.fromuser }}</a></li>
+                                    {% endif %}
+                                    <div class="createdAt">{{ in_mess_one.createdat|date("m/d/Y/h:m") }}</div>
                                 </div>
                                 <div class="panel-body">
                                     <li class="messages_list">{{ in_mess_one.body }}</li>
+
                                 </div>
                             </div>
                         {% else %}
@@ -36,12 +42,18 @@
                 <div class="tab-pane" id="outcoming">
                     <ul>
                         {% for out_mess_one in out_mess %}
-                            <div class="panel panel-info messages_panel">
+                            <div class="panel panel-danger messages_panel">
                                 <div class="panel-heading">
-                                    <li class="messages_list">To: {{ out_mess_one.toUser }}</li>
+                                    {% if out_mess_one.touser.avatar == null %}
+                                        <li class="messages_list"><a href="{{ path('user_profile',{'id':out_mess_one.touser.id}) }}">{{ out_mess_one.touser }}</a></li>
+                                    {% else %}
+                                        <li class="messages_list"><img src="{{ asset('uploads/avatar/') }}{{ out_mess_one.touser.avatar }}" class="avatar_mini" alt="ava"><a href="{{ path('user_profile',{'id':out_mess_one.touser.id}) }}">{{ out_mess_one.touser }}</a></li>
+                                    {% endif %}
                                 </div>
+                                <div class="created_at">{{ out_mess_one.createdat|date("m/d/Y/h:m") }}</div>
                                 <div class="panel-body">
                                     <li class="messages_list">{{ out_mess_one.body }}</li>
+
                                 </div>
                             </div>
                         {% else %}
