@@ -2,7 +2,6 @@
 
 namespace BionicUniversity\Bundle\UserBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -49,6 +48,7 @@ class UserAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->add('avatar')
             ->add('firstName')
             ->add('lastName')
             ->add('department')

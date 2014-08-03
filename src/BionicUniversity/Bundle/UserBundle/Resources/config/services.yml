@@ -2,6 +2,8 @@ parameters:
     bionic.user.util.user_manipulator.class: BionicUniversity\Bundle\UserBundle\Util\UserManipulator
     bionic_university_user.event_listener.upload_listener.class: BionicUniversity\Bundle\UserBundle\EventListener\UploadListener
     twig.extension.routing.class: BionicUniversity\Bundle\UserBundle\Twig\RoutingExtension
+    bionic_university_user.form.transformer.html_purifier.class: Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer
+
 services:
     bionic.user.util.user_manipulator:
         class: %bionic.user.util.user_manipulator.class%
@@ -23,3 +25,15 @@ services:
         arguments: [~, BionicUniversity\Bundle\UserBundle\Entity\User, SonataAdminBundle:CRUD, @fos_user.mailer, @fos_user.util.token_generator, @session, @fos_user.user_manager]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: User}
+
+    form.type.textarea:
+        class: BionicUniversity\Bundle\UserBundle\Form\TextareaType
+        arguments:
+            - "@biounic_university_user.form.transformer.html_purifier"
+        tags:
+            - {name: form.type, alias: "textarea" }
+
+    biounic_university_user.form.transformer.html_purifier:
+        class: %bionic_university_user.form.transformer.html_purifier.class%
+        arguments:
+            - "@exercise_html_purifier.default"

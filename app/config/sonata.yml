@@ -4,3 +4,14 @@ sonata_block:
         # Enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts:   [admin]
+        sonata.admin.block.search_result:
+            contexts: [admin]
+sonata_doctrine_orm_admin:
+    templates:
+      types:
+        list:
+          html: ::sonata_extensions.html.twig
+
+sonata_admin:
+    title:                Sparrow Admin
+    title_logo:           http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2011/2/21/1298323304013/Tree-Sparrow---flying--Pa-007.jpg

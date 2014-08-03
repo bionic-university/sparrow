@@ -24,6 +24,8 @@ class AppKernel extends Kernel
 
             new Oneup\UploaderBundle\OneupUploaderBundle(),
 
+            new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
+
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
