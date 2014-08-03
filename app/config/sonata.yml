@@ -6,6 +6,7 @@ sonata_block:
             contexts:   [admin]
         sonata.admin.block.search_result:
             contexts: [admin]
+        bionic_university_user.block.statistics: ~
 sonata_doctrine_orm_admin:
     templates:
       types:
@@ -15,3 +16,8 @@ sonata_doctrine_orm_admin:
 sonata_admin:
     title:                Sparrow Admin
     title_logo:           http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2011/2/21/1298323304013/Tree-Sparrow---flying--Pa-007.jpg
+    dashboard:
+        blocks:
+            # display a dashboard block
+            - { position: left, type: sonata.admin.block.admin_list }
+            - { position: right, type: bionic_university_user.block.statistics }

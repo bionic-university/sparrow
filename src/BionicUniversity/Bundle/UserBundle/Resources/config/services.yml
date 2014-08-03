@@ -29,11 +29,20 @@ services:
     form.type.textarea:
         class: BionicUniversity\Bundle\UserBundle\Form\TextareaType
         arguments:
-            - "@biounic_university_user.form.transformer.html_purifier"
+            - "@bionic_university_user.form.transformer.html_purifier"
         tags:
             - {name: form.type, alias: "textarea" }
 
-    biounic_university_user.form.transformer.html_purifier:
+    bionic_university_user.form.transformer.html_purifier:
         class: %bionic_university_user.form.transformer.html_purifier.class%
         arguments:
             - "@exercise_html_purifier.default"
+
+    bionic_university_user.block.statistics:
+      class: BionicUniversity\Bundle\UserBundle\Block\StatisticsBlock
+      tags:
+        - { name: sonata.block }
+      arguments:
+        - "sonata.block.service.statistics"
+        - @templating
+        - @doctrine.orm.entity_manager

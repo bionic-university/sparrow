@@ -1,0 +1,15 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <script>
+        var articlesData = {
+            'name': 'Articles',
+            data: [
+                    {% for article in articles %}
+                        [Date.UTC({{ article.createdAt|date('Y, n, j') }}), 1],
+                    {% endfor %}
+            ]
+        }
+    </script>
+    <div id="articles"></div>
+{% endblock %}
