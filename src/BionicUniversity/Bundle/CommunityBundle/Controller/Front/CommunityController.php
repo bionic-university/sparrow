@@ -4,6 +4,10 @@ namespace BionicUniversity\Bundle\CommunityBundle\Controller\Front;
 use BionicUniversity\Bundle\CommunityBundle\Entity\Membership;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use BionicUniversity\Bundle\WallBundle\Entity\Post;
+use BionicUniversity\Bundle\CommunityBundle\Form\Type\PostType;
+
+use BionicUniversity\Bundle\UserBundle\Entity\User;
 class CommunityController extends Controller
 {
 
@@ -11,11 +15,31 @@ class CommunityController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BionicUniversityCommunityBundle:Community')->find($id);
+        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findByCommunity($entity, ['createdAt'=>'desc']);
+        $memberships = $em->getRepository('BionicUniversityCommunityBundle:Membership')->findByCommunity($entity);
+        $users = array();
+        foreach($memberships as $membership)
+        {
+            $users[] = $membership->getUser();
+        }
+        if (!$users) {
+            throw $this->createNotFoundException('Unable to find Users.');
+        }
+        if (!$memberships) {
+            throw $this->createNotFoundException('Unable to find Memberships.');
+        }
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-        return $this->render('BionicUniversityCommunityBundle:Community/Front:community.html.twig', array('entity'=> $entity));
+        $form = $this->createPostForm($id);
+
+        return $this->render('BionicUniversityCommunityBundle:Community/Front:community.html.twig', array(
+            'entity' => $entity,
+            'post' => $posts,
+            'form' => $form->createView(),
+            'users' => $users,
+        ));
     }
 
     public function communitiesAction()
@@ -74,5 +98,28 @@ class CommunityController extends Controller
         $em->flush();
 
         return $this->redirect($this->generateUrl('communities'));
+    }
+
+    /**
+     * Creates a form to create communities posts.
+     *
+     * @param Post $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createPostForm($id)
+    {
+        $form = $this->createForm(new PostType(), null, array(
+            'action' => $this->generateUrl('create_community_post', ['id'=>$id]),
+            'method' => 'POST',
+            'show_legend' => true,
+            'label' => 'Write a new post',
+        ));
+
+        $form->add('submit', 'submit', array(
+            'label' => 'Create new post',
+            'attr' => ['class' => 'pull-right btn btn-success']));
+
+        return $form;
     }
 }
