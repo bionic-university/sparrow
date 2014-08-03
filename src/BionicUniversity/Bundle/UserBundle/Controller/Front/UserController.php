@@ -130,13 +130,13 @@ class UserController extends Controller
         /**
          * #@var Friendship $friendship
          */
+
         foreach ($myFriendships as $friendship) {
             if ($friendship->getUserReceiver() == $user) {
                 array_push($myFriends, $friendship->getUserSender());
             } else {
                 array_push($myFriends, $friendship->getUserReceiver());
             }
-
         }
         $requests = $user->getRequests();
 
@@ -148,22 +148,30 @@ class UserController extends Controller
             if ($friendship->getUserSender() == $user && $friendship->getAcceptanceStatus() != 1) {
                 array_push($unconfirmedRequests, $friendship->getUserReceiver());
             }
+            $requests_count = (string)count($unconfirmedRequests);
         }
         $invites = $user->getInvites();
         $unconfirmedInvites = [];
+
         /**
          * @var Friendship $friendship
          */
         foreach ($invites as $friendship) {
             if ($friendship->getUserReceiver() == $user && $friendship->getAcceptanceStatus() != 1) {
                 array_push($unconfirmedInvites, $friendship->getUserSender());
+
             }
+            $invites_count = (string)count($unconfirmedInvites);
+
         }
-        return $this->render('BionicUniversityUserBundle:User/Front:friends.html.twig', [
+            return $this->render('BionicUniversityUserBundle:User/Front:friends.html.twig', [
             'my_friends' => $myFriends,
             'all_people' => $em->getRepository("BionicUniversityUserBundle:User")->findAll(),
             'requests' => $unconfirmedRequests,
-            'invites' => $unconfirmedInvites
+            'invites' => $unconfirmedInvites,
+            'invites_count' => $invites_count,
+            'requests_count' => $requests_count,
+
         ]);
     }
 

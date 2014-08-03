@@ -6,8 +6,16 @@
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#my_friends" role="tab" data-toggle="tab">My friends</a></li>
                 <li><a href="#all" role="tab" data-toggle="tab">All people</a></li>
-                <li><a href="#invites" role="tab" data-toggle="tab">Invites</a></li>
-                <li><a href="#requests" role="tab" data-toggle="tab">Requests</a></li>
+                <li><a href="#invites" role="tab" data-toggle="tab">Invites
+                        {% if invites_count > 0 %}
+                        <strong>({{ invites_count }})</strong>
+                        {% endif %}
+                    </a></li>
+                <li><a href="#requests" role="tab" data-toggle="tab">Requests
+                        {% if requests_count > 0 %}
+                        ({{ requests_count }})
+                    </a></li>
+                        {% endif %}
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="my_friends">
@@ -34,6 +42,7 @@
                     {% endfor %}
                 </div>
                 <div class="tab-pane" id="invites">
+
                     {% for friend in invites %}
                         {{ helpers.user(friend) }}
                     {% else %}
@@ -53,10 +62,11 @@
                                 No requests sent yet!
                             </div>
                         </div>
-                    {% endfor %}
                 </div>
+                {% endfor %}
 
-            </div>
+
+
         {% endblock friends %}
     {% endblock heading_wall %}
 {% block body %}
