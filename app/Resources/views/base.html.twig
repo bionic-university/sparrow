@@ -43,9 +43,8 @@
                 })
             })(jQuery, document);
         </script>
-        <script src="{{ asset('assets/plugins/read_more/readmore.js') }}"
+        <script src="{{ asset('assets/plugins/read_more/readmore.js') }}"></script>
         <script src="{{ asset('assets/plugins/core_nicescroll/jquery.nicescroll.min.js') }}"></script>
-        <script src="{{ asset('assets/plugins/read_more/readmore.js') }}"
         <script src="{{ asset('assets/plugins/core_breakpoints/breakpoints.js') }}"></script>
         <script src="{{ asset('assets/plugins/core_preload/pace.min.js') }}"></script>
         <script src="{{ asset('assets/components/core_preload/preload.pace.init.js') }}"></script>
@@ -63,8 +62,8 @@
         <script src="{{ asset('assets/plugins/other_mixitup/jquery.mixitup.min.js') }}"></script>
         <script src="{{ asset('assets/plugins/other_mixitup/mixitup.init.js') }}"></script>
         <script src="{{ asset('assets/components/core/core.init.js') }}"></script>
-
-
+        {% block javascripts %}
+        {% endblock %}
     </body>
 </html>
 
