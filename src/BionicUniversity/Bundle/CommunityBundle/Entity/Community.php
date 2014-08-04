@@ -53,6 +53,11 @@ class Community
         $this->posts = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * @return \DateTime
      */
@@ -106,7 +111,7 @@ class Community
     /**
      * Set name
      *
-     * @param  string    $name
+     * @param  string $name
      * @return Community
      */
     public function setName($name)
@@ -129,7 +134,7 @@ class Community
     /**
      * Set description
      *
-     * @param  string    $description
+     * @param  string $description
      * @return Community
      */
     public function setDescription($description)
