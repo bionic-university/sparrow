@@ -27,6 +27,7 @@
                                 </div>
                                 <div class="panel-body">
                                     <li class="messages_list">{{ in_mess_one.body }}</li>
+                                    <div class="sf-button"><a href="{{ path('messages_reply',{'id':in_mess_one.fromuser.id}) }}">Reply</a></div>
                                 </div>
                             </div>
                         {% else %}
@@ -52,6 +53,7 @@
                                 </div>
                                 <div class="panel-body">
                                     <li class="messages_list">{{ out_mess_one.body }}</li>
+                                    <div class="sf-button"><a href="{{ path('messages_reply',{'id':out_mess_one.touser.id}) }}">Send one more</a></div>
                                 </div>
                             </div>
                         {% else %}

@@ -18,7 +18,7 @@ class MessageController extends Controller
      * Lists all Message entities.
      *
      */
-    public function messagesAction()
+    public function messagesAction($id = null)
     {
         $user=$this->getUser();
 
@@ -26,8 +26,15 @@ class MessageController extends Controller
         $outcomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByFromUser($user, ['createdAt'=>'desc']);
         $incomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByToUser($user, ['createdAt'=>'desc']);
 
-        $entity = new Message();
-        $form = $this->createCreateForm($entity);
+        $message = new Message();
+        if(null !== $id){
+            $receiver = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
+            if(!$receiver){
+                throw $this->createNotFoundException('User not found');
+            }
+            $message->setToUser($receiver);
+        }
+        $form = $this->createCreateForm($message);
 
         return $this->render('BionicUniversityMessageBundle:Message:Front/messages.html.twig',
             array(
