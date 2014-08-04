@@ -14,7 +14,6 @@ use BionicUniversity\Bundle\MessageBundle\Entity\Message;
  */
 class MessageController extends Controller
 {
-
     /**
      * Lists all Message entities.
      *
@@ -44,6 +43,14 @@ class MessageController extends Controller
                 'form' => $form->createView(),
             )
         );
+    }
+
+    public function lastMessageAction($max = 3)
+    {
+        $user = $this->getUser();
+        $entity = $this->getDoctrine()->getManager()->getRepository("BionicUniversityMessageBundle:Message")->findBy(['toUser' => $user],['createdAt' => 'desc'],$max);
+
+        return $this->render("@BionicUniversityMessage/Message/Front/last_messages.html.twig", ['lastMessages' => $entity]);
     }
 
     /**
