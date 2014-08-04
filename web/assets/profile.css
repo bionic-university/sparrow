@@ -13,6 +13,8 @@
 }
 .createdAt{
     text-align: right;
+    float: right;
+    margin-right: 5%;
 }
 .wall_head{
 height: 50px;
@@ -42,4 +44,7 @@ width: 90%;
 }
 .reply a{
     text-decoration: none;
+}
+.messages_list, .createdAt{
+    display: inline-block;
 }

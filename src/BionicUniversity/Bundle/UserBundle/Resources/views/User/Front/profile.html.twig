@@ -9,7 +9,7 @@
                 {% if entity.avatar == false %}
                     <form action="{{ oneup_uploader_endpoint('avatar') }}" class="dropzone square drop_avatar">
                         <div class="fallback">
-                            <input name="file" type="file" multiple/>
+                            <input name="file" type="file"/>
                         </div>
                     </form>
                 {% else %}

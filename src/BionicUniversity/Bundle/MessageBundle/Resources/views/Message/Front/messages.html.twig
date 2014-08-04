@@ -27,7 +27,6 @@
                                 </div>
                                 <div class="panel-body">
                                     <li class="messages_list">{{ in_mess_one.body }}</li>
-
                                 </div>
                             </div>
                         {% else %}
@@ -49,11 +48,10 @@
                                     {% else %}
                                         <li class="messages_list"><img src="{{ asset('uploads/avatar/') }}{{ out_mess_one.touser.avatar }}" class="avatar_mini" alt="ava"><a href="{{ path('user_profile',{'id':out_mess_one.touser.id}) }}">{{ out_mess_one.touser }}</a></li>
                                     {% endif %}
+                                    <div class="createdAt">{{ out_mess_one.createdat|date("m/d/Y/h:m") }}</div>
                                 </div>
-                                <div class="created_at">{{ out_mess_one.createdat|date("m/d/Y/h:m") }}</div>
                                 <div class="panel-body">
                                     <li class="messages_list">{{ out_mess_one.body }}</li>
-
                                 </div>
                             </div>
                         {% else %}
