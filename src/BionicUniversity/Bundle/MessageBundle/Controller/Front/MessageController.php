@@ -37,6 +37,7 @@ class MessageController extends Controller
         }
         $form = $this->createCreateForm($message);
 
+
         return $this->render('BionicUniversityMessageBundle:Message:Front/messages.html.twig',
             array(
                 'out_mess' => $outcomingMessages,
@@ -79,7 +80,7 @@ class MessageController extends Controller
             'action' => $this->generateUrl('message_create_front')
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create', 'attr'=>['class' => 'btn btn-success pull-right']));
+        $form->add('submit', 'submit', array('label' => 'Send', 'attr'=>['class' => 'btn btn-success pull-right']));
 
         return $form;
     }

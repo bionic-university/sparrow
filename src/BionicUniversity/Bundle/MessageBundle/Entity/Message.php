@@ -136,9 +136,9 @@ class Message
         return $this->isread;
     }
 
-    public function setIsRead()
+    public function setIsRead($status)
     {
-        $this->isread;
+        $this->isread = $status;
     }
 
 }

@@ -21,9 +21,10 @@
                                     {% if in_mess_one.fromuser.avatar == null %}
                                     <li class="messages_list"><a href="{{ path('user_profile',{'id':in_mess_one.fromuser.id}) }}">{{ in_mess_one.fromuser }}</a></li>
                                     {% else %}
-                                    <li class="messages_list"><img src="{{ asset('uploads/avatar/') }}{{ in_mess_one.fromuser.avatar }}" class="avatar_mini" alt="ava"><a href="{{ path('user_profile',{'id':in_mess_one.fromuser.id}) }}">{{ in_mess_one.fromuser }}</a></li>
+                                    <li class="messages_list"><img src="{{ asset('uploads/avatar/') }}{{ in_mess_one.fromuser.avatar }}" class="avatar_mini" alt="ava">
+                                        <a href="{{ path('user_profile',{'id':in_mess_one.fromuser.id}) }}">{{ in_mess_one.fromuser }}</a></li>
                                     {% endif %}
-                                    <div class="createdAt">{{ in_mess_one.createdat|date("m/d/Y/h:m") }}</div>
+                                        <div class="createdAt">{{ in_mess_one.createdat|date("m/d/Y/h:m") }}</div>
                                 </div>
                                 <div class="panel-body">
                                     <li class="messages_list">{{ in_mess_one.body }}</li>
