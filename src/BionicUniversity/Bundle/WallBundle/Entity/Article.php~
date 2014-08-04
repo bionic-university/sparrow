@@ -1,46 +1,38 @@
 <?php
 
 namespace BionicUniversity\Bundle\WallBundle\Entity;
-use BionicUniversity\Bundle\UserBundle\Entity\User;
-use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
 use Symfony\Component\Validator\Constraints\DateTime;
 
-
 /**
- * Post
+ * Article
  */
-class Post
+class Article
 {
     /**
      * @var integer
      */
     private $id;
-
     /**
-     * @var User
+     * @var string
      */
-    private $author;
-
+    private $title;
     /**
      * @var string
      */
     private $text;
-
     /**
      * @var \DateTime
      */
     private $createdAt;
-
     /**
-     * @var Community
+     * @var Wall
      */
-    private $community;
+    private $wall;
 
     public function __construct()
     {
-      $this->createdAt = new \DateTime();
+        $this->createdAt = new \DateTime();
     }
-
     /**
      * Get id
      * @return integer
@@ -51,9 +43,28 @@ class Post
     }
 
     /**
+     * Set title
+     * @param  string  $title
+     * @return Article
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+    /**
+     * Get title
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+    /**
      * Set text
-     * @param  string $text
-     * @return Post
+     * @param  string  $text
+     * @return Article
      */
     public function setText($text)
     {
@@ -61,7 +72,6 @@ class Post
 
         return $this;
     }
-
     /**
      * Get text
      * @return string
@@ -70,11 +80,10 @@ class Post
     {
         return $this->text;
     }
-
     /**
      * Set createdAt
      * @param  \DateTime $createdAt
-     * @return Post
+     * @return Article
      */
     public function setCreatedAt($createdAt)
     {
@@ -82,7 +91,6 @@ class Post
 
         return $this;
     }
-
     /**
      * Get createdAt
      * @return \DateTime
@@ -92,44 +100,8 @@ class Post
         return $this->createdAt;
     }
 
-    /**
-     * Get community
-     * @return Community
-     */
-    public function getCommunity()
+    public function getWall()
     {
-        return $this->community;
-    }
-
-    /**
-     * Set community
-     * @param  Community $community
-     * @return Community
-     */
-    public function setCommunity(Community $community)
-    {
-        $this->community = $community;
-
-        return $this;
-    }
-
-    /**
-     * Set author
-     * @param  User $author
-     * @return User
-     */
-    public function setAuthor(User $author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function getAuthor()
-    {
-        return $this->author;
+        return $this->wall;
     }
 }
