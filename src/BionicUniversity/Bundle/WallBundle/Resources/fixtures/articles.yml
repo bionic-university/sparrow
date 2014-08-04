@@ -1,0 +1,5 @@
+BionicUniversity\Bundle\WallBundle\Entity\Article:
+    article{1..100}:
+        title: <title()>
+        text: <realText(500)>
+        createdAt: <dateTime()>

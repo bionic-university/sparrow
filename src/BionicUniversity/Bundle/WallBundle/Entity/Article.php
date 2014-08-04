@@ -24,10 +24,6 @@ class Article
      * @var \DateTime
      */
     private $createdAt;
-    /**
-     * @var Wall
-     */
-    private $wall;
 
     public function __construct()
     {
@@ -98,10 +94,5 @@ class Article
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    public function getWall()
-    {
-        return $this->wall;
     }
 }

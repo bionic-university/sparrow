@@ -18,8 +18,7 @@ class CommunityController extends Controller
         $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findByCommunity($entity, ['createdAt'=>'desc']);
         $memberships = $em->getRepository('BionicUniversityCommunityBundle:Membership')->findByCommunity($entity);
         $users = array();
-        foreach($memberships as $membership)
-        {
+        foreach ($memberships as $membership) {
             $users[] = $membership->getUser();
         }
         if (!$users) {
@@ -52,14 +51,10 @@ class CommunityController extends Controller
         $all = $em->getRepository('BionicUniversityCommunityBundle:Community')->findAll();
         $allCommunities=array();
 
-        if(null != $myMemberships)
-        {
-            foreach($all as $community => $data)
-            {
-                foreach($myMemberships as $membership)
-                {
-                    if($data->getId() === $membership->getCommunity()->getId())
-                    {
+        if (null != $myMemberships) {
+            foreach ($all as $community => $data) {
+                foreach ($myMemberships as $membership) {
+                    if ($data->getId() === $membership->getCommunity()->getId()) {
                         unset($all[$community]);
                     }
                 }
