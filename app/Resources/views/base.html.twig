@@ -33,11 +33,19 @@
                 $(function(){
                     $('textarea').redactor();
                     $('select').select2();
+                    $('.text-inverse').click(function(){
+                        $('.modal-body').readmore({
+                            speed: 75,
+                            maxHeight: 50
+                        });
+                    });
+
                 })
             })(jQuery, document);
         </script>
-
+        <script src="{{ asset('assets/plugins/read_more/readmore.js') }}"
         <script src="{{ asset('assets/plugins/core_nicescroll/jquery.nicescroll.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/read_more/readmore.js') }}"
         <script src="{{ asset('assets/plugins/core_breakpoints/breakpoints.js') }}"></script>
         <script src="{{ asset('assets/plugins/core_preload/pace.min.js') }}"></script>
         <script src="{{ asset('assets/components/core_preload/preload.pace.init.js') }}"></script>

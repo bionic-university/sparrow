@@ -22,19 +22,19 @@
 
                 <ul class="menu list-unstyled">
                     <li class="hasSubmenu">
-                        <a href="/" ><i class="icon-tv"></i><span>Profile</span></a>
+                        <a href="/" ><i class=" icon-home-1"></i><span>Profile</span></a>
                     </li>
                     <li class="hasSubmenu">
-                        <a href="{{ path('user_friends') }}" ><i class="icon-tv"></i><span>Friends</span></a>
+                        <a href="{{ path('user_friends') }}" ><i class="icon-group"></i><span>Friends</span></a>
                     </li>
                     <li class="hasSubmenu">
-                        <a href="{{ path('messages') }}" ><i class="icon-tv"></i><span>Message</span></a>
+                        <a href="{{ path('messages') }}" ><i class="icon-comment-typing"></i><span>Message</span></a>
                     </li>
                     <li class="hasSubmenu">
-                        <a href="{{ path('communities') }}" ><i class="icon-tv"></i><span>Communities</span></a>
+                        <a href="{{ path('communities') }}" ><i class="icon-ghost"></i><span>Communities</span></a>
                     </li>
                     <li class="hasSubmenu">
-                        <a href="{{ path('user_setting') }}" ><i class="icon-tv"></i><span>Settings</span></a>
+                        <a href="{{ path('user_setting') }}" ><i class="icon-toilet"></i><span>Settings</span></a>
                     </li>
                     {% if app.security.isGranted("ROLE_SONATA_ADMIN") %}
                         <li>

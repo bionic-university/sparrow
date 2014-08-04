@@ -39,13 +39,13 @@ class ArticleController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('front_article_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('front_article_show', ['id' => $entity->getId()]));
         }
 
-        return $this->render('BionicUniversityWallBundle:Article/Front:index.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Article/Front:index.html.twig', [
             'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+            'form'   => $form->createView()
+        ]);
     }
 
     /**
