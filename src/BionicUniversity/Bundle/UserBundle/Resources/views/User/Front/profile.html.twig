@@ -7,25 +7,29 @@
         <div class="row">
             <aside class=" col-md-3">
                 {% if entity.avatar == false %}
-                <form action="{{ oneup_uploader_endpoint('avatar') }}" class="dropzone square drop_avatar">
-                    <div class="fallback">
-                    <input name="file" type="file" multiple />
-                    </div>
-                </form>
+                    {% if app.user.id == entity.id %}
+                        <form id = "dropzone" action="{{ oneup_uploader_endpoint('avatar') }}" class="dropzone square drop_avatar">
+                            <div class="fallback">
+                                <input name="file" type="file" multiple/>
+                            </div>
+                        </form>
+                    {% endif %}
                 {% else %}
                     <img src="{{ asset('uploads/avatar/') }}{{ entity.avatar }}" class="avatar" alt="Your avatar">
                 {% endif %}
             </aside>
-            <section class="col-md-9" >
+            <section class="col-md-9">
                 <ul class="list">
-                    <li class="list-item">Position: {{ app.security.token.user.position}}</li>
-                    <li class="list-item">Gender: {{ app.security.token.user.gender}}</li>
-                    <li class="list-item">Department: {{ app.security.token.user.department}}</li>
+                    <li class="list-item">Position: {{ app.security.token.user.position }}</li>
+                    <li class="list-item">Gender: {{ app.security.token.user.gender }}</li>
+                    <li class="list-item">Department: {{ app.security.token.user.department }}</li>
                     <li class="list-item">Interests:
                         <ul>
                             {% if entity.interests != 'none' %}
                                 {% for interest in entity.interests %}
-                                    <li><a href="{{ path('user_profile', { 'id': entity.id, 'strSearch': interest.name }) }}">{{ interest.name }}</a></li>
+                                    <li>
+                                        <a href="{{ path('user_profile', { 'id': entity.id, 'strSearch': interest.name }) }}">{{ interest.name }}</a>
+                                    </li>
                                 {% endfor %}
                             {% endif %}
                         </ul>
@@ -35,26 +39,35 @@
         </div>
     {% endblock profile %}
     {% block heading_wall %}
-        <h1>My blog</h1>
-        <div>
-            {{ form(form) }}
+        <h2>My blog</h2>
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                {{ form(form) }}
+            </div>
         </div>
         <div>
-            <ul>
-                {% for post_body in post %}
-                    <div class="">
-                        <li class="">{{ post_body.text }}</li>
+            <h2>Recent posts</h2>
+
+            {% for post_body in post %}
+                <div class="panel panel-default">
+                    <div class="panel-body">{{ post_body.text|raw }}</li>
                         {% if app.security.token.user == post_body.author %}
-                            <a href="{{ path('delete_post', {'id': post_body.id, '_token': csrfToken}) }}">
+                            <a class="pull-right" href="{{ path('delete_post', {'id': post_body.id}) }}">
                                 Delete
                             </a>
                         {% endif %}
                     </div>
-                {% endfor %}
-            </ul>
+                </div>
+            {% else %}
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        No posts added yet
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     {% endblock heading_wall %}
 {% block javascripts %}
-    <script type="text/javascript" src="{{  asset('vendor/dropzone/downloads/dropzone.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/dropzone/downloads/dropzone.js') }}"></script>
 {% endblock javascripts %}
 

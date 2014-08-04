@@ -2,7 +2,9 @@
 namespace BionicUniversity\Bundle\CommunityBundle\Controller\Front;
 
 use BionicUniversity\Bundle\CommunityBundle\Entity\Membership;
+use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use BionicUniversity\Bundle\UserBundle\Entity\Avatar;
 
 class CommunityController extends Controller
 {
@@ -15,7 +17,18 @@ class CommunityController extends Controller
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-        return $this->render('BionicUniversityCommunityBundle:Community/Front:community.html.twig', array('entity'=> $entity));
+        $em = $this->getDoctrine()->getManager();
+        $subscribers = $em->getRepository('BionicUniversityCommunityBundle:Membership')->findBy(array(
+            'community' => $id,
+        ));
+        if (!$subscribers) {
+            throw $this->createNotFoundException('Unable to find User entity.');
+        }
+
+        return $this->render('BionicUniversityCommunityBundle:Community/Front:community.html.twig', array(
+            'entity' => $entity,
+            'user' => $subscribers,
+        ));
     }
 
     public function communitiesAction()

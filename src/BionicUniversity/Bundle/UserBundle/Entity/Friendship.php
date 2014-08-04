@@ -7,6 +7,9 @@ namespace BionicUniversity\Bundle\UserBundle\Entity;
  */
 class Friendship
 {
+    const DECLINED = -1;
+    const UNCONFIRMED = 0;
+    const CONFIRMED = 1;
     /**
      * @var integer
      */
@@ -26,6 +29,11 @@ class Friendship
      * @var integer
      */
     private $acceptanceStatus;
+
+    public function __construct()
+    {
+        $this->acceptanceStatus = self::UNCONFIRMED;
+    }
 
     /**
      * @param int $acceptanceStatus

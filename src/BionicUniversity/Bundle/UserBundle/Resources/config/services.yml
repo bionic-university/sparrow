@@ -1,6 +1,7 @@
 parameters:
     bionic.user.util.user_manipulator.class: BionicUniversity\Bundle\UserBundle\Util\UserManipulator
     bionic_university_user.event_listener.upload_listener.class: BionicUniversity\Bundle\UserBundle\EventListener\UploadListener
+    twig.extension.routing.class: BionicUniversity\Bundle\UserBundle\Twig\RoutingExtension
 services:
     bionic.user.util.user_manipulator:
         class: %bionic.user.util.user_manipulator.class%
@@ -10,3 +11,7 @@ services:
         arguments: [@doctrine, @doctrine.orm.entity_manager, @security.context]
         tags:
             - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
+    twig.extension.routing:
+        class: %twig.extension.routing.class%
+        public: false
+        arguments: [@router, @form.csrf_provider]

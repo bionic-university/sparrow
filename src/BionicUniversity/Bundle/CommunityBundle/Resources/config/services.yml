@@ -1,7 +1,8 @@
 parameters:
-#    bionic_university_community.example.class: BionicUniversity\Bundle\CommunityBundle\Example
-
+    bionic_university_community.event_listener.upload_listener.class: BionicUniversity\Bundle\CommunityBundle\EventListener\UploadListener
 services:
-#    bionic_university_community.example:
-#        class: %bionic_university_community.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    bionic_university_community.event_listener.upload_listener:
+        class: %bionic_university_community.event_listener.upload_listener.class%
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+        - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }

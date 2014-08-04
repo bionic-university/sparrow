@@ -14,6 +14,6 @@ BionicUniversity\Bundle\UserBundle\Entity\Interest:
     manyToMany:
         users:
           targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
-          mappedBy: interest
+          mappedBy: interests
 
 

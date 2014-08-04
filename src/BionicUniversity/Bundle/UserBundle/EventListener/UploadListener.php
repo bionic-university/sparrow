@@ -20,14 +20,17 @@ class UploadListener
 
     public function onUpload(PostPersistEvent $event)
     {
+        $request = $event->getRequest();
+
         $avatar = $event->getFile();
         $path = $avatar->getBasename();
+        if ('oneup_uploader.controller.avatar:upload' === $request->get('_controller')) {
+            $user = $this->securityContext->getToken()->getUser();
+            $user->setAvatar($path);
 
-        $user = $this->securityContext->getToken()->getUser();
-        $user->setAvatar($path);
-
-        $em = $this->doctrine->getManager();
-        $em->persist($user);
-        $em->flush();
+            $em = $this->doctrine->getManager();
+            $em->persist($user);
+            $em->flush();
+        }
     }
 }

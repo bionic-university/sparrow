@@ -1,0 +1,28 @@
+{% macro user(user) %}
+    <div class="panel panel-danger communities_panel">
+        <div class="panel-heading">
+            <li class="communities_list"><a href="{{ path('user_profile',{'id':user.id}) }}">
+                    Name: {{ user.firstName }}</a></li>
+        </div>
+        <div class="panel-body">
+            <li class="communities_list">{{ user.department }}</li>
+        </div>
+        {% if user.isFriendOf(app.security.token.user) %}
+            <div class="btn btn-default"><a href="{{ path('user_remove_friend',{ 'id': user.id }) }}">Remove</a></div>
+        {% elseif user.hasInvited(app.security.token.user) %}
+            <div class="btn btn-default"><a href="{{ path('user_confirm_friend',{ 'id': user.id }) }}">Add to
+                    friends
+                </a>
+            </div>
+        {% elseif app.security.token.user.hasInvited(user) %}
+            <div class="btn btn-default">
+                User has not confirmed friendship yet
+            </div>
+        {% elseif user.id == app.security.token.user.id %}
+            <div class="btn btn-default">It's you</div>
+        {% else %}
+            <div class="btn btn-default"><a href="{{ path('user_add_friend',{ 'id': user.id }) }}">Add to friends</a>
+            </div>
+        {% endif %}
+    </div>
+{% endmacro %}

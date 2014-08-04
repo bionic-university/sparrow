@@ -30,6 +30,7 @@ fos_user_change_password:
 fos_user_registration_confirm:
     pattern: /confirm/{token}
     defaults: {_controller: FOSUserBundle:Registration:confirm, _method: GET}
+
 oneup_uploader:
     resource: .
     type: uploader

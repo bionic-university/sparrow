@@ -3,14 +3,36 @@
         {{ entity.name }}
     {% endblock heading_profile %}
     {% block profile %}
+        {% block javascripts %}
+            <script type="text/javascript" src="{{ asset('vendor/dropzone/downloads/dropzone.js') }}"></script>
+        {% endblock javascripts %}
         <div class="row">
-            <aside class="avatar col-md-2">
+            <aside class=" col-md-3">
+                    {% if entity.avatar == false %}
+                        {% if app.user.id == entity.owner.id %}
+                            <form id = "dropzone" action="{{ oneup_uploader_endpoint('community_logo') }}" class="dropzone square drop_avatar">
+                                <div class="fallback">
+                                    <input name="file" type="file" multiple/>
+                                </div>
+                                <input type="hidden" name="community" value="{{ entity.id }}" />
+                            </form>
+                        {% endif %}
+                    {% else %}
+                            <img src="{{ asset('uploads/community_logo/') }}{{ entity.avatar }}" class="avatar" alt="Your avatar">
+                    {% endif %}
             </aside>
-            <section class="col-md-10" >
+            <section class="col-md-9" >
                 <ul class="list">
                     <li class="list-item">{{ entity.description}}</li>
                 </ul>
+            <div style="border: 1px solid black;">
+                Our Subscribers
+                {% for us in user %}
+                    </br><a href="{{ asset('id') }}{{ us.user.id }}">{{ us.user }}</a>
+                {% endfor %}
+            </div>
             </section>
+
         </div>
     {% endblock profile %}
     {% block heading_wall %}
