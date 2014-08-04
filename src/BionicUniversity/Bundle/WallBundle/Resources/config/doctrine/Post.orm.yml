@@ -1,5 +1,6 @@
 BionicUniversity\Bundle\WallBundle\Entity\Post:
     type: entity
+    repositoryClass: BionicUniversity\Bundle\WallBundle\Doctrine\ORM\PostRepository
     table: null
     id:
         id:

@@ -1,0 +1,11 @@
+{% extends '::front.html.twig' %}
+
+{% block profile -%}
+    {% for feed in feeds %}
+        {% if feed.community is not null %}
+            {{ feed.community.name }}:<br>
+        {% endif %}
+        {{ feed.author }} said: <br>
+        {{ feed.text|raw }}<br><br>
+    {% endfor %}
+{% endblock profile %}

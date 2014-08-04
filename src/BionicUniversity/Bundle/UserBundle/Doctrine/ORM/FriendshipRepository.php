@@ -25,7 +25,7 @@ class FriendshipRepository extends EntityRepository
 
     public function findFriends($user)
     {
-        $repository = $this->getEntityManager()->getRepository("BionicUniversityUserBundle:Friendship")->createQueryBuilder('friendship')
+        $repository = $this->createQueryBuilder('friendship')
             ->where('(friendship.userSender = :user OR friendship.userReceiver = :user) AND friendship.acceptanceStatus = 1')
             ->setParameter('user',$user)
             ->getQuery();
@@ -35,7 +35,7 @@ class FriendshipRepository extends EntityRepository
 
     public function findUnconfirmedFriends($userSender,$userReceiver)
     {
-        $repository = $this->getEntityManager()->getRepository("BionicUniversityUserBundle:Friendship")->createQueryBuilder('friendship')
+        $repository = $this->createQueryBuilder('friendship')
             ->where('friendship.userSender = :userSender AND friendship.userReceiver = :userReceiver AND friendship.acceptanceStatus != 1')
             ->setParameters(['userReceiver' => $userReceiver, 'userSender' => $userSender])
             ->getQuery();
