@@ -501,7 +501,7 @@ class User extends BaseUser
      */
     public function getAvatar()
     {
-        return $this->avatar;
+        return (null !== $this->avatar) ? $this->avatar : 'no_avatar.jpg';
     }
 
     public function isFriendOf(User $user)

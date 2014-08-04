@@ -29,11 +29,11 @@ class UserController extends Controller
 
         $form = $this->createPostForm();
 
-        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array(
+        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', [
             'entity' => $entity,
-            'post' => $posts,
+            'posts' => $posts,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     public function createPasswordAction(Request $request)
