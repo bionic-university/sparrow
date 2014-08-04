@@ -1,77 +1,148 @@
 {% extends "::base.html.twig" %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/profile.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('assets/page.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('assets/blog.css') }}"/>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}" />
+
+    <![endif]-->
+
+    <!--  Stylesheet Complete CSS compiled from ../assets/css/admin/module.admin.stylesheet-complete.less -->
+    <link rel="stylesheet" href="{{ asset('assets/css/admin/module.admin.stylesheet-complete.min.css') }}" />
+
 {% endblock %}
 {% block body %}
-    {% block navigation %}
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
+    <div class="container-fluid">
+        <div id="menu" class="hidden-print hidden-xs sidebar-default sidebar-brand-primary">
+            <div id="sidebar-social-wrapper">
 
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Sparrow</a>
-            </div>
-            <div class="navbar-collapse collapse" >
-                <ul class="nav navbar-nav">
-                    <li><a href={{ path('user_login') }}>Home</a></li>
-                    <li><a href="{{ path('front_article') }}">News</a></li>
-                    <li><a href="#">Contacts</a></li>
-                    <li><a href="#">Help</a></li>
-                    <li><a href="#">About us</a></li>
-                    <li><a href="/logout">Log out</a></li>
+                <!-- LOGO / TEXT -->
+                <div id="brandWrapper">
+                    <a href="#"><span class="text">Sparrow</span></a>
+                </div>
+
+                <ul class="menu list-unstyled">
+                    <li class="hasSubmenu">
+                        <a href="/" ><i class="icon-tv"></i><span>Profile</span></a>
+                    </li>
+                    <li class="hasSubmenu">
+                        <a href="{{ path('user_friends') }}" ><i class="icon-tv"></i><span>Friends</span></a>
+                    </li>
+                    <li class="hasSubmenu">
+                        <a href="{{ path('messages') }}" ><i class="icon-tv"></i><span>Message</span></a>
+                    </li>
+                    <li class="hasSubmenu">
+                        <a href="{{ path('communities') }}" ><i class="icon-tv"></i><span>Communities</span></a>
+                    </li>
+                    <li class="hasSubmenu">
+                        <a href="{{ path('user_setting') }}" ><i class="icon-tv"></i><span>Settings</span></a>
+                    </li>
+                    {% if app.security.isGranted("ROLE_SONATA_ADMIN") %}
+                        <li>
+                            <a href="{{ path('sonata_admin_dashboard') }}"><i class="icon-tv"></i><span>To admin</span></a>
+                        </li>
+                    {% endif %}
                 </ul>
-                {% if app.security.isGranted("ROLE_SUPER_ADMIN") %}
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{ path('admin_page') }}" style="margin-right: ">To admin</a></li>
-                    </ul>
-                {% endif %}
             </div>
         </div>
-    </div>
-    {% endblock navigation %}
-    <div class="container-fluid">
 
-       {#<div class="jumbotron">#}
+        <div id="content">
+            <div class="navbar hidden-print navbar-default box main" role="navigation">
 
-            <div class="row">
-                {% block menu %}
-                <div class="col-sm-3 col-md-2 sidebar">
-                    <ul class="nav nav-sidebar">
-                            <li class="list-group-item"><a href="{{ path('user_login') }}">My profile</a></li>
-                            <li class="list-group-item"><a href="{{ path('messages') }}">Messages</a></li>
-                            <li class="list-group-item"><a href="#">Friends</a></li>
-                            <li class="list-group-item"><a href={{ path('communities') }}>Communities</a></li>
-                            <li class="list-group-item"><a href="{{ path('user_setting') }}">Settings</a></li>
-                        </ul>
+                <!--  RIGHT TOGGLE BUTTON FOR SIDEBAR CHAT  -->
+                <div class="user-action user-action-btn-navbar pull-right border-left">
+                    <a href="#menu-right" class="btn btn-sm btn-navbar btn-open-right"><i class="fa fa-comments fa-2x"></i></a>
                 </div>
-                {% endblock menu %}
-                <div class="col-sm-9 col-md-offset-2 main">
-                    <h1 class="page-header ">
-                        {% block heading_profile %}{% endblock heading_profile %}
-                    </h1>
 
-                    <div class="profile">
-                    {% block profile %}{% endblock profile %}
-                    </div>
-                    <div class="blog-header">
-                        {% block heading_wall %}{% endblock heading_wall %}
-                    </div>
+                <!--  LEFT TOGGLE BUTTON FOR SIDEBAR MENU -->
+                <div class="user-action user-action-btn-navbar pull-left">
+                    <a href="#menu" class="btn btn-sm btn-navbar btn-open-left"><i class="fa fa-bars fa-2x"></i></a>
+                </div>
 
-                    </div>
+                <!-- ICON WITH DROPDOWN FOR NOTIFICATIONS    -->
+                <ul class="notifications pull-left hidden-xs">
+                    <li class="dropdown notif">
+                        <a href="#" class="dropdown-toggle"  data-toggle="dropdown"><i class="notif-block icon-envelope-1"></i><span class="fa fa-star"></span></a>
+                        {{ render(controller('BionicUniversityMessageBundle:Front/Message:lastMessage', {
+                        'max': 3
+                        })) }}
+                    </li>
+                </ul>
 
+                <!--  USER DROPDOWN MENU-->
+                <div class="user-action pull-left menu-right-hidden-xs menu-left-hidden-xs border-left">
+                    <div class="dropdown username pull-left">
+                        <!-- DROPDOWN BUTTON -->
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<span class="media margin-none">
+					<span class="pull-left"><img src="{{ app.security.token.user.avatar }}" alt="user" class="img-circle"></span>
+					<span class="media-body">{{ app.security.token.user.firstname }} <span class="caret"></span></span>
+				</span>
+                        </a>
+                        <!-- DROPDOWN ITEMS -->
+                        <ul class="dropdown-menu">
+                            <li><a href="/">Profile</a></li>
+                            <li><a href="{{ path('messages') }}">Messages</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!--  SEARCH INPUT 100% WIDTH-->
+                <div class="input-group hidden-xs pull-left">
+                    <span class="input-group-addon"><i class="icon-search"></i></span>
+                    <input type="text" class="form-control" placeholder="Search a friend"/>
+                </div>
             </div>
+            <!-- <div class="layout-app">  -->
+            <div class="innerAll">
+                <div class="row">
+                    <div class="col-lg-9 col-md-8">
+
+                        <div class="timeline-cover">
+                            <div class="cover">
+                                <div class="top">
+                                    <img src="../assets//images/photodune-2755655-party-time-s.jpg" class="img-responsive" />
+                                </div>
+                                <ul class="list-unstyled">
+                                    <li class="active"><a href="index.html?lang=en"><i class="fa fa-fw fa-clock-o"></i> <span>Timeline</span></a></li>
+                                    <li><a href="{{ path('user_friends') }}{{ path('messages') }}"><i class="fa fa-fw icon-group"></i><span> Friends </span><small>(19)</small></a></li>
+                                    <li><a href="{{ path('messages') }}"><i class="fa fa-fw icon-envelope-fill-1"></i> <span>Messages</span> <small>(2 new)</small></a></li>
+                                </ul>
+                            </div>
+                            <div class="widget">
+                                <div class="widget-body padding-none margin-none">
+                                    <div class="innerAll">
+                                        <i class="fa fa-quote-left text-muted pull-left fa-fw"></i>
+                                        <p class="lead margin-none">What a fun Partyyy</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% block wall %}
+
+                        {% endblock wall %}
+
+                    </div>
+                    </div>
+                </div>
+
+                    {% block profile %}
+                    {% endblock profile %}
+                </div>
+
+
+        <!-- // Content END -->
+
+        <div class="clearfix"></div>
+        <!-- // Sidebar menu & content wrapper END -->
 
 
 
-       {#</div>#}
-
+        <!-- FOOTER HERE -->
     </div>
-<footer></footer>
+
+    <!-- REQUIRED VARIABLES SCRIPTS -->
+
+    <!-- FOOTER SCRIPTS -->
 {% endblock body %}

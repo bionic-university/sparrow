@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: sonata.yml }
     - { resource: "@BionicUniversityMessageBundle/Resources/config/services.yml" }
 framework:
     #esi:             ~
@@ -91,3 +92,7 @@ oneup_uploader:
 
 genemu_form:
     select2: ~
+
+hautelook_alice:
+    locale: en_US   # default
+    seed: 1         # default

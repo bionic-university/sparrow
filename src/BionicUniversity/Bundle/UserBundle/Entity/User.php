@@ -362,13 +362,11 @@ class User extends BaseUser
     {
         return $this->gender;
     }
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $interests;
-
-
-
 
     /**
      * Remove post
@@ -383,7 +381,7 @@ class User extends BaseUser
     /**
      * Get post
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPost()
     {
@@ -393,7 +391,7 @@ class User extends BaseUser
     /**
      * Add interests
      *
-     * @param \BionicUniversity\Bundle\UserBundle\Entity\Interest $interests
+     * @param  \BionicUniversity\Bundle\UserBundle\Entity\Interest $interests
      * @return User
      */
     public function addInterest(\BionicUniversity\Bundle\UserBundle\Entity\Interest $interests)
@@ -416,18 +414,17 @@ class User extends BaseUser
     /**
      * Get interests
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getInterests()
     {
         return $this->interests;
     }
-  
 
     /**
      * Add requests
      *
-     * @param \BionicUniversity\Bundle\UserBundle\Entity\Friendship $requests
+     * @param  \BionicUniversity\Bundle\UserBundle\Entity\Friendship $requests
      * @return User
      */
     public function addRequest(\BionicUniversity\Bundle\UserBundle\Entity\Friendship $requests)
@@ -450,7 +447,7 @@ class User extends BaseUser
     /**
      * Get requests
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getRequests()
     {
@@ -460,7 +457,7 @@ class User extends BaseUser
     /**
      * Add invites
      *
-     * @param \BionicUniversity\Bundle\UserBundle\Entity\Friendship $invites
+     * @param  \BionicUniversity\Bundle\UserBundle\Entity\Friendship $invites
      * @return User
      */
     public function addInvite(\BionicUniversity\Bundle\UserBundle\Entity\Friendship $invites)
@@ -483,7 +480,7 @@ class User extends BaseUser
     /**
      * Get invites
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getInvites()
     {
@@ -506,4 +503,38 @@ class User extends BaseUser
         return $this->avatar;
     }
 
+    public function isFriendOf(User $user)
+    {
+        return count($this->getFriends()->filter(function ($element) use ($user) {
+            return $element->getId() === $user->getId();
+        })) > 0;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection|ArrayCollection
+     */
+    public function getFriends()
+    {
+        $friendships = new ArrayCollection(array_merge($this->invites->toArray(), $this->requests->toArray()));
+
+        return $friendships->filter(function ($element) {
+
+            /**@var Friendship $element */
+            $element->getAcceptanceStatus() === Friendship::CONFIRMED;
+        });
+    }
+
+    public function hasInvited(User $user)
+    {
+        return count($this->requests->filter(function ($element) use ($user) {
+            return $element->getUserReceiver()->getId() === $user->getId() && $element->getAcceptanceStatus() === Friendship::UNCONFIRMED;
+        }));
+    }
+
+    public function wasInvitedBy(User $user)
+    {
+        return count($this->invites->filter(function ($element) use ($user) {
+            return $element->getUserSender()->getId() === $user->getId() && $element->getAcceptanceStatus() === Friendship::UNCONFIRMED;
+        }));
+    }
 }

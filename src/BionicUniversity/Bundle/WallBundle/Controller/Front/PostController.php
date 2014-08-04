@@ -71,9 +71,7 @@ class PostController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Community entity.');
         }
-        if (false === $this->get('form.csrf_provider')->isCsrfTokenValid('delete_post', $request->get('_token'))) {
-            throw $this->createAccessDeniedException('Invalid CSRF token.');
-        }
+
         $em->remove($entity);
         $em->flush();
 

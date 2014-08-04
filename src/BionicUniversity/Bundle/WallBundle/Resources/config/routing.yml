@@ -13,3 +13,7 @@ BionicUniversityWallBundle_admin_article:
 BionicUniversityWallBundle_front_article:
     resource: "@BionicUniversityWallBundle/Resources/config/routing/front/article.yml"
     prefix:   /news
+
+BionicUniversityWallBundle_feed:
+    resource: "@BionicUniversityWallBundle/Resources/config/routing/front/feed.yml"
+    prefix:   /feed

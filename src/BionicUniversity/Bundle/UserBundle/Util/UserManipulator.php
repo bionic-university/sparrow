@@ -47,6 +47,7 @@ class UserManipulator
         $user->setDateOfBirth(new \DateTime());
         $user->setGender(User::GENDER_MALE);
         $user->setSuperAdmin((Boolean)$superadmin);
+        $user->addRole('ROLE_SONATA_ADMIN');
         $this->userManager->updateUser($user);
 
         return $user;
