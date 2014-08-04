@@ -5,7 +5,7 @@ namespace BionicUniversity\Bundle\UserBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use FOS\UserBundle\Model\User as BaseUser;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * User
  */
@@ -41,6 +41,7 @@ class User extends BaseUser
 
     /**
      * @var string
+     * @Assert\NotBlank()
      */
     private $department;
 

@@ -112,7 +112,7 @@ class UserController extends Controller
             return $this->redirect($this->generateUrl('user_profile', ['id' => $id]));
         }
 
-        return $this->render('BionicUniversityUserBundle:User/Admin:edit.html.twig', [
+        return $this->render('BionicUniversityUserBundle:User/Front:settings.html.twig', [
             'entity' => $entity,
             'edit_form' => $editForm->createView(),
         ]);

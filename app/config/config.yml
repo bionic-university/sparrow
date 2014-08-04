@@ -83,7 +83,10 @@ fos_user:
                 enabled:    true
 
 mopa_bootstrap:
-    form: ~  # Adds twig form theme  support
+    form:
+        render_optional_text:  true
+        render_required_asterisk:  true
+
 
 oneup_uploader:
     mappings:
