@@ -5,3 +5,14 @@ services:
 #    bionic_university_wall.example:
 #        class: %bionic_university_wall.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+    bionic_university_wall.admin.post:
+        class: BionicUniversity\Bundle\WallBundle\Admin\PostAdmin
+        arguments: [~, BionicUniversity\Bundle\WallBundle\Entity\Post, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Post}
+
+    bionic_university_wall.admin.article:
+        class: BionicUniversity\Bundle\WallBundle\Admin\ArticleAdmin
+        arguments: [~, BionicUniversity\Bundle\WallBundle\Entity\Article, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Article}

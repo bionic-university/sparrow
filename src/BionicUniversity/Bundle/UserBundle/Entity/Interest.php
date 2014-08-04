@@ -24,7 +24,6 @@ class Interest
      */
     private $users;
 
-
     /**
      * Constructor
      */
@@ -36,7 +35,7 @@ class Interest
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -46,7 +45,7 @@ class Interest
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string   $name
      * @return Interest
      */
     public function setName($name)
@@ -59,7 +58,7 @@ class Interest
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -69,7 +68,7 @@ class Interest
     /**
      * Add users
      *
-     * @param \BionicUniversity\Bundle\UserBundle\Entity\User $users
+     * @param  \BionicUniversity\Bundle\UserBundle\Entity\User $users
      * @return Interest
      */
     public function addUser(\BionicUniversity\Bundle\UserBundle\Entity\User $users)
@@ -92,7 +91,7 @@ class Interest
     /**
      * Get users
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
     {

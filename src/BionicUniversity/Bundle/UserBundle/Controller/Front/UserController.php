@@ -7,10 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BionicUniversity\Bundle\UserBundle\Form\CreatePasswordType;
 
 use BionicUniversity\Bundle\UserBundle\Entity\User;
-use BionicUniversity\Bundle\UserBundle\Entity\Avatar;
 use BionicUniversity\Bundle\UserBundle\Entity\Friendship;
 use BionicUniversity\Bundle\UserBundle\Form\UserSettingsType;
-use BionicUniversity\Bundle\UserBundle\Doctrine\ORM\FriendshipRepository;
 
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use BionicUniversity\Bundle\WallBundle\Form\PostType;
@@ -120,7 +118,6 @@ class UserController extends Controller
         ]);
     }
 
-
     public function friendsAction()
     {
         $user = $this->getUser();
@@ -159,6 +156,7 @@ class UserController extends Controller
                 array_push($unconfirmedInvites, $friendship->getUserSender());
             }
         }
+
         return $this->render('BionicUniversityUserBundle:User/Front:friends.html.twig', [
             'my_friends' => $myFriends,
             'all_people' => $em->getRepository("BionicUniversityUserBundle:User")->findAll(),
@@ -166,7 +164,6 @@ class UserController extends Controller
             'invites' => $unconfirmedInvites
         ]);
     }
-
 
     public function addFriendAction($id)
     {

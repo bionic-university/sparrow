@@ -3,25 +3,25 @@ namespace BionicUniversity\Bundle\UserBundle\Twig;
 
 use Symfony\Bridge\Twig\Extension\RoutingExtension as Base;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class RoutingExtension extends Base
 {
 
-    public function __construct(RouterInterface $generator, CsrfProviderInterface $csrfProvider)
-    {
-        $this->router = $generator;
-        $this->csrfProvider = $csrfProvider;
-    }
+    private $provider;
 
     public function getPath($name, $parameters = array(), $relative = false)
     {
-        return $this->router->generate($name, array_merge($parameters, ['_token' => $this->generateToken()]), $relative ? UrlGeneratorInterface::RELATIVE_PATH : UrlGeneratorInterface::ABSOLUTE_PATH);
+        return parent::getPath($name, array_merge($parameters, ['_token' => $this->generateToken()]), $relative);
+    }
+
+    public function setCsrfProvider(CsrfProviderInterface $provider)
+    {
+        $this->provider = $provider;
     }
 
     private function generateToken()
     {
-        return $this->csrfProvider->generateCsrfToken('anything');
+        return $this->provider->generateCsrfToken('anything');
     }
+
 }

@@ -48,7 +48,7 @@
 
             {% for post_body in post %}
                 <div class="panel panel-default">
-                    <div class="panel-body">{{ post_body.text|raw }}</li>
+                    <div class="panel-body">{{ post_body.text|raw }}
                         {% if app.security.token.user == post_body.author %}
                             <a class="pull-right" href="{{ path('delete_post', {'id': post_body.id}) }}">
                                 Delete

@@ -101,6 +101,18 @@ class Post
     }
 
     /**
+     * Set community
+     * @param  Community $community
+     * @return Community
+     */
+    public function setCommunity(Community $community)
+    {
+        $this->community = $community;
+
+        return $this;
+    }
+
+    /**
      * Set author
      * @param  User $author
      * @return User
