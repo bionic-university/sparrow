@@ -21,7 +21,7 @@ class Message
     private $fromUser;
 
     /**
-     * @var User
+     * @var User0
      */
     private $toUser;
 
@@ -34,6 +34,11 @@ class Message
      * @var \DateTime
      */
     private $createdAt;
+
+    /**
+     * @var integer
+     */
+    private $isread;
 
     public function __construct()
     {
@@ -119,6 +124,21 @@ class Message
     public function getToUser()
     {
         return $this->toUser;
+    }
+
+    /**
+     * Get isread
+     *
+     * @return integer
+     */
+    public function getIsRead()
+    {
+        return $this->isread;
+    }
+
+    public function setIsRead()
+    {
+        $this->isread;
     }
 
 }

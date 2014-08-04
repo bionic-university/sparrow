@@ -11,6 +11,8 @@ BionicUniversity\Bundle\MessageBundle\Entity\Message:
             type: text
         createdAt:
             type: datetime
+        isread:
+            type: integer
     manyToOne:
         toUser:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
