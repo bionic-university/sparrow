@@ -1,0 +1,3 @@
+feed:
+    path:     /
+    defaults: { _controller: "BionicUniversityWallBundle:Front/Feed:index" }
