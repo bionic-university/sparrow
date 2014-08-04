@@ -21,9 +21,9 @@ class ArticleController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('BionicUniversityWallBundle:Article')->findAll();
 
-        return $this->render('BionicUniversityWallBundle:Article/Front:index.html.twig', array(
-            'entities' => $entities,
-        ));
+        return $this->render('@BionicUniversityWall/Post/Front/recent_news.html.twig', [
+            'articles' => $entities,
+        ]);
     }
     /**
      * Creates a new Article entity.
@@ -55,12 +55,12 @@ class ArticleController extends Controller
      */
     private function createCreateForm(Article $entity)
     {
-        $form = $this->createForm(new ArticleType(), $entity, array(
+        $form = $this->createForm(new ArticleType(), $entity, [
             'action' => $this->generateUrl('front_article_create'),
             'method' => 'POST',
-        ));
+        ]);
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', ['label' => 'Create']);
 
         return $form;
     }
@@ -74,10 +74,10 @@ class ArticleController extends Controller
         $entity = new Article();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('', array(
+        return $this->render('', [
             'entity' => $entity,
             'form'   => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -94,8 +94,8 @@ class ArticleController extends Controller
             throw $this->createNotFoundException('Unable to find Article entity.');
         }
 
-        return $this->render('BionicUniversityWallBundle:Article/Front:show.html.twig', array(
+        return $this->render('BionicUniversityWallBundle:Article/Front:show.html.twig', [
             'entity' => $entity,
-        ));
+        ]);
     }
 }
