@@ -3,7 +3,7 @@
 <div class="col-md-4 col-lg-3">
     <div class="widget">
         <div class="widget-body text-center">
-            <a href=""><img src="{{ entity.avatar }}" width="120" alt="" class="img-circle"></a>
+            <a href=""><img src="{{ asset('/uploads/avatar/'~entity.avatar) }}" width="120" alt="" class="img-circle"></a>
             <h2 class="strong margin-none">{{ entity.firstname }}</h2>
             <div class="innerB">Working at {{ entity.department }}</div>
             {% if app.security.token.user != entity %}
@@ -92,7 +92,7 @@
     {% endblock profile %}
 
     {% block content %}
-        {{ include ("BionicUniversityWallBundle:Post/Front:posts.html.twig", {'posts': posts}) }}
+        {{ include ("BionicUniversityWallBundle:Post/Front:posts.html.twig", {'posts': posts, 'form': form}) }}
     {% endblock content %}
 
 {% block javascripts %}

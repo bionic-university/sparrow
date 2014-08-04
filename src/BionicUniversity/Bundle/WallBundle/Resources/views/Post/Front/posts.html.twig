@@ -1,33 +1,58 @@
 {% block content %}
-    <div class="gridalicious-row" data-toggle="gridalicious" data-gridalicious-width="340" data-gridalicious-gutter="12" data-gridalicious-selector=".gridalicious-item">
-    <div class="innerAll inner-2x loading text-center text-medium"><i class="fa fa-fw fa-spinner fa-spin"></i> Loading</div>
-    <div class="loaded hide2">
+<div class="row">
+    <div class="col-md-6">
+        <div class="widget widget-heading-simple widget-body-white">
 
-    {% for post in posts %}
-    <!-- Widget -->
-    <div class="widget gridalicious-item not-responsive">
-        <!-- Info -->
-        <div class="bg-primary">
-            <div class="media">
-                <a href="" class="pull-left"><img src="{{ post.author.avatar }}" style="width: 50px !important; margin: 10px 10px 10px 11px;" class="media-object avatarka"></a>
-                <div class="media-body innerTB half">
-                    <a href="#" class="pull-right innerT innerR text-white">
-                        <i class="icon-reply-all-fill fa fa-2x "></i>
-                    </a>
-                    <a href="" class="text-white strong display-block">{{ post.author }}</a>
-                    <span>on {{ post.createdAt | date }}</span>
-
+            <div class="widget-body">
+                <div class="innerLR">
+                    {{ form(form) }}
                 </div>
-
             </div>
-        </div>
 
-
-        <!-- Content -->
-        <div class="innerAll">
-            <p>{{ post.text }}</p>
         </div>
     </div>
-    <!-- //End Widget -->
-    {% endfor %}
+</div>
+    <div class="gridalicious-row" data-toggle="gridalicious" data-gridalicious-width="340" data-gridalicious-gutter="12"
+         data-gridalicious-selector=".gridalicious-item">
+        <div class="innerAll inner-2x loading text-center text-medium"><i class="fa fa-fw fa-spinner fa-spin"></i>
+            Loading
+        </div>
+        <div class="loaded hide2">
+
+            {% for post in posts %}
+                <!-- Widget -->
+                <div class="widget gridalicious-item not-responsive">
+                    <!-- Info -->
+                    <div class="bg-primary">
+                        <div class="media">
+                            <a href="" class="pull-left"><img src="{{ asset('/uploads/avatar/'~post.author.avatar) }}"
+                                                              style="width: 50px !important; max-width: 50px; margin: 10px 10px 10px 11px;padding-left:10px"
+                                                              class="media-object avatarka"></a>
+
+                            <div class="media-body innerTB half">
+                                <a href="#" class="pull-right innerT innerR text-white">
+                                    <i class="icon-reply-all-fill fa fa-2x "></i>
+                                </a>
+                                <a href="" class="text-white strong display-block">{{ post.author }}</a>
+                                <span>on {{ post.createdAt | date }}</span>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <!-- Content -->
+                    <div class="innerAll">
+                        <p>{{ post.text|raw }}</p>
+                    </div>
+                </div>
+                <!-- //End Widget -->
+            {% else %}
+                <div class="widget gridalicious-item not-responsive">
+                    <div class="innerAll">
+                        <p>No posts added yet. Please. add the first one</p>
+                    </div>
+                </div>
+            {% endfor %}
 {% endblock content %}
