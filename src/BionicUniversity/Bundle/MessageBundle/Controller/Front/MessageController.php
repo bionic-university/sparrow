@@ -19,16 +19,23 @@ class MessageController extends Controller
      * Lists all Message entities.
      *
      */
-    public function messagesAction(Request $request)
+    public function messagesAction($id = null)
     {
-        $entity = new Message();
-        $form = $this->createCreateForm($entity);
+        $user=$this->getUser();
 
-        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $form->handleRequest($request);
         $outcomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByFromUser($user, ['createdAt'=>'desc']);
         $incomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByToUser($user, ['createdAt'=>'desc']);
+
+        $message = new Message();
+        if(null !== $id){
+            $receiver = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
+            if(!$receiver){
+                throw $this->createNotFoundException('User not found');
+            }
+            $message->setToUser($receiver);
+        }
+        $form = $this->createCreateForm($message);
 
         return $this->render('BionicUniversityMessageBundle:Message:Front/messages.html.twig',
             array(
@@ -45,13 +52,14 @@ class MessageController extends Controller
      */
     public function createAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $entity = new Message();
         $entity->setFromUser($this->getUser());
 
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
-        $em = $this->getDoctrine()->getManager();
         $em->persist($entity);
         $em->flush();
 

@@ -2,10 +2,19 @@
     width: 200px;
     height: 200px;
 }
+.avatar_mini{
+    width: 40px;
+    height: 40px;
+}
 .drop_avatar{
     width: 200px;
     height: 200px;
     background-color: lightgrey;
+}
+.createdAt{
+    text-align: right;
+    float: right;
+    margin-right: 5%;
 }
 .wall_head{
 height: 50px;
@@ -32,4 +41,10 @@ width: 90%;
 }
 .communities_panel a{
     text-decoration: none;
+}
+.reply a{
+    text-decoration: none;
+}
+.messages_list, .createdAt{
+    display: inline-block;
 }
