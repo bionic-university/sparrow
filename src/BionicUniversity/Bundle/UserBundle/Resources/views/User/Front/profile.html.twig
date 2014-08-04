@@ -91,9 +91,9 @@
     <!-- // Widget END -->
     {% endblock profile %}
 
-    {% block wall %}
-        {% include "BionicUniversityWallBundle:Post/Front:posts.html.twig" %}
-    {% endblock wall %}
+    {% block content %}
+        {{ include ("BionicUniversityWallBundle:Post/Front:posts.html.twig", {'posts': posts}) }}
+    {% endblock content %}
 
 {% block javascripts %}
     <script type="text/javascript" src="{{ asset('vendor/dropzone/downloads/dropzone.js') }}"></script>
