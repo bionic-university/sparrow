@@ -34,6 +34,8 @@ class UserController extends Controller
         ]);
     }
 
+
+
     public function createPasswordAction(Request $request)
     {
         $entity = $this->getUser();

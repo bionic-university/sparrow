@@ -146,5 +146,7 @@
 
     <!-- REQUIRED VARIABLES SCRIPTS -->
 
-    <!-- FOOTER SCRIPTS -->
+    {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('vendor/dropzone/downloads/dropzone.js') }}"></script>
+    {% endblock javascripts %}
 {% endblock body %}
