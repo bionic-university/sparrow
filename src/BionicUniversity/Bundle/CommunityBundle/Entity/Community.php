@@ -16,7 +16,6 @@ class Community
     /**
      * @var integer
      * @Assert\Type(type="integer")
-     * @Assert\NotBlank()
      */
     private $id;
 
@@ -54,7 +53,6 @@ class Community
 
     /**
      * @var User
-     * @Assert\NotBlank()
      */
     private $owner;
 

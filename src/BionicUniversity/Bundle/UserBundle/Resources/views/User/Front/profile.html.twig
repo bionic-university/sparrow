@@ -92,10 +92,9 @@
     {% endblock profile %}
 
     {% block content %}
-        {{ include ("BionicUniversityWallBundle:Post/Front:posts.html.twig", {'posts': posts, 'form': form}) }}
+        {{ include ("BionicUniversityWallBundle:Post/Front:posts.html.twig", {'posts':posts, 'form':form}) }}
     {% endblock content %}
 
 {% block javascripts %}
     <script type="text/javascript" src="{{ asset('vendor/dropzone/downloads/dropzone.js') }}"></script>
 {% endblock javascripts %}
-

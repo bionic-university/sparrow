@@ -14,7 +14,6 @@ class Membership
     /**
      * @var integer
      * @Assert\Type(type="integer")
-     * @Assert\NotBlank()
      */
     private $id;
 
@@ -26,7 +25,6 @@ class Membership
 
     /**
      * @var Community
-     * @Assert\NotBlank()
      */
     private $community;
 

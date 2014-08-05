@@ -16,7 +16,6 @@ class Friendship
     /**
      * @var integer
      * @Assert\Type(type="integer")
-     * @Assert\NotBlank()
      */
     private $id;
 
