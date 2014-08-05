@@ -22,14 +22,21 @@ class MessageController extends Controller
     public function messagesAction($id = null)
     {
         $user=$this->getUser();
-
+        $uid = $user->getId();
         $em = $this->getDoctrine()->getManager();
         $outcomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByFromUser($user, ['createdAt'=>'desc']);
         $incomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByToUser($user, ['createdAt'=>'desc']);
+        $unreadMessages = null;
+        $allunreadmessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findBy(array( "toUser"=> $uid, "isread" => "0"));
+        $unreadcounter =(string)count($allunreadmessages);
 
         $message = new Message();
         if(null !== $id){
             $receiver = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
+            $unreadMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findBy(array( "toUser"=> $uid, 'fromUser' => $id,"isread" => "0"));
+            $unreadcounter = count($unreadMessages);
+            foreach ($unreadMessages as $elem){ $elem->setIsRead(1);}
+            $em->flush();
             if(!$receiver){
                 throw $this->createNotFoundException('User not found');
             }
@@ -37,12 +44,16 @@ class MessageController extends Controller
         }
         $form = $this->createCreateForm($message);
 
+        $em->persist($message);
+
 
         return $this->render('BionicUniversityMessageBundle:Message:Front/messages.html.twig',
             array(
                 'out_mess' => $outcomingMessages,
                 'in_mess' => $incomingMessages,
                 'form' => $form->createView(),
+                'unreadmessages' => $unreadMessages,
+                'unreadcounter' => $unreadcounter
             )
         );
     }
@@ -57,6 +68,7 @@ class MessageController extends Controller
 
         $entity = new Message();
         $entity->setFromUser($this->getUser());
+        $entity->setIsRead(0);
 
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);

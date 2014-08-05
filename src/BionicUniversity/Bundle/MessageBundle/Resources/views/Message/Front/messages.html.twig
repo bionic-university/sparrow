@@ -9,7 +9,7 @@
         <h1>My messages</h1>
         {% block messages %}
             <ul class="nav nav-tabs" role="tablist">
-                <li><a href="#incoming" role="tab" data-toggle="tab">Incoming</a></li>
+                <li><a href="#incoming" role="tab" data-toggle="tab">{% if unreadcounter  != 0 %}<strong>Incoming - ({{ unreadcounter }})</strong>{% else %}Incoming{% endif %}</a></li>
                 <li><a href="#outcoming" role="tab" data-toggle="tab">Outcoming</a></li>
             </ul>
             <div class="tab-content">
@@ -24,10 +24,10 @@
                                     <li class="messages_list"><img src="{{ asset('uploads/avatar/') }}{{ in_mess_one.fromuser.avatar }}" class="avatar_mini" alt="ava">
                                         <a href="{{ path('user_profile',{'id':in_mess_one.fromuser.id}) }}">{{ in_mess_one.fromuser }}</a></li>
                                     {% endif %}
-                                        <div class="createdAt">{{ in_mess_one.createdat|date("m/d/Y/h:m") }}</div>
+                                        <div class="createdAt">{% if in_mess_one.isread == '0' %}new {% else %}read {% endif %}{{ in_mess_one.createdat|date("m/d/Y/h:m") }}</div>
                                 </div>
                                 <div class="panel-body">
-                                    <li class="messages_list">{{ in_mess_one.body }}</li>
+                                    <li class="messages_list">{{ in_mess_one.body | raw}}</li>
                                     <div class="sf-button"><a href="{{ path('messages_reply',{'id':in_mess_one.fromuser.id}) }}">Reply</a></div>
                                 </div>
                             </div>
@@ -50,10 +50,10 @@
                                     {% else %}
                                         <li class="messages_list"><img src="{{ asset('uploads/avatar/') }}{{ out_mess_one.touser.avatar }}" class="avatar_mini" alt="ava"><a href="{{ path('user_profile',{'id':out_mess_one.touser.id}) }}">{{ out_mess_one.touser }}</a></li>
                                     {% endif %}
-                                    <div class="createdAt">{{ out_mess_one.createdat|date("m/d/Y/h:m") }}</div>
+                                    <div class="createdAt">{{ out_mess_one.createdat|date("h:m d-M-Y") }}</div>
                                 </div>
                                 <div class="panel-body">
-                                    <li class="messages_list">{{ out_mess_one.body }}</li>
+                                    <li class="messages_list">{{ out_mess_one.body | raw }}</li>
                                     <div class="sf-button"><a href="{{ path('messages_reply',{'id':out_mess_one.touser.id}) }}">Send one more</a></div>
                                 </div>
                             </div>
@@ -69,7 +69,6 @@
             </div>
         {% endblock messages %}
     {% endblock heading_wall %}
-
 {% block javascripts %}
     {{ parent() }}
     <script>$(document).ready($('#myTab a').tab('show'))</script>

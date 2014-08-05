@@ -38,7 +38,7 @@ class Message
     /**
      * @var integer
      */
-    private $isread;
+    private $isread = 0;
 
     public function __construct()
     {
