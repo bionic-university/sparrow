@@ -16,47 +16,103 @@ class User extends BaseUser
 
     /**
      * @var integer
+     * @Assert\Type(type="integer")
+     * @Assert\NotBlank()
      */
     protected $id;
 
     /**
      * @var string
+     * @Assert\Length(
+     *      max = "255",
+     *      )
      */
     private $avatar;
 
     /**
      * @var string
+     * @Assert\Type(
+     *      type="string",
+     *      message="These data must be a string"
+     *      )
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "50",
+     *      minMessage = "Your first name must be at least 2 characters length",
+     *      maxMessage = "Your first name cannot be longer than 50 characters length"
+     *      )
+     * @Assert\NotBlank()
      */
     private $firstName;
 
     /**
      * @var string
+     * @Assert\Type(
+     *      type="string",
+     *      message="These data must be a string"
+     *      )
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "50",
+     *      minMessage = "Your last name must be at least 2 characters length",
+     *      maxMessage = "Your last name cannot be longer than 50 characters length"
+     *      )
+     * @Assert\NotBlank()
      */
     private $lastName;
 
     /**
      * @var string
+     * @Assert\Type(
+     *      type="string",
+     *      message="These data must be a string"
+     *      )
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "50",
+     *      minMessage = "Your position must be at least 2 characters length",
+     *      maxMessage = "Your position cannot be longer than 50 characters length"
+     *      )
+     * @Assert\NotBlank()
      */
     private $position;
 
     /**
      * @var string
+     * @Assert\Type(
+     *      type="string",
+     *      message="These data must be a string"
+     *      )
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "50",
+     *      minMessage = "Your department must be at least 2 characters length",
+     *      maxMessage = "Your department cannot be longer than 50 characters length"
+     *      )
      * @Assert\NotBlank()
      */
     private $department;
 
     /**
      * @var string
+     * @Assert\Choice(
+     *      choices = { "m", "f" },
+     *      message = "Choose a valid gender."
+     *      )
+     * @Assert\NotBlank()
      */
     private $gender;
 
     /**
      * @var ArrayCollection
+     * @Assert\NotBlank()
      */
     private $incomingMessages;
 
     /**
      * @var ArrayCollection
+     * @Assert\NotBlank()
+     *
      */
     private $outcomingMessages;
 
@@ -81,6 +137,9 @@ class User extends BaseUser
     private $invites;
     /**
      * @var \DateTime
+     * @Assert\NotBlank(
+     *      message = "This value should not be blank"
+     *      )
      */
     private $dateOfBirth;
 

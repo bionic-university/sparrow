@@ -4,6 +4,8 @@ namespace BionicUniversity\Bundle\CommunityBundle\Entity;
 
 use BionicUniversity\Bundle\UserBundle\Entity\User;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Memberships
  */
@@ -11,16 +13,20 @@ class Membership
 {
     /**
      * @var integer
+     * @Assert\Type(type="integer")
+     * @Assert\NotBlank()
      */
     private $id;
 
     /**
      * @var User
+     * @Assert\NotBlank()
      */
     private $user;
 
     /**
      * @var Community
+     * @Assert\NotBlank()
      */
     private $community;
 

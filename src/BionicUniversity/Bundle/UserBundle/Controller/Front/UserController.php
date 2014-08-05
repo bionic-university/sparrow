@@ -106,20 +106,6 @@ class UserController extends Controller
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-        $validator = $this->get('validator');
-        $errors = $validator->validate($entity);
-
-        if (count($errors) > 0) {
-            /*
-             * Uses a __toString method on the $errors variable which is a
-             * ConstraintViolationList object. This gives us a nice string
-             * for debugging
-             */
-            $errorsString = (string) $errors;
-
-            return new Response($errorsString);
-        }
-
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
         if ($editForm->isValid()) {

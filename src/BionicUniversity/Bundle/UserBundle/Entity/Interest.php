@@ -7,20 +7,31 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * User
  */
+
+use Symfony\Component\Validator\Constraints as Assert;
+
 class Interest
 {
     /**
      * @var integer
+     * @Assert\Type(type="integer")
+     * @Assert\NotBlank()
      */
     protected $id;
 
     /**
      * @var string
+     * @Assert\Type(type="string")
+     * @Assert\Length(
+     *      max = "50",
+     *      )
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @var ArrayCollection
+     * @Assert\NotBlank()
      */
     private $users;
 

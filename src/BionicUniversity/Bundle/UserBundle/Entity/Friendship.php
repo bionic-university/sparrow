@@ -5,6 +5,9 @@ namespace BionicUniversity\Bundle\UserBundle\Entity;
 /**
  * Friendships
  */
+
+use Symfony\Component\Validator\Constraints as Assert;
+
 class Friendship
 {
     const DECLINED = -1;
@@ -12,21 +15,27 @@ class Friendship
     const CONFIRMED = 1;
     /**
      * @var integer
+     * @Assert\Type(type="integer")
+     * @Assert\NotBlank()
      */
     private $id;
 
     /**
      * @var User
+     * @Assert\NotBlank()
      */
     private $userSender;
 
     /**
      * @var User
+     * @Assert\NotBlank()
      */
     private $userReceiver;
 
     /**
      * @var integer
+     * @Assert\Type(type="integer")
+     * @Assert\NotBlank()
      */
     private $acceptanceStatus;
 
