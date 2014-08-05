@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use BionicUniversity\Bundle\UserBundle\Entity\User;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Community
  */
@@ -13,21 +15,29 @@ class Community
 {
     /**
      * @var integer
+     * @Assert\Type(type="integer")
      */
     private $id;
 
     /**
      * @var string
+     * @Assert\Length(
+     *      max = "50",
+     *      maxMessage = "Community name cannot be longer than 50 characters length"
+     *      )
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @var \DateTime
+     * @Assert\NotBlank()
      */
     private $createdAt;
 
     /**
      * @var string
+     * @Assert\NotBlank()
      */
     private $description;
 
