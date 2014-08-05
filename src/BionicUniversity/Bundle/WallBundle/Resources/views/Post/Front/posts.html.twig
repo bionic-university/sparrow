@@ -18,12 +18,15 @@
                                                                   class="media-object avatarka"></a>
 
                                 <div class="media-body innerTB half">
-                                    <a href="#" class="pull-right innerT innerR text-white">
-                                        <i class="icon-reply-all-fill fa fa-2x "></i>
-                                    </a>
+                                    {% if app.security.token.user == post.author %}
+                                        <a style="margin-right: 7px" class="pull-right text-white" href="{{ path('delete_post', {'id': post.id}) }}">
+                                            <span class="icon-circle-delete fa-2x "></span>
+
+                                        </a>
+                                    {% endif %}
+
                                     <a href="" class="text-white strong display-block">{{ post.author }}</a>
                                     <span>on {{ post.createdAt | date }}</span>
-
                                 </div>
 
                             </div>
@@ -31,13 +34,16 @@
 
 
                         <!-- Content -->
-                        <div class="innerAll">
-                            <p><span class="readmore">{{ post.text }}</span></p></div>
+                        <div class="innerAll text-justify">
+                            <p><span class="readmore">
+
+                                    {{ post.text | raw }}</span></p>
+
+                            </div>
                         </div>
                     </div>
                     <!-- //End Widget -->
                 {% endfor %}
-            {#</div>#}
-
+            </div>
     {% endblock content %}
 {% endblock wrapper %}
