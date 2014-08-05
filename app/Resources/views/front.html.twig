@@ -46,6 +46,7 @@
         </div>
 
         <div id="content">
+
             <div class="navbar hidden-print navbar-default box main" role="navigation">
 
                 <!--  RIGHT TOGGLE BUTTON FOR SIDEBAR CHAT  -->
@@ -93,6 +94,7 @@
                     <input type="text" class="form-control" placeholder="Search a friend"/>
                 </div>
             </div>
+            {% block wrapper %}
             <!-- <div class="layout-app">  -->
             <div class="innerAll">
                 <div class="row">
@@ -120,16 +122,16 @@
                         </div>
 
                         {% block content %}
-
                         {% endblock content %}
-
-                    </div>
+                        <!-- // Widget END -->
                     </div>
                 </div>
+            </div>
 
                     {% block profile %}
                     {% endblock profile %}
-                </div>
+            {% endblock wrapper %}
+        </div>
 
 
         <!-- // Content END -->
