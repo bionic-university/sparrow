@@ -1,0 +1,26 @@
+default:
+    autoload:
+        '': %paths.base%/features/Context
+        'Page': %paths.base%/features/
+    suites:
+        default:
+            path: %paths.base%/features
+            contexts:
+                - Context\FeatureContext
+                - Context\SecurityContext
+                - Knp\FriendlyContexts\Context\MinkContext
+                - Knp\FriendlyContexts\Context\PageContext
+                - Knp\FriendlyContexts\Context\RawPageContext
+    extensions:
+        Behat\MinkExtension\ServiceContainer\MinkExtension:
+            base_url:    'http://localhost:8000/app_dev.php'
+            selenium2:   ~
+            goutte: ~
+            default_session: goutte
+            javascript_session: selenium2
+            show_auto: true
+            show_cmd: firefox %s
+        Knp\FriendlyContexts\Extension:
+            page:
+                namespace: "Page"
+        Behat\Symfony2Extension\ServiceContainer\Symfony2Extension: ~
