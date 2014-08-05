@@ -1,41 +1,191 @@
 {% extends "::front.html.twig" %}
 
 {% block content %}
-    <div class="input-group innerB">
-        <input type="text" class="form-control " placeholder="Search contacts">
-        <div class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></div>
-    </div>
+    <!-- Tabs -->
+    <div class="relativeWrap" >
+        <div class="box-generic">
 
-    <div class="row row-merge">
-{% for friend in my_friends %}
-    <div class="col-md-12 col-lg-6 bg-white border-bottom">
-        <div class="row">
-
-            <div class="col-sm-9">
-                <div class="media">
-                    <a class="pull-left margin-none" href="#">
-                        <img class="img-clean" src="{{ friend.avatar }}" alt="...">
-                    </a>
-                    <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
-                        <h4 class="media-heading"><a href="" class="text-inverse">{friend.name}</a></h4>
-                        <p>
-                            <!-- <span class="text-success strong"><i class="fa fa-check"></i> Friend</span> &nbsp;  -->
-                            <i class="fa fa-fw fa-map-marker text-muted"></i> {friend.department}</p>
-                    </div>
-                </div>
+            <!-- Tabs Heading -->
+            <div class="tabsbar tabsbar-2">
+                <ul class="row row-merge">
+                    <li class="col-md-3 glyphicons parents active"><a href="#tab1-4" data-toggle="tab"><i></i> Friends</a></li>
+                    <li class="col-md-3 glyphicons down_arrow"><a href="#tab2-4" data-toggle="tab"><i></i> <span>Requests</span></a></li>
+                    <li class="col-md-3 glyphicons up_arrow"><a href="#tab3-4" data-toggle="tab"><i></i> <span>Invites</span></a></li>
+                    <li class="col-md-3 glyphicons globe"><a href="#tab4-4" data-toggle="tab"><i></i> <span>All people</span></a></li>
+                </ul>
             </div>
-            <div class="col-sm-3">
-                <div class="innerAll text-right">
-                    <div class="btn-group-vertical btn-group-sm">
-                        <a href="" class="btn btn-primary"><i class="fa fa-fw fa-thumbs-up"></i> Like</a>
-                        <a href="" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
+            <!-- // Tabs Heading END -->
+
+            <div class="tab-content">
+
+                <!-- Tab content -->
+                <div class="tab-pane active" id="tab1-4">
+                    <div class="row row-merge">
+                        {% for friend in my_friends %}
+                            <div class="col-md-12 col-lg-6 bg-white border-bottom">
+                                <div class="row">
+
+                                    <div class="col-sm-9">
+                                        <div class="media">
+                                            <a class="pull-left margin-none" href="#">
+                                                <img class="img-clean" src="{{ friend.avatar }}" alt="..." width="100" height="100">
+                                            </a>
+                                            <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
+                                                <h4 class="media-heading"><a href="{{ path('user_profile',{'id':friend.id}) }}" class="text-inverse">{{friend.firstName }} {{friend.lastName}}</a></h4>
+                                                <p>
+                                                    <!-- <span class="text-success strong"><i class="fa fa-check"></i> Friend</span> &nbsp;  -->
+                                                    <i class="fa fa-fw fa-map-marker text-muted"></i> {{ friend.department }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="innerAll text-right">
+                                            <div class="btn-group-vertical btn-group-sm">
+                                                <a href="" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
+                                                <a href="{{ path('user_remove_friend',{ 'id': friend.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-ban"></i> Remove</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                        </div>
+                </div>
+                <!-- // Tab content END -->
+
+                <!-- Tab content -->
+                <div class="tab-pane" id="tab2-4">
+                    <div class="row row-merge">
+                        {% if requests != null %}
+                        {% for request in requests %}
+                            <div class="col-md-12 col-lg-6 bg-white border-bottom">
+                                <div class="row">
+
+                                    <div class="col-sm-9">
+                                        <div class="media">
+                                            <a class="pull-left margin-none" href="#">
+                                                <img class="img-clean" src="{{ request.avatar }}" alt="..." width="100" height="100">
+                                            </a>
+                                            <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
+                                                <h4 class="media-heading"><a href="{{ path('user_profile',{'id':request.id}) }}" class="text-inverse">{{request.firstName }} {{request.lastName}}</a></h4>
+                                                <p>
+                                                    <!-- <span class="text-success strong"><i class="fa fa-check"></i> Friend</span> &nbsp;  -->
+                                                    <i class="fa fa-fw fa-map-marker text-muted"></i> {{ request.department }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="innerAll text-right">
+                                            <div class="btn-group-vertical btn-group-sm">
+                                                <a href="" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
+                                                <a href="" class="btn btn-primary"><i class="fa fa-fw fa-thumbs-up"></i> Remove request</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                        {% else %}
+                         Have nothing
+                        {% endif %}
+                    </div>
+
+                </div>
+                <!-- // Tab content END -->
+
+                <!-- Tab content -->
+                <div class="tab-pane" id="tab3-4">
+                    <div class="row row-merge">
+                        {% if invites != null %}
+                        {% for invite  in invites %}
+                            <div class="col-md-12 col-lg-6 bg-white border-bottom">
+                                <div class="row">
+
+                                    <div class="col-sm-9">
+                                        <div class="media">
+                                            <a class="pull-left margin-none" href="#">
+                                                <img class="img-clean" src="{{ invite.avatar }}" alt="..." width="100" height="100">
+                                            </a>
+                                            <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
+                                                <h4 class="media-heading"><a href="{{ path('user_profile',{'id':invite.id}) }}" class="text-inverse">{{invite.firstName }} {{invite.lastName}}</a></h4>
+                                                <p>
+                                                    <!-- <span class="text-success strong"><i class="fa fa-check"></i> Friend</span> &nbsp;  -->
+                                                    <i class="fa fa-fw fa-map-marker text-muted"></i> {{ invite.department }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="innerAll text-right">
+                                            <div class="btn-group-vertical btn-group-sm">
+                                                <a href="" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
+                                                <a href="{{ path('user_confirm_friend',{ 'id': invite.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-thumbs-up"></i> Confirm</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                            Have nothing
+                        {% endif %}
+
                     </div>
                 </div>
+                <!-- // Tab content END -->
+
+                <!-- Tab content -->
+                <div class="tab-pane" id="tab4-4">
+                    <div class="row row-merge">
+                        {% for people in all_people %}
+                            {% if people != app.security.token.user %}
+                            <div class="col-md-12 col-lg-6 bg-white border-bottom">
+                                <div class="row">
+
+                                    <div class="col-sm-9">
+                                        <div class="media">
+                                            <a class="pull-left margin-none" href="#">
+                                                <img class="img-clean" src="{{ people.avatar }}" alt="..." width="100" height="100">
+                                            </a>
+                                            <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
+                                                <h4 class="media-heading"><a href="{{ path('user_profile',{'id':people.id}) }}" class="text-inverse">{{people.firstName }} {{people.lastName}}</a></h4>
+                                                <p>
+                                                    <!-- <span class="text-success strong"><i class="fa fa-check"></i> Friend</span> &nbsp;  -->
+                                                    <i class="fa fa-fw fa-map-marker text-muted"></i> {{ people.department }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="innerAll text-right">
+                                            <div class="btn-group-vertical btn-group-sm">
+                                                <a href="" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
+                                                {% if people.isFriendOf(app.security.token.user) %}
+                                                    In friends
+                                                {% else %}
+                                                    <a href="{{ path('user_add_friend',{ 'id': people.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-bell"></i> Add</a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- // Tab content END -->
+
             </div>
         </div>
-
     </div>
-{% endfor %}
+    <!-- // Tabs END -->
+
+
 
     </div>
 {% endblock content %}
