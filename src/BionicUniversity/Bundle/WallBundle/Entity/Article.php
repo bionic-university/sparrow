@@ -13,7 +13,6 @@ class Article
     /**
      * @var integer
      * @Assert\Type(type="integer")
-     * @Assert\NotBlank()
      */
     private $id;
 

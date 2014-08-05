@@ -135,8 +135,12 @@ class User extends BaseUser
      * @var ArrayCollection
      */
     private $invites;
+
     /**
      * @var \DateTime
+     * @Assert\Date(
+     *      message = "This value must be YYYY-MM-DD format"
+     *      )
      * @Assert\NotBlank(
      *      message = "This value should not be blank"
      *      )
