@@ -29,6 +29,10 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
             type: string
             length: '255'
             nullable: true
+        aboutMe:
+            type: string
+            length: '255'
+            nullable: true
     manyToMany:
         interests:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\Interest

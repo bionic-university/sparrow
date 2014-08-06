@@ -104,6 +104,27 @@ class User extends BaseUser
     private $gender;
 
     /**
+     * @var string
+     */
+    private $aboutMe;
+
+    /**
+     * @param string $aboutMe
+     */
+    public function setAboutMe($aboutMe)
+    {
+        $this->aboutMe = $aboutMe;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAboutMe()
+    {
+        return $this->aboutMe;
+    }
+
+    /**
      * @var ArrayCollection
      * @Assert\NotBlank()
      */
@@ -590,7 +611,9 @@ class User extends BaseUser
     public function isFriendOf(User $user)
     {
         return count($this->getFriends()->filter(function ($element) use ($user) {
-            return $element->getId() === $user->getId();
+            /** @var Friendship $element */
+            return $element->getUserReceiver()->getId() === $user->getId()
+            || $element->getUserSender()->getId() === $user->getId();
         })) > 0;
     }
 
@@ -600,11 +623,10 @@ class User extends BaseUser
     public function getFriends()
     {
         $friendships = new ArrayCollection(array_merge($this->invites->toArray(), $this->requests->toArray()));
-
         return $friendships->filter(function ($element) {
 
             /**@var Friendship $element */
-            $element->getAcceptanceStatus() === Friendship::CONFIRMED;
+            return $element->getAcceptanceStatus() === Friendship::CONFIRMED;
         });
     }
 

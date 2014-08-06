@@ -38,6 +38,13 @@ class UserController extends Controller
         ));
     }
 
+    public function aboutAction($id)
+    {
+        $user  = $this->getDoctrine()->getRepository("BionicUniversityUserBundle:User")->find($id);
+
+        return $this->render('@BionicUniversityUser/User/Front/about.html.twig',['user' => $user]);
+    }
+
     public function createPasswordAction(Request $request)
     {
         $entity = $this->getUser();
@@ -130,7 +137,7 @@ class UserController extends Controller
         $myFriendships = $em->getRepository("BionicUniversityUserBundle:Friendship")->findFriends($user);
         $myFriends = [];
         /**
-         * #@var Friendship $friendship
+         * @var Friendship $friendship
          */
         foreach ($myFriendships as $friendship) {
             if ($friendship->getUserReceiver() == $user) {

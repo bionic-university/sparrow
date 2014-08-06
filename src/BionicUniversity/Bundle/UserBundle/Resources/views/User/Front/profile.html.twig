@@ -1,6 +1,6 @@
 {% extends "::front.html.twig" %}
  {% block profile %}
-<div class="col-md-4 col-lg-3">
+<div class="col-md-4 col-lg-3 k">
     <div class="widget">
         <div class="widget-body text-center">
             {% if entity.avatar == false %}
@@ -28,61 +28,9 @@
         </div>
     </div>
 
-    <div class="widget">
-        <h5 class="innerAll margin-none border-bottom bg-gray">Recent News</h5>
-        <div class="widget-body padding-none">
-            <div class="media border-bottom innerAll margin-none">
-                <img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>
-                <div class="media-body">
-                    <a href="" class="pull-right text-muted innerT half">
-                        <i class="fa fa-comments"></i> 4
-                    </a>
-                    <h5 class="margin-none"><a href="" class="text-inverse">Social Admin Released</a></h5>
-                    <small>on February 2nd, 2014 </small>
-                </div>
-            </div>
-            <div class="media border-bottom innerAll margin-none">
-                <img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>
-                <div class="media-body">
-                    <a href="" class="pull-right text-muted innerT half">
-                        <i class="fa fa-comments"></i> 4
-                    </a>
-                    <h5 class="margin-none"><a href="" class="text-inverse">Timeline Cover Page</a></h5>
-                    <small>on February 2nd, 2014 </small>
-                </div>
-            </div>
-            <div class="media border-bottom innerAll margin-none">
-                <img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>
-                <div class="media-body">
-                    <a href="" class="pull-right text-muted innerT half">
-                        <i class="fa fa-comments"></i> 4
-                    </a>
-                    <h5 class="margin-none"><a href="" class="text-inverse">1000+ Sales</a></h5>
-                    <small>on February 2nd, 2014 </small>
-                </div>
-            </div>
-            <div class="media border-bottom innerAll margin-none">
-                <img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>
-                <div class="media-body">
-                    <a href="" class="pull-right text-muted innerT half">
-                        <i class="fa fa-comments"></i> 4
-                    </a>
-                    <h5 class="margin-none"><a href="" class="text-inverse">On-Page Optimization</a></h5>
-                    <small>on February 2nd, 2014 </small>
-                </div>
-            </div>
-            <div class="media border-bottom innerAll margin-none">
-                <img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>
-                <div class="media-body">
-                    <a href="" class="pull-right text-muted innerT half">
-                        <i class="fa fa-comments"></i> 4
-                    </a>
-                    <h5 class="margin-none"><a href="" class="text-inverse">14th Admin Template</a></h5>
-                    <small>on February 2nd, 2014 </small>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% block recent_news %}
+        {{ render(controller('BionicUniversityWallBundle:Front/Article:index')) }}
+    {% endblock recent_news %}
 
     <!-- Widget -->
     <div class="widget widget-heading-simple widget-body-white">
