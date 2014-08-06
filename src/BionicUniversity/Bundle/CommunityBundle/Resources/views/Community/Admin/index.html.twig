@@ -16,7 +16,11 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('community_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.name }}</td>
+                <td>{{ entity.name }}
+                    {% if true  == entity.avatar %}
+                        <img src="{{ asset('uploads/avatar/') }}{{ entity.avatar }}" class="avatar media-object avatar_mini" alt="Your avatar">
+                    {% endif %}
+                </td>
                 <td>{{ entity.description }}</td>
                 <td>
                 <ul>

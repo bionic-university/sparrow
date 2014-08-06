@@ -4,29 +4,11 @@
         {{ app.User.getLastName }}
     {% endblock heading_profile %}
     {% block profile %}
-        <div class="row">
-            <aside class="avatar col-md-3">
-                {% if app.user.avatar == false %}
-                    <form action="{{ oneup_uploader_endpoint('avatar') }}" class="dropzone square drop_avatar">
-                        <div class="fallback">
-                            <input name="file" type="file" multiple />
-                        </div>
-                    </form>
-                {% else %}
-                    <img src="{{ asset('uploads/avatar/') }}{{ app.user.avatar }}" class="avatar" alt="Your avatar">
-                {% endif %}
-            </aside>
-            <section class="col-md-9" >
-                <ul class="list">
-                    <li class="list-item">{{ app.User.getPosition}}</li>
-                    <li class="list-item">{{ app.User.getGender}}</li>
-                    <li class="list-item">{{ app.User.getDepartment}}</li>
-                </ul>
-            </section>
-        </div>
+
     {% endblock profile %}
-    {% block heading_wall %}
+    {% block wall %}
         <h1>My communities</h1>
+        <div class="button"><a href="{{ path('create_new') }}">Create community</a></div>
         {% block communities %}
             <ul class="nav nav-tabs" role="tablist" id="myTab">
                 <li><a href="#my" role="tab" data-toggle="tab">My communities</a></li>
@@ -61,7 +43,7 @@
                 </div>
             </div>
         {% endblock communities %}
-    {% endblock heading_wall %}
+    {% endblock wall %}
 {% block body %}
     {{ parent() }}
 {% endblock body %}

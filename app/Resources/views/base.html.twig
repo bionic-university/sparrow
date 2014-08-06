@@ -28,14 +28,7 @@
         <script type="text/javascript" src="{{ asset('vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
         <script type="text/javascript" src="{{ asset('vendor/select2/select2.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('vendor/redactor/redactor/redactor.min.js') }}"></script>
-        <script>
-            (function($, document){
-                $(function(){
-                    $('textarea').redactor();
-                    $('select').select2();
-                })
-            })(jQuery, document);
-        </script>
+
 
         <script src="{{ asset('assets/plugins/core_nicescroll/jquery.nicescroll.min.js') }}"></script>
         <script src="{{ asset('assets/plugins/core_breakpoints/breakpoints.js') }}"></script>
@@ -55,8 +48,29 @@
         <script src="{{ asset('assets/plugins/other_mixitup/jquery.mixitup.min.js') }}"></script>
         <script src="{{ asset('assets/plugins/other_mixitup/mixitup.init.js') }}"></script>
         <script src="{{ asset('assets/components/core/core.init.js') }}"></script>
-
-
+        <script type="text/javascript" src="{{ asset('vendor/dropzone/downloads/dropzone.js') }}"></script>
+        <script>
+            (function($, document){
+                $(function(){
+                    $('textarea').redactor();
+                    $('select').select2();
+                    Dropzone.options.myAwesomeDropzone = {
+                        maxFiles: 1,
+                        accept: function(file, done) {
+                            console.log("uploaded");
+                            done();
+                        },
+                        init: function() {
+                            this.on("maxfilesexceeded", function(file){
+                                alert("No more files please!");
+                            });
+                        }
+                    };
+                })
+            })(jQuery, document);
+        </script>
+        {% block javascripts %}
+        {% endblock %}
     </body>
 </html>
 

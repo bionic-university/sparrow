@@ -46,6 +46,11 @@ class Community
      */
     private $owner;
 
+    /**
+     * @var string
+     */
+    private $avatar;
+
     public function __construct()
     {
         $this->createdAt = new \dateTime();
@@ -194,4 +199,21 @@ class Community
     {
         $this->posts->removeElement($post);
     }
+
+    /**
+     * @param string $avatar
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
 }

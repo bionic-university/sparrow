@@ -1,6 +1,15 @@
-{% extends '::front.html.twig' %}
+{% extends "::front.html.twig" %}
 {% block profile -%}
     <h1>User edit</h1>
+
+    <div class="squared">
+        <form action="{{ oneup_uploader_endpoint('avatar') }}" class="dropzone" id="my-awesome-dropzone">
+            <div class="dz-message message_dz"><h1>Drop</h1> file here to upload new avatar</div>
+            <div class="fallback">
+                <input name="file" type="file"/>
+            </div>
+        </form>
+    </div>
 
     {{ form(edit_form) }}
 
@@ -16,4 +25,4 @@
 {% block javascripts %}
     {{ parent() }}
     {{ form_javascript(edit_form) }}
-{% endblock %}
+{% endblock javascripts%}

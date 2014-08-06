@@ -1,6 +1,6 @@
 {% extends '::front.html.twig' %}
 
-{% block body -%}
+{% block profile -%}
     <h1>Community edit</h1>
 
     <div class="squared">
@@ -16,8 +16,8 @@
 
 <ul class="record_actions">
     <li>
-        <a href="{{ path('community') }}">
-            Back to the list
+        <a href="{{ path('community_profile',{'id':entity.id}) }}">
+            Back to the community
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>

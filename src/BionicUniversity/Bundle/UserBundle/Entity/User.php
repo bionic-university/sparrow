@@ -2,6 +2,7 @@
 
 namespace BionicUniversity\Bundle\UserBundle\Entity;
 
+use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
 use Doctrine\Common\Collections\ArrayCollection;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -72,6 +73,10 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      */
+    private $myCommunities;
+    /**
+     * @var ArrayCollection
+     */
     private $requests;
 
     /**
@@ -94,6 +99,7 @@ class User extends BaseUser
         $this->invites = new ArrayCollection();
         $this->groups = ['ROLE_USER'];
         $this->interests = new ArrayCollection();
+        $this->myCommunities = new ArrayCollection();
     }
 
     public function __toString()
@@ -279,6 +285,22 @@ class User extends BaseUser
     public function removeOutcomingMessage($outcomingMessages)
     {
         $this->outcomingMessages->removeElement($outcomingMessages);
+    }
+
+    public function addMyCommunities(Community $community)
+    {
+        $this->myCommunities[] = $community;
+
+        return $this;
+    }
+
+    /**
+     * Remove posts
+     * @param Post $post
+     */
+    public function removeMyCommunities(Community $community)
+    {
+        $this->myCommunities->removeElement($community);
     }
 
     /**
@@ -503,6 +525,9 @@ class User extends BaseUser
         return $this->avatar;
     }
 
+    public function getFullAvatar(){
+        return sprintf('<img src="/web/uploads/avatar/%s"/>', $this->avatar);
+    }
     public function isFriendOf(User $user)
     {
         return count($this->getFriends()->filter(function ($element) use ($user) {
@@ -537,4 +562,21 @@ class User extends BaseUser
             return $element->getUserSender()->getId() === $user->getId() && $element->getAcceptanceStatus() === Friendship::UNCONFIRMED;
         }));
     }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $myCommunities
+     */
+    public function setMyCommunities($myCommunities)
+    {
+        $this->myCommunities = $myCommunities;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getMyCommunities()
+    {
+        return $this->myCommunities;
+    }
+
 }

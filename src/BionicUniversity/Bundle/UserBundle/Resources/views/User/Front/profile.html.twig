@@ -3,7 +3,16 @@
 <div class="col-md-4 col-lg-3">
     <div class="widget">
         <div class="widget-body text-center">
-            <a href=""><img src="{{ entity.avatar }}" width="120" alt="" class="img-circle"></a>
+            {% if entity.avatar == false %}
+                <form action="{{ oneup_uploader_endpoint('avatar') }}" class="dropzone square drop_avatar">
+                    <div class="dz-message message_dz"><h1>Drop</h1> file here to upload new avatar</div>
+                    <div class="fallback">
+                        <input name="file" type="file"/>
+                    </div>
+                </form>
+            {% else %}
+                <img src="{{ asset('uploads/avatar/') }}{{ entity.avatar }}" class="avatar media-object" alt="Your avatar">
+            {% endif %}
             <h2 class="strong margin-none">{{ entity.firstname }}</h2>
             <div class="innerB">Working at {{ entity.department }}</div>
             {% if app.security.token.user != entity %}
