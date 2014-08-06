@@ -1,138 +1,155 @@
 <!DOCTYPE html>
-    <!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7 sidebar sidebar-social footer-sticky"> <![endif]-->
-    <!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8 sidebar sidebar-social footer-sticky"> <![endif]-->
-    <!--[if IE 8]>    <html class="ie lt-ie9 sidebar sidebar-social footer-sticky"> <![endif]-->
-    <!--[if gt IE 8]> <html class="ie sidebar sidebar-social footer-sticky"> <![endif]-->
+<!--[if lt IE 7]>
+<html class="ie lt-ie9 lt-ie8 lt-ie7 sidebar sidebar-social footer-sticky"> <![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie9 lt-ie8 sidebar sidebar-social footer-sticky"> <![endif]-->
+<!--[if IE 8]>
+<html class="ie lt-ie9 sidebar sidebar-social footer-sticky"> <![endif]-->
+<!--[if gt IE 8]>
+<html class="ie sidebar sidebar-social footer-sticky"> <![endif]-->
 
-    <!--[if !IE]><!-->
+<!--[if !IE]><!-->
 <html class="sidebar sidebar-social footer-sticky">
-    <!-- <![endif]-->
-    {% block header %}
-        <head>
-            <meta charset="UTF-8" />
-            <title>{% block title %}Welcome!{% endblock %}</title>
-            <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.css') }}"/>
-            <link rel="stylesheet" href="{{ asset('vendor/select2/select2.css') }}"/>
-            <link rel="stylesheet" href="{{ asset('vendor/select2/select2-bootstrap.css') }}"/>
-            <link rel="stylesheet" href="{{ asset('vendor/redactor/redactor/redactor.css') }}"/>
+<!-- <![endif]-->
+{% block header %}
+    <head>
+        <meta charset="UTF-8"/>
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('vendor/select2/select2.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('vendor/select2/select2-bootstrap.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('vendor/redactor/redactor/redactor.css') }}"/>
 
-            {% block stylesheets %}
-            {% endblock %}
-            <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-            <script src="{{ asset('assets/library/jquery/jquery.min.js') }}"></script>
-            <script src="{{ asset('assets/library/jquery/jquery-migrate.min.js') }}"></script>
-            <script src="{{ asset('assets/library/modernizr/modernizr.js') }}"></script>
-            <script src="{{ asset('assets/plugins/core_less-js/less.min.js') }}"></script>
-            <script src="{{ asset('assets/plugins/charts_flot/excanvas.js') }}"></script>
-            <script src="{{ asset('assets/plugins/core_browser/ie/ie.prototype.polyfill.js') }}"></script>
-            <script>if (/*@cc_on!@*/false && document.documentMode === 10) { document.documentElement.className+=' ie ie10'; }</script>
-
-        </head>
-    {% endblock header %}
-    <body>
-        {% block body %}{% endblock %}
-        <script type="text/javascript" src="{{ asset('vendor/jquery/dist/jquery.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('vendor/select2/select2.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('vendor/redactor/redactor/redactor.min.js') }}"></script>
-        <script>
-            (function($, document){
-                $(function(){
-                    $('textarea').redactor();
-                    $('select').select2();
-                    Dropzone.options.myAwesomeDropzone = {
-                        maxFiles: 1,
-                        accept: function(file, done) {
-                            console.log("uploaded");
-                            done();
-                        },
-                        init: function() {
-                            this.on("maxfilesexceeded", function(file){
-                                alert("No more files please!");
-                            });
-                        }
-                    };
-                })
-            })(jQuery, document);
-        </script>
-        <script>
-            $(document).ready(function() {
-                // Configure/customize these variables.
-                var showChar = 500; // How many characters are shown by default
-                var ellipsestext = "...";
-                var moretext = " hide text";
-                var lesstext = "full text";
-
-                $('.readmore').each(function() {
-                    var content = $(this).html();
-
-                    if(content.length > showChar) {
-
-                        var c = content.substr(0, showChar);
-                        var h = content.substr(showChar, content.length - showChar);
-
-                        var html = c + '<span class="less">'+ ellipsestext + '</span>' + '<span class="moretext" style="display:none">' + h + '</span><a href="" class="morelink">' + lesstext + '</a>';
-                       /*
-*/
-                        $(this).html(html);
-
-
-                    }
-
-                });
-
-                $(".morelink").click(function(){
-                    if($(this).hasClass("less")) {
-                        $(this).removeClass("less");
-                        $(this).html(lesstext);
-                    } else {
-                        $(this).addClass("less");
-                        $(this).html(moretext);
-                    }
-                    $(this).parent().prev().toggle();
-                    $(this).prev().toggle();
-                    return false;
-                });
-            });
-        </script>
-        <!-- Global -->
-        <script data-id="App.Config">
-            var App = {};	var basePath = '',
-                    commonPath = '../assets/',
-                    rootPath = '../',
-                    DEV = false,
-                    componentsPath = '../assets/components/';
-
-            var primaryColor = '#25ad9f',
-                    dangerColor = '#b55151',
-                    successColor = '#609450',
-                    infoColor = '#4a8bc2',
-                    warningColor = '#ab7a4b',
-                    inverseColor = '#45484d';
-
-            var themerPrimaryColor = primaryColor;
-
-        </script>
-        <script src="{{ asset('assets/plugins/core_nicescroll/jquery.nicescroll.min.js') }}"></script>
-        <script src="{{ asset('assets/plugins/core_breakpoints/breakpoints.js') }}"></script>
-        <script src="{{ asset('assets/plugins/core_preload/pace.min.js') }}"></script>
-        <script src="{{ asset('assets/components/core_preload/preload.pace.init.js') }}"></script>
-        <script src="{{ asset('assets/plugins/menu_sidr/jquery.sidr.js') }}"></script>
-        <script src="{{ asset('assets/components/widget_twitter/twitter.init.js') }}"></script>
-        <script src="{{ asset('assets/plugins/media_holder/holder.js') }}"></script>
-        <script src="{{ asset('assets/plugins/media_gridalicious/jquery.gridalicious.min.js') }}"></script>
-        <script src="{{ asset('assets/components/media_gridalicious/gridalicious.init.js') }}"></script>
-        <script src="{{ asset('assets/components/maps_google/maps-google.init.js') }}"></script>
-        <script src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false&callback=initGoogleMaps"></script>
-        <script src="{{ asset('assets/plugins/ui_modals/bootbox.min.js') }}"></script>
-        <script src="{{ asset('assets/components/menus/sidebar.main.init.js') }}"></script>
-        <script src="{{ asset('assets/components/menus/sidebar.collapse.init.js') }}"></script>
-        <script src="{{ asset('assets/components/menus/menus.sidebar.chat.init.js') }}"></script>
-        <script src="{{ asset('assets/plugins/other_mixitup/jquery.mixitup.min.js') }}"></script>
-        <script src="{{ asset('assets/plugins/other_mixitup/mixitup.init.js') }}"></script>
-        <script src="{{ asset('assets/components/core/core.init.js') }}"></script>
-        {% block javascripts %}
+        {% block stylesheets %}
         {% endblock %}
-    </body>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+        <script src="{{ asset('assets/library/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/library/jquery/jquery-migrate.min.js') }}"></script>
+        <script src="{{ asset('assets/library/modernizr/modernizr.js') }}"></script>
+        <script src="{{ asset('assets/plugins/core_less-js/less.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/charts_flot/excanvas.js') }}"></script>
+        <script src="{{ asset('assets/plugins/core_browser/ie/ie.prototype.polyfill.js') }}"></script>
+        <script>if (/*@cc_on!@*/false && document.documentMode === 10) {
+                document.documentElement.className += ' ie ie10';
+            }</script>
+
+    </head>
+{% endblock header %}
+<body>
+{% block body %}{% endblock %}
+<script type="text/javascript" src="{{ asset('vendor/jquery/dist/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/select2/select2.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/redactor/redactor/redactor.min.js') }}"></script>
+<script data-id="App.Config">
+    var App = {};
+    var basePath = '',
+            commonPath = '../assets/',
+            rootPath = '../',
+            DEV = false,
+            componentsPath = '../assets/components/';
+
+    var primaryColor = '#25ad9f',
+            dangerColor = '#b55151',
+            successColor = '#609450',
+            infoColor = '#4a8bc2',
+            warningColor = '#ab7a4b',
+            inverseColor = '#45484d';
+
+    var themerPrimaryColor = primaryColor;
+
+</script>
+<script src="{{ asset('assets/plugins/core_nicescroll/jquery.nicescroll.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/core_breakpoints/breakpoints.js') }}"></script>
+<script src="{{ asset('assets/plugins/core_preload/pace.min.js') }}"></script>
+<script src="{{ asset('assets/components/core_preload/preload.pace.init.js') }}"></script>
+<script src="{{ asset('assets/plugins/menu_sidr/jquery.sidr.js') }}"></script>
+<script src="https://raw.githubusercontent.com/xing/wysihtml5/master/dist/wysihtml5-0.3.0.js"></script>
+{#<script src="https://raw.githubusercontent.com/jhollingworth/bootstrap-wysihtml5/master/src/bootstrap-wysihtml5.js"></script>#}
+<script src="{{ asset('assets/plugins/forms_editors_wysihtml5/js/bootstrap-wysihtml5-0.0.2.js') }}"></script>
+<script src="{{ asset('assets/components/widget_twitter/twitter.init.js') }}"></script>
+<script src="{{ asset('assets/plugins/media_holder/holder.js') }}"></script>
+<script src="{{ asset('assets/plugins/media_gridalicious/jquery.gridalicious.min.js') }}"></script>
+<script src="{{ asset('assets/components/media_gridalicious/gridalicious.init.js') }}"></script>
+<script src="{{ asset('assets/components/maps_google/maps-google.init.js') }}"></script>
+{#<script src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false&callback=initGoogleMaps"></script>#}
+<script src="{{ asset('assets/plugins/ui_modals/bootbox.min.js') }}"></script>
+<script src="{{ asset('assets/components/menus/sidebar.main.init.js') }}"></script>
+<script src="{{ asset('assets/components/menus/sidebar.collapse.init.js') }}"></script>
+<script src="{{ asset('assets/components/menus/menus.sidebar.chat.init.js') }}"></script>
+<script src="{{ asset('assets/plugins/other_mixitup/jquery.mixitup.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/other_mixitup/mixitup.init.js') }}"></script>
+<script src="{{ asset('assets/components/core/core.init.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/dropzone/downloads/dropzone.js') }}"></script>
+
+<script>
+//    $(window).on('load', function(){
+//        setTimeout(function(){
+//            /* wysihtml5 */
+//            if ($('textarea').size() > 0)
+//                $('textarea').wysihtml5();
+//        }, 200);
+//    });
+    (function ($, document) {
+        $(function () {
+            $('select').select2();
+            $('textarea').wysihtml5();
+
+            Dropzone.options.myAwesomeDropzone = {
+                maxFiles: 1,
+                accept: function (file, done) {
+                    console.log("uploaded");
+                    done();
+                },
+                init: function () {
+                    this.on("maxfilesexceeded", function (file) {
+                        alert("No more files please!");
+                    });
+                }
+            };
+        })
+    })(jQuery, document);
+    $(function () {
+
+        // Configure/customize these variables.
+        var showChar = 500; // How many characters are shown by default
+        var ellipsestext = "...";
+        var moretext = " hide text";
+        var lesstext = "full text";
+
+        $('.readmore').each(function () {
+            var content = $(this).html();
+
+            if (content.length > showChar) {
+                var c = content.substr(0, showChar);
+                var h = content.substr(showChar, content.length - showChar);
+
+                var html = c + '<span class="less">' + ellipsestext + '</span>' + '<span class="moretext" style="display:none">' + h + '</span><a href="" class="morelink">' + lesstext + '</a>';
+                /*
+                 */
+                $(this).html(html);
+            }
+        });
+
+        $(".morelink").click(function () {
+            if ($(this).hasClass("less")) {
+                $(this).removeClass("less");
+                $(this).html(lesstext);
+            } else {
+                $(this).addClass("less");
+                $(this).html(moretext);
+            }
+            $(this).parent().prev().toggle();
+            $(this).prev().toggle();
+            return false;
+        });
+    })
+    ;
+</script>
+<!-- Global -->
+
+{% block javascripts %}
+{% endblock %}
+</body>
 </html>
 
