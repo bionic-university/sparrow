@@ -92,6 +92,8 @@ oneup_uploader:
     mappings:
         avatar:
             frontend: dropzone
+        community_logo:
+            frontend: fineuploader
 
 genemu_form:
     select2: ~

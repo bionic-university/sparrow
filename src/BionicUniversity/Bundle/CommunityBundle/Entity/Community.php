@@ -170,6 +170,22 @@ class Community
     }
 
     /**
+     * @param string $avatar
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
      * Add memberships
      *
      * @param  \BionicUniversity\Bundle\CommunityBundle\Entity\Community $memberships

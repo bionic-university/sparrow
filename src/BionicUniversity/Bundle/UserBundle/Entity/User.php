@@ -6,7 +6,7 @@ use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
 use Doctrine\Common\Collections\ArrayCollection;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use FOS\UserBundle\Model\User as BaseUser;
-use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * User
  */
@@ -637,5 +637,4 @@ class User extends BaseUser
     {
         return $this->myCommunities;
     }
-
 }

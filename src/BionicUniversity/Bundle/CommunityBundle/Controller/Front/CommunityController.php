@@ -2,7 +2,9 @@
 namespace BionicUniversity\Bundle\CommunityBundle\Controller\Front;
 
 use BionicUniversity\Bundle\CommunityBundle\Entity\Membership;
+use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use BionicUniversity\Bundle\UserBundle\Entity\Avatar;
 
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use BionicUniversity\Bundle\CommunityBundle\Form\Type\PostType;
