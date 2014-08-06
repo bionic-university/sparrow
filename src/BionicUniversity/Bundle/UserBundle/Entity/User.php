@@ -181,7 +181,7 @@ class User extends BaseUser
         $this->memberships = new ArrayCollection();
         $this->requests = new ArrayCollection();
         $this->invites = new ArrayCollection();
-        $this->groups = ['ROLE_USER'];
+        $this->roles = ['ROLE_USER'];
         $this->interests = new ArrayCollection();
         $this->myCommunities = new ArrayCollection();
         $this->setEnabled(false);

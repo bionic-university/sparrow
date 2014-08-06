@@ -3,37 +3,55 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block login_form %}
-    <!-- <div class="layout-app col-fs">  -->
-    <div class="container"><div class="layout-app col-fs">
+<!-- <div class="layout-app col-fs">  -->
+<div class="container">
+    <div class="layout-app col-fs">
         <div class="row row-app">
             <div class="col-md-12">
                 <div class="col-separator col-separator-first box col-unscrollable col-fs">
                     <div class="col-table">
                         <div class="col-table-row">
                             <div class="col-app col-unscrollable tab-content">
-                                <div class="col-app lock-wrapper lock-bg-1 tab-pane active animated fadeIn" id="lock-1-1">
+                                <div class="col-app lock-wrapper lock-bg-1 tab-pane active animated fadeIn"
+                                     id="lock-1-1">
                                     <h1 class="text-white innerB text-center">Welcome to Sparrow</h1>
+
                                     <h3 class="text-white innerB text-center">Account Access</h3>
+
                                     <div class="lock-container">
                                         <div class="innerAll text-center">
                                             <img src="../assets//images/people/100/22.jpg" class="img-circle"/>
+
+                                            {% if error %}
+                                                <div class="alert alert-danger">
+                                                    {{ error|trans }}
+                                                </div>
+                                            {% endif %}
                                             <div class="innerLR">
                                                 <form action="{{ path("fos_user_security_check") }}" method="post">
-                                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
 
                                                     <label for="username">Username:</label>
-                                                    <input class="form-control text-center bg-gray" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+                                                    <input class="form-control text-center bg-gray" type="text"
+                                                           id="username" name="_username" value="{{ last_username }}"
+                                                           required="required"/>
 
                                                     <label for="password">{{ 'security.login.password'|trans }}</label>
-                                                    <input class="form-control text-center bg-gray" type="password" id="password" name="_password" required="required" />
+                                                    <input class="form-control text-center bg-gray" type="password"
+                                                           id="password" name="_password" required="required"/>
 
-                                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                                                    <input type="checkbox" id="remember_me" name="_remember_me"
+                                                           value="on"/>
                                                     <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+
                                                     <div class="innerT">
-                                                        <input  class="btn btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                                                        <input class="btn btn-primary" type="submit" id="_submit"
+                                                               name="_submit"
+                                                               value="{{ 'security.login.submit'|trans }}"/>
                                                     </div>
                                                     <div class="login-help">
-                                                         <a href="{{ path("fos_user_resetting_request") }}">Reset your password</a>
+                                                        <a href="{{ path("fos_user_resetting_request") }}">Reset your
+                                                            password</a>
                                                     </div>
                                                 </form>
                                             </div>
@@ -48,4 +66,4 @@
         </div>
     </div>
 
-{% endblock %}
+    {% endblock %}
