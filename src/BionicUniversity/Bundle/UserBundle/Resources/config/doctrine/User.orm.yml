@@ -1,4 +1,5 @@
 BionicUniversity\Bundle\UserBundle\Entity\User:
+    repositoryClass: BionicUniversity\Bundle\UserBundle\Doctrine\ORM\UserRepository
     type: entity
     table: null
     id:

@@ -10,7 +10,6 @@ use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use BionicUniversity\Bundle\CommunityBundle\Form\Type\PostType;
 use BionicUniversity\Bundle\CommunityBundle\Form\Type\FrontCommunityType;
 use BionicUniversity\Bundle\UserBundle\Entity\User;
-use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
 use Symfony\Component\HttpFoundation\Request;
 
 class CommunityController extends Controller

@@ -75,7 +75,7 @@
                         <!-- DROPDOWN BUTTON -->
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
 				<span class="media margin-none">
-					<span class="pull-left"><img src="{{ app.security.token.user.avatar }}" alt="user" class="img-circle"></span>
+					<span class="pull-left"><img src="{{ asset('/uploads/avatar/'~app.security.token.user.avatar) }}" alt="user" class="img-circle"></span>
 					<span class="media-body">{{ app.security.token.user.firstname }} <span class="caret"></span></span>
 				</span>
                         </a>
