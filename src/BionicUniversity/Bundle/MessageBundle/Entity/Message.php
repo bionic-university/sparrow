@@ -50,6 +50,7 @@ class Message
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->isread = false;
     }
 
     /**

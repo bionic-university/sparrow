@@ -12,8 +12,8 @@
             <meta charset="UTF-8" />
             <title>{% block title %}Welcome!{% endblock %}</title>
             <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.css') }}"/>
-            <link rel="stylesheet" href="{{ asset('vendor/select2/select2.css') }}"/>
-            <link rel="stylesheet" href="{{ asset('vendor/select2/select2-bootstrap.css') }}"/>
+            {#<link rel="stylesheet" href="{{ asset('vendor/select2/select2.css') }}"/>#}
+            {#<link rel="stylesheet" href="{{ asset('vendor/select2/select2-bootstrap.css') }}"/>#}
             <link rel="stylesheet" href="{{ asset('vendor/redactor/redactor/redactor.css') }}"/>
 
             {% block stylesheets %}
@@ -25,6 +25,7 @@
             <script src="{{ asset('assets/plugins/core_less-js/less.min.js') }}"></script>
             <script src="{{ asset('assets/plugins/charts_flot/excanvas.js') }}"></script>
             <script src="{{ asset('assets/plugins/core_browser/ie/ie.prototype.polyfill.js') }}"></script>
+            <script src="{{ asset('assets/script.js') }}"
             <script>if (/*@cc_on!@*/false && document.documentMode === 10) { document.documentElement.className+=' ie ie10'; }</script>
 
         </head>
@@ -33,7 +34,7 @@
         {% block body %}{% endblock %}
         <script type="text/javascript" src="{{ asset('vendor/jquery/dist/jquery.js') }}"></script>
         <script type="text/javascript" src="{{ asset('vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('vendor/select2/select2.min.js') }}"></script>
+        <script type="text/javascript" src="http://cdn2.mosaicpro.biz/shared/assets/plugins/forms_elements_select2/js/select2.js"></script>
         <script type="text/javascript" src="{{ asset('vendor/redactor/redactor/redactor.min.js') }}"></script>
         <script>
             (function($, document){

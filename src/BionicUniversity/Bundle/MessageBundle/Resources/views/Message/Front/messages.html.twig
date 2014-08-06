@@ -9,14 +9,11 @@
     <div class="row row-merge borders">
     <div class="col-md-3 listWrapper">
         <div class="innerAll">
-            <form autocomplete="off" class="form-inline margin-none">
-                <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" placeholder="Find messages .." />
-								<span class="input-group-btn">
-									<button type="button" class="btn btn-primary btn-xs pull-right"><i class="fa fa-search"></i></button>
-								</span>
-                </div>
-            </form>
+            {#<form autocomplete="off" class="form-inline margin-none">#}
+                {#<div class="input-group input-group-sm">#}
+                    {{ form(userSearchForm) }}
+                {#</div>#}
+            {#</form>#}
         </div>
         <div class="bg-gray text-center strong border-top innerAll half"> {% if messages | length != 0 %}
                 {{ messages | length }}
@@ -50,8 +47,8 @@
             </div>
         </div>
         <div class="bg-gray innerAll text-center margin-none"></div>
-        <div  id="type" class="collapse border-top">
-            <textarea type="text" class="form-control rounded-none border-none" placeholder="Write your messages..."></textarea>
+        <div  id="type" class=" border-top">
+            {{ form(messageForm) }}
         </div>
 
         <div class="widget border-top padding-none margin-none">
@@ -78,9 +75,9 @@
                             </div>
                         </div>
                         <div class="col-sm-6 hidden-xs">
-                            <i class="icon-time-clock pull-right text-muted innerT half fa fa-2x"></i>
-										<span class="pull-right innerR innerT text-right  text-muted">
-										{{ message.createdAt | date }}
+                                			<span class="pull-right innerR innerT text-right  text-muted messagestatus">
+                                            <p>{% if message.isread != 0 %}read{% else %}unread{% endif %} message | received
+										{{ message.createdAt | date ('h:i d-m-Y')}}</p>
 										</span>
                         </div>
                     </div>
@@ -98,6 +95,8 @@
     </div>
     </div>
     <!-- // Widget END -->
-
+<script>
+    var url =  '/messages/%s?_token={{ token }}';
+</script>
     </div>
 {% endblock %}
