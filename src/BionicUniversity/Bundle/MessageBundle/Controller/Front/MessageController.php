@@ -94,4 +94,20 @@ class MessageController extends Controller
 
         return $form;
     }
+
+    public function unreadMessagesAction($max = 3)
+    {
+        $user=$this->getUser();
+        $uid = $user->getId();
+        $em = $this->getDoctrine()->getManager();
+        $unreadMessages = null;
+        $allunreadmessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findBy(array( "toUser"=> $uid, "isread" => "0"));
+        $unreadcounter =(string)count($allunreadmessages);
+        return $this->render('BionicUniversityMessageBundle:Message:Front/unread_messages.html.twig',
+            array(
+                'unreadmessages' => $unreadMessages,
+                'unreadcounter' => $unreadcounter
+            )
+        );
+    }
 }
