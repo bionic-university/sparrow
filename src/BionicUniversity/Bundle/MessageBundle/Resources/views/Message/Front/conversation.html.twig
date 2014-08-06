@@ -1,15 +1,18 @@
 {% for user in conversations %}
     <li class="border-bottom  bg-primary">
+        <a href="{{ path('message_conversation',{'id':user.id}) }}" class="text-white">
         <div class="media innerAll">
-            <div class="media-object pull-left hidden-phone">
-                <a href="{{ path('message_conversation',{'id':user.id}) }}">
+                <div class="media-object pull-left hidden-phone">
+
                     <img src="{{ user.avatar }}" width="50" alt="Image" />
-                </a>
+
             </div>
+
             <div class="media-body">
-                <div><span class="strong">{{ user }}</span> <small class="text-italic pull-right label label-default"></small></div>
+                <div><span class="strong">{{ user }}</span> <small class="text-italic text-white pull-right label label-default"></small></div>
                 <div>{{ user.incomingMessages[0].body | raw}}</div>
             </div>
         </div>
+        </a>
     </li>
 {% endfor %}
