@@ -2,10 +2,13 @@
 
 namespace BionicUniversity\Bundle\UserBundle\Entity;
 
+use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
 use Doctrine\Common\Collections\ArrayCollection;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
+
+
 /**
  * User
  */
@@ -103,6 +106,27 @@ class User extends BaseUser
     private $gender;
 
     /**
+     * @var string
+     */
+    private $aboutMe;
+
+    /**
+     * @param string $aboutMe
+     */
+    public function setAboutMe($aboutMe)
+    {
+        $this->aboutMe = $aboutMe;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAboutMe()
+    {
+        return $this->aboutMe;
+    }
+
+    /**
      * @var ArrayCollection
      * @Assert\NotBlank()
      */
@@ -125,6 +149,10 @@ class User extends BaseUser
      */
     private $memberships;
 
+    /**
+     * @var ArrayCollection
+     */
+    private $myCommunities;
     /**
      * @var ArrayCollection
      */
@@ -157,6 +185,7 @@ class User extends BaseUser
         $this->invites = new ArrayCollection();
         $this->groups = ['ROLE_USER'];
         $this->interests = new ArrayCollection();
+        $this->myCommunities = new ArrayCollection();
     }
 
     public function __toString()
@@ -342,6 +371,22 @@ class User extends BaseUser
     public function removeOutcomingMessage($outcomingMessages)
     {
         $this->outcomingMessages->removeElement($outcomingMessages);
+    }
+
+    public function addMyCommunities(Community $community)
+    {
+        $this->myCommunities[] = $community;
+
+        return $this;
+    }
+
+    /**
+     * Remove posts
+     * @param Post $post
+     */
+    public function removeMyCommunities(Community $community)
+    {
+        $this->myCommunities->removeElement($community);
     }
 
     /**
@@ -566,10 +611,15 @@ class User extends BaseUser
         return (null !== $this->avatar) ? $this->avatar : 'no_avatar.jpg';
     }
 
+    public function getFullAvatar(){
+        return sprintf('<img src="/web/uploads/avatar/%s"/>', $this->avatar);
+    }
     public function isFriendOf(User $user)
     {
         return count($this->getFriends()->filter(function ($element) use ($user) {
-            return $element->getId() === $user->getId();
+            /** @var Friendship $element */
+            return $element->getUserReceiver()->getId() === $user->getId()
+            || $element->getUserSender()->getId() === $user->getId();
         })) > 0;
     }
 
@@ -579,11 +629,10 @@ class User extends BaseUser
     public function getFriends()
     {
         $friendships = new ArrayCollection(array_merge($this->invites->toArray(), $this->requests->toArray()));
-
         return $friendships->filter(function ($element) {
 
             /**@var Friendship $element */
-            $element->getAcceptanceStatus() === Friendship::CONFIRMED;
+            return $element->getAcceptanceStatus() === Friendship::CONFIRMED;
         });
     }
 
@@ -599,5 +648,21 @@ class User extends BaseUser
         return count($this->invites->filter(function ($element) use ($user) {
             return $element->getUserSender()->getId() === $user->getId() && $element->getAcceptanceStatus() === Friendship::UNCONFIRMED;
         }));
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $myCommunities
+     */
+    public function setMyCommunities($myCommunities)
+    {
+        $this->myCommunities = $myCommunities;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getMyCommunities()
+    {
+        return $this->myCommunities;
     }
 }

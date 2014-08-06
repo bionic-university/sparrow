@@ -6,11 +6,9 @@
             <div class="media-body">
                 <span class="label label-default pull-right">5 min</span>
                 <h5 class="media-heading">{{ message.fromUser }}</h5>
-                <p class="margin-none">{{ message.body }}</p>
+                <p class="margin-none">{{ message.body | raw }}</p>
             </div>
         </li>
     {% endfor %}
-
-
 
 </ul>

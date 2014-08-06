@@ -3,6 +3,8 @@ namespace BionicUniversity\Bundle\UserBundle\Twig;
 
 use Symfony\Bridge\Twig\Extension\RoutingExtension as Base;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class RoutingExtension extends Base
 {
@@ -23,5 +25,4 @@ class RoutingExtension extends Base
     {
         return $this->provider->generateCsrfToken('anything');
     }
-
 }

@@ -8,7 +8,8 @@
 
     <!--  Stylesheet Complete CSS compiled from ../assets/css/admin/module.admin.stylesheet-complete.less -->
     <link rel="stylesheet" href="{{ asset('assets/css/admin/module.admin.stylesheet-complete.min.css') }}" />
-
+    <link rel="stylesheet" href="{{ asset('assets/profile.css') }}" />
+    <link href="{{ asset('vendor/dropzone/downloads/css/dropzone.css') }}" type="text/css" rel="stylesheet" />
 {% endblock %}
 {% block body %}
     <div class="container-fluid">
@@ -22,19 +23,22 @@
 
                 <ul class="menu list-unstyled">
                     <li class="hasSubmenu">
-                        <a href="/" ><i class="icon-tv"></i><span>Profile</span></a>
+                        <a href="/" ><i class=" icon-home-1"></i><span>Profile</span></a>
                     </li>
                     <li class="hasSubmenu">
-                        <a href="{{ path('user_friends') }}" ><i class="icon-tv"></i><span>Friends</span></a>
+                        <a href="{{ path('user_friends') }}" ><i class="icon-group"></i><span>Friends</span></a>
                     </li>
                     <li class="hasSubmenu">
-                        <a href="{{ path('messages') }}" ><i class="icon-tv"></i><span>Message</span></a>
+                        <a href="{{ path('messages') }}" ><i class="icon-comment-typing"></i><span>Message</span></a>
                     </li>
                     <li class="hasSubmenu">
-                        <a href="{{ path('communities') }}" ><i class="icon-tv"></i><span>Communities</span></a>
+                        <a href="{{ path('communities') }}" ><i class="icon-ghost"></i><span>Communities</span></a>
                     </li>
                     <li class="hasSubmenu">
-                        <a href="{{ path('user_setting') }}" ><i class="icon-tv"></i><span>Settings</span></a>
+                        <a href="{{ path('user_setting') }}" ><i class="icon-toilet"></i><span>Settings</span></a>
+                    </li>
+                    <li class="hasSubmenu">
+                        <a href="{{ path('user_about_me') }}" ><i class="icon-looking-smirk"></i><span>About Me</span></a>
                     </li>
                     {% if app.security.isGranted("ROLE_SONATA_ADMIN") %}
                         <li>
@@ -74,7 +78,7 @@
                         <!-- DROPDOWN BUTTON -->
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
 				<span class="media margin-none">
-					<span class="pull-left"><img src="{{ app.security.token.user.avatar }}" alt="user" class="img-circle"></span>
+					<span class="pull-left"><img src="{{ asset('/uploads/avatar/'~app.security.token.user.avatar) }}" alt="user" class="img-circle"></span>
 					<span class="media-body">{{ app.security.token.user.firstname }} <span class="caret"></span></span>
 				</span>
                         </a>
@@ -93,6 +97,7 @@
                     <input type="text" class="form-control" placeholder="Search a friend"/>
                 </div>
             </div>
+            {% block wrapper %}
             <!-- <div class="layout-app">  -->
             <div class="innerAll">
                 <div class="row">
@@ -105,8 +110,12 @@
                                 </div>
                                 <ul class="list-unstyled">
                                     <li class="active"><a href="index.html?lang=en"><i class="fa fa-fw fa-clock-o"></i> <span>Timeline</span></a></li>
-                                    <li><a href="{{ path('user_friends') }}{{ path('messages') }}"><i class="fa fa-fw icon-group"></i><span> Friends </span><small>(19)</small></a></li>
-                                    <li><a href="{{ path('messages') }}"><i class="fa fa-fw icon-envelope-fill-1"></i> <span>Messages</span> <small>(2 new)</small></a></li>
+                                    <li><a href="{{ path('user_friends') }}{{ path('messages') }}"><i class="fa fa-fw icon-group"></i><span> Friends </span></a></li>
+                                    <li><a href="{{ path('messages') }}"><i class="fa fa-fw icon-envelope-fill-1"></i> <span>Messages</span> <small>
+                                                {{ render(controller('BionicUniversityMessageBundle:Front/Message:unreadMessages', {
+                                                'max': 3
+                                                })) }}
+                                    </small></a></li>
                                 </ul>
                             </div>
                             <div class="widget">
@@ -120,16 +129,16 @@
                         </div>
 
                         {% block content %}
-
                         {% endblock content %}
-
-                    </div>
+                        <!-- // Widget END -->
                     </div>
                 </div>
+            </div>
 
                     {% block profile %}
                     {% endblock profile %}
-                </div>
+            {% endblock wrapper %}
+        </div>
 
 
         <!-- // Content END -->
@@ -144,5 +153,4 @@
 
     <!-- REQUIRED VARIABLES SCRIPTS -->
 
-    <!-- FOOTER SCRIPTS -->
 {% endblock body %}

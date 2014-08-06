@@ -1,0 +1,166 @@
+{% extends "::front.html.twig" %}
+{% block profile %}
+    {% include('@BionicUniversityUser/User/Front/profile_block.html.twig') %}
+{% endblock profile %}
+
+{% block content %}
+    <h3>About</h3>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="innerAll bg-white">
+                <h5>Short Bio</h5>
+                <div class="media innerB ">
+                    <a href="" class="pull-left">
+                        <img src="{{ user.avatar }}" alt="" width="75"/>
+                    </a>
+                    <div class="media-body">
+                        <p>{% if null != user.aboutMe %}{{ user.aboutMe }}{% else %}User has left this field blank{% endif %}</p>
+                    </div>
+                </div>
+                <h5>Hobby</h5>
+						<span class="innerR innerB">
+							<i class="box-generic innerAll icon-chef-hat fa fa-4x" data-toggle="tooltip" data-original-title="Cooking" data-placement="bottom"></i>
+						</span>
+						<span class="innerR innerB">
+							<i class="box-generic innerAll  icon-soccerball-fiil fa fa-4x" data-toggle="tooltip" data-original-title="Soccer" data-placement="bottom"></i>
+						</span>
+						<span class="innerR innerB">
+							<i class="box-generic innerAll  icon-steering-wheel fa fa-4x" data-toggle="tooltip" data-original-title="Driving" data-placement="bottom"></i>
+						</span>
+						<span class="innerR innerB">
+							<i class="box-generic innerAll  icon-swimming fa fa-4x" data-toggle="tooltip" data-original-title="Swimming" data-placement="bottom"></i>
+						</span>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="widget">
+                <div class="widget-head border-bottom bg-gray">
+                    <h5 class="innerAll pull-left margin-none">Basic Info</h5>
+                    <div class="pull-right">
+                        <a href="" class="text-muted">
+                            <i class="fa fa-pencil innerL"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <div class="row">
+                        <div class="col-sm-6">User:</div>
+                        <div class="col-sm-6 text-right">
+                            <span class="label label-default">mosaicpro</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">Friends:</div>
+                        <div class="col-sm-6 text-right">
+                            <span class="label label-default">219</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">Joined:</div>
+                        <div class="col-sm-6 text-right">
+                            <span class="label label-default">2 months ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget">
+                <div class="widget-head border-bottom bg-gray">
+                    <h5 class="innerAll pull-left margin-none">Contact</h5>
+                    <div class="pull-right">
+                        <a href="" class="text-muted">
+                            <i class="fa fa-facebook innerL"></i>
+                        </a>
+                        <a href="" class="text-muted">
+                            <i class="fa fa-twitter innerL"></i>
+                        </a>
+                        <a href="" class="text-muted">
+                            <i class="fa fa-dribbble innerL"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="widget-body padding-none">
+                    <div class="innerAll">
+                        <p class=" margin-none"><i class="fa fa-phone fa-fw text-muted"></i> 01 21198478</p>
+                    </div>
+                    <div class="border-top innerAll">
+                        <p class=" margin-none"><i class="fa fa-envelope fa-fw text-muted"></i> Email us</p>
+                    </div>
+                    <div class="border-top innerAll">
+                        <p class=" margin-none"><i class="fa fa-link fa-fw text-muted"></i> <a href="">Visit website</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="innerT">
+        <div class="widget">
+            <div class="widget-head border-bottom bg-gray">
+                <h5 class="pull-left margin-none innerAll">Friends <span class="text-muted">(40)</span></h5>
+                <div class="pull-right">
+                    <a href="" class="text-muted">
+                        <i class="fa fa-eye innerL"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="widget-body margin-none">
+                <div class="innerAll">
+                    <a href="">
+                        <img src="../assets/images/people/50/1.jpg" alt="" class="innerR innerB half"/>
+                    </a>
+                    <a href="">
+                        <img src="../assets/images/people/50/2.jpg" alt="" class="innerR innerB half"/>
+                    </a>
+                    <a href="">
+                        <img src="../assets/images/people/50/3.jpg" alt="" class="innerR innerB half"/>
+                    </a>
+                    <a href="">
+                        <img src="../assets/images/people/50/4.jpg" alt="" class="innerR innerB half"/>
+                    </a>
+                    <a href="">
+                        <img src="../assets/images/people/50/5.jpg" alt="" class="innerR innerB half"/>
+                    </a>
+                    <a href="">
+                        <img src="../assets/images/people/50/6.jpg" alt="" class="innerR innerB half"/>
+                    </a>
+                    <a href="">
+                        <img src="../assets/images/people/50/7.jpg" alt="" class="innerR innerB half"/>
+                    </a>
+                    <a href="">
+                        <img src="../assets/images/people/50/8.jpg" alt="" class="innerR innerB half"/>
+                    </a>
+                    <a href="">
+                        <img src="../assets/images/people/50/9.jpg" alt="" class="innerR innerB half"/>
+                    </a>
+                    <a href="">
+                        <img src="../assets/images/people/50/10.jpg" alt="" class="innerR innerB half"/>
+                    </a>
+                    <a href="">
+                        <img src="../assets/images/people/50/11.jpg" alt="" class="innerR innerB half"/>
+                    </a>
+                    <a href="">
+                        <img src="../assets/images/people/50/12.jpg" alt="" class="innerR innerB half"/>
+                    </a>
+                    <a href="">
+                        <img src="../assets/images/people/50/13.jpg" alt="" class="innerR innerB half"/>
+                    </a>
+                    <a href="">
+                        <img src="../assets/images/people/50/14.jpg" alt="" class="innerR innerB half"/>
+                    </a>
+                    <a href="">
+                        <img src="../assets/images/people/50/15.jpg" alt="" class="innerR innerB half"/>
+                    </a>
+                    <a href="">
+                        <img src="../assets/images/people/50/16.jpg" alt="" class="innerR innerB half"/>
+                    </a>
+
+                </div>
+            </div>
+
+
+
+{% endblock content %}

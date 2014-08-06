@@ -7,13 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BionicUniversity\Bundle\UserBundle\Form\CreatePasswordType;
 
 use BionicUniversity\Bundle\UserBundle\Entity\User;
+use BionicUniversity\Bundle\UserBundle\Entity\Avatar;
 use BionicUniversity\Bundle\UserBundle\Entity\Friendship;
 use BionicUniversity\Bundle\UserBundle\Form\UserSettingsType;
+use BionicUniversity\Bundle\UserBundle\Doctrine\ORM\FriendshipRepository;
 
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use BionicUniversity\Bundle\WallBundle\Form\PostType;
-
-use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -21,19 +21,31 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
-        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findBy(['author'=>$entity, 'community'=>null], ['createdAt'=>'desc']);
+        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findByAuthor($entity);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
         $form = $this->createPostForm();
+        $csrfToken = $this->get('form.csrf_provider')->generateCsrfToken('delete_post');
 
-        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', [
+        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array(
             'entity' => $entity,
             'posts' => $posts,
             'form' => $form->createView(),
-        ]);
+            'csrfToken' => $csrfToken,
+        ));
+    }
+
+    public function aboutAction($id = null)
+    {
+        if($id)
+            $user  = $this->getDoctrine()->getRepository("BionicUniversityUserBundle:User")->find($id);
+        else
+            $user = $this->getDoctrine()->getRepository("BionicUniversityUserBundle:User")->find($this->getUser());
+
+        return $this->render('@BionicUniversityUser/User/Front/about.html.twig',['user' => $user]);
     }
 
     public function createPasswordAction(Request $request)
@@ -114,11 +126,12 @@ class UserController extends Controller
             return $this->redirect($this->generateUrl('user_profile', ['id' => $id]));
         }
 
-        return $this->render('BionicUniversityUserBundle:User/Front:settings.html.twig', [
+        return $this->render('BionicUniversityUserBundle:User/Admin:edit.html.twig', [
             'entity' => $entity,
             'edit_form' => $editForm->createView(),
         ]);
     }
+
 
     public function friendsAction()
     {
@@ -127,7 +140,7 @@ class UserController extends Controller
         $myFriendships = $em->getRepository("BionicUniversityUserBundle:Friendship")->findFriends($user);
         $myFriends = [];
         /**
-         * #@var Friendship $friendship
+         * @var Friendship $friendship
          */
         foreach ($myFriendships as $friendship) {
             if ($friendship->getUserReceiver() == $user) {

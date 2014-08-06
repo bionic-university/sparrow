@@ -1,75 +1,103 @@
 {% extends "::front.html.twig" %}
-    {% block heading_profile %}
-        Type a message
-    {% endblock heading_profile %}
-    {% block profile %}
-        {{ form(form) }}
-    {% endblock profile %}
-    {% block heading_wall %}
-        <h1>My messages</h1>
-        {% block messages %}
-            <ul class="nav nav-tabs" role="tablist">
-                <li><a href="#incoming" role="tab" data-toggle="tab">Incoming</a></li>
-                <li><a href="#outcoming" role="tab" data-toggle="tab">Outcoming</a></li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane active" id="incoming">
-                    <ul>
-                        {% for in_mess_one in in_mess %}
-                            <div class="panel panel-info messages_panel">
-                                <div class="panel-heading">
-                                    {% if in_mess_one.fromuser.avatar == null %}
-                                    <li class="messages_list"><a href="{{ path('user_profile',{'id':in_mess_one.fromuser.id}) }}">{{ in_mess_one.fromuser }}</a></li>
-                                    {% else %}
-                                    <li class="messages_list"><img src="{{ asset('uploads/avatar/') }}{{ in_mess_one.fromuser.avatar }}" class="avatar_mini" alt="ava"><a href="{{ path('user_profile',{'id':in_mess_one.fromuser.id}) }}">{{ in_mess_one.fromuser }}</a></li>
-                                    {% endif %}
-                                    <div class="createdAt">{{ in_mess_one.createdat|date("m/d/Y/h:m") }}</div>
-                                </div>
-                                <div class="panel-body">
-                                    <li class="messages_list">{{ in_mess_one.body }}</li>
-                                    <div class="sf-button"><a href="{{ path('messages_reply',{'id':in_mess_one.fromuser.id}) }}">Reply</a></div>
-                                </div>
-                            </div>
-                        {% else %}
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    No messages recieved yet
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="tab-pane" id="outcoming">
-                    <ul>
-                        {% for out_mess_one in out_mess %}
-                            <div class="panel panel-danger messages_panel">
-                                <div class="panel-heading">
-                                    {% if out_mess_one.touser.avatar == null %}
-                                        <li class="messages_list"><a href="{{ path('user_profile',{'id':out_mess_one.touser.id}) }}">{{ out_mess_one.touser }}</a></li>
-                                    {% else %}
-                                        <li class="messages_list"><img src="{{ asset('uploads/avatar/') }}{{ out_mess_one.touser.avatar }}" class="avatar_mini" alt="ava"><a href="{{ path('user_profile',{'id':out_mess_one.touser.id}) }}">{{ out_mess_one.touser }}</a></li>
-                                    {% endif %}
-                                    <div class="createdAt">{{ out_mess_one.createdat|date("m/d/Y/h:m") }}</div>
-                                </div>
-                                <div class="panel-body">
-                                    <li class="messages_list">{{ out_mess_one.body }}</li>
-                                    <div class="sf-button"><a href="{{ path('messages_reply',{'id':out_mess_one.touser.id}) }}">Send one more</a></div>
-                                </div>
-                            </div>
-                        {% else %}
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    No messages sent yet
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        {% endblock messages %}
-    {% endblock heading_wall %}
+{% block wrapper %}
+    <!-- <div class="layout-app">  -->
+    <div class="innerAll">
+    <!-- Widget -->
+    <div class="widget widget-messages widget-heading-simple widget-body-white">
+    <div class="widget-body padding-none margin-none">
 
-{% block javascripts %}
-    {{ parent() }}
-    <script>$(document).ready($('#myTab a').tab('show'))</script>
-{% endblock javascripts %}
+    <div class="row row-merge borders">
+    <div class="col-md-3 listWrapper">
+        <div class="innerAll">
+            <form autocomplete="off" class="form-inline margin-none">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" placeholder="Find messages .." />
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-primary btn-xs pull-right"><i class="fa fa-search"></i></button>
+								</span>
+                </div>
+            </form>
+        </div>
+        <div class="bg-gray text-center strong border-top innerAll half"> {% if messages | length != 0 %}
+                {{ messages | length }}
+            {% else %}Haven't
+            {% endif %}
+            messages <i class="fa fa-circle-arrow-down"></i></div>
+        <ul class="list-unstyled">
+            {{ render(controller('BionicUniversityMessageBundle:Front/Message:recentConversation')) }}
+        </ul>
+    </div>
+    <div class="col-md-9 detailsWrapper">
+
+        {% if null != interlocutor %}
+        <!-- User -->
+        <div class="bg-primary">
+            <div class="media">
+                <a href="" class="pull-left">
+                    <img src="{{ asset('/uploads/avatar/'~interlocutor.avatar) }}" width="65" class="media-object">
+                </a>
+                <div class="media-body innerTB innerR">
+                    <div class="innerT half pull-right">
+                        <a  href="#type" class=" btn btn-default bg-white btn-sm" data-toggle="collapse">
+                            <i class="fa fa-pencil"></i> Write
+                        </a>
+                    </div>
+                    <h4 href="" class="text-white pull-left innerAll strong display-block margin-none">{{ interlocutor }}</h4>
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="bg-gray innerAll text-center margin-none"></div>
+        <div  id="type" class="collapse border-top">
+            <textarea type="text" class="form-control rounded-none border-none" placeholder="Write your messages..."></textarea>
+        </div>
+
+        <div class="widget border-top padding-none margin-none">
+
+            {% for message in messages %}
+            <!--  Message -->
+            <div class="media margin-none innerAll">
+                <a href="" class="pull-left hidden-xs">
+                    <img src="{{ asset('/uploads/avatar/'~message.fromUser.avatar) }}" width="60" class="media-object">
+                </a>
+                <div class="media-body innerTB">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="innerT half">
+                                <div class="media">
+                                    <div class="pull-left">
+                                        <a href="" class="strong text-inverse ">{{ message.fromUser }}</a>
+                                        <span class="innerR text-muted visible-xs"></span>
+                                    </div>
+                                    <div class="media-body">
+                                        {{ message.body | raw }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 hidden-xs">
+                            <i class="icon-time-clock pull-right text-muted innerT half fa fa-2x"></i>
+										<span class="pull-right innerR innerT text-right  text-muted">
+										{{ message.createdAt | date }}
+										</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+            <div class="bg-gray innerAll text-center margin-none">Please choose conversation</div>
+        {% endif %}
+    </div>
+
+    </div>
+    </div>
+    </div>
+    <!-- // Widget END -->
+
+    </div>
+{% endblock %}

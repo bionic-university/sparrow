@@ -1,5 +1,6 @@
 BionicUniversity\Bundle\MessageBundle\Entity\Message:
     type: entity
+    repositoryClass: BionicUniversity\Bundle\MessageBundle\Doctrine\ORM\MessageRepository
     id:
         id:
             type: integer
@@ -11,6 +12,8 @@ BionicUniversity\Bundle\MessageBundle\Entity\Message:
             type: text
         createdAt:
             type: datetime
+        isread:
+            type: integer
     manyToOne:
         toUser:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User

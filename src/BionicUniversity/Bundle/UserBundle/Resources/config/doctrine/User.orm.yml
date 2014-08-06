@@ -1,4 +1,5 @@
 BionicUniversity\Bundle\UserBundle\Entity\User:
+    repositoryClass: BionicUniversity\Bundle\UserBundle\Doctrine\ORM\UserRepository
     type: entity
     table: null
     id:
@@ -29,8 +30,10 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
             type: string
             length: '255'
             nullable: true
-
-
+        aboutMe:
+            type: string
+            length: '255'
+            nullable: true
     manyToMany:
         interests:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\Interest
@@ -65,4 +68,7 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\Friendship
             mappedBy: userReceiver
             cascade: ['remove']
+        myCommunities:
+            targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Community
+            mappedBy: owner
     lifecycleCallbacks: {  }
