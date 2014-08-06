@@ -3,11 +3,8 @@
         <a href="{{ path('message_conversation',{'id':user.id}) }}" class="text-white">
         <div class="media innerAll">
                 <div class="media-object pull-left hidden-phone">
-
                     <img src="{{ asset('/uploads/avatar/'~user.avatar) }}" width="50" alt="Image" />
-
-            </div>
-
+                </div>
             <div class="media-body">
                 <div><span class="strong">{{ user }}</span> <small class="text-italic text-white pull-right label label-default"></small></div>
                 <div>{{ user.incomingMessages[0].body | raw}}</div>
