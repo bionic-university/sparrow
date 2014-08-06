@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
-        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findByAuthor($entity);
+        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findBy(['author'=>$entity, 'community'=>null], ['createdAt'=>'desc' ]);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
@@ -29,6 +29,7 @@ class UserController extends Controller
 
         $form = $this->createPostForm();
         $csrfToken = $this->get('form.csrf_provider')->generateCsrfToken('delete_post');
+
 
         return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array(
             'entity' => $entity,
