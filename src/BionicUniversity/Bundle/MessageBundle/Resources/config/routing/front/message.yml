@@ -11,4 +11,7 @@ message_create_front:
 message_conversation:
     path:   /messages/{id}
     defaults: { _controller: "BionicUniversityMessageBundle:Front/Message:messages" }
+message_conversations:
+    path:   /messages/
+    defaults: { _controller: "BionicUniversityMessageBundle:Front/Message:messages" }
 

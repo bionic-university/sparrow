@@ -18,14 +18,18 @@
                 </div>
             </form>
         </div>
-        <div class="bg-gray text-center strong border-top innerAll half">1490 messages <i class="fa fa-circle-arrow-down"></i></div>
+        <div class="bg-gray text-center strong border-top innerAll half"> {% if messages | length != 0 %}
+                {{ messages | length }}
+            {% else %}Haven't
+            {% endif %}
+            messages <i class="fa fa-circle-arrow-down"></i></div>
         <ul class="list-unstyled">
             {{ render(controller('BionicUniversityMessageBundle:Front/Message:recentConversation')) }}
         </ul>
     </div>
     <div class="col-md-9 detailsWrapper">
 
-
+        {% if null != interlocutor %}
         <!-- User -->
         <div class="bg-primary">
             <div class="media">
@@ -45,6 +49,7 @@
 
             </div>
         </div>
+        <div class="bg-gray innerAll text-center margin-none"></div>
         <div  id="type" class="collapse border-top">
             <textarea type="text" class="form-control rounded-none border-none" placeholder="Write your messages..."></textarea>
         </div>
@@ -83,10 +88,12 @@
 
             </div>
             {% endfor %}
-
-
         </div>
+        {% else %}
+            <div class="bg-gray innerAll text-center margin-none">Please choose conversation</div>
+        {% endif %}
     </div>
+
     </div>
     </div>
     </div>

@@ -20,12 +20,21 @@ class MessageController extends Controller
      * Lists all Message entities.
      *
      */
-    public function messagesAction($id)
+    public function messagesAction($id = null)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $messages = $em->getRepository("BionicUniversityMessageBundle:Message")->findMessages($user,$id);
-        $interlocutor = $em->getRepository("BionicUniversityUserBundle:User")->find($id);
+        if(null != $id)
+        {
+            $messages = $em->getRepository("BionicUniversityMessageBundle:Message")->findMessages($user,$id);
+            $interlocutor = $em->getRepository("BionicUniversityUserBundle:User")->find($id);
+        }
+        else
+        {
+            $interlocutor = null;
+            $messages = null;
+        }
+
 
         return $this->render('@BionicUniversityMessage/Message/Front/messages.html.twig', ['messages' => $messages, 'interlocutor' => $interlocutor]);
     }
