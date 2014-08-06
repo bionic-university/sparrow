@@ -1,0 +1,23 @@
+BionicUniversity\Bundle\UserBundle\Entity\Department:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '50'
+        imageUrl:
+            type: string
+            length: '255'
+            nullable: true
+    oneToMany:
+        users:
+          targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
+          mappedBy: department
+
+

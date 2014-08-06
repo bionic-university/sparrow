@@ -48,3 +48,9 @@ services:
         - "sonata.block.service.statistics"
         - @templating
         - @doctrine.orm.entity_manager
+
+    bionic_university_user.admin.department:
+        class: BionicUniversity\Bundle\UserBundle\Admin\DepartmentAdmin
+        arguments: [~, BionicUniversity\Bundle\UserBundle\Entity\Department, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Department}
