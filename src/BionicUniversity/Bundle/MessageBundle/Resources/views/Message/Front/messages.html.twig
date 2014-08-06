@@ -69,10 +69,10 @@
                                 <div class="media">
                                     <div class="pull-left">
                                         <a href="" class="strong text-inverse ">{{ message.fromUser }}</a>
-                                        <span class="innerR text-muted visible-xs">Jan 15th, 2014 </span>
+                                        <span class="innerR text-muted visible-xs"></span>
                                     </div>
                                     <div class="media-body">
-                                        {{ message.body }}
+                                        {{ message.body | raw }}
                                     </div>
                                 </div>
                             </div>

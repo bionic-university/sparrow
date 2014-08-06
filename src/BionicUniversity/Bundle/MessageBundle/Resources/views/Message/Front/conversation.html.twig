@@ -7,8 +7,8 @@
                 </a>
             </div>
             <div class="media-body">
-                <div><span class="strong">{{ user }}</span> <small class="text-italic pull-right label label-default">2 days</small></div>
-                <div>{{ user.incomingMessages[0].body }}</div>
+                <div><span class="strong">{{ user }}</span> <small class="text-italic pull-right label label-default"></small></div>
+                <div>{{ user.incomingMessages[0].body | raw}}</div>
             </div>
         </div>
     </li>
