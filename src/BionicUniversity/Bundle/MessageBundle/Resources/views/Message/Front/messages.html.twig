@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="bg-gray innerAll text-center margin-none"></div>
-        <div  id="type" class="collapse border-top">
+        <div  id="type" class="border-top">
             <textarea type="text" class="form-control rounded-none border-none" placeholder="Write your messages..."></textarea>
         </div>
 
@@ -78,9 +78,9 @@
                             </div>
                         </div>
                         <div class="col-sm-6 hidden-xs">
-                            <i class="icon-time-clock pull-right text-muted innerT half fa fa-2x"></i>
-										<span class="pull-right innerR innerT text-right  text-muted">
-										{{ message.createdAt | date }}
+                                			<span class="pull-right innerR innerT text-right  text-muted messagestatus">
+                                            <p>{% if message.isread != 0 %}read{% else %}unread{% endif %} message | received
+										{{ message.createdAt | date ('h:i d-m-Y')}}</p>
 										</span>
                         </div>
                     </div>
