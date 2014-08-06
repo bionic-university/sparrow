@@ -160,7 +160,6 @@ class CommunityController extends Controller
 
         $entity = new Community();
         $entity->setOwner($owner);
-        $id=$entity->getId();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
