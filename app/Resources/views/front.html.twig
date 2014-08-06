@@ -37,6 +37,9 @@
                     <li class="hasSubmenu">
                         <a href="{{ path('user_setting') }}" ><i class="icon-toilet"></i><span>Settings</span></a>
                     </li>
+                    <li class="hasSubmenu">
+                        <a href="{{ path('user_about_me') }}" ><i class="icon-looking-smirk"></i><span>About Me</span></a>
+                    </li>
                     {% if app.security.isGranted("ROLE_SONATA_ADMIN") %}
                         <li>
                             <a href="{{ path('sonata_admin_dashboard') }}"><i class="icon-tv"></i><span>To admin</span></a>
@@ -75,7 +78,7 @@
                         <!-- DROPDOWN BUTTON -->
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
 				<span class="media margin-none">
-					<span class="pull-left"><img src="{{ app.security.token.user.avatar }}" alt="user" class="img-circle"></span>
+					<span class="pull-left"><img src="{{ asset('/uploads/avatar/'~app.security.token.user.avatar) }}" alt="user" class="img-circle"></span>
 					<span class="media-body">{{ app.security.token.user.firstname }} <span class="caret"></span></span>
 				</span>
                         </a>

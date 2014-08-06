@@ -32,7 +32,7 @@ class UserController extends Controller
 
         return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array(
             'entity' => $entity,
-            'post' => $posts,
+            'posts' => $posts,
             'form' => $form->createView(),
             'csrfToken' => $csrfToken,
         ));

@@ -34,7 +34,7 @@
         <div class="bg-primary">
             <div class="media">
                 <a href="" class="pull-left">
-                    <img src="{{ interlocutor.avatar }}" width="65" class="media-object">
+                    <img src="{{ asset('/uploads/avatar/'~interlocutor.avatar) }}" width="65" class="media-object">
                 </a>
                 <div class="media-body innerTB innerR">
                     <div class="innerT half pull-right">
@@ -60,7 +60,7 @@
             <!--  Message -->
             <div class="media margin-none innerAll">
                 <a href="" class="pull-left hidden-xs">
-                    <img src="{{ message.fromUser.avatar }}" width="60" class="media-object">
+                    <img src="{{ asset('/uploads/avatar/'~message.fromUser.avatar) }}" width="60" class="media-object">
                 </a>
                 <div class="media-body innerTB">
                     <div class="row">
