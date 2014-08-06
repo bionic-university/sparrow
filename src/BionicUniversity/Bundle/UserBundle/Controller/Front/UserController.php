@@ -34,9 +34,12 @@ class UserController extends Controller
         ]);
     }
 
-    public function aboutAction($id)
+    public function aboutAction($id = null)
     {
-        $user  = $this->getDoctrine()->getRepository("BionicUniversityUserBundle:User")->find($id);
+        if($id)
+            $user  = $this->getDoctrine()->getRepository("BionicUniversityUserBundle:User")->find($id);
+        else
+            $user = $this->getDoctrine()->getRepository("BionicUniversityUserBundle:User")->find($this->getUser());
 
         return $this->render('@BionicUniversityUser/User/Front/about.html.twig',['user' => $user]);
     }
