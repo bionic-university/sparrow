@@ -48,7 +48,7 @@ class UserAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('avatar')
+            ->add('fullAvatar')
             ->add('firstName')
             ->add('lastName')
             ->add('department')

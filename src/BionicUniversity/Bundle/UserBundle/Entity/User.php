@@ -2,6 +2,7 @@
 
 namespace BionicUniversity\Bundle\UserBundle\Entity;
 
+use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
 use Doctrine\Common\Collections\ArrayCollection;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -16,36 +17,89 @@ class User extends BaseUser
 
     /**
      * @var integer
+     * @Assert\Type(type="integer")
      */
     protected $id;
 
     /**
      * @var string
+     * @Assert\Length(
+     *      max = "255000",
+     *      )
      */
     private $avatar;
 
     /**
      * @var string
+     * @Assert\Type(
+     *      type="string",
+     *      message="These data must be a string"
+     *      )
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "50",
+     *      minMessage = "Your first name must be at least 2 characters length",
+     *      maxMessage = "Your first name cannot be longer than 50 characters length"
+     *      )
+     * @Assert\NotBlank()
      */
     private $firstName;
 
     /**
      * @var string
+     * @Assert\Type(
+     *      type="string",
+     *      message="These data must be a string"
+     *      )
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "50",
+     *      minMessage = "Your last name must be at least 2 characters length",
+     *      maxMessage = "Your last name cannot be longer than 50 characters length"
+     *      )
+     * @Assert\NotBlank()
      */
     private $lastName;
 
     /**
      * @var string
+     * @Assert\Type(
+     *      type="string",
+     *      message="These data must be a string"
+     *      )
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "50",
+     *      minMessage = "Your position must be at least 2 characters length",
+     *      maxMessage = "Your position cannot be longer than 50 characters length"
+     *      )
+     * @Assert\NotBlank()
      */
     private $position;
 
     /**
      * @var string
+     * @Assert\Type(
+     *      type="string",
+     *      message="These data must be a string"
+     *      )
+     * @Assert\Length(
+     *      min = "2",
+     *      max = "50",
+     *      minMessage = "Your department must be at least 2 characters length",
+     *      maxMessage = "Your department cannot be longer than 50 characters length"
+     *      )
+     * @Assert\NotBlank()
      */
     private $department;
 
     /**
      * @var string
+     * @Assert\Choice(
+     *      choices = { "m", "f" },
+     *      message = "Choose a valid gender."
+     *      )
+     * @Assert\NotBlank()
      */
     private $gender;
 
@@ -72,11 +126,14 @@ class User extends BaseUser
 
     /**
      * @var ArrayCollection
+     * @Assert\NotBlank()
      */
     private $incomingMessages;
 
     /**
      * @var ArrayCollection
+     * @Assert\NotBlank()
+     *
      */
     private $outcomingMessages;
 
@@ -93,6 +150,10 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      */
+    private $myCommunities;
+    /**
+     * @var ArrayCollection
+     */
     private $requests;
 
     /**
@@ -101,6 +162,9 @@ class User extends BaseUser
     private $invites;
     /**
      * @var \DateTime
+     * @Assert\NotBlank(
+     *      message = "This value should not be blank"
+     *      )
      */
     private $dateOfBirth;
 
@@ -115,6 +179,7 @@ class User extends BaseUser
         $this->invites = new ArrayCollection();
         $this->groups = ['ROLE_USER'];
         $this->interests = new ArrayCollection();
+        $this->myCommunities = new ArrayCollection();
     }
 
     public function __toString()
@@ -300,6 +365,22 @@ class User extends BaseUser
     public function removeOutcomingMessage($outcomingMessages)
     {
         $this->outcomingMessages->removeElement($outcomingMessages);
+    }
+
+    public function addMyCommunities(Community $community)
+    {
+        $this->myCommunities[] = $community;
+
+        return $this;
+    }
+
+    /**
+     * Remove posts
+     * @param Post $post
+     */
+    public function removeMyCommunities(Community $community)
+    {
+        $this->myCommunities->removeElement($community);
     }
 
     /**
@@ -521,9 +602,12 @@ class User extends BaseUser
      */
     public function getAvatar()
     {
-        return $this->avatar;
+        return (null !== $this->avatar) ? $this->avatar : 'no_avatar.jpg';
     }
 
+    public function getFullAvatar(){
+        return sprintf('<img src="/web/uploads/avatar/%s"/>', $this->avatar);
+    }
     public function isFriendOf(User $user)
     {
         return count($this->getFriends()->filter(function ($element) use ($user) {
@@ -558,5 +642,21 @@ class User extends BaseUser
         return count($this->invites->filter(function ($element) use ($user) {
             return $element->getUserSender()->getId() === $user->getId() && $element->getAcceptanceStatus() === Friendship::UNCONFIRMED;
         }));
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $myCommunities
+     */
+    public function setMyCommunities($myCommunities)
+    {
+        $this->myCommunities = $myCommunities;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getMyCommunities()
+    {
+        return $this->myCommunities;
     }
 }

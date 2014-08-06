@@ -3,6 +3,7 @@
 namespace BionicUniversity\Bundle\MessageBundle\Entity;
 
 use BionicUniversity\Bundle\UserBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Message
@@ -12,26 +13,32 @@ class Message
 {
     /**
      * @var integer
+     * @Assert\Type(type="integer")
      */
     private $id;
 
     /**
      * @var User
+     * @Assert\NotBlank()
      */
     private $fromUser;
 
     /**
      * @var User
+     * @Assert\NotBlank()
      */
     private $toUser;
 
     /**
      * @var string
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank()
      */
     private $body;
 
     /**
      * @var \DateTime
+     * @Assert\NotBlank()
      */
     private $createdAt;
 

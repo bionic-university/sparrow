@@ -55,16 +55,34 @@ class MessageController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $user=$this->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+        $outcomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByFromUser($user, ['createdAt'=>'desc']);
+        $incomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByToUser($user, ['createdAt'=>'desc']);
+
+
         $entity = new Message();
         $entity->setFromUser($this->getUser());
 
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
-        $em->persist($entity);
-        $em->flush();
+        if ($form->isValid()){
+            $em->persist($entity);
+            $em->flush();
 
-        return $this->redirect($this->generateUrl('messages'));
+            return $this->redirect($this->generateUrl('messages'));
+        }
+
+        return $this->render('BionicUniversityMessageBundle:Message:Front/messages.html.twig',
+            array(
+                'out_mess' => $outcomingMessages,
+                'in_mess' => $incomingMessages,
+                'form' => $form->createView(),
+            )
+        );
+
     }
 
     public function recentConversationAction()

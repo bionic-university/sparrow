@@ -22,8 +22,10 @@ class PostController extends Controller
     {
         $entity = new Post();
         $entity->setAuthor($this->getUser());
+
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+
         $id = $this->getUser()->getId();
 
         if ($form->isValid()) {

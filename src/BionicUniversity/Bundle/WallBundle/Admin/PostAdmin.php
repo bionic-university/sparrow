@@ -17,8 +17,8 @@ class PostAdmin extends Admin
     {
         $datagridMapper
             ->add('text')
-            ->add('createdAt')
-        ;
+            ->add('community')
+            ->add('createdAt');
     }
 
     /**
@@ -28,6 +28,7 @@ class PostAdmin extends Admin
     {
         $listMapper
             ->add('text')
+            ->add('community')
             ->add('createdAt')
             ->add('_action', 'actions', array(
                 'actions' => array(
@@ -35,8 +36,7 @@ class PostAdmin extends Admin
                     'edit' => array(),
                     'delete' => array(),
                 )
-            ))
-        ;
+            ));
     }
 
     /**
@@ -46,8 +46,8 @@ class PostAdmin extends Admin
     {
         $formMapper
             ->add('text')
-            ->add('createdAt')
-        ;
+            ->add('community')
+            ->add('createdAt');
     }
 
     /**
@@ -57,7 +57,7 @@ class PostAdmin extends Admin
     {
         $showMapper
             ->add('text')
-            ->add('createdAt')
-        ;
+            ->add('community')
+            ->add('createdAt');
     }
 }
