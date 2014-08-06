@@ -20,15 +20,4 @@ class MessageRepository extends EntityRepository
 
         return $query->getResult();
     }
-
-    public function  findCountMessages($user)
-    {
-        $query = $this->createQueryBuilder('count(message)')
-            ->where('message.toUser =:user')
-            ->setParameter('user', $user)
-            ->getQuery();
-
-        return $query->getSingleResult();
-    }
-
 }
