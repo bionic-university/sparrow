@@ -1,0 +1,13 @@
+BionicUniversity\Bundle\UserBundle\Entity\User:
+    admin:
+        username: andrew
+        firstName: Andrew
+        lastName: Kovalyov
+        email: andrew@kovalyov.com
+        plainPassword: 123456
+        position: CEO
+        department: CEO room
+        dateOfBirth: <dateTime()>
+        enabled: 1
+        gender: m
+        roles: ['ROLE_SONATA_ADMIN']

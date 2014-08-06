@@ -1,29 +1,70 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.css') }}"/>
-        <link rel="stylesheet" href="{{ asset('vendor/select2/select2.css') }}"/>
-        <link rel="stylesheet" href="{{ asset('vendor/select2/select2-bootstrap.css') }}"/>
-        <link rel="stylesheet" href="{{ asset('vendor/redactor/redactor/redactor.css') }}"/>
+    <!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7 sidebar sidebar-social footer-sticky"> <![endif]-->
+    <!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8 sidebar sidebar-social footer-sticky"> <![endif]-->
+    <!--[if IE 8]>    <html class="ie lt-ie9 sidebar sidebar-social footer-sticky"> <![endif]-->
+    <!--[if gt IE 8]> <html class="ie sidebar sidebar-social footer-sticky"> <![endif]-->
 
-        {% block stylesheets %}
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <!--[if !IE]><!-->
+<html class="sidebar sidebar-social footer-sticky">
+    <!-- <![endif]-->
+    {% block header %}
+        <head>
+            <meta charset="UTF-8" />
+            <title>{% block title %}Welcome!{% endblock %}</title>
+            <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('vendor/select2/select2.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('vendor/select2/select2-bootstrap.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('vendor/redactor/redactor/redactor.css') }}"/>
 
-    </head>
+            {% block stylesheets %}
+            {% endblock %}
+            <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        </head>
+    {% endblock header %}
     <body>
         {% block body %}{% endblock %}
         <script type="text/javascript" src="{{ asset('vendor/jquery/dist/jquery.js') }}"></script>
         <script type="text/javascript" src="{{ asset('vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
         <script type="text/javascript" src="{{ asset('vendor/select2/select2.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('vendor/redactor/redactor/redactor.min.js') }}"></script>
+
+        <script src="{{ asset('assets/plugins/core_nicescroll/jquery.nicescroll.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/core_breakpoints/breakpoints.js') }}"></script>
+        <script src="{{ asset('assets/plugins/core_preload/pace.min.js') }}"></script>
+        <script src="{{ asset('assets/components/core_preload/preload.pace.init.js') }}"></script>
+        <script src="{{ asset('assets/plugins/menu_sidr/jquery.sidr.js') }}"></script>
+        <script src="{{ asset('assets/components/widget_twitter/twitter.init.js') }}"></script>
+        <script src="{{ asset('assets/plugins/media_holder/holder.js') }}"></script>
+        <script src="{{ asset('assets/plugins/media_gridalicious/jquery.gridalicious.min.js') }}"></script>
+        <script src="{{ asset('assets/components/media_gridalicious/gridalicious.init.js') }}"></script>
+        <script src="{{ asset('assets/components/maps_google/maps-google.init.js') }}"></script>
+        <script src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false&callback=initGoogleMaps"></script>
+        <script src="{{ asset('assets/plugins/ui_modals/bootbox.min.js') }}"></script>
+        <script src="{{ asset('assets/components/menus/sidebar.main.init.js') }}"></script>
+        <script src="{{ asset('assets/components/menus/sidebar.collapse.init.js') }}"></script>
+        <script src="{{ asset('assets/components/menus/menus.sidebar.chat.init.js') }}"></script>
+        <script src="{{ asset('assets/plugins/other_mixitup/jquery.mixitup.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/other_mixitup/mixitup.init.js') }}"></script>
+        <script src="{{ asset('assets/components/core/core.init.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('vendor/dropzone/downloads/dropzone.js') }}"></script>
         <script>
             (function($, document){
                 $(function(){
                     $('textarea').redactor();
                     $('select').select2();
+                    Dropzone.options.myAwesomeDropzone = {
+                        maxFiles: 1,
+                        accept: function(file, done) {
+                            console.log("uploaded");
+                            done();
+                        },
+                        init: function() {
+                            this.on("maxfilesexceeded", function(file){
+                                alert("No more files please!");
+                            });
+                        }
+                    };
                 })
             })(jQuery, document);
         </script>
@@ -31,3 +72,4 @@
         {% endblock %}
     </body>
 </html>
+

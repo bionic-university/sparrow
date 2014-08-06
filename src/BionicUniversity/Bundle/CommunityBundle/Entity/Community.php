@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use BionicUniversity\Bundle\UserBundle\Entity\User;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Community
  */
@@ -13,21 +15,29 @@ class Community
 {
     /**
      * @var integer
+     * @Assert\Type(type="integer")
      */
     private $id;
 
     /**
      * @var string
+     * @Assert\Length(
+     *      max = "50",
+     *      maxMessage = "Community name cannot be longer than 50 characters length"
+     *      )
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @var \DateTime
+     * @Assert\NotBlank()
      */
     private $createdAt;
 
     /**
      * @var string
+     * @Assert\NotBlank()
      */
     private $description;
 
@@ -56,6 +66,11 @@ class Community
         $this->createdAt = new \dateTime();
         $this->memberships = new ArrayCollection();
         $this->posts = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 
     /**
@@ -111,7 +126,7 @@ class Community
     /**
      * Set name
      *
-     * @param  string    $name
+     * @param  string $name
      * @return Community
      */
     public function setName($name)
@@ -134,7 +149,7 @@ class Community
     /**
      * Set description
      *
-     * @param  string    $description
+     * @param  string $description
      * @return Community
      */
     public function setDescription($description)
@@ -215,4 +230,21 @@ class Community
     {
         $this->posts->removeElement($post);
     }
+
+    /**
+     * @param string $avatar
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
 }

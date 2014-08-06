@@ -1,40 +1,44 @@
 {% extends "::front.html.twig" %}
-    {% block heading_profile %}
-        {{ entity.name }}
-    {% endblock heading_profile %}
-    {% block profile %}
-        {% block javascripts %}
-            <script type="text/javascript" src="{{ asset('vendor/dropzone/downloads/dropzone.js') }}"></script>
-        {% endblock javascripts %}
-        <div class="row">
-            <aside class=" col-md-3">
-                    {% if entity.avatar == false %}
-                        {% if app.user.id == entity.owner.id %}
-                            <form id = "dropzone" action="{{ oneup_uploader_endpoint('community_logo') }}" class="dropzone square drop_avatar">
-                                <div class="fallback">
-                                    <input name="file" type="file" multiple/>
-                                </div>
-                                <input type="hidden" name="community" value="{{ entity.id }}" />
-                            </form>
-                        {% endif %}
-                    {% else %}
-                            <img src="{{ asset('uploads/community_logo/') }}{{ entity.avatar }}" class="avatar" alt="Your avatar">
-                    {% endif %}
-            </aside>
-            <section class="col-md-9" >
-                <ul class="list">
-                    <li class="list-item">{{ entity.description}}</li>
-                </ul>
-            <div style="border: 1px solid black;">
-                Our Subscribers
-                {% for us in user %}
-                    </br><a href="{{ asset('id') }}{{ us.user.id }}">{{ us.user }}</a>
-                {% endfor %}
+{% block wall %}
+<ul class="list">
+    <li class="list-item"> <img src="{{ asset('uploads/avatar/') }}{{ entity.avatar }}" class="avatar_mini media-object" alt="Your avatar">{{ entity.name }}</li>
+    <li class="list-item"> {{ entity.description}}</li>
+    {% if app.security.token.user == entity.owner %}
+        <div class="button"><a href="{{ path('front_community_edit',{'id':entity.id}) }}">Edit community</a></div>
+    {% endif %}
+</ul>
+<div class="row">
+    {% if null != users %}
+        {% for user in users %}
+            <div class="col-md-offset-2 col-md-8">
+                {% if app.security.token.user == entity.owner or user%}
+                    {{ form(form) }}
+                {% endif %}
             </div>
-            </section>
-
-        </div>
-    {% endblock profile %}
-    {% block heading_wall %}
-        <h1>My blog</h1>
-    {% endblock heading_wall %}
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+    <h2>Recent posts</h2>
+    {% if null == post %}
+    {% else %}
+        {% for post_body in post %}
+            <div class="panel panel-default">
+                <div class="panel-body">{{ post_body.text|raw }}
+                    {% if app.security.token.user == post_body.author %}
+                        <a class="pull-right" href="{{ path('delete_community_post', {'id': post_body.id}) }}">
+                            Delete
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    No posts added yet
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock wall %}

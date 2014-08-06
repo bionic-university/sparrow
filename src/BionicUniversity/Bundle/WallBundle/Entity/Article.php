@@ -3,6 +3,8 @@
 namespace BionicUniversity\Bundle\WallBundle\Entity;
 use Symfony\Component\Validator\Constraints\DateTime;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Article
  */
@@ -10,24 +12,29 @@ class Article
 {
     /**
      * @var integer
+     * @Assert\Type(type="integer")
      */
     private $id;
+
     /**
      * @var string
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank()
      */
     private $title;
+
     /**
      * @var string
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank()
      */
     private $text;
+
     /**
      * @var \DateTime
+     * @Assert\NotBlank()
      */
     private $createdAt;
-    /**
-     * @var Wall
-     */
-    private $wall;
 
     public function __construct()
     {
@@ -98,10 +105,5 @@ class Article
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    public function getWall()
-    {
-        return $this->wall;
     }
 }

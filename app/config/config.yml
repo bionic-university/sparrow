@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: sonata.yml }
     - { resource: "@BionicUniversityMessageBundle/Resources/config/services.yml" }
 framework:
     #esi:             ~
@@ -82,7 +83,10 @@ fos_user:
                 enabled:    true
 
 mopa_bootstrap:
-    form: ~  # Adds twig form theme  support
+    form:
+        render_optional_text:  true
+        render_required_asterisk:  true
+
 
 oneup_uploader:
     mappings:
@@ -93,3 +97,7 @@ oneup_uploader:
 
 genemu_form:
     select2: ~
+
+hautelook_alice:
+    locale: en_US   # default
+    seed: 1         # default

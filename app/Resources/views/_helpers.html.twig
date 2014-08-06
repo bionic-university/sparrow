@@ -24,5 +24,7 @@
             <div class="btn btn-default"><a href="{{ path('user_add_friend',{ 'id': user.id }) }}">Add to friends</a>
             </div>
         {% endif %}
+        <div class="btn btn-default"><a href="{{ path('messages',{ 'send_message[toUser]': user.id }) }}">Write a message</a>
+        </div>
     </div>
 {% endmacro %}

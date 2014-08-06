@@ -1,0 +1,15 @@
+{% extends '::front.html.twig' %}
+
+{% block profile %}
+    <h1>Community creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('communities') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock profile %}

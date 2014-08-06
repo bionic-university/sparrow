@@ -6,3 +6,9 @@ services:
         arguments: [@doctrine.orm.entity_manager]
         tags:
         - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
+
+    bionic_university_community.admin.community:
+        class: BionicUniversity\Bundle\CommunityBundle\Admin\CommunityAdmin
+        arguments: [~, BionicUniversity\Bundle\CommunityBundle\Entity\Community, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Community}

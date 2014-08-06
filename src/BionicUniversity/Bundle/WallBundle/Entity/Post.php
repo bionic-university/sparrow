@@ -5,6 +5,9 @@ use BionicUniversity\Bundle\UserBundle\Entity\User;
 use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
 use Symfony\Component\Validator\Constraints\DateTime;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 /**
  * Post
  */
@@ -12,26 +15,32 @@ class Post
 {
     /**
      * @var integer
+     * @Assert\Type(type="integer")
      */
     private $id;
 
     /**
      * @var User
+     * @Assert\NotBlank()
      */
     private $author;
 
     /**
      * @var string
+     * @Assert\Type(type="string")
      */
     private $text;
 
     /**
      * @var \DateTime
+     * @Assert\DateTime()
+     * @Assert\NotBlank()
      */
     private $createdAt;
 
     /**
      * @var Community
+     * @Assert\NotBlank()
      */
     private $community;
 
@@ -98,6 +107,18 @@ class Post
     public function getCommunity()
     {
         return $this->community;
+    }
+
+    /**
+     * Set community
+     * @param  Community $community
+     * @return Community
+     */
+    public function setCommunity(Community $community)
+    {
+        $this->community = $community;
+
+        return $this;
     }
 
     /**

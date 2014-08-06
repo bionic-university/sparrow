@@ -19,9 +19,10 @@ BionicUniversity\Bundle\CommunityBundle\Entity\Community:
             type: string
             length: '255'
             nullable: true
-    oneToOne:
+    manyToOne:
         owner:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
+            inversedBy: myCommunities
     oneToMany:
         memberships:
             targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Membership

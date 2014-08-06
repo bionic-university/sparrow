@@ -15,29 +15,26 @@ use BionicUniversity\Bundle\UserBundle\Doctrine\ORM\FriendshipRepository;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use BionicUniversity\Bundle\WallBundle\Form\PostType;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Oneup\UploaderBundle\Event\PostPersistEvent;
-use Symfony\Component\Security\Core\SecurityContextInterface;
-
 class UserController extends Controller
 {
     public function profileAction($id)
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
-        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findByAuthor($entity, ['createdAt'=>'desc']);
+        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findByAuthor($entity);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
         $form = $this->createPostForm();
-
+        $csrfToken = $this->get('form.csrf_provider')->generateCsrfToken('delete_post');
 
         return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array(
             'entity' => $entity,
             'post' => $posts,
             'form' => $form->createView(),
+            'csrfToken' => $csrfToken,
         ));
     }
 
@@ -164,6 +161,7 @@ class UserController extends Controller
                 array_push($unconfirmedInvites, $friendship->getUserSender());
             }
         }
+
         return $this->render('BionicUniversityUserBundle:User/Front:friends.html.twig', [
             'my_friends' => $myFriends,
             'all_people' => $em->getRepository("BionicUniversityUserBundle:User")->findAll(),
@@ -171,7 +169,6 @@ class UserController extends Controller
             'invites' => $unconfirmedInvites
         ]);
     }
-
 
     public function addFriendAction($id)
     {
@@ -273,6 +270,7 @@ class UserController extends Controller
 
         return $this->render('@BionicUniversityUser/User/Front/invites.html.twig', ['invites' => $unconfirmedInvites]);
     }
+
     /**
      * Creates a form to create user posts.
      *
