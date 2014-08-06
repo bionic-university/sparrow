@@ -53,7 +53,6 @@ class Community
 
     /**
      * @var User
-     * @Assert\NotBlank()
      */
     private $owner;
 

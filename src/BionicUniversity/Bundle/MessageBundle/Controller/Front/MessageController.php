@@ -20,16 +20,16 @@ class MessageController extends Controller
      */
     public function messagesAction($id = null)
     {
-        $user = $this->getUser();
+        $user=$this->getUser();
 
         $em = $this->getDoctrine()->getManager();
-        $outcomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByFromUser($user, ['createdAt' => 'desc']);
-        $incomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByToUser($user, ['createdAt' => 'desc']);
+        $outcomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByFromUser($user, ['createdAt'=>'desc']);
+        $incomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByToUser($user, ['createdAt'=>'desc']);
 
         $message = new Message();
-        if (null !== $id) {
+        if(null !== $id){
             $receiver = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
-            if (!$receiver) {
+            if(!$receiver){
                 throw $this->createNotFoundException('User not found');
             }
             $message->setToUser($receiver);
@@ -48,7 +48,7 @@ class MessageController extends Controller
     public function lastMessageAction($max = 3)
     {
         $user = $this->getUser();
-        $entity = $this->getDoctrine()->getManager()->getRepository("BionicUniversityMessageBundle:Message")->findBy(['toUser' => $user], ['createdAt' => 'desc'], $max);
+        $entity = $this->getDoctrine()->getManager()->getRepository("BionicUniversityMessageBundle:Message")->findBy(['toUser' => $user],['createdAt' => 'desc'],$max);
 
         return $this->render("@BionicUniversityMessage/Message/Front/last_messages.html.twig", ['lastMessages' => $entity]);
     }
@@ -59,23 +59,28 @@ class MessageController extends Controller
      */
     public function createAction(Request $request)
     {
-        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+
+        $user=$this->getUser();
 
         $em = $this->getDoctrine()->getManager();
-        $outcomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByFromUser($user, ['createdAt' => 'desc']);
-        $incomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByToUser($user, ['createdAt' => 'desc']);
+        $outcomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByFromUser($user, ['createdAt'=>'desc']);
+        $incomingMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findByToUser($user, ['createdAt'=>'desc']);
+
 
         $entity = new Message();
         $entity->setFromUser($this->getUser());
 
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-        if ($form->isValid()) {
+
+        if ($form->isValid()){
             $em->persist($entity);
             $em->flush();
-            return $this->redirect($this->generateUrl('messages'));
 
+            return $this->redirect($this->generateUrl('messages'));
         }
+
         return $this->render('BionicUniversityMessageBundle:Message:Front/messages.html.twig',
             array(
                 'out_mess' => $outcomingMessages,
@@ -83,6 +88,7 @@ class MessageController extends Controller
                 'form' => $form->createView(),
             )
         );
+
     }
 
     /**
@@ -98,7 +104,7 @@ class MessageController extends Controller
             'action' => $this->generateUrl('message_create_front')
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create', 'attr' => ['class' => 'btn btn-success pull-right']));
+        $form->add('submit', 'submit', array('label' => 'Create', 'attr'=>['class' => 'btn btn-success pull-right']));
 
         return $form;
     }

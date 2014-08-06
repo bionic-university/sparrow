@@ -25,7 +25,6 @@ class Membership
 
     /**
      * @var Community
-     * @Assert\NotBlank()
      */
     private $community;
 

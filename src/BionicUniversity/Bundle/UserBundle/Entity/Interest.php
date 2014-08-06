@@ -15,7 +15,6 @@ class Interest
     /**
      * @var integer
      * @Assert\Type(type="integer")
-     * @Assert\NotBlank()
      */
     protected $id;
 

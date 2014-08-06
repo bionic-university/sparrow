@@ -17,14 +17,13 @@ class User extends BaseUser
     /**
      * @var integer
      * @Assert\Type(type="integer")
-     * @Assert\NotBlank()
      */
     protected $id;
 
     /**
      * @var string
      * @Assert\Length(
-     *      max = "255",
+     *      max = "255000",
      *      )
      */
     private $avatar;

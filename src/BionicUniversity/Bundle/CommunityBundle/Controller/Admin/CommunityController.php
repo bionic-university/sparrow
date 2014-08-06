@@ -14,7 +14,6 @@ use BionicUniversity\Bundle\CommunityBundle\Form\CommunityType;
  */
 class CommunityController extends Controller
 {
-
     /**
      * Lists all Community entities.
      *

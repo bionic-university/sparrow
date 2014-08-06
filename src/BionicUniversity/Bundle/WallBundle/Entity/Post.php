@@ -16,6 +16,7 @@ class Post
     /**
      * @var integer
      * @Assert\Type(type="integer")
+     * @Assert\NotBlank()
      */
     private $id;
 
@@ -28,10 +29,6 @@ class Post
     /**
      * @var string
      * @Assert\Type(type="string")
-     * @Assert\Length(
-     *      max = "14",
-     *      maxMessage="Wrong length"
-     *      )
      * @Assert\NotBlank()
      */
     private $text;
