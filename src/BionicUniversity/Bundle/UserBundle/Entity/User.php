@@ -613,6 +613,16 @@ class User extends BaseUser
     public function getFullAvatar(){
         return sprintf('<img src="/web/uploads/avatar/%s"/>', $this->avatar);
     }
+
+    public function haveRequest(User $user)
+    {
+        return count($this->getFriends()->filter(function ($element) use ($user) {
+            /** @var Friendship $element */
+            return $element->getUserReceiver()->getId() === $user->getId()
+            || $element->getUserSender()->getId() === $user->getId();
+        })) == 0;
+    }
+
     public function isFriendOf(User $user)
     {
         return count($this->getFriends()->filter(function ($element) use ($user) {
