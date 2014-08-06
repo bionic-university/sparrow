@@ -614,7 +614,7 @@ class User extends BaseUser
         return sprintf('<img src="/web/uploads/avatar/%s"/>', $this->avatar);
     }
 
-    public function haveRequest(User $user)
+    public function hasRequest(User $user)
     {
         return count($this->getFriends()->filter(function ($element) use ($user) {
             /** @var Friendship $element */
