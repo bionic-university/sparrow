@@ -17,6 +17,8 @@ class User extends BaseUser
     const GENDER_MALE = 'm';
     const GENDER_FEMALE = 'f';
 
+    const ROLE_01 = 'User';
+    const ROLE_02 = 'Admin';
     /**
      * @var integer
      * @Assert\Type(type="integer")
@@ -182,6 +184,7 @@ class User extends BaseUser
         $this->groups = ['ROLE_USER'];
         $this->interests = new ArrayCollection();
         $this->myCommunities = new ArrayCollection();
+        $this->setEnabled(false);
     }
 
     public function __toString()
@@ -660,5 +663,15 @@ class User extends BaseUser
     public function getMyCommunities()
     {
         return $this->myCommunities;
+    }
+
+    /**
+     * Returns the user roles
+     *
+     * @return array The roles
+     */
+    public function getRoles()
+    {
+        return $this->roles;
     }
 }
