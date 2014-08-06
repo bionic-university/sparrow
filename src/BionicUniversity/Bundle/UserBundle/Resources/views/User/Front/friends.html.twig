@@ -28,7 +28,7 @@
                                         <div class="col-sm-9">
                                             <div class="media">
                                                 <a class="pull-left margin-none" href="#">
-                                                    <img class="img-clean" src="{{ friend.avatar }}" alt="..." width="100" height="100">
+                                                    <img class="img-clean" src="{{ asset('/uploads/avatar/'~ friend.avatar) }}" alt="..." width="100" height="100">
                                                 </a>
                                                 <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
                                                     <h4 class="media-heading"><a href="{{ path('user_profile',{'id':friend.id}) }}" class="text-inverse">{{friend.firstName }} {{friend.lastName}}</a></h4>
@@ -68,7 +68,7 @@
                                         <div class="col-sm-9">
                                             <div class="media">
                                                 <a class="pull-left margin-none" href="#">
-                                                    <img class="img-clean" src="{{ request.avatar }}" alt="..." width="100" height="100">
+                                                    <img class="img-clean" src="{{ asset('/uploads/avatar/'~ request.avatar) }}" alt="..." width="100" height="100">
                                                 </a>
                                                 <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
                                                     <h4 class="media-heading"><a href="{{ path('user_profile',{'id':request.id}) }}" class="text-inverse">{{request.firstName }} {{request.lastName}}</a></h4>
@@ -110,7 +110,7 @@
                                         <div class="col-sm-9">
                                             <div class="media">
                                                 <a class="pull-left margin-none" href="#">
-                                                    <img class="img-clean" src="{{ invite.avatar }}" alt="..." width="100" height="100">
+                                                    <img class="img-clean" src="{{ asset('/uploads/avatar/'~ invite.avatar) }}" alt="..." width="100" height="100">
                                                 </a>
                                                 <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
                                                     <h4 class="media-heading"><a href="{{ path('user_profile',{'id':invite.id}) }}" class="text-inverse">{{invite.firstName }} {{invite.lastName}}</a></h4>
@@ -151,7 +151,7 @@
                                         <div class="col-sm-9">
                                             <div class="media">
                                                 <a class="pull-left margin-none" href="#">
-                                                    <img class="img-clean" src="{{ people.avatar }}" alt="..." width="100" height="100">
+                                                    <img class="img-clean" src="{{ asset('/uploads/avatar/'~ people.avatar) }}" alt="..." width="100" height="100">
                                                 </a>
                                                 <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
                                                     <h4 class="media-heading"><a href="{{ path('user_profile',{'id':people.id}) }}" class="text-inverse">{{people.firstName }} {{people.lastName}}</a></h4>

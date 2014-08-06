@@ -32,6 +32,10 @@ user_friend_requests:
 user_friend_invites:
     path: /invites
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:friendInvites" }
+user_about_me:
+    path: /about/
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:about"}
 user_about:
     path: /about/{id}
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:about"}
+
