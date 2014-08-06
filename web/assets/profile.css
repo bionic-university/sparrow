@@ -1,16 +1,17 @@
 .avatar{
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height:100%;
 }
 .avatar_mini{
     width: 40px;
     height: 40px;
-}
-.drop_avatar{
-    width: 200px;
-    height: 200px;
     background-color: lightgrey;
 }
+/*.drop_avatar{*/
+    /*width: 200px;*/
+    /*height: 200px;*/
+    /*background-color: lightgrey;*/
+/*}*/
 .createdAt{
     text-align: right;
     float: right;
@@ -47,4 +48,18 @@ width: 90%;
 }
 .messages_list, .createdAt{
     display: inline-block;
+}
+.dz-max-files-reached{
+    background-color: red;
+}
+.message_dz{
+    text-align: center;
+    font-style: oblique;
+    font-family: Helvetica, sans-serif;
+}
+.squared{
+    border: 4px, dashed, lightskyblue;
+    width: 20%;
+    height:100%;
+
 }

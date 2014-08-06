@@ -1,3 +1,23 @@
 community_profile:
     path:     /id{id}
     defaults: { _controller: "BionicUniversityCommunityBundle:Front/Community:profile" }
+create_new:
+    path:     /new
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/Community:new" }
+front_community_create:
+    path:     /create
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/Community:create" }
+    requirements: { _method: post }
+front_community_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/Community:edit" }
+
+front_community_update:
+    path:     /{id}/update
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/Community:update" }
+    requirements: { _method: post|put }
+
+front_community_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/Community:delete" }
+    requirements: { _method: post|delete }
