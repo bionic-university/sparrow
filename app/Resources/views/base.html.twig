@@ -19,6 +19,13 @@
             {% block stylesheets %}
             {% endblock %}
             <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+            <script src="{{ asset('assets/library/jquery/jquery.min.js') }}"></script>
+            <script src="{{ asset('assets/library/jquery/jquery-migrate.min.js') }}"></script>
+            <script src="{{ asset('assets/library/modernizr/modernizr.js') }}"></script>
+            <script src="{{ asset('assets/plugins/core_less-js/less.min.js') }}"></script>
+            <script src="{{ asset('assets/plugins/charts_flot/excanvas.js') }}"></script>
+            <script src="{{ asset('assets/plugins/core_browser/ie/ie.prototype.polyfill.js') }}"></script>
+            <script>if (/*@cc_on!@*/false && document.documentMode === 10) { document.documentElement.className+=' ie ie10'; }</script>
 
         </head>
     {% endblock header %}
@@ -76,6 +83,24 @@
                     return false;
                 });
             });
+        </script>
+        <!-- Global -->
+        <script data-id="App.Config">
+            var App = {};	var basePath = '',
+                    commonPath = '../assets/',
+                    rootPath = '../',
+                    DEV = false,
+                    componentsPath = '../assets/components/';
+
+            var primaryColor = '#25ad9f',
+                    dangerColor = '#b55151',
+                    successColor = '#609450',
+                    infoColor = '#4a8bc2',
+                    warningColor = '#ab7a4b',
+                    inverseColor = '#45484d';
+
+            var themerPrimaryColor = primaryColor;
+
         </script>
         <script src="{{ asset('assets/plugins/core_nicescroll/jquery.nicescroll.min.js') }}"></script>
         <script src="{{ asset('assets/plugins/core_breakpoints/breakpoints.js') }}"></script>

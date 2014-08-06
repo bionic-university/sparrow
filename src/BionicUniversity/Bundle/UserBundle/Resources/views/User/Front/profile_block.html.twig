@@ -1,0 +1,33 @@
+{% block profile %}
+<div class="col-md-4 col-lg-3 k">
+    <div class="widget">
+        <div class="widget-body text-center">
+            <a href=""><img src="{{ app.security.token.user.avatar }}" width="120" alt="" class="img-circle"></a>
+            <h2 class="strong margin-none">{{ app.security.token.user.firstname }}</h2>
+            <div class="innerB">Working at {{ app.security.token.user.department }}</div>
+            <div class="btn-group-vertical btn-block">
+                    <a href="{{ path('user_setting') }}" class="btn btn-default"><i class="fa fa-cog pull-right"></i>Edit Account</a>
+                    <a href="/logout" class="btn btn-default"><i class="fa fa-cog pull-right"></i>Logout</a>
+            </div>
+        </div>
+    </div>
+
+    {% block recent_news %}
+        {{ render(controller('BionicUniversityWallBundle:Front/Article:index')) }}
+    {% endblock recent_news %}
+
+    <!-- Widget -->
+    <div class="widget widget-heading-simple widget-body-white">
+
+        <!-- Widget Heading -->
+        <div class="widget-head">
+            <h4 class="heading glyphicons glyphicons-social twitter"><i></i>Twitter feed</h4>
+        </div>
+        <!-- // Widget Heading END -->
+
+        <div class="widget-body" data-builder-exclude="element children">
+            <div class="jstwitter" data-gridalicious="false" data-type="slide" data-images="false"><span class="label label-default">Loading .. </span></div>
+        </div>
+    </div>
+    <!-- // Widget END -->
+    {% endblock profile %}

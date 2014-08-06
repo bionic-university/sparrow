@@ -34,7 +34,12 @@ class UserController extends Controller
         ]);
     }
 
+    public function aboutAction($id)
+    {
+        $user  = $this->getDoctrine()->getRepository("BionicUniversityUserBundle:User")->find($id);
 
+        return $this->render('@BionicUniversityUser/User/Front/about.html.twig',['user' => $user]);
+    }
 
     public function createPasswordAction(Request $request)
     {

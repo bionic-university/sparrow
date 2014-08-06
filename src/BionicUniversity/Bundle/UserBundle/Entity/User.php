@@ -50,6 +50,27 @@ class User extends BaseUser
     private $gender;
 
     /**
+     * @var string
+     */
+    private $aboutMe;
+
+    /**
+     * @param string $aboutMe
+     */
+    public function setAboutMe($aboutMe)
+    {
+        $this->aboutMe = $aboutMe;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAboutMe()
+    {
+        return $this->aboutMe;
+    }
+
+    /**
      * @var ArrayCollection
      */
     private $incomingMessages;
