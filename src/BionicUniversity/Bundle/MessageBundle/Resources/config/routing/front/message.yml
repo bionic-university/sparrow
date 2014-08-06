@@ -5,7 +5,7 @@ messages_reply:
     path:     /messages/reply/{id}
     defaults: { _controller: "BionicUniversityMessageBundle:Front/Message:messages",  }
 message_create_front:
-    path:     /create
+    path:     /create/{id}
     defaults: { _controller: "BionicUniversityMessageBundle:Front/Message:create" }
     requirements: { _method: post }
 message_conversation:

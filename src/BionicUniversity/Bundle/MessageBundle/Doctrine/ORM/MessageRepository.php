@@ -15,7 +15,7 @@ class MessageRepository extends EntityRepository
             ->orWhere('f =:firstUser AND t = :secondUser')
             ->orWhere('f =:secondUser AND t = :firstUser')
             ->setParameters(['firstUser' => $firstUser, 'secondUser' => $secondUser])
-            ->orderBy('message.createdAt')
+            ->orderBy('message.createdAt', 'desc')
             ->getQuery();
 
         return $query->getResult();
