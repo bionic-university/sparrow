@@ -9,11 +9,7 @@
     <div class="row row-merge borders">
     <div class="col-md-3 listWrapper">
         <div class="innerAll">
-            {#<form autocomplete="off" class="form-inline margin-none">#}
-                {#<div class="input-group input-group-sm">#}
                     {{ form(userSearchForm) }}
-                {#</div>#}
-            {#</form>#}
         </div>
         <div class="bg-gray text-center strong border-top innerAll half"> {% if messages | length != 0 %}
                 {{ messages | length }}
@@ -48,7 +44,7 @@
         </div>
         <div class="bg-gray innerAll text-center margin-none"></div>
         <div  id="type" class=" border-top">
-            {{ form(messageForm) }}
+            {{ form(messageForm)  }}
         </div>
 
         <div class="widget border-top padding-none margin-none">

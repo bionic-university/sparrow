@@ -29,11 +29,11 @@ class UserController extends Controller
 
         $form = $this->createPostForm();
 
-        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array(
+        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', [
             'entity' => $entity,
             'posts' => $posts,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     public function aboutAction($id = null)
@@ -235,14 +235,14 @@ class UserController extends Controller
      */
     private function createPostForm()
     {
-        $form = $this->createForm(new PostType(), null, array(
+        $form = $this->createForm(new PostType(), null, [
             'action' => $this->generateUrl('create_post'),
             'method' => 'POST',
             'show_legend' => true,
             'label' => 'Write a new post'
-        ));
+        ]);
 
-        $form->add('submit', 'submit', array('label' => 'Create new post', 'attr' => ['class' => 'pull-right btn btn-success']));
+        $form->add('submit', 'submit', ['label' => 'Create new post', 'attr' => ['class' => 'pull-right btn btn-success']]);
 
         return $form;
     }

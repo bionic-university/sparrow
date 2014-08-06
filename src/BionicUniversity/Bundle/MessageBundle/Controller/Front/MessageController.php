@@ -31,7 +31,6 @@ class MessageController extends Controller
             $interlocutor = $em->getRepository("BionicUniversityUserBundle:User")->find($id);
             $message->setToUser($interlocutor);
             $messageForm = $this->createCreateForm($message)->createView();
-
         }
         else
         {
@@ -44,7 +43,8 @@ class MessageController extends Controller
             ->createFormBuilder($user)
             ->add('friends', 'entity', [
                 'class'=> 'BionicUniversity\Bundle\UserBundle\Entity\User',
-                'label'=> ''
+                'show_legend' => false,
+                'label' => false
             ])
             ->getForm();
 
@@ -92,11 +92,8 @@ class MessageController extends Controller
 
         return $this->render('BionicUniversityMessageBundle:Message:Front/messages.html.twig',
             [
-                'out_mess' => $outcomingMessages,
-                'in_mess' => $incomingMessages,
-                'form' => $form->createView(),
-            ]
-        );
+                'form' => $form->createView()
+            ]);
 
     }
 
@@ -123,7 +120,7 @@ class MessageController extends Controller
             'action' => $this->generateUrl('message_create_front', ['id'=>$entity->getToUser()->getId()])
         ]);
 
-        $form->add('submit', 'submit', ['label' => 'Create', 'attr'=>['class' => 'btn btn-success pull-right']]);
+        $form->add('submit', 'submit', ['label' => 'Write', 'attr' =>['class' => 'btn btn-default bg-white btn-sm']]);
 
         return $form;
     }

@@ -22,3 +22,7 @@ div.media-object img{
 span.messagestatus p{
     font-size: 10px;
 }
+
+form fieldset legend{
+    display: none
+}
