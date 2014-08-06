@@ -9,7 +9,9 @@
             </div>
 
             <div class="media-body">
-                <div><span class="strong">{{ user }}</span> <small class="text-italic text-white pull-right label label-default"></small></div>
+                <div><span class="strong">{{ user }}</span> <small class="text-italic text-white pull-right label label-default">
+                        received {{ user.incomingMessages[0].createdAt | date ("h:i m/d/Y")}}
+                </small></div>
                 <div>{{ user.incomingMessages[0].body | raw}}</div>
             </div>
         </div>

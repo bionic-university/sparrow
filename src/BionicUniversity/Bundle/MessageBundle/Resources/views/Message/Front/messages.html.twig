@@ -10,7 +10,7 @@
     <div class="col-md-3 listWrapper">
         <div class="innerAll">
             <form autocomplete="off" class="form-inline margin-none">
-                <div class="input-group input-group-sm">
+                <div class= input-group input-group-sm">
                     <input type="text" class="form-control" placeholder="Find messages .." />
 								<span class="input-group-btn">
 									<button type="button" class="btn btn-primary btn-xs pull-right"><i class="fa fa-search"></i></button>
@@ -19,8 +19,8 @@
             </form>
         </div>
         <div class="bg-gray text-center strong border-top innerAll half"> {% if messages | length != 0 %}
-                {{ messages | length }}
-            {% else %}Haven't
+                This conversation contains {{ messages | length }}
+            {% else %}Select conversation to send
             {% endif %}
             messages <i class="fa fa-circle-arrow-down"></i></div>
         <ul class="list-unstyled">
@@ -39,10 +39,10 @@
                 <div class="media-body innerTB innerR">
                     <div class="innerT half pull-right">
                         <a  href="#type" class=" btn btn-default bg-white btn-sm" data-toggle="collapse">
-                            <i class="fa fa-pencil"></i> Write
+                            <i class="fa fa-pencil"></i> Send
                         </a>
                     </div>
-                    <h4 href="" class="text-white pull-left innerAll strong display-block margin-none">{{ interlocutor }}</h4>
+                    <h4 href="" class="text-white pull-left innerAll strong display-block margin-none">{{ interlocutor | raw}}</h4>
 
 
                 </div>
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="bg-gray innerAll text-center margin-none"></div>
-        <div  id="type" class="collapse border-top">
+        <div  id="type" class="border-top">
             <textarea type="text" class="form-control rounded-none border-none" placeholder="Write your messages..."></textarea>
         </div>
 
@@ -80,7 +80,8 @@
                         <div class="col-sm-6 hidden-xs">
                             <i class="icon-time-clock pull-right text-muted innerT half fa fa-2x"></i>
 										<span class="pull-right innerR innerT text-right  text-muted">
-										{{ message.createdAt | date }}
+										{% if message.isread == '1' %} read {% else %} unread {% endif %}
+                                        {{ message.createdAt | date ('h:i d/m/Y')}}
 										</span>
                         </div>
                     </div>
