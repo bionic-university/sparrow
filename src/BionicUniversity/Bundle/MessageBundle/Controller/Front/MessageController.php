@@ -120,7 +120,7 @@ class MessageController extends Controller
             'action' => $this->generateUrl('message_create_front', ['id'=>$entity->getToUser()->getId()])
         ]);
 
-        $form->add('submit', 'submit', ['label' => 'Write', 'attr' =>['class' => 'btn btn-default bg-white btn-sm']]);
+        $form->add('submit', 'submit', ['label' => 'Write', 'attr' =>['class' => 'btn pull-right btn btn-success']]);
 
         return $form;
     }
