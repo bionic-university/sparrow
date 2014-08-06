@@ -6,7 +6,7 @@ use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
 use Doctrine\Common\Collections\ArrayCollection;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use FOS\UserBundle\Model\User as BaseUser;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * User
  */
@@ -42,6 +42,7 @@ class User extends BaseUser
 
     /**
      * @var string
+     * @Assert\NotBlank()
      */
     private $department;
 
@@ -522,7 +523,7 @@ class User extends BaseUser
      */
     public function getAvatar()
     {
-        return $this->avatar;
+        return (null !== $this->avatar) ? $this->avatar : 'no_avatar.jpg';
     }
 
     public function getFullAvatar(){

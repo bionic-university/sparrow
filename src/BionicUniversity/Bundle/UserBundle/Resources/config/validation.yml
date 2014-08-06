@@ -1,0 +1,4 @@
+BionicUniversity\UserBundle\Entity\User:
+    properties:
+        department:
+             - NotBlank: ~

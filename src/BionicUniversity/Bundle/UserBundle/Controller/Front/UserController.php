@@ -27,11 +27,11 @@ class UserController extends Controller
 
         $form = $this->createPostForm();
 
-        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array(
+        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', [
             'entity' => $entity,
-            'post' => $posts,
+            'posts' => $posts,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     public function createPasswordAction(Request $request)
@@ -112,7 +112,7 @@ class UserController extends Controller
             return $this->redirect($this->generateUrl('user_profile', ['id' => $id]));
         }
 
-        return $this->render('BionicUniversityUserBundle:User/Admin:edit.html.twig', [
+        return $this->render('BionicUniversityUserBundle:User/Front:settings.html.twig', [
             'entity' => $entity,
             'edit_form' => $editForm->createView(),
         ]);
