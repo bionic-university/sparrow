@@ -20,7 +20,7 @@
                                 <div class="media-body innerTB half">
 
                                     {% if app.security.token.user == post.author %}
-                                        <a href="#" class="pull-right innerT innerR text-white">
+                                        <a href="{{ path('delete_post', {'id': post.id}) }}" class="pull-right innerT innerR text-white">
                                             <i class="icon-circle-delete fa fa-2x "></i>
                                         </a>
                                     {% endif %}
