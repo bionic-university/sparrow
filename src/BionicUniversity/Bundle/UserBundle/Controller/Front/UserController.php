@@ -127,7 +127,7 @@ class UserController extends Controller
         $myFriendships = $em->getRepository("BionicUniversityUserBundle:Friendship")->findFriends($user);
         $myFriends = [];
         /**
-         * #@var Friendship $friendship
+         * @var Friendship $friendship
          */
         foreach ($myFriendships as $friendship) {
             if ($friendship->getUserReceiver() == $user) {

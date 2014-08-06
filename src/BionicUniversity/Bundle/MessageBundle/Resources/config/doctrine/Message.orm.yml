@@ -1,5 +1,6 @@
 BionicUniversity\Bundle\MessageBundle\Entity\Message:
     type: entity
+    repositoryClass: BionicUniversity\Bundle\MessageBundle\Doctrine\ORM\MessageRepository
     id:
         id:
             type: integer
