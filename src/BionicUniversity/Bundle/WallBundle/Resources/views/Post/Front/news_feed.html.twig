@@ -21,7 +21,7 @@
                         <div class="media-body innerTB half">
 
                             {% if app.security.token.user == feed.author %}
-                                <a href="{{ path('delete_post', {'id': feed.author.id}) }}"
+                                <a href="{{ path('cmdelete_post', {'id': feed.author.id}) }}"
                                    class="pull-right innerT innerR text-white">
                                     <i class="icon-circle-delete fa fa-2x "></i>
                                 </a>
