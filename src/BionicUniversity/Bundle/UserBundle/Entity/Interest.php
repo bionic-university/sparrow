@@ -29,6 +29,31 @@ class Interest
     private $name;
 
     /**
+     * @var string
+     * @Assert\Type(type="string")
+     * @Assert\Length(
+     *      max = "255000",
+     *      )
+     */
+    private $logo;
+
+    /**
+     * @param string $logo
+     */
+    public function setLogo($logo)
+    {
+        $this->logo = $logo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogo()
+    {
+        return $this->logo;
+    }
+
+    /**
      * @var ArrayCollection
      * @Assert\NotBlank()
      */

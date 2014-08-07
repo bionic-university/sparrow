@@ -107,8 +107,28 @@ class User extends BaseUser
 
     /**
      * @var string
+     * @Assert\Length(
+     *      max = "1000",
+     *      maxMessage="Permissible length of the story itself is 1000 characters"
+     *      )
      */
     private $aboutMe;
+
+
+    /**
+     * @var \DateTime
+     * @Assert\DateTime()
+     * @Assert\NotBlank()
+     */
+    private $joined;
+
+    /**
+     * @return \DateTime
+     */
+    public function getJoined()
+    {
+        return $this->joined;
+    }
 
     /**
      * @param string $aboutMe
@@ -164,6 +184,30 @@ class User extends BaseUser
     private $invites;
 
     /**
+     * @var string
+     * @Assert\Length(max = "15", maxMessage="This value cannot be greater than 15 characters")
+     * @Assert\NotBlank()
+     */
+    private $phoneNumber;
+
+    /**
+     * @param string $phoneNumber
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
+    }
+
+
+    /**
      * @var \DateTime
      * @Assert\Date(
      *      message = "This value must be YYYY-MM-DD format"
@@ -186,6 +230,7 @@ class User extends BaseUser
         $this->groups = ['ROLE_USER'];
         $this->interests = new ArrayCollection();
         $this->myCommunities = new ArrayCollection();
+        $this->joined = new \dateTime();
     }
 
     public function __toString()

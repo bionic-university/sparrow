@@ -11,6 +11,10 @@ BionicUniversity\Bundle\UserBundle\Entity\Interest:
         name:
             type: string
             length: '50'
+        logo:
+            type: string
+            length: '255'
+            nullable: true
     manyToMany:
         users:
           targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
