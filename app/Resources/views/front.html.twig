@@ -106,8 +106,11 @@
 
         <!--  SEARCH INPUT 100% WIDTH-->
         <div class="input-group hidden-xs pull-left">
-            <span class="input-group-addon"><i class="icon-search"></i></span>
-            <input type="text" class="form-control" placeholder="Search a friend"/>
+            <form action="{{ path('user_search') }}" method="POST">
+                <span class="input-group-addon"><i class="icon-search"></i></span>
+                <input type="text" class="form-control" placeholder="Search a friend" name="name"/>
+                <input type="submit" style="position: absolute; left: -9999px"/>
+            </form>
         </div>
     </div>
     {% block wrapper %}
