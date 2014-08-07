@@ -38,6 +38,7 @@ class Message
 
     /**
      * @var \DateTime
+     * @Assert\DateTime()
      * @Assert\NotBlank()
      */
     private $createdAt;
