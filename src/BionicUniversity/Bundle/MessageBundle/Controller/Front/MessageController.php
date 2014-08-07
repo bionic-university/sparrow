@@ -49,7 +49,7 @@ class MessageController extends Controller
                 'class'=> 'BionicUniversity\Bundle\UserBundle\Entity\User',
                 'show_legend' => false,
                 'label' => false,
-                'empty_value' => 'Choose an friend'
+                'empty_value' => 'Choose an friend',
                 'choices' => $user->getFriends(),
                 'attr'=>['style' => 'width:100%']
             ])
