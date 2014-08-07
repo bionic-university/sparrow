@@ -3,11 +3,11 @@
 namespace BionicUniversity\Bundle\WallBundle\Controller\Front;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use BionicUniversity\Bundle\UserBundle\Entity\Friendship;
 use BionicUniversity\Bundle\CommunityBundle\Entity\Membership;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
-use BionicUniversity\Bundle\UserBundle\Entity\User;
+use BionicUniversity\Bundle\UserBundle\Doctrine\ORM\FriendshipRepository;
+
 
 /**
  * Feed controller.
@@ -29,7 +29,7 @@ class FeedController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $communities = $this->findCommunities($user);
-        $friends = $this->findFriends($user);
+        $friends = $this->getDoctrine()->getRepository("BionicUniversityUserBundle:Friendship")->findFriends($user);
 
         return $em->getRepository("BionicUniversityWallBundle:Post")->getFeed($communities, $friends, $user);
     }
@@ -47,17 +47,4 @@ class FeedController extends Controller
         return $communities->getResult();
     }
 
-    public function findFriends($user)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $friends = $em->getRepository("BionicUniversityUserBundle:User")
-            ->createQueryBuilder('user')
-            ->leftJoin('user.requests', 'request')
-            ->leftJoin('user.invites', 'invite')
-            ->where('(request.userReceiver = :user OR invite.userSender = :user) AND request.acceptanceStatus = 1 AND invite.acceptanceStatus = 1')
-            ->setParameter('user', $user)
-            ->getQuery();
-
-        return $friends->getResult();
-    }
 }
