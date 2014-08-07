@@ -653,7 +653,7 @@ class User extends BaseUser
 
     public function getFullAvatar()
     {
-        return sprintf('/uploads/avatar/%s', $this->avatar);
+        return sprintf('/uploads/avatar/%s', $this->getAvatar());
     }
 
     public function hasRequest(User $user)

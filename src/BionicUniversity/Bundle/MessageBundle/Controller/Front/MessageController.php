@@ -23,6 +23,7 @@ class MessageController extends Controller
     public function messagesAction($id = null)
     {
         $user = $this->getUser();
+        $uid = $user->getId();
         $em = $this->getDoctrine()->getManager();
         $message = new Message();
         if(null != $id)
@@ -31,6 +32,9 @@ class MessageController extends Controller
             $interlocutor = $em->getRepository("BionicUniversityUserBundle:User")->find($id);
             $message->setToUser($interlocutor);
             $messageForm = $this->createCreateForm($message)->createView();
+            $unreadMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findBy(array( "toUser"=> $uid, 'fromUser' => $id,"isread" => "0"));
+            foreach ($unreadMessages as $elem){ $elem->setIsRead(1);}
+            $em->flush();
         }
         else
         {
@@ -126,7 +130,7 @@ class MessageController extends Controller
         return $form;
     }
 
-    public function unreadMessagesAction($max = 3)
+    public function unreadMessagesAction()
     {
         $user=$this->getUser();
         $uid = $user->getId();
