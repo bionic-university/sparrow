@@ -116,7 +116,7 @@
     $(function () {
 
         // Configure/customize these variables.
-        var showChar = 500; // How many characters are shown by default
+        var showChar = 300; // How many characters are shown by default
         var ellipsestext = "...";
         var moretext = " hide text";
         var lesstext = "full text";
@@ -129,8 +129,6 @@
                 var h = content.substr(showChar, content.length - showChar);
 
                 var html = c + '<span class="less">' + ellipsestext + '</span>' + '<span class="moretext" style="display:none">' + h + '</span><a href="" class="morelink">' + lesstext + '</a>';
-                /*
-                 */
                 $(this).html(html);
             }
         });
