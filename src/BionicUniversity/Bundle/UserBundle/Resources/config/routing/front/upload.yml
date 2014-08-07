@@ -1,0 +1,3 @@
+redactor_file_upload:
+    path:     /redactor/upload
+    defaults: { _controller: "BionicUniversityUserBundle:Front/Upload:upload" }

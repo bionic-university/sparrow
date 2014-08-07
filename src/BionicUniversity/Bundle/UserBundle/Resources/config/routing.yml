@@ -9,3 +9,7 @@ BionicUniversityUserBundle_front_user:
 BionicUniversityUserBundle_front_security:
         resource: "@BionicUniversityUserBundle/Resources/config/routing/front/security.yml"
         prefix:   /
+
+BionicUniversityUserBundle_front_upload:
+        resource: "@BionicUniversityUserBundle/Resources/config/routing/front/upload.yml"
+        prefix:   /

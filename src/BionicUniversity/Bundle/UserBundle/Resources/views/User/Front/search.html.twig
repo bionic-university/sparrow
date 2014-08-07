@@ -1,0 +1,67 @@
+{% extends "::front.html.twig" %}
+{% block content %}
+    <!-- Tabs -->
+    <div class="relativeWrap">
+        <div class="box-generic">
+            <h4>{{ users|length }} user(s) found by query "{{ query }}"</h4>
+            <div class="row row-merge">
+                {% for found in users %}
+                    <div class="col-md-12 col-lg-6 bg-white border-bottom">
+                        <div class="row">
+
+                            <div class="col-sm-9">
+                                <div class="media">
+                                    <a class="pull-left margin-none" href="{{ path('user_profile',{'id':found.id}) }}">
+                                        <img class="img-clean" src="{{ asset(found.fullAvatar) }}" alt="..."
+                                             width="100"
+                                             height="100">
+                                    </a>
+
+                                    <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
+                                        <h4 class="media-heading"><a href="{{ path('user_profile',{'id':found.id}) }}"
+                                                                     class="text-inverse">{{ found.firstName }} {{ found.lastName }}</a>
+                                        </h4>
+
+                                        <p>
+                                            <!-- <span class="text-success strong"><i class="fa fa-check"></i> found</span> &nbsp;  -->
+                                            <i class="fa fa-fw fa-map-marker text-muted"></i> {{ found.department }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="innerAll text-right">
+                                    <div class="btn-group-vertical btn-group-sm">
+                                        <a href="{{ path('message_conversation',{'id':found.id}) }}" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
+                                        {% if app.security.token.user.isFriendOf(found) %}
+                                            In friends
+                                        {% elseif app.security.token.user.hasRequest(found) %}
+                                            Request sent
+                                        {% else %}
+                                            <a href="{{ path('user_add_friend',{ 'id': found.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-bell"></i> Add</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    {% else %}
+                    No users found by query "{{ query }}"
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+
+    {% block profile %}
+        {% include('@BionicUniversityUser/User/Front/profile_block.html.twig') %}
+    {% endblock profile %}
+
+
+
+
+

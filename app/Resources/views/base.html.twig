@@ -97,7 +97,10 @@
         $(function () {
             $("select").select2();
 //            $('select:not([multiple])').select2();
-            $('textarea').redactor();
+            $('textarea').redactor(
+            {
+                fileUpload: '/redactor/upload'
+            });
             $('input[type="date"]').datepicker({
                 format: 'yyyy-mm-dd'
             });

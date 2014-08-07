@@ -106,8 +106,11 @@
 
         <!--  SEARCH INPUT 100% WIDTH-->
         <div class="input-group hidden-xs pull-left">
-            <span class="input-group-addon"><i class="icon-search"></i></span>
-            <input type="text" class="form-control" placeholder="Search a friend"/>
+            <form action="{{ path('user_search') }}" method="POST">
+                <span class="input-group-addon"><i class="icon-search"></i></span>
+                <input type="text" class="form-control" placeholder="Search a friend" name="name"/>
+                <input type="submit" style="position: absolute; left: -9999px"/>
+            </form>
         </div>
     </div>
     {% block wrapper %}
@@ -119,7 +122,7 @@
                 <div class="timeline-cover">
                     <div class="cover">
                         <div class="top">
-                            <img src="../assets//images/photodune-2755655-party-time-s.jpg" class="img-responsive" />
+                            <img src="{{ asset('assets/images/photodune-2755655-party-time-s.jpg') }}" class="img-responsive" />
                         </div>
                         <ul class="list-unstyled">
                             <li class="active"><a href="{{ path('feed') }}"><i class="fa fa-fw fa-clock-o"></i> <span>Feed</span></a></li>

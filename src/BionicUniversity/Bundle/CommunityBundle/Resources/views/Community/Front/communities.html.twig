@@ -40,6 +40,9 @@
                                             <div class="innerAll text-right">
                                                 <div class="btn-group-vertical btn-group-sm">
                                                     <a href="{{ path('leave_community',{ 'id': membership.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-ban"></i>Leave</a>
+                                                    {% if app.security.token.user == membership.community.owner %}
+                                                    <a href="{{ path('front_community_edit',{ 'id': membership.community.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-gear"></i>Edit</a>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>

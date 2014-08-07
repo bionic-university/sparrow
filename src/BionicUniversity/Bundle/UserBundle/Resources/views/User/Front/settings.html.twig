@@ -54,16 +54,7 @@
                 </div>
             </form>
         </div>
-
         {{ form(edit_form) }}
-
-        <ul class="record_actions">
-            <li>
-                <a href="{{ path('user_profile', { 'id': entity.id }) }}">
-                    Back
-                </a>
-            </li>
-        </ul>
     {% endblock content %}
 
 {% block javascripts %}

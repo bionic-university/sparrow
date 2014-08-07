@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
-        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findBy(['author'=>$entity, 'community'=>null], ['createdAt'=>'desc' ]);
+        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findBy(['author' => $entity, 'community' => null], ['createdAt' => 'desc']);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
@@ -35,8 +35,8 @@ class UserController extends Controller
 
     public function aboutAction($id = null)
     {
-        if($id)
-            $user  = $this->getDoctrine()->getRepository("BionicUniversityUserBundle:User")->find($id);
+        if ($id)
+            $user = $this->getDoctrine()->getRepository("BionicUniversityUserBundle:User")->find($id);
         else
             $user = $this->getDoctrine()->getRepository("BionicUniversityUserBundle:User")->find($this->getUser());
 
@@ -62,7 +62,7 @@ class UserController extends Controller
 
         //$friends = $user->getFriends();
 
-        return $this->render('@BionicUniversityUser/User/Front/about.html.twig',['user' => $user, 'friends' => $myFriends, 'interests' => $interests]);
+        return $this->render('@BionicUniversityUser/User/Front/about.html.twig', ['user' => $user, 'friends' => $myFriends, 'interests' => $interests]);
     }
 
     public function createPasswordAction(Request $request)
@@ -264,6 +264,17 @@ class UserController extends Controller
         $form->add('submit', 'submit', ['label' => 'Create new post', 'attr' => ['class' => 'pull-right btn btn-success']]);
 
         return $form;
+    }
+
+    public function searchAction(Request $request)
+    {
+        $queryString = $request->get('name');
+        $tokens = explode(' ', $queryString);
+        $users = $this->getDoctrine()->getManager()->getRepository('BionicUniversityUserBundle:User')->search($tokens);
+        return $this->render('BionicUniversityUserBundle:User/Front:search.html.twig', [
+            'users' => $users,
+            'query' =>$queryString
+        ]);
     }
 }
 

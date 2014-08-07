@@ -1,8 +1,5 @@
 {% extends '::front.html.twig' %}
-
-{% block profile -%}
-    <h1>Community edit</h1>
-
+{% block content %}
     <div class="squared">
         <form action="{{ oneup_uploader_endpoint('avatar') }}" class="dropzone" id="my-awesome-dropzone">
             <div class="dz-message message_dz"><h1>Drop</h1> file here to upload new avatar</div>
@@ -13,13 +10,15 @@
     </div>
 
     {{ form(edit_form) }}
+    <br />
+    <br />
+    {{ form(delete_form) }}
+{% endblock content %}
+ {% block profile %}
+     {% include('@BionicUniversityUser/User/Front/profile_block.html.twig') %}
+ {% endblock profile %}
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('community_profile',{'id':entity.id}) }}">
-            Back to the community
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
-{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock javascripts%}

@@ -24,9 +24,11 @@
                 <div class="widget-head border-bottom bg-gray">
                     <h5 class="innerAll pull-left margin-none">Basic Info</h5>
                     <div class="pull-right">
-                        <a href="" class="text-muted">
+                        {% if app.security.token.user == entity.owner %}
+                        <a href="{{ path('front_community_edit',{ 'id': entity.id }) }}" class="text-muted">
                             <i class="fa fa-pencil innerL"></i>
                         </a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="widget-body">
