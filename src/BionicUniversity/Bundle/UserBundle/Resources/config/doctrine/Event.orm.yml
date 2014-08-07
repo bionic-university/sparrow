@@ -1,0 +1,22 @@
+BionicUniversity\Bundle\UserBundle\Entity\Event:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '50'
+        date:
+            type: datetime
+    manyToMany:
+        users:
+          targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
+          mappedBy: interests
+          cascade: ['persist']
+
+
