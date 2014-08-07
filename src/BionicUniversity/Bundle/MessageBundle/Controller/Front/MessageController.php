@@ -3,6 +3,7 @@
 namespace BionicUniversity\Bundle\UserBundle\Doctrine\ORM;
 namespace BionicUniversity\Bundle\MessageBundle\Controller\Front;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BionicUniversity\Bundle\UserBundle\Doctrine\ORM\UserRepository;
@@ -44,7 +45,9 @@ class MessageController extends Controller
             ->createFormBuilder($user)
             ->add('friends', 'entity', [
                 'class'=> 'BionicUniversity\Bundle\UserBundle\Entity\User',
-                'label'=> ''
+                'label'=> '',
+                'choices' => $user->getFriends(),
+                'attr'=>['style' => 'width:100%']
             ])
             ->getForm();
 
@@ -53,7 +56,7 @@ class MessageController extends Controller
             'interlocutor' => $interlocutor,
             'userSearchForm' =>$userSearchForm->createView(),
             'token' => $this->get('form.csrf_provider')->generateCsrfToken(''),
-            'messageForm' => $messageForm
+            'messageForm' => $messageForm,
         ]);
     }
 
