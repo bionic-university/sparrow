@@ -31,9 +31,13 @@ class Event
      * @var \DateTime
      */
     private $date;
+
+    /**
+     * @var string
+     */
+    private $description;
     /**
      * @var ArrayCollection
-     * @Assert\NotBlank()
      */
     private $users;
 
@@ -130,4 +134,21 @@ class Event
     {
         return $this->users;
     }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
 }

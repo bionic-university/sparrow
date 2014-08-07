@@ -10,4 +10,16 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         dateOfBirth: <dateTime()>
         enabled: 1
         gender: m
-        roles: ['ROLE_SONATA_ADMIN']
+        roles: ['ROLE_SONATA_ADMIN', 'ROLE_USER']
+    mariia:
+        username: mzakrevska
+        firstName: Mariia
+        lastName: Zakrevska
+        email: zakrevska@bionic-hill.com
+        plainPassword: 123456
+        position: Administrator
+        dateOfBirth: <dateTime()>
+        enabled: 1
+        gender: f
+        department: @bionic-hill
+        roles: ['ROLE_SONATA_ADMIN', 'ROLE_USER']

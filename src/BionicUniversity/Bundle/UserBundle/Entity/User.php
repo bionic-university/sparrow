@@ -156,6 +156,12 @@ class User extends BaseUser
      * @var ArrayCollection
      */
     private $invites;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $events;
+
     /**
      * @var \DateTime
      * @Assert\NotBlank(
@@ -173,6 +179,7 @@ class User extends BaseUser
         $this->memberships = new ArrayCollection();
         $this->requests = new ArrayCollection();
         $this->invites = new ArrayCollection();
+        $this->events = new ArrayCollection();
         $this->roles = ['ROLE_USER'];
         $this->interests = new ArrayCollection();
         $this->myCommunities = new ArrayCollection();
@@ -277,7 +284,7 @@ class User extends BaseUser
      * @param  Department $department
      * @return User
      */
-    public function setDepartment(Department $department)
+    public function setDepartment(Department $department = null)
     {
         $this->department = $department;
 
@@ -602,7 +609,8 @@ class User extends BaseUser
         return (null !== $this->avatar) ? $this->avatar : 'no_avatar.jpg';
     }
 
-    public function getFullAvatar(){
+    public function getFullAvatar()
+    {
         return sprintf('/uploads/avatar/%s', $this->avatar);
     }
 
@@ -675,5 +683,50 @@ class User extends BaseUser
     public function getRoles()
     {
         return $this->roles;
+    }
+
+    /**
+     * Add myCommunities
+     *
+     * @param \BionicUniversity\Bundle\CommunityBundle\Entity\Community $myCommunities
+     * @return User
+     */
+    public function addMyCommunity(\BionicUniversity\Bundle\CommunityBundle\Entity\Community $myCommunities)
+    {
+        $this->myCommunities[] = $myCommunities;
+
+        return $this;
+    }
+
+    /**
+     * Remove myCommunities
+     *
+     * @param \BionicUniversity\Bundle\CommunityBundle\Entity\Community $myCommunities
+     */
+    public function removeMyCommunity(\BionicUniversity\Bundle\CommunityBundle\Entity\Community $myCommunities)
+    {
+        $this->myCommunities->removeElement($myCommunities);
+    }
+
+    /**
+     * Add event
+     *
+     * @param \BionicUniversity\Bundle\CommunityBundle\Entity\Event $event
+     * @return User
+     */
+    public function addEvent(Event $event)
+    {
+        $this->events[] = $event;
+        $event->addUser($this);
+    }
+
+    /**
+     * Remove myCommunities
+     *
+     * @param \BionicUniversity\Bundle\CommunityBundle\Entity\Event $event
+     */
+    public function removeEvent(Event $event)
+    {
+        $this->events->removeElement($$event);
     }
 }

@@ -11,12 +11,11 @@ BionicUniversity\Bundle\UserBundle\Entity\Event:
         name:
             type: string
             length: '50'
+        name:
+            type: text
         date:
             type: datetime
     manyToMany:
         users:
           targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
-          mappedBy: interests
-          cascade: ['persist']
-
-
+          inversedBy: events

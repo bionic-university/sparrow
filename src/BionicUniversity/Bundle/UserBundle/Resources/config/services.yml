@@ -67,3 +67,9 @@ services:
         arguments: [~, BionicUniversity\Bundle\UserBundle\Entity\Interest, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: Interest}
+
+    bionic_university_user.admin.event:
+        class: BionicUniversity\Bundle\UserBundle\Admin\EventAdmin
+        arguments: [~, BionicUniversity\Bundle\UserBundle\Entity\Event, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Event}

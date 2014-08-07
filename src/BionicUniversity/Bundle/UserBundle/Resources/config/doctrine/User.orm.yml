@@ -72,4 +72,8 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         department:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\Department
             inversedBy: users
+    manyToMany:
+        events:
+          targetEntity: BionicUniversity\Bundle\UserBundle\Entity\Event
+          mappedBy: users
     lifecycleCallbacks: {  }
