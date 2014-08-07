@@ -71,7 +71,7 @@
         <!-- ICON WITH DROPDOWN FOR NOTIFICATIONS    -->
         <ul class="notifications pull-left hidden-xs">
             <li class="dropdown notif">
-                <a href="#" class="dropdown-toggle"  data-toggle="dropdown"><i class="notif-block icon-envelope-1"></i><span class="fa"></span></a>
+                <a href="{{ path('messages') }}" class="dropdown-toggle"  data-toggle="dropdown"><i class="notif-block icon-envelope-1"></i><span class="fa"></span></a>
                 {{ render(controller('BionicUniversityMessageBundle:Front/Message:lastMessage', {
                 'max': 3
                 })) }}

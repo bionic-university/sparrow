@@ -26,6 +26,7 @@ div.media-object img{
 /*adjusts status text in msg body*/
 span.messagestatus p{
     font-size: 10px;
+    color:#636363;
 }
 
 form fieldset legend{
@@ -41,6 +42,10 @@ div.widget-body img.avatar {
     height:100%;
 }
 
+/*main page avatar fix*/
+div.widget-body {
+    padding:0px !important;
+}
 .col-sm-9 {
     width: 70% !important;
 }
