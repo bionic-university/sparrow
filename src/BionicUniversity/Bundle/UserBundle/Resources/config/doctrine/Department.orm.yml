@@ -1,4 +1,4 @@
-BionicUniversity\Bundle\UserBundle\Entity\Interest:
+BionicUniversity\Bundle\UserBundle\Entity\Department:
     type: entity
     table: null
     id:
@@ -11,13 +11,13 @@ BionicUniversity\Bundle\UserBundle\Entity\Interest:
         name:
             type: string
             length: '50'
-        icon:
+        imageUrl:
             type: string
-            length: '50'
-    manyToMany:
+            length: '255'
+            nullable: true
+    oneToMany:
         users:
           targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
-          mappedBy: interests
-          cascade: ['persist']
+          mappedBy: department
 
 

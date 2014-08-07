@@ -2,7 +2,7 @@
 
 namespace BionicUniversity\Bundle\MessageBundle\Entity;
 
-use BionicUniversity\Bundle\UserBundle\Entity;
+use BionicUniversity\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -38,6 +38,7 @@ class Message
 
     /**
      * @var \DateTime
+     * @Assert\DateTime()
      * @Assert\NotBlank()
      */
     private $createdAt;

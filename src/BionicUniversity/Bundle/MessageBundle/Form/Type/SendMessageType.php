@@ -31,9 +31,8 @@ class SendMessageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder
-            ->add('body');
+            ->add('body', null, ['label' => false]);
     }
 
     /**
@@ -41,9 +40,10 @@ class SendMessageType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'BionicUniversity\Bundle\MessageBundle\Entity\Message'
-        ));
+        $resolver->setDefaults([
+            'data_class' => 'BionicUniversity\Bundle\MessageBundle\Entity\Message',
+            'show_legend' => false
+        ]);
     }
 
     /**

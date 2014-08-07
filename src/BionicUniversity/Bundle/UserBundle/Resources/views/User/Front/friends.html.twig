@@ -27,8 +27,8 @@
 
                                         <div class="col-sm-9">
                                             <div class="media">
-                                                <a class="pull-left margin-none" href="#">
-                                                    <img class="img-clean" src="{{ asset('/uploads/avatar/'~ friend.avatar) }}" alt="..." width="100" height="100">
+                                                <a class="pull-left margin-none" href="{{ path('user_profile',{'id':friend.id}) }}">
+                                                    <img class="img-clean" src="{{ asset(friend.fullAvatar) }}" alt="..." width="100" height="100">
                                                 </a>
                                                 <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
                                                     <h4 class="media-heading"><a href="{{ path('user_profile',{'id':friend.id}) }}" class="text-inverse">{{friend.firstName }} {{friend.lastName}}</a></h4>
@@ -41,7 +41,7 @@
                                         <div class="col-sm-3">
                                             <div class="innerAll text-right">
                                                 <div class="btn-group-vertical btn-group-sm">
-                                                    <a href="" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
+                                                    <a href="{{ path('message_conversation',{'id':friend.id}) }}" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
                                                     <a href="{{ path('user_remove_friend',{ 'id': friend.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-ban"></i> Remove</a>
                                                 </div>
                                             </div>
@@ -67,11 +67,11 @@
 
                                         <div class="col-sm-9">
                                             <div class="media">
-                                                <a class="pull-left margin-none" href="#">
-                                                    <img class="img-clean" src="{{ asset('/uploads/avatar/'~ request.avatar) }}" alt="..." width="100" height="100">
+                                                <a class="pull-left margin-none" href="{{ path('user_profile',{'id':request.id}) }}">
+                                                    <img class="img-clean" src="{{ asset(request.fullAvatar) }}" alt="..." width="100" height="100">
                                                 </a>
                                                 <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
-                                                    <h4 class="media-heading"><a href="{{ path('user_profile',{'id':request.id}) }}" class="text-inverse">{{request.firstName }} {{request.lastName}}</a></h4>
+                                                    <h4 class="media-heading"><a href="{{ path('user_profile',{'id':request.id}) }}" class="text-inverse">{{ request }}</a></h4>
                                                     <p>
                                                         <!-- <span class="text-success strong"><i class="fa fa-check"></i> Friend</span> &nbsp;  -->
                                                         <i class="fa fa-fw fa-map-marker text-muted"></i> {{ request.department }}</p>
@@ -81,8 +81,8 @@
                                         <div class="col-sm-3">
                                             <div class="innerAll text-right">
                                                 <div class="btn-group-vertical btn-group-sm">
-                                                    <a href="" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
-                                                    <a href="{{ path('user_remove_friend',{'id': request.id}) }}" class="btn btn-primary"><i class="fa fa-fw fa-thumbs-up"></i> Remove request</a>
+                                                    <a href="{{ path('message_conversation',{'id':request.id}) }}" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
+                                                    <a href="{{ path('user_remove_friend',{'id': request.id}) }}" class="btn btn-primary"><i class="fa fa-fw fa-thumbs-up"></i>Cancel</a>
 
                                                 </div>
                                             </div>
@@ -109,11 +109,11 @@
 
                                         <div class="col-sm-9">
                                             <div class="media">
-                                                <a class="pull-left margin-none" href="#">
-                                                    <img class="img-clean" src="{{ asset('/uploads/avatar/'~ invite.avatar) }}" alt="..." width="100" height="100">
+                                                <a class="pull-left margin-none" href="{{ path('user_profile',{'id':invite.id}) }}">
+                                                    <img class="img-clean" src="{{ asset(invite.fullAvatar) }}" alt="..." width="100" height="100">
                                                 </a>
                                                 <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
-                                                    <h4 class="media-heading"><a href="{{ path('user_profile',{'id':invite.id}) }}" class="text-inverse">{{invite.firstName }} {{invite.lastName}}</a></h4>
+                                                    <h4 class="media-heading"><a href="{{ path('user_profile',{'id':invite.id}) }}" class="text-inverse">{{ invite }}</a></h4>
                                                     <p>
                                                         <!-- <span class="text-success strong"><i class="fa fa-check"></i> Friend</span> &nbsp;  -->
                                                         <i class="fa fa-fw fa-map-marker text-muted"></i> {{ invite.department }}</p>
@@ -123,7 +123,7 @@
                                         <div class="col-sm-3">
                                             <div class="innerAll text-right">
                                                 <div class="btn-group-vertical btn-group-sm">
-                                                    <a href="" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
+                                                    <a href="{{ path('message_conversation',{'id':invite.id}) }}" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
                                                     <a href="{{ path('user_confirm_friend',{ 'id': invite.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-thumbs-up"></i> Confirm</a>
 
                                                 </div>
@@ -150,11 +150,11 @@
 
                                         <div class="col-sm-9">
                                             <div class="media">
-                                                <a class="pull-left margin-none" href="#">
-                                                    <img class="img-clean" src="{{ asset('/uploads/avatar/'~ people.avatar) }}" alt="..." width="100" height="100">
+                                                <a class="pull-left margin-none" href="{{ path('user_profile',{'id':people.id}) }}">
+                                                    <img class="img-clean" src="{{ asset(people.fullAvatar) }}" alt="..." width="100" height="100">
                                                 </a>
                                                 <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
-                                                    <h4 class="media-heading"><a href="{{ path('user_profile',{'id':people.id}) }}" class="text-inverse">{{people.firstName }} {{people.lastName}}</a></h4>
+                                                    <h4 class="media-heading"><a href="{{ path('user_profile',{'id':people.id}) }}" class="text-inverse">{{people}}</a></h4>
                                                     <p>
                                                         <!-- <span class="text-success strong"><i class="fa fa-check"></i> Friend</span> &nbsp;  -->
                                                         <i class="fa fa-fw fa-map-marker text-muted"></i> {{ people.department }}</p>
@@ -164,9 +164,11 @@
                                         <div class="col-sm-3">
                                             <div class="innerAll text-right">
                                                 <div class="btn-group-vertical btn-group-sm">
-                                                    <a href="" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
-                                                    {% if people.isFriendOf(app.security.token.user) %}
+                                                    <a href="{{ path('message_conversation',{'id':people.id}) }}" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
+                                                    {% if app.security.token.user.isFriendOf(people) %}
                                                         In friends
+                                                    {% elseif app.security.token.user.hasRequest(people) %}
+                                                        Request sent
                                                     {% else %}
                                                         <a href="{{ path('user_add_friend',{ 'id': people.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-bell"></i> Add</a>
                                                     {% endif %}
@@ -184,7 +186,7 @@
 
             </div>
 
-
+</div></div>
     <!-- // Tabs END -->
 {% endblock content %}
 

@@ -47,6 +47,22 @@ class Community
     private $posts;
 
     /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $posts
+     */
+    public function setPosts($posts)
+    {
+        $this->posts = $posts;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
      * @var ArrayCollection
      */
     private $memberships;
@@ -67,6 +83,7 @@ class Community
         $this->memberships = new ArrayCollection();
         $this->posts = new ArrayCollection();
     }
+
 
     public function __toString()
     {
@@ -182,7 +199,12 @@ class Community
      */
     public function getAvatar()
     {
-        return $this->avatar;
+        return (null !== $this->avatar) ? $this->avatar : 'no_avatar.jpg';
+    }
+
+    public function getFullAvatar()
+    {
+        return sprintf('/uploads/avatar/%s', $this->getAvatar());
     }
 
     /**

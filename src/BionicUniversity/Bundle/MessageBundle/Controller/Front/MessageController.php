@@ -3,7 +3,6 @@
 namespace BionicUniversity\Bundle\UserBundle\Doctrine\ORM;
 namespace BionicUniversity\Bundle\MessageBundle\Controller\Front;
 
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BionicUniversity\Bundle\UserBundle\Doctrine\ORM\UserRepository;
@@ -24,6 +23,7 @@ class MessageController extends Controller
     public function messagesAction($id = null)
     {
         $user = $this->getUser();
+        $uid = $user->getId();
         $em = $this->getDoctrine()->getManager();
         $message = new Message();
         if(null != $id)
@@ -32,7 +32,9 @@ class MessageController extends Controller
             $interlocutor = $em->getRepository("BionicUniversityUserBundle:User")->find($id);
             $message->setToUser($interlocutor);
             $messageForm = $this->createCreateForm($message)->createView();
-
+            $unreadMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findBy(array( "toUser"=> $uid, 'fromUser' => $id,"isread" => "0"));
+            foreach ($unreadMessages as $elem){ $elem->setIsRead(1);}
+            $em->flush();
         }
         else
         {
@@ -45,7 +47,9 @@ class MessageController extends Controller
             ->createFormBuilder($user)
             ->add('friends', 'entity', [
                 'class'=> 'BionicUniversity\Bundle\UserBundle\Entity\User',
-                'label'=> '',
+                'show_legend' => false,
+                'label' => false,
+                'empty_value' => 'Choose an friend'
                 'choices' => $user->getFriends(),
                 'attr'=>['style' => 'width:100%']
             ])

@@ -1,4 +1,4 @@
-BionicUniversity\Bundle\UserBundle\Entity\Interest:
+BionicUniversity\Bundle\UserBundle\Entity\Event:
     type: entity
     table: null
     id:
@@ -11,9 +11,8 @@ BionicUniversity\Bundle\UserBundle\Entity\Interest:
         name:
             type: string
             length: '50'
-        icon:
-            type: string
-            length: '50'
+        date:
+            type: datetime
     manyToMany:
         users:
           targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User

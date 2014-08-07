@@ -1,28 +1,86 @@
 {% extends "::front.html.twig" %}
-{% block profile -%}
+{% block profile %}
     <h1>User edit</h1>
 
-    <div class="squared">
-        <form action="{{ oneup_uploader_endpoint('avatar') }}" class="dropzone" id="my-awesome-dropzone">
-            <div class="dz-message message_dz"><h1>Drop</h1> file here to upload new avatar</div>
-            <div class="fallback">
-                <input name="file" type="file"/>
+
+<div class="col-md-4 col-lg-3 k">
+    <div class="widget">
+        <div class="widget-body text-center">
+            {#{% if app.security.token.user.id == entity.id %}#}
+            {#{% if entity.avatar == false %}#}
+            {#<form action="{{ oneup_uploader_endpoint('avatar') }}" class="dropzone square drop_avatar">#}
+            {#<div class="dz-message message_dz"><h1>Drop</h1> file here to upload new avatar</div>#}
+            {#<div class="fallback">#}
+            {#<input name="file" type="file"/>#}
+            {#</div>#}
+            {#</form>#}
+            {#{% endif %}#}
+            {#{% else %}#}
+            <img src="{{ asset(entity.fullAvatar) }}" class="avatar media-object" alt="Your avatar">
+            {#{% endif %}#}
+            <a href="{{ path('user_about',{'id': entity.id}) }}" ><h2 class="strong margin-none">{{ entity.firstname }}</h2></a>
+            <h2 class="strong margin-none">{{ entity.firstname }}</h2>
+            <div class="innerB">Working at {{ entity.department }}</div>
+            {% if app.security.token.user != entity %}
+                {% if app.security.token.user.isFriendOf(entity) %}
+                    <a href="" class="btn btn-primary text-center btn-block">Send message</a>
+                {% else %}
+                    <a href="{{ path('user_add_friend', { 'id': entity.getid }) }}" class="btn btn-primary text-center btn-block">Add to friends</a>
+                    <a href="" class="btn btn-primary text-center btn-block">Send message</a>
+                {% endif %}
+            {% endif %}
+            <div class="btn-group-vertical btn-block">
+                {% if app.security.token.user == entity %}
+                    <a href="{{ path('user_setting') }}" class="btn btn-default"><i class="fa fa-cog pull-right"></i>Edit Account</a>
+                    <a href="/logout" class="btn btn-default"><i class="fa fa-cog pull-right"></i>Logout</a>
+                {% endif %}
             </div>
-        </form>
+        </div>
     </div>
 
-    {{ form(edit_form) }}
+    {% block recent_news %}
+        {{ render(controller('BionicUniversityWallBundle:Front/Article:index')) }}
+    {% endblock recent_news %}
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('user_profile', { 'id': entity.id }) }}">
-                Back
-            </a>
-        </li>
-    </ul>
+    <!-- Twitter Widget -->
+    <div class="widget widget-heading-simple widget-body-white">
+
+        <!-- Widget Heading -->
+        <div class="widget-head">
+            <h4 class="heading glyphicons glyphicons-social twitter"><i></i>Twitter feed</h4>
+        </div>
+        <!-- // Widget Heading END -->
+
+        <div class="widget-body" data-builder-exclude="element children">
+            <div class="jstwitter" data-gridalicious="false" data-type="slide" data-images="false"><span class="label label-default">Loading .. </span></div>
+        </div>
+    </div>
+
 
 {% endblock profile %}
+
+    {% block content %}
+        <div class="squared" style="width: 30%;">
+            <form action="{{ oneup_uploader_endpoint('avatar') }}" class="dropzone" id="my-awesome-dropzone">
+                <div class="dz-message message_dz"><h1>Drop</h1> file here to upload new avatar</div>
+                <div class="fallback">
+                    <input name="file" type="file"/>
+                </div>
+            </form>
+        </div>
+
+        {{ form(edit_form) }}
+
+        <ul class="record_actions">
+            <li>
+                <a href="{{ path('user_profile', { 'id': entity.id }) }}">
+                    Back
+                </a>
+            </li>
+        </ul>
+    {% endblock content %}
+
 {% block javascripts %}
     {{ parent() }}
-    {{ form_javascript(edit_form) }}
+    {#{{ form_javascript(edit_form) }}#}
 {% endblock javascripts%}

@@ -5,12 +5,12 @@ namespace BionicUniversity\Bundle\UserBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * User
+ * Department
  */
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Interest
+class Department
 {
     /**
      * @var integer
@@ -32,11 +32,11 @@ class Interest
      * @var string
      * @Assert\Type(type="string")
      * @Assert\Length(
-     *      max = "50",
+     *      max = "255",
      *      )
-     * @Assert\NotBlank()
      */
-    private $icon;
+    private $imageUrl;
+
     /**
      * @var ArrayCollection
      * @Assert\NotBlank()
@@ -62,10 +62,18 @@ class Interest
     }
 
     /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * Set name
      *
-     * @param  string $name
-     * @return Interest
+     * @param  string   $name
+     * @return Department
      */
     public function setName($name)
     {
@@ -85,10 +93,28 @@ class Interest
     }
 
     /**
+     * Get imageUrl
+     *
+     * @return string
+     */
+    public function getImageUrl()
+    {
+        return $this->imageUrl;
+    }
+
+    /**
+     * @param mixed $imageUrl
+     */
+    public function setImageUrl($imageUrl)
+    {
+        $this->imageUrl = $imageUrl;
+    }
+
+    /**
      * Add users
      *
      * @param  \BionicUniversity\Bundle\UserBundle\Entity\User $users
-     * @return Interest
+     * @return Department
      */
     public function addUser(\BionicUniversity\Bundle\UserBundle\Entity\User $users)
     {
@@ -117,22 +143,8 @@ class Interest
         return $this->users;
     }
 
-    /**
-     * @param string $icon
-     */
-    public function setIcon($icon)
+    public function __toString()
     {
-        $this->icon = $icon;
-
-        return $this;
+        return $this->name;
     }
-
-    /**
-     * @return string
-     */
-    public function getIcon()
-    {
-        return $this->icon;
-    }
-
 }

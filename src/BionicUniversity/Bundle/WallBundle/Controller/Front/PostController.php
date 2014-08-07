@@ -26,21 +26,20 @@ class PostController extends Controller
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
-        $id = $this->getUser()->getId();
+
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('user_profile' , ['id'=>$id]));
+            return $this->redirect($this->generateUrl('user_profile' , ['id'=>$this->getUser()->getId()]));
         }
 
-        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array(
+        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', [
             'entity' => $entity,
             'form'   => $form->createView(),
-            'id'=>$id,
-        ));
+        ]);
     }
 
     /**
@@ -52,12 +51,12 @@ class PostController extends Controller
      */
     private function createCreateForm(Post $entity)
     {
-        $form = $this->createForm(new PostType(), $entity, array(
+        $form = $this->createForm(new PostType(), $entity, [
             'action' => $this->generateUrl('create_post'),
-            'method' => 'POST',
-        ));
+            'method' => 'POST'
+        ]);
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', ['label' => 'Create']);
 
         return $form;
     }
