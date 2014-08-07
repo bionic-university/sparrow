@@ -5,13 +5,10 @@ namespace BionicUniversity\Bundle\UserBundle\Controller\Front;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BionicUniversity\Bundle\UserBundle\Form\CreatePasswordType;
-
 use BionicUniversity\Bundle\UserBundle\Entity\User;
-use BionicUniversity\Bundle\UserBundle\Entity\Avatar;
 use BionicUniversity\Bundle\UserBundle\Entity\Friendship;
 use BionicUniversity\Bundle\UserBundle\Form\UserSettingsType;
 use BionicUniversity\Bundle\UserBundle\Doctrine\ORM\FriendshipRepository;
-
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use BionicUniversity\Bundle\WallBundle\Form\PostType;
 
@@ -43,7 +40,29 @@ class UserController extends Controller
         else
             $user = $this->getDoctrine()->getRepository("BionicUniversityUserBundle:User")->find($this->getUser());
 
-        return $this->render('@BionicUniversityUser/User/Front/about.html.twig',['user' => $user]);
+        //$interests = $this->getDoctrine()->getRepository("BionicUniversityUserBundle:Interests")->find($this->getUser());
+
+        $interests = $user->getInterests();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $myFriendships = $em->getRepository("BionicUniversityUserBundle:Friendship")->findFriends($user);
+        $myFriends = [];
+        /**
+         * @var Friendship $friendship
+         */
+        foreach ($myFriendships as $friendship) {
+            if ($friendship->getUserReceiver() == $user) {
+                array_push($myFriends, $friendship->getUserSender());
+            } else {
+                array_push($myFriends, $friendship->getUserReceiver());
+            }
+
+        }
+
+        //$friends = $user->getFriends();
+
+        return $this->render('@BionicUniversityUser/User/Front/about.html.twig',['user' => $user, 'friends' => $myFriends, 'interests' => $interests]);
     }
 
     public function createPasswordAction(Request $request)

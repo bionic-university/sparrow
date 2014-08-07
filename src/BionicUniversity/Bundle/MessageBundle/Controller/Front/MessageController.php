@@ -48,7 +48,8 @@ class MessageController extends Controller
             ->add('friends', 'entity', [
                 'class'=> 'BionicUniversity\Bundle\UserBundle\Entity\User',
                 'show_legend' => false,
-                'label' => false
+                'label' => false,
+                'empty_value' => 'Choose an friend'
             ])
             ->getForm();
 

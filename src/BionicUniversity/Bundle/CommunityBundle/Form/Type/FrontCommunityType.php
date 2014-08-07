@@ -25,9 +25,9 @@ class FrontCommunityType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'BionicUniversity\Bundle\CommunityBundle\Entity\Community'
-        ));
+        ]);
     }
 
     /**
