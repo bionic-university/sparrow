@@ -64,7 +64,7 @@ class Interest
     /**
      * Set name
      *
-     * @param  string   $name
+     * @param  string $name
      * @return Interest
      */
     public function setName($name)
@@ -116,4 +116,23 @@ class Interest
     {
         return $this->users;
     }
+
+    /**
+     * @param string $icon
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
 }
