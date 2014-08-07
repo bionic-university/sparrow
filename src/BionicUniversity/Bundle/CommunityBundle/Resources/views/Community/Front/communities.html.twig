@@ -69,7 +69,7 @@
                                                     <h4 class="media-heading"><a href="{{ path('community_profile',{'id':community.id}) }}" class="text-inverse">{{ community.name }}</a></h4>
                                                     <p>
                                                         <!-- <span class="text-success strong"><i class="fa fa-check"></i> Friend</span> &nbsp;  -->
-                                                        <i class="fa fa-fw fa-map-marker text-muted"></i> {{ community.description}}</p>
+                                                        <i class="fa fa-fw fa-map-marker text-muted"></i> {{ community.description | raw}}</p>
                                                 </div>
                                             </div>
                                         </div>

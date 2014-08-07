@@ -14,7 +14,7 @@
                         <img src="{{ asset(entity.fullAvatar) }}" alt="" width="75"/>
                     </a>
                     <div class="media-body">
-                        <p>{% if null != entity.description %}{{ entity.description }}{% else %}User has left this field blank{% endif %}</p>
+                        <p>{% if null != entity.description %}{{ entity.description | raw}}{% else %}User has left this field blank{% endif %}</p>
                     </div>
                 </div>
             </div>
