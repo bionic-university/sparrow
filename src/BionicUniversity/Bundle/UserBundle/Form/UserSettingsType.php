@@ -22,23 +22,26 @@ class UserSettingsType extends AbstractType
             ->add('position')
             ->add('department')
             ->add('phoneNumber')
-            ->add('aboutMe', 'textarea')
-            ->add('status')
+            ->add('aboutMe', 'textarea', array('required' => false))
             ->add('gender', 'choice', array(
                     'choices' => array(User::GENDER_MALE => 'Male', User::GENDER_FEMALE => 'Female'),
-                    'empty_value' => 'Choose user gender',
+                    'empty_value' => false,
                     'empty_data' => null,
                 )
             )
             ->add('dateOfBirth', 'birthday', [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+                'required' => false
             ])
             ->add('interests', 'genemu_jqueryselect2_entity',
                 [
-                    'multiple' =>true,
                     'class' => 'BionicUniversity\Bundle\UserBundle\Entity\Interest',
-                    'property' =>'name'
+                    'property' => 'name',
+                    'multiple' => true,
+                    'attr' => ['
+                    class' => 'col-md-4'],
+                    'required' => false
                 ]
             );
     }

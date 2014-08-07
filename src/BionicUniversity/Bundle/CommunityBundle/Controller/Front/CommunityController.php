@@ -21,22 +21,21 @@ class CommunityController extends Controller
         $entity = $em->getRepository('BionicUniversityCommunityBundle:Community')->find($id);
         $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findByCommunity($entity, ['createdAt'=>'desc']);
         $memberships = $em->getRepository('BionicUniversityCommunityBundle:Membership')->findByCommunity($entity);
-        $users = array();
+        $users = [];
         foreach ($memberships as $membership) {
             $users[] = $membership->getUser();
         }
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Community entity.');
         }
-
         $form = $this->createPostForm($id);
 
-        return $this->render('BionicUniversityCommunityBundle:Community/Front:community.html.twig', array(
+        return $this->render('BionicUniversityCommunityBundle:Community/Front:community.html.twig', [
             'entity' => $entity,
             'post' => $posts,
             'form' => $form->createView(),
             'users' => $users,
-        ));
+        ]);
     }
 
     public function communitiesAction()
@@ -47,7 +46,7 @@ class CommunityController extends Controller
 
         $myMemberships = $em->getRepository('BionicUniversityCommunityBundle:Membership')->findByUser($user);
         $all = $em->getRepository('BionicUniversityCommunityBundle:Community')->findAll();
-        $allCommunities=array();
+        $allCommunities = [];
 
         if (null != $myMemberships) {
             foreach ($all as $community => $data) {
@@ -57,12 +56,10 @@ class CommunityController extends Controller
                     }
                 }
             }
-
         }
+        $allCommunities = $all;
 
-        $allCommunities=$all;
-
-        return $this->render('BionicUniversityCommunityBundle:Community/Front:communities.html.twig', array('my_memberships'=>$myMemberships,'all_communities'=>$allCommunities));
+        return $this->render('BionicUniversityCommunityBundle:Community/Front:communities.html.twig', ['memberships'=>$myMemberships,'communities'=>$allCommunities]);
     }
 
     public function joinAction($id)
@@ -82,13 +79,13 @@ class CommunityController extends Controller
 
     public function leaveAction($id)
     {
-
         $em = $this->getDoctrine()->getManager();
-
         $membership = $em->getRepository('BionicUniversityCommunityBundle:Membership')->findOneById($id);
-
-        $em->remove($membership);
-        $em->flush();
+        if(null != $membership)
+        {
+            $em->remove($membership);
+            $em->flush();
+        }
 
         return $this->redirect($this->generateUrl('communities'));
     }
@@ -102,16 +99,16 @@ class CommunityController extends Controller
      */
     private function createPostForm($id)
     {
-        $form = $this->createForm(new PostType(), null, array(
+        $form = $this->createForm(new PostType(), null, [
             'action' => $this->generateUrl('create_community_post', ['id'=>$id]),
             'method' => 'POST',
             'show_legend' => true,
-            'label' => 'Write a new post',
-        ));
+            'label' => 'Write a new post'
+        ]);
 
-        $form->add('submit', 'submit', array(
+        $form->add('submit', 'submit', [
             'label' => 'Create new post',
-            'attr' => ['class' => 'pull-right btn btn-success']));
+            'attr' => ['class' => 'pull-right btn btn-success']]);
 
         return $form;
     }
@@ -125,10 +122,10 @@ class CommunityController extends Controller
         $entity = new Community();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('BionicUniversityCommunityBundle:Community/Front:new.html.twig', array(
+        return $this->render('BionicUniversityCommunityBundle:Community/Front:new.html.twig', [
             'entity' => $entity,
             'form'   => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -140,12 +137,12 @@ class CommunityController extends Controller
      */
     private function createCreateForm(Community $entity)
     {
-        $form = $this->createForm(new FrontCommunityType(), $entity, array(
+        $form = $this->createForm(new FrontCommunityType(), $entity, [
             'action' => $this->generateUrl('front_community_create'),
             'method' => 'POST',
-        ));
+        ]);
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', ['label' => 'Create']);
 
         return $form;
     }
@@ -160,7 +157,6 @@ class CommunityController extends Controller
 
         $entity = new Community();
         $entity->setOwner($owner);
-        $id=$entity->getId();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -169,13 +165,13 @@ class CommunityController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('community_profile', array('id'=>$entity->getId())));
+            return $this->redirect($this->generateUrl('community_profile', ['id'=>$entity->getId()]));
         }
 
-        return $this->render('BionicUniversityCommunityBundle:Community/Front:new.html.twig', array(
+        return $this->render('BionicUniversityCommunityBundle:Community/Front:new.html.twig', [
             'entity' => $entity,
             'form'   => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -195,11 +191,11 @@ class CommunityController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BionicUniversityCommunityBundle:Community/Front:edit.html.twig', array(
+        return $this->render('BionicUniversityCommunityBundle:Community/Front:edit.html.twig', [
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -211,12 +207,13 @@ class CommunityController extends Controller
      */
     private function createEditForm(Community $entity)
     {
-        $form = $this->createForm(new FrontCommunityType(), $entity, array(
-            'action' => $this->generateUrl('front_community_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+        $form = $this->createForm(new FrontCommunityType(), $entity,
+        [
+            'action' => $this->generateUrl('front_community_update', ['id' => $entity->getId()]),
+            'method' => 'PUT'
+        ]);
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', ['label' => 'Update']);
 
         return $form;
     }
@@ -241,14 +238,14 @@ class CommunityController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('front_community_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('front_community_edit', ['id' => $id]));
         }
 
-        return $this->render('BionicUniversityCommunityBundle:Community/Front:edit.html.twig', array(
+        return $this->render('BionicUniversityCommunityBundle:Community/Front:edit.html.twig', [
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
     /**
      * Deletes a Community entity.

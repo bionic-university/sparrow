@@ -16,7 +16,6 @@ class Post
     /**
      * @var integer
      * @Assert\Type(type="integer")
-     * @Assert\NotBlank()
      */
     private $id;
 
@@ -42,7 +41,6 @@ class Post
 
     /**
      * @var Community
-     * @Assert\NotBlank()
      */
     private $community;
 

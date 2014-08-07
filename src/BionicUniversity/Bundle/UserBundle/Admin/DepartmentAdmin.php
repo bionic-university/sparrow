@@ -1,14 +1,13 @@
 <?php
 
-namespace BionicUniversity\Bundle\WallBundle\Admin;
+namespace BionicUniversity\Bundle\UserBundle\Admin;
 
-use BionicUniversity\Bundle\UserBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class PostAdmin extends Admin
+class DepartmentAdmin extends Admin
 {
     /**
      * @param DatagridMapper $datagridMapper
@@ -16,9 +15,10 @@ class PostAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('text')
-            ->add('community')
-            ->add('createdAt');
+            ->add('id')
+            ->add('name')
+            ->add('imageUrl')
+        ;
     }
 
     /**
@@ -27,16 +27,17 @@ class PostAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('text')
-            ->add('community')
-            ->add('createdAt')
+            ->add('id')
+            ->add('name')
+            ->add('imageUrl')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
                 )
-            ));
+            ))
+        ;
     }
 
     /**
@@ -45,7 +46,9 @@ class PostAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('text');
+            ->add('name')
+            ->add('imageUrl')
+        ;
     }
 
     /**
@@ -54,8 +57,9 @@ class PostAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('text')
-            ->add('community')
-            ->add('createdAt');
+            ->add('id')
+            ->add('name')
+            ->add('imageUrl')
+        ;
     }
 }

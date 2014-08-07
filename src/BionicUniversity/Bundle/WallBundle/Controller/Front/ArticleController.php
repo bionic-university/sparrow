@@ -19,12 +19,13 @@ class ArticleController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('BionicUniversityWallBundle:Article')->findAll();
+        $entities = $em->getRepository('BionicUniversityWallBundle:Article')->findBy([], ['createdAt' => 'desc']);
 
         return $this->render('@BionicUniversityWall/Post/Front/recent_news.html.twig', [
             'articles' => $entities,
         ]);
     }
+
     /**
      * Creates a new Article entity.
      */
@@ -44,13 +45,13 @@ class ArticleController extends Controller
 
         return $this->render('BionicUniversityWallBundle:Article/Front:index.html.twig', [
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         ]);
     }
 
     /**
      * Creates a form to create a Article entity.
-     * @param  Article                      $entity The entity
+     * @param  Article $entity The entity
      * @return \Symfony\Component\Form\Form The form
      */
     private function createCreateForm(Article $entity)
@@ -72,11 +73,11 @@ class ArticleController extends Controller
     public function newAction()
     {
         $entity = new Article();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('', [
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 

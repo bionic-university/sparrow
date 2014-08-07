@@ -1,6 +1,7 @@
 parameters:
     bionic.user.util.user_manipulator.class: BionicUniversity\Bundle\UserBundle\Util\UserManipulator
     bionic_university_user.event_listener.upload_listener.class: BionicUniversity\Bundle\UserBundle\EventListener\UploadListener
+    bionic_university_user.event_listener.invalid_token_listener.class: BionicUniversity\Bundle\UserBundle\EventListener\InvalidTokenListener
     twig.extension.routing.class: BionicUniversity\Bundle\UserBundle\Twig\RoutingExtension
     bionic_university_user.form.transformer.html_purifier.class: Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer
 
@@ -8,11 +9,18 @@ services:
     bionic.user.util.user_manipulator:
         class: %bionic.user.util.user_manipulator.class%
         arguments: [ @fos_user.user_manager ]
+
     bionic_university_user.event_listener.upload_listener:
         class: %bionic_university_user.event_listener.upload_listener.class%
         arguments: [@doctrine, @doctrine.orm.entity_manager, @security.context]
         tags:
             - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
+
+    bionic_university_user.event_listener.invalid_token_listener:
+        class: %bionic_university_user.event_listener.invalid_token_listener.class%
+        arguments: [@form.csrf_provider]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
     twig.extension.routing:
         class: %twig.extension.routing.class%
@@ -47,3 +55,15 @@ services:
         - "sonata.block.service.statistics"
         - @templating
         - @doctrine.orm.entity_manager
+
+    bionic_university_user.admin.department:
+        class: BionicUniversity\Bundle\UserBundle\Admin\DepartmentAdmin
+        arguments: [~, BionicUniversity\Bundle\UserBundle\Entity\Department, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Department}
+
+    bionic_university_user.admin.interest:
+        class: BionicUniversity\Bundle\UserBundle\Admin\InterestAdmin
+        arguments: [~, BionicUniversity\Bundle\UserBundle\Entity\Interest, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Interest}

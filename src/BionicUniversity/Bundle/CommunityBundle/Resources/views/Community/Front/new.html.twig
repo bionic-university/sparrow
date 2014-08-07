@@ -1,15 +1,19 @@
-{% extends '::front.html.twig' %}
+<div class="bg-primary">
+    <div class="media">
 
-{% block profile %}
-    <h1>Community creation</h1>
+        <div class="media-body innerTB innerR">
+            <div class="innerT half pull-right">
+                <a  href="#type" class=" btn btn-default bg-white btn-sm" data-toggle="collapse">
+                    <i class="fa fa-pencil"></i> Go
+                </a>
+            </div>
+            <h4 href="" class="text-white pull-left innerAll strong display-block margin-none">Create new community</h4>
+        </div>
 
+    </div>
+</div>
+<div class="bg-gray innerAll text-center margin-none"><span  class="text-muted lead"><i class="icon-venn-diagram"></i></span></div>
+<div  id="type" class="collapse border-top">
     {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('communities') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
-{% endblock profile %}
+    <div class="bg-gray innerAll text-center margin-none"><span  class="text-muted lead"><i class="icon-venn-diagram"></i></span></div>
+</div>

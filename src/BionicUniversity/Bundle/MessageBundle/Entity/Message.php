@@ -2,6 +2,7 @@
 
 namespace BionicUniversity\Bundle\MessageBundle\Entity;
 
+use BionicUniversity\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -50,6 +51,7 @@ class Message
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->isread = false;
     }
 
     /**

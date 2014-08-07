@@ -82,7 +82,7 @@
                                             <div class="innerAll text-right">
                                                 <div class="btn-group-vertical btn-group-sm">
                                                     <a href="" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
-                                                    <a href="{{ path('user_remove_friend',{'id': request.id}) }}" class="btn btn-primary"><i class="fa fa-fw fa-thumbs-up"></i> Remove request</a>
+                                                    <a href="{{ path('user_remove_friend',{'id': request.id}) }}" class="btn btn-primary"><i class="fa fa-fw fa-thumbs-up"></i>Cancel</a>
 
                                                 </div>
                                             </div>
@@ -165,8 +165,10 @@
                                             <div class="innerAll text-right">
                                                 <div class="btn-group-vertical btn-group-sm">
                                                     <a href="" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
-                                                    {% if people.isFriendOf(app.security.token.user) %}
+                                                    {% if app.security.token.user.isFriendOf(people) %}
                                                         In friends
+                                                    {% elseif app.security.token.user.hasRequest(people) %}
+                                                        Request sent
                                                     {% else %}
                                                         <a href="{{ path('user_add_friend',{ 'id': people.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-bell"></i> Add</a>
                                                     {% endif %}
@@ -184,7 +186,7 @@
 
             </div>
 
-
+</div></div>
     <!-- // Tabs END -->
 {% endblock content %}
 

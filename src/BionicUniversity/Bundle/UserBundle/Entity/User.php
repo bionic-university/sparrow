@@ -7,16 +7,21 @@ use Doctrine\Common\Collections\ArrayCollection;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity as Unique;
 
 
 /**
  * User
+ * @Unique(fields="email", errorPath="email", message="fos.user.email.used")
+
  */
 class User extends BaseUser
 {
     const GENDER_MALE = 'm';
     const GENDER_FEMALE = 'f';
 
+    const ROLE_USER = 'ROLE_USER';
+    const ROLE_SONATA_ADMIN = 'ROLE_ADMIN';
     /**
      * @var integer
      * @Assert\Type(type="integer")
@@ -80,17 +85,8 @@ class User extends BaseUser
     private $position;
 
     /**
-     * @var string
-     * @Assert\Type(
-     *      type="string",
-     *      message="These data must be a string"
-     *      )
-     * @Assert\Length(
-     *      min = "2",
-     *      max = "50",
-     *      minMessage = "Your department must be at least 2 characters length",
-     *      maxMessage = "Your department cannot be longer than 50 characters length"
-     *      )
+     * @var Department
+     *
      * @Assert\NotBlank()
      */
     private $department;
@@ -117,8 +113,6 @@ class User extends BaseUser
 
     /**
      * @var \DateTime
-     * @Assert\DateTime()
-     * @Assert\NotBlank()
      */
     private $joined;
 
@@ -212,7 +206,6 @@ class User extends BaseUser
     /**
      * @var string
      * @Assert\Length(max = "15", maxMessage="This value cannot be greater than 15 characters")
-     * @Assert\NotBlank()
      */
     private $phoneNumber;
 
@@ -235,10 +228,10 @@ class User extends BaseUser
 
     /**
      * @var \DateTime
-     * @Assert\Date(
+     * Assert\Date(
      *      message = "This value must be YYYY-MM-DD format"
      *      )
-     * @Assert\NotBlank(
+     * Assert\NotBlank(
      *      message = "This value should not be blank"
      *      )
      */
@@ -254,9 +247,11 @@ class User extends BaseUser
         $this->requests = new ArrayCollection();
         $this->invites = new ArrayCollection();
         $this->groups = ['ROLE_USER'];
+        $this->roles = ['ROLE_USER'];
         $this->interests = new ArrayCollection();
         $this->myCommunities = new ArrayCollection();
-        $this->joined = new \dateTime();
+        $this->setEnabled(false);
+        $this->joined = new \DateTime();
     }
 
     public function __toString()
@@ -354,10 +349,10 @@ class User extends BaseUser
     /**
      * Set department
      *
-     * @param  string $department
+     * @param  Department $department
      * @return User
      */
-    public function setDepartment($department)
+    public function setDepartment(Department $department)
     {
         $this->department = $department;
 
@@ -367,7 +362,7 @@ class User extends BaseUser
     /**
      * Get department
      *
-     * @return string
+     * @return Department
      */
     public function getDepartment()
     {
@@ -682,9 +677,19 @@ class User extends BaseUser
         return (null !== $this->avatar) ? $this->avatar : 'no_avatar.jpg';
     }
 
-    public function getFullAvatar(){
-        return sprintf('<img src="/web/uploads/avatar/%s"/>', $this->avatar);
+    public function getFullAvatar()
+    {
+        return sprintf('/uploads/avatar/%s', $this->getAvatar());
     }
+
+    public function hasRequest(User $user)
+    {
+        return count($this->getFriendships()->filter(function ($element) use ($user) {
+            /** @var Friendship $element */
+            return $element->getUserReceiver()->getId() === $user->getId();
+        })) > 0;
+    }
+
     public function isFriendOf(User $user)
     {
         return count($this->getFriends()->filter(function ($element) use ($user) {
@@ -692,6 +697,19 @@ class User extends BaseUser
             return $element->getUserReceiver()->getId() === $user->getId()
             || $element->getUserSender()->getId() === $user->getId();
         })) > 0;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection|ArrayCollection
+     */
+    public function getFriendships()
+    {
+        $friendships = new ArrayCollection(array_merge($this->invites->toArray(), $this->requests->toArray()));
+        return $friendships->filter(function ($element) {
+
+            /**@var Friendship $element */
+            return $element->getAcceptanceStatus() === Friendship::UNCONFIRMED;
+        });
     }
 
     /**
@@ -735,5 +753,15 @@ class User extends BaseUser
     public function getMyCommunities()
     {
         return $this->myCommunities;
+    }
+
+    /**
+     * Returns the user roles
+     *
+     * @return array The roles
+     */
+    public function getRoles()
+    {
+        return $this->roles;
     }
 }

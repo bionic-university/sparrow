@@ -7,8 +7,11 @@
     <![endif]-->
 
     <!--  Stylesheet Complete CSS compiled from ../assets/css/admin/module.admin.stylesheet-complete.less -->
+    <link rel="stylesheet" href="{{ asset('vendor/select2/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/select2/select2-bootstrap.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/admin/module.admin.stylesheet-complete.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/profile.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/page.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor.css') }}" />
     <link href="{{ asset('vendor/dropzone/downloads/css/dropzone.css') }}" type="text/css" rel="stylesheet" />
 {% endblock %}
 {% block body %}
@@ -98,15 +101,25 @@
                 </div>
             </div>
             {% block wrapper %}
-            <!-- <div class="layout-app">  -->
-            <div class="innerAll">
-                <div class="row">
-                    <div class="col-lg-9 col-md-8">
+                <!-- <div class="layout-app">  -->
+                <div class="innerAll">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-8">
 
-                        <div class="timeline-cover">
-                            <div class="cover">
-                                <div class="top">
-                                    <img src="../assets//images/photodune-2755655-party-time-s.jpg" class="img-responsive" />
+                            <div class="timeline-cover">
+                                <div class="cover">
+                                    <div class="top">
+                                        <img src="{{ app.security.token.user.department.imageUrl }}" class="img-responsive" />
+                                    </div>
+                                    <ul class="list-unstyled">
+                                        <li class="active"><a href="index.html?lang=en"><i class="fa fa-fw fa-clock-o"></i> <span>Timeline</span></a></li>
+                                        <li><a href="{{ path('user_friends') }}{{ path('messages') }}"><i class="fa fa-fw icon-group"></i><span> Friends </span></a></li>
+                                        <li><a href="{{ path('messages') }}"><i class="fa fa-fw icon-envelope-fill-1"></i> <span>Messages</span> <small>
+                                                    {{ render(controller('BionicUniversityMessageBundle:Front/Message:unreadMessages', {
+                                                    'max': 3
+                                                    })) }}
+                                                </small></a></li>
+                                    </ul>
                                 </div>
                                 <ul class="list-unstyled">
                                     <li class="active"><a href="index.html?lang=en"><i class="fa fa-fw fa-clock-o"></i> <span>Timeline</span></a></li>

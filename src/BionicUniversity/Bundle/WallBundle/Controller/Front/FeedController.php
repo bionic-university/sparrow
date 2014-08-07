@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BionicUniversity\Bundle\UserBundle\Entity\Friendship;
 use BionicUniversity\Bundle\CommunityBundle\Entity\Membership;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
+use BionicUniversity\Bundle\UserBundle\Entity\User;
 
 /**
  * Feed controller.
@@ -18,9 +19,9 @@ class FeedController extends Controller
         $user = $this->getUser();
         $feeds = $this->findFeed($user);
 
-        return $this->render('BionicUniversityWallBundle:Feed:index.html.twig', array(
+        return $this->render('@BionicUniversityWall/Post/Front/news_feed.html.twig', [
             'feeds' => $feeds,
-        ));
+        ]);
     }
 
     public function findFeed($user)
