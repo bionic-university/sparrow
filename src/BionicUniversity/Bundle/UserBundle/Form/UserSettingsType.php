@@ -22,10 +22,10 @@ class UserSettingsType extends AbstractType
             ->add('position')
             ->add('department')
             ->add('phoneNumber')
-            ->add('aboutMe', 'textarea')
+            ->add('aboutMe', 'textarea', array('required' => false))
             ->add('gender', 'choice', array(
                     'choices' => array(User::GENDER_MALE => 'Male', User::GENDER_FEMALE => 'Female'),
-                    'empty_value' => 'Choose user gender',
+                    'empty_value' => false,
                     'empty_data' => null,
                 )
             )

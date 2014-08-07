@@ -15,13 +15,13 @@
                         <img src="{{ asset('/uploads/avatar/'~ user.avatar) }}" alt="" width="75"/>
                     </a>
                     <div class="media-body">
-                        <p>{% if null != user.aboutMe %}{{ user.aboutMe }}{% else %}User has left this field blank{% endif %}</p>
+                        <p>{% if null != user.aboutMe %}{{ user.aboutMe|raw }}{% else %}User has left this field blank{% endif %}</p>
                     </div>
                 </div>
                 <h5>Hobby</h5>
                     {% for interest in interests %}
                         <span class="innerR innerB">
-							<i class="box-generic innerAll {{ interest.icon }} fa fa-4x" data-toggle="tooltip" data-original-title="{{ interest.name }}" data-placement="bottom"></i>
+							<i class="box-generic innerAll {{ interest.logo }} fa fa-4x" data-toggle="tooltip" data-original-title="{{ interest.name }}" data-placement="bottom"></i>
 						</span>
                     {% endfor %}
             </div>
