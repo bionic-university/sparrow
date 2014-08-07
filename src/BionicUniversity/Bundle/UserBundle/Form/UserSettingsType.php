@@ -11,7 +11,7 @@ class UserSettingsType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array                $options
+     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -34,9 +34,11 @@ class UserSettingsType extends AbstractType
             ->add('interests', 'entity',
                 [
                     'class' => 'BionicUniversity\Bundle\UserBundle\Entity\Interest',
-                    'property' =>'name',
-                    'expanded' => true,
-                    'multiple' => true
+                    'property' => 'name',
+                    'multiple' => true,
+                    'attr' => ['
+                    class' => 'col-md-4'],
+                    'required' => false
                 ]
             );
     }
