@@ -36,6 +36,9 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         phoneNumber:
             type: string
             length: '15'
+        status:
+            type: string
+            length: '140'
     manyToMany:
         interests:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\Interest

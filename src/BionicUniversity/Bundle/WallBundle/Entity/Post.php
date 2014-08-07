@@ -16,7 +16,6 @@ class Post
     /**
      * @var integer
      * @Assert\Type(type="integer")
-     *
      */
     private $id;
 

@@ -23,8 +23,8 @@ class InvalidTokenListener
 //        if (!$token) {
 //            throw new AccessDeniedException('Invalid token');
 //        }
-        if ($token && (false === $this->provider->isCsrfTokenValid('anything', $token))) {
-            throw new AccessDeniedException('Invalid token');
-        }
+//        if ($token && (false === $this->provider->isCsrfTokenValid('anything', $token))) {
+//            throw new AccessDeniedException('Invalid token');
+//        }
     }
 }

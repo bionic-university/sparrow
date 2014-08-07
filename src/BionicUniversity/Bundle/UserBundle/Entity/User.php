@@ -7,18 +7,21 @@ use Doctrine\Common\Collections\ArrayCollection;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity as Unique;
 
 
 /**
  * User
+ * @Unique(fields="email", errorPath="email", message="fos.user.email.used")
+
  */
 class User extends BaseUser
 {
     const GENDER_MALE = 'm';
     const GENDER_FEMALE = 'f';
 
-    const ROLE_01 = 'User';
-    const ROLE_02 = 'Admin';
+    const ROLE_USER = 'ROLE_USER';
+    const ROLE_SONATA_ADMIN = 'ROLE_ADMIN';
     /**
      * @var integer
      * @Assert\Type(type="integer")
@@ -110,10 +113,34 @@ class User extends BaseUser
 
     /**
      * @var \DateTime
-     * @Assert\DateTime()
-     * @Assert\NotBlank()
      */
     private $joined;
+
+    /**
+     * @var string
+     * @Assert\Type(type="string")
+     * @Assert\Length(
+     *      max = "140",
+     *      maxMessage="Permissible length of the story itself is 140 characters"
+     *      )
+     */
+    private $status;
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
 
     /**
      * @return \DateTime
@@ -179,7 +206,6 @@ class User extends BaseUser
     /**
      * @var string
      * @Assert\Length(max = "15", maxMessage="This value cannot be greater than 15 characters")
-     * @Assert\NotBlank()
      */
     private $phoneNumber;
 
@@ -202,10 +228,10 @@ class User extends BaseUser
 
     /**
      * @var \DateTime
-     * @Assert\Date(
+     * Assert\Date(
      *      message = "This value must be YYYY-MM-DD format"
      *      )
-     * @Assert\NotBlank(
+     * Assert\NotBlank(
      *      message = "This value should not be blank"
      *      )
      */

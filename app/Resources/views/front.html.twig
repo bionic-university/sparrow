@@ -21,7 +21,7 @@
 
                 <!-- LOGO / TEXT -->
                 <div id="brandWrapper">
-                    <a href="/"><span class="text">Sparrow</span></a>
+                    <a href="#"><span class="text">Sparrow</span></a>
                 </div>
 
                 <ul class="menu list-unstyled">
@@ -59,7 +59,7 @@
             <div class="navbar hidden-print navbar-default box main" role="navigation">
 
                 <!--  RIGHT TOGGLE BUTTON FOR SIDEBAR CHAT  -->
-                <div class="user-action user-action-btn-navbar pull-right border-left sidechat">
+                <div class="user-action user-action-btn-navbar pull-right border-left">
                     <a href="#menu-right" class="btn btn-sm btn-navbar btn-open-right"><i class="fa fa-comments fa-2x"></i></a>
                 </div>
 
@@ -124,24 +124,37 @@
                                                 </small></a></li>
                                     </ul>
                                 </div>
-                                <div class="widget">
-                                    <div class="widget-body padding-none margin-none">
-                                        <div class="innerAll">
+                                <ul class="list-unstyled">
+                                    <li class="active"><a href="index.html?lang=en"><i class="fa fa-fw fa-clock-o"></i> <span>Timeline</span></a></li>
+                                    <li><a href="{{ path('user_friends') }}{{ path('messages') }}"><i class="fa fa-fw icon-group"></i><span> Friends </span></a></li>
+                                    <li><a href="{{ path('messages') }}"><i class="fa fa-fw icon-envelope-fill-1"></i> <span>Messages</span> <small>
+                                                {{ render(controller('BionicUniversityMessageBundle:Front/Message:unreadMessages', {
+                                                'max': 3
+                                                })) }}
+                                    </small></a></li>
+                                </ul>
+                            </div>
+                            <div class="widget">
+                                <div class="widget-body padding-none margin-none">
+                                    <div class="innerAll">
+                                        {% if entity.status != null %}
                                             <i class="fa fa-quote-left text-muted pull-left fa-fw"></i>
-                                            <p class="lead margin-none">What a fun Partyyy</p>
-                                        </div>
+                                            <p class="lead margin-none">{{ entity.status }}</p>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            {% block content %}
-                            {% endblock content %}
-                            <!-- // Widget END -->
-
+                        {% block content %}
+                        {% endblock content %}
+                        <!-- // Widget END -->
+                    </div>
                 </div>
+            </div>
 
-                {% block profile %}
-                {% endblock profile %}
+                    {% block profile %}
+                    {% endblock profile %}
             {% endblock wrapper %}
         </div>
 

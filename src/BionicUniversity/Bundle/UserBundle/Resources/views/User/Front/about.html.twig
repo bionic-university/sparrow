@@ -15,7 +15,7 @@
                         <img src="{{ asset('/uploads/avatar/'~ user.avatar) }}" alt="" width="75"/>
                     </a>
                     <div class="media-body">
-                        <p>{% if null != user.aboutMe %}{{ user.aboutMe }}{% else %}User has left this field blank{% endif %}</p>
+                        <p>{% if null != user.aboutMe %}{{ user.aboutMe|raw }}{% else %}User has left this field blank{% endif %}</p>
                     </div>
                 </div>
                 <h5>Hobby</h5>
