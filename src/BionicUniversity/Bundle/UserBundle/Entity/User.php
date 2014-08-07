@@ -123,6 +123,32 @@ class User extends BaseUser
     private $joined;
 
     /**
+     * @var string
+     * @Assert\Type(type="string")
+     * @Assert\Length(
+     *      max = "140",
+     *      maxMessage="Permissible length of the story itself is 140 characters"
+     *      )
+     */
+    private $status;
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getJoined()
