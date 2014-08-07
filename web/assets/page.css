@@ -31,8 +31,8 @@ span.messagestatus p{
 form fieldset legend{
     display: none
 }
-/*hides mr.Awesome title*/
-#chat-notification {
+/*hides mr.Awesome title & right-side chat button*/
+#chat-notification, .sidechat {
     visibility:hidden;
 }
 /*adaptive avatar on profile page*/
