@@ -26,46 +26,56 @@ class MessageController extends Controller
         $uid = $user->getId();
         $em = $this->getDoctrine()->getManager();
         $message = new Message();
-        if(null != $id)
-        {
-            $messages = $em->getRepository("BionicUniversityMessageBundle:Message")->findMessages($user,$id);
+        if (null != $id) {
+            $messages = $em->getRepository("BionicUniversityMessageBundle:Message")->findMessages($user, $id);
             $interlocutor = $em->getRepository("BionicUniversityUserBundle:User")->find($id);
             $message->setToUser($interlocutor);
             $messageForm = $this->createCreateForm($message)->createView();
-            $unreadMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findBy(array( "toUser"=> $uid, 'fromUser' => $id,"isread" => "0"));
-            foreach ($unreadMessages as $elem){ $elem->setIsRead(1);}
+            $unreadMessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findBy(array("toUser" => $uid, 'fromUser' => $id, "isread" => "0"));
+            foreach ($unreadMessages as $elem) {
+                $elem->setIsRead(1);
+            }
             $em->flush();
-        }
-        else
-        {
+        } else {
             $interlocutor = null;
             $messages = null;
             $messageForm = null;
         }
 
+        $friends = [];
+        /**@var Friendship $friendship */
+        foreach ($user->getFriends() as $friendship) {
+            if ($friendship->getUserReceiver()->getId() !== $user->getId()) {
+                array_push($friends, $friendship->getUserReceiver());
+            } elseif ($friendship->getUserSender()->getId() !== $user->getId()) {
+                array_push($friends, $friendship->getUserSender());
+            }
+        }
         $userSearchForm = $this
             ->createFormBuilder($user)
             ->add('friends', 'entity', [
-                'class'=> 'BionicUniversity\Bundle\UserBundle\Entity\User',
+                'class' => 'BionicUniversity\Bundle\UserBundle\Entity\User',
                 'show_legend' => false,
                 'label' => false,
-                'empty_value' => 'Choose an friend'
+                'empty_value' => 'Choose a friend',
+                'choices' => $friends,
+                'attr' => ['style' => 'width:100%']
             ])
             ->getForm();
 
         return $this->render('@BionicUniversityMessage/Message/Front/messages.html.twig', [
             'messages' => $messages,
             'interlocutor' => $interlocutor,
-            'userSearchForm' =>$userSearchForm->createView(),
+            'userSearchForm' => $userSearchForm->createView(),
             'token' => $this->get('form.csrf_provider')->generateCsrfToken(''),
-            'messageForm' => $messageForm
+            'messageForm' => $messageForm,
         ]);
     }
 
     public function lastMessageAction($max = 3)
     {
         $user = $this->getUser();
-        $entity = $this->getDoctrine()->getManager()->getRepository("BionicUniversityMessageBundle:Message")->findBy(['toUser' => $user],['createdAt' => 'desc'],$max);
+        $entity = $this->getDoctrine()->getManager()->getRepository("BionicUniversityMessageBundle:Message")->findBy(['toUser' => $user], ['createdAt' => 'desc'], $max);
 
         return $this->render("@BionicUniversityMessage/Message/Front/last_messages.html.twig", ['lastMessages' => $entity]);
     }
@@ -76,29 +86,32 @@ class MessageController extends Controller
      */
     public function createAction(Request $request, $id)
     {
-        $user=$this->getUser();
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $entity = new Message();
         $entity->setFromUser($user);
         $interlocutor = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
-        if(null === $interlocutor){
+        if (null === $interlocutor) {
             throw $this->createNotFoundException('Interlocutor not found');
         }
         $entity->setToUser($interlocutor);
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
-        if ($form->isValid()){
+        if ($form->isValid()) {
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('message_conversation', ['id'=>$interlocutor->getId()]));
+            return $this->redirect($this->generateUrl('message_conversation', ['id' => $interlocutor->getId()]));
         }
 
         return $this->render('BionicUniversityMessageBundle:Message:Front/messages.html.twig',
             [
-                'form' => $form->createView()
-            ]);
+                'out_mess' => $outcomingMessages,
+                'in_mess' => $incomingMessages,
+                'form' => $form->createView(),
+            ]
+        );
 
     }
 
@@ -108,7 +121,7 @@ class MessageController extends Controller
         $em = $this->getDoctrine()->getManager();
         $conversations = $em->getRepository("BionicUniversityUserBundle:User")->findConversation($user);
 
-        return $this->render('BionicUniversityMessageBundle:Message/Front:conversation.html.twig',['conversations' => $conversations]);
+        return $this->render('BionicUniversityMessageBundle:Message/Front:conversation.html.twig', ['conversations' => $conversations]);
     }
 
 
@@ -122,22 +135,22 @@ class MessageController extends Controller
     private function createCreateForm(Message $entity)
     {
         $form = $this->createForm('send_message', $entity, [
-            'action' => $this->generateUrl('message_create_front', ['id'=>$entity->getToUser()->getId()])
+            'action' => $this->generateUrl('message_create_front', ['id' => $entity->getToUser()->getId()])
         ]);
 
-        $form->add('submit', 'submit', ['label' => 'Write', 'attr' =>['class' => 'btn pull-right btn btn-success']]);
+        $form->add('submit', 'submit', ['label' => 'Create', 'attr' => ['class' => 'btn btn-success pull-right']]);
 
         return $form;
     }
 
-    public function unreadMessagesAction()
+    public function unreadMessagesAction($max = 3)
     {
-        $user=$this->getUser();
+        $user = $this->getUser();
         $uid = $user->getId();
         $em = $this->getDoctrine()->getManager();
         $unreadMessages = null;
-        $allunreadmessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findBy([ "toUser"=> $uid, "isread" => "0"]);
-        $unreadcounter =(string)count($allunreadmessages);
+        $allunreadmessages = $em->getRepository('BionicUniversityMessageBundle:Message')->findBy(["toUser" => $uid, "isread" => "0"]);
+        $unreadcounter = (string)count($allunreadmessages);
         return $this->render('BionicUniversityMessageBundle:Message:Front/unread_messages.html.twig',
             [
                 'unreadmessages' => $unreadMessages,

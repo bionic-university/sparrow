@@ -19,11 +19,15 @@
                     </div>
                 </div>
                 <h5>Hobby</h5>
+                <div class="row row-icons">
                     {% for interest in interests %}
-                        <span class="innerR innerB">
-							<i class="box-generic innerAll fa {{ interest.logo }} fa-4x" data-toggle="tooltip" data-original-title="{{ interest.name }}" data-placement="bottom"></i>
-						</span>
+                        {#<div class="innerR innerB">#}
+							<div class="col-md-3 box-generic innerAll fa {{ interest.icon }} fa-4x" data-toggle="tooltip" data-original-title="{{ interest.name }}" data-placement="bottom">
+                                <i></i>
+							{#</div>#}
+						</div>
                     {% endfor %}
+                </div>
             </div>
         </div>
         <div class="col-sm-6">
@@ -124,3 +128,26 @@
     </div>
 </div>
 {% endblock content %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .row-icons [class*="col"][class*="glyphicons"] {
+            padding-left: 10px;
+        }
+        .row-icons [class*="col"] {
+            margin-bottom: 10px;
+            padding: 0px;
+            height:48px;
+            width:50px;
+
+        }
+        .row-icons [class*="col"][class*="glyphicons"] i:before {
+            left: 10px;
+            top: 10px;
+        }
+        .row-icons [class*="col"] i, .row-icons [class*="col"] i:before {
+            color: #25AD9F;
+            font-size: 24px;
+        }
+    </style>
+{% endblock %}

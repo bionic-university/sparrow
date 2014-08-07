@@ -69,6 +69,7 @@
 {#<script src="{{ asset('assets/plugins/forms_editors_wysihtml5/js/wysihtml5-0.3.0.js') }}"></script>#}
 {#<script src="https://raw.githubusercontent.com/jhollingworth/bootstrap-wysihtml5/master/src/bootstrap-wysihtml5.js"></script>#}
 {#<script src="{{ asset('assets/plugins/forms_editors_wysihtml5/js/bootstrap-wysihtml5-0.0.2.js') }}"></script>#}
+<script src="http://cdn2.mosaicpro.biz/shared/assets/plugins/forms_elements_bootstrap-datepicker/js/bootstrap-datepicker.js?v=v2.0.1-rc1&sv=v0.0.1.2"></script>
 <script src="{{ asset('assets/components/widget_twitter/twitter.init.js') }}"></script>
 <script src="{{ asset('assets/plugins/media_holder/holder.js') }}"></script>
 <script src="{{ asset('assets/plugins/media_gridalicious/jquery.gridalicious.min.js') }}"></script>
@@ -97,6 +98,9 @@
             $("select").select2();
 //            $('select:not([multiple])').select2();
             $('textarea').redactor();
+            $('input[type="date"]').datepicker({
+                format: 'yyyy-mm-dd'
+            });
 
             Dropzone.options.myAwesomeDropzone = {
                 maxFiles: 1,
