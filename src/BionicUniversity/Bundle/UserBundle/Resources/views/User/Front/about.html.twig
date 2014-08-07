@@ -55,6 +55,18 @@
                             <span class="label label-default">{{ user.joined|date("m/d/Y") }}</span>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-6">Department:</div>
+                        <div class="col-sm-6 text-right">
+                            <span class="label label-default">{{ user.department }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">Position:</div>
+                        <div class="col-sm-6 text-right">
+                            <span class="label label-default">{{ user.position }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="widget">
@@ -79,9 +91,7 @@
                     <div class="border-top innerAll">
                         <p class=" margin-none"><i class="fa fa-envelope fa-fw text-muted"></i> Email: {{ user.email }}</p>
                     </div>
-                    <div class="border-top innerAll">
-                        <p class=" margin-none"><i class="fa fa-link fa-fw text-muted"></i> <a href="{{ path('user_profile', { 'id': user.id }) }}">Visit website</a></p>
-                    </div>
+
                 </div>
             </div>
         </div>

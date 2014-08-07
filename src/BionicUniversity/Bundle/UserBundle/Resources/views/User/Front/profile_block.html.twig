@@ -2,8 +2,8 @@
 <div class="col-md-4 col-lg-3 k">
     <div class="widget">
         <div class="widget-body text-center">
-            <a href=""><img src="{{ asset('/uploads/avatar/'~app.security.token.user.avatar) }}" width="120" alt="" class="img-circle"></a>
-            <h2 class="strong margin-none">{{ app.security.token.user}}</h2>
+            <a href=""><img src="{{ asset(app.security.token.user.fullAvatar) }}" width="120" alt="" class="img-circle"></a>
+            <a href="{{ path('user_about',{'id': app.security.token.user.id}) }}" ><h2 class="strong margin-none">{{ app.security.token.user}}</h2></a>
             <div class="innerB">Working at {{ app.security.token.user.department }}</div>
             <div class="btn-group-vertical btn-block">
                     <a href="{{ path('user_setting') }}" class="btn btn-default"><i class="fa fa-cog pull-right"></i>Edit Account</a>

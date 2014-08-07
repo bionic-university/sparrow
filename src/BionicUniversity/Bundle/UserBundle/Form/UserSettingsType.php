@@ -42,8 +42,8 @@ class UserSettingsType extends AbstractType
                     'attr' => ['
                     class' => 'col-md-4'],
                     'required' => false
-                ]
-            );
+                ])
+            ->setAttribute('label',false);
     }
 
     /**

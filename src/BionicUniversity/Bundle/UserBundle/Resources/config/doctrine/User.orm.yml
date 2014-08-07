@@ -20,6 +20,7 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
             length: '100'
         dateOfBirth:
             type: date
+            nullable: true
         gender:
             type: string
             length: '6'
@@ -36,6 +37,7 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         phoneNumber:
             type: string
             length: '15'
+            nullable: true
         status:
             type: string
             length: '140'
