@@ -50,6 +50,8 @@ class MessageController extends Controller
                 'show_legend' => false,
                 'label' => false,
                 'empty_value' => 'Choose an friend'
+                'choices' => $user->getFriends(),
+                'attr'=>['style' => 'width:100%']
             ])
             ->getForm();
 
@@ -58,7 +60,7 @@ class MessageController extends Controller
             'interlocutor' => $interlocutor,
             'userSearchForm' =>$userSearchForm->createView(),
             'token' => $this->get('form.csrf_provider')->generateCsrfToken(''),
-            'messageForm' => $messageForm
+            'messageForm' => $messageForm,
         ]);
     }
 
@@ -97,8 +99,11 @@ class MessageController extends Controller
 
         return $this->render('BionicUniversityMessageBundle:Message:Front/messages.html.twig',
             [
-                'form' => $form->createView()
-            ]);
+                'out_mess' => $outcomingMessages,
+                'in_mess' => $incomingMessages,
+                'form' => $form->createView(),
+            ]
+        );
 
     }
 
@@ -125,12 +130,12 @@ class MessageController extends Controller
             'action' => $this->generateUrl('message_create_front', ['id'=>$entity->getToUser()->getId()])
         ]);
 
-        $form->add('submit', 'submit', ['label' => 'Write', 'attr' =>['class' => 'btn pull-right btn btn-success']]);
+        $form->add('submit', 'submit', ['label' => 'Create', 'attr'=>['class' => 'btn btn-success pull-right']]);
 
         return $form;
     }
 
-    public function unreadMessagesAction()
+    public function unreadMessagesAction($max = 3)
     {
         $user=$this->getUser();
         $uid = $user->getId();
