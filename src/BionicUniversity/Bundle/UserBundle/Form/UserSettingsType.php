@@ -11,7 +11,7 @@ class UserSettingsType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -34,7 +34,7 @@ class UserSettingsType extends AbstractType
                 'format' => 'yyyy-MM-dd',
                 'required' => false
             ])
-            ->add('interests', 'entity',
+            ->add('interests', 'genemu_jqueryselect2_entity',
                 [
                     'class' => 'BionicUniversity\Bundle\UserBundle\Entity\Interest',
                     'property' => 'name',
