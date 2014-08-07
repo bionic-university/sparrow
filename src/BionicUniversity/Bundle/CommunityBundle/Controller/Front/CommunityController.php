@@ -20,21 +20,14 @@ class CommunityController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BionicUniversityCommunityBundle:Community')->find($id);
         $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findByCommunity($entity, ['createdAt'=>'desc']);
-        $memberships = $em->getRepository('BionicUniversityCommunityBundle:Membership')->findByCommunity($entity);
-        $users = [];
-        foreach ($memberships as $membership) {
-            $users[] = $membership->getUser();
-        }
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Community entity.');
         }
         $form = $this->createPostForm($id);
-
         return $this->render('BionicUniversityCommunityBundle:Community/Front:community.html.twig', [
             'entity' => $entity,
-            'post' => $posts,
-            'form' => $form->createView(),
-            'users' => $users,
+            'posts' => $posts,
+            'form' => $form->createView()
         ]);
     }
 

@@ -26,13 +26,13 @@
                                         <div class="col-sm-9">
                                             <div class="media">
                                                 <a class="pull-left margin-none" href="#">
-                                                    <img class="img-clean" src="" alt="..." width="100" height="100">
+                                                    <img class="img-clean" src="{{ asset(membership.community.fullAvatar) }}" alt="..." width="100" height="100">
                                                 </a>
                                                 <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
                                                     <h4 class="media-heading"><a href="{{ path('community_profile',{'id':membership.community.id}) }}" class="text-inverse">{{ membership.community.name }}</a></h4>
                                                     <p>
                                                         <!-- <span class="text-success strong"><i class="fa fa-check"></i> Friend</span> &nbsp;  -->
-                                                        <i class="fa fa-fw fa-map-marker text-muted"></i> </p>
+                                                        <i class="fa fa-fw fa-map-marker text-muted"></i> {{ membership.community.description }} </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -63,13 +63,13 @@
                                         <div class="col-sm-9">
                                             <div class="media">
                                                 <a class="pull-left margin-none" href="#">
-                                                    <img class="img-clean" src="" alt="..." width="100" height="100">
+                                                    <img class="img-clean" src="{{ asset(community.fullAvatar) }}" alt="..." width="100" height="100">
                                                 </a>
                                                 <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
                                                     <h4 class="media-heading"><a href="{{ path('community_profile',{'id':community.id}) }}" class="text-inverse">{{ community.name }}</a></h4>
                                                     <p>
                                                         <!-- <span class="text-success strong"><i class="fa fa-check"></i> Friend</span> &nbsp;  -->
-                                                        <i class="fa fa-fw fa-map-marker text-muted"></i> </p>
+                                                        <i class="fa fa-fw fa-map-marker text-muted"></i> {{ community.description}}</p>
                                                 </div>
                                             </div>
                                         </div>
