@@ -7,6 +7,11 @@ a.pull-left img.media-object{
     height: 60px;
 }
 
+/*adjusts title above conversation*/
+span.conv_title {
+    font-size: 14px;
+    font-weight: 400;
+}
 
 div.media-object {
 
@@ -18,7 +23,7 @@ div.media-object img{
     min-width: 50px;
     height: 50px;
 }
-
+/*adjusts status text in msg body*/
 span.messagestatus p{
     font-size: 10px;
 }
@@ -26,3 +31,13 @@ span.messagestatus p{
 form fieldset legend{
     display: none
 }
+/*hides mr.Awesome title*/
+#chat-notification {
+    visibility:hidden;
+}
+/*adaptive avatar on profile page*/
+div.widget-body img.avatar {
+    width:100%;
+    height:100%;
+}
+

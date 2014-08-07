@@ -32,7 +32,7 @@
                         <a href="{{ path('user_friends') }}" ><i class="icon-group"></i><span>Friends</span></a>
                     </li>
                     <li class="hasSubmenu">
-                        <a href="{{ path('messages') }}" ><i class="icon-comment-typing"></i><span>Message</span></a>
+                        <a href="{{ path('messages') }}" ><i class="icon-comment-typing"></i><span>Messages</span></a>
                     </li>
                     <li class="hasSubmenu">
                         <a href="{{ path('communities') }}" ><i class="icon-ghost"></i><span>Communities</span></a>
@@ -68,7 +68,7 @@
                 <!-- ICON WITH DROPDOWN FOR NOTIFICATIONS    -->
                 <ul class="notifications pull-left hidden-xs">
                     <li class="dropdown notif">
-                        <a href="#" class="dropdown-toggle"  data-toggle="dropdown"><i class="notif-block icon-envelope-1"></i><span class="fa fa-star"></span></a>
+                        <a href="#" class="dropdown-toggle"  data-toggle="dropdown"><i class="notif-block icon-envelope-1"></i><span class="fa"></span></a>
                         {{ render(controller('BionicUniversityMessageBundle:Front/Message:lastMessage', {
                         'max': 3
                         })) }}

@@ -11,11 +11,11 @@
         <div class="innerAll">
                     {{ form(userSearchForm) }}
         </div>
-        <div class="bg-gray text-center strong border-top innerAll half"> {% if messages | length != 0 %}
-                {{ messages | length }}
-            {% else %}Haven't
+        <div class="bg-gray text-center strong border-top innerAll half"> <span class="conv_title">{% if messages | length != 0 %}
+                {{ messages | length }} messages in conversation
+            {% else %}Please select interlocutor
             {% endif %}
-            messages <i class="fa fa-circle-arrow-down"></i></div>
+            </span><i class="fa fa-circle-arrow-down"></i></div>
         <ul class="list-unstyled">
             {{ render(controller('BionicUniversityMessageBundle:Front/Message:recentConversation')) }}
         </ul>
