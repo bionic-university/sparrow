@@ -4,9 +4,6 @@ namespace BionicUniversity\Bundle\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-/**
- * Department
- */
 
 use Symfony\Component\Validator\Constraints as Assert;
 

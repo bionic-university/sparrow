@@ -44,3 +44,7 @@ div.widget-body img.avatar {
 .col-sm-9 {
     width: 70% !important;
 }
+/*hides annoying Text and star above posts form*/
+.form-group label {
+    display:none;
+}
