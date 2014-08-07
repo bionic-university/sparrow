@@ -1,5 +1,6 @@
 {% block wrapper %}
     {% block content %}
+{% if app.security.token.user == entity %}
 <div class="row">
     <div class="col-md-12">
         <div class="widget widget-heading-simple widget-body-white">
@@ -13,20 +14,21 @@
         </div>
     </div>
 </div>
+{% endif %}
 <div class="gridalicious-row" data-toggle="gridalicious" data-gridalicious-width="340" data-gridalicious-gutter="12"
      data-gridalicious-selector=".gridalicious-item">
     <div class="innerAll inner-2x loading text-center text-medium"><i class="fa fa-fw fa-spinner fa-spin"></i>
         Loading
     </div>
     <div class="loaded hide2">
-
+        {% if posts != null %}
         {% for post in posts %}
             <!-- Widget -->
             <div class="widget gridalicious-item not-responsive">
                 <!-- Info -->
                 <div class="bg-primary">
                     <div class="media">
-                        <a href="" class="pull-left"><img src="{{ asset('/uploads/avatar/'~ post.author.avatar) }}"
+                        <a href="" class="pull-left"><img src="{{ asset(post.author.fullAvatar) }}"
                                                           style=" min-height: 50px; max-height: 50px;"
                                                           class="media-object"></a>
 
@@ -59,6 +61,9 @@
 
             <!-- //End Widget -->
         {% endfor %}
+        {% else %}
+            <div class="bg-gray innerAll text-center margin-none"><span class="text-muted lead"><i class="icon-venn-diagram">            User has not write something</i></span></div>
+        {% endif %}
     </div>
         {% endblock content %}
         {% endblock wrapper %}

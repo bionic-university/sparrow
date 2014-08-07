@@ -20,7 +20,7 @@
             <div class="innerB">Working at {{ entity.department }}</div>
             {% if app.security.token.user != entity %}
                 {% if app.security.token.user.isFriendOf(entity) %}
-                    <a href="" class="btn btn-primary text-center btn-block">Send message</a>
+                    <a href="{{ path('message_conversation',{'id':entity.id}) }}" class="btn btn-primary text-center btn-block">Send message</a>
                 {% else %}
                 <a href="{{ path('user_add_friend', { 'id': entity.getid }) }}" class="btn btn-primary text-center btn-block">Add to friends</a>
                     <a href="" class="btn btn-primary text-center btn-block">Send message</a>
