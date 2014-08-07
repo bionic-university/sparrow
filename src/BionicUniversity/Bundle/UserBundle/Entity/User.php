@@ -609,7 +609,6 @@ class User extends BaseUser
     {
         return (null !== $this->avatar) ? $this->avatar : 'no_avatar.jpg';
     }
-
     public function getFullAvatar()
     {
         return sprintf('/uploads/avatar/%s', $this->avatar);
@@ -617,11 +616,10 @@ class User extends BaseUser
 
     public function hasRequest(User $user)
     {
-        return count($this->getFriends()->filter(function ($element) use ($user) {
+        return count($this->getFriendships()->filter(function ($element) use ($user) {
             /** @var Friendship $element */
-            return $element->getUserReceiver()->getId() === $user->getId()
-            || $element->getUserSender()->getId() === $user->getId();
-        })) == 0;
+            return $element->getUserReceiver()->getId() === $user->getId();
+        })) > 0;
     }
 
     public function isFriendOf(User $user)
@@ -631,6 +629,19 @@ class User extends BaseUser
             return $element->getUserReceiver()->getId() === $user->getId()
             || $element->getUserSender()->getId() === $user->getId();
         })) > 0;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection|ArrayCollection
+     */
+    public function getFriendships()
+    {
+        $friendships = new ArrayCollection(array_merge($this->invites->toArray(), $this->requests->toArray()));
+        return $friendships->filter(function ($element) {
+
+            /**@var Friendship $element */
+            return $element->getAcceptanceStatus() === Friendship::UNCONFIRMED;
+        });
     }
 
     /**

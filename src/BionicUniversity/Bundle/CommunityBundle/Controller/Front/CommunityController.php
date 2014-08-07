@@ -59,7 +59,7 @@ class CommunityController extends Controller
         }
         $allCommunities = $all;
 
-        return $this->render('BionicUniversityCommunityBundle:Community/Front:communities.html.twig', ['my_memberships'=>$myMemberships,'communities'=>$allCommunities]);
+        return $this->render('BionicUniversityCommunityBundle:Community/Front:communities.html.twig', ['memberships'=>$myMemberships,'communities'=>$allCommunities]);
     }
 
     public function joinAction($id)
@@ -79,13 +79,13 @@ class CommunityController extends Controller
 
     public function leaveAction($id)
     {
-
         $em = $this->getDoctrine()->getManager();
-
         $membership = $em->getRepository('BionicUniversityCommunityBundle:Membership')->findOneById($id);
-
-        $em->remove($membership);
-        $em->flush();
+        if(null != $membership)
+        {
+            $em->remove($membership);
+            $em->flush();
+        }
 
         return $this->redirect($this->generateUrl('communities'));
     }

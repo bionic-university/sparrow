@@ -165,9 +165,9 @@
                                             <div class="innerAll text-right">
                                                 <div class="btn-group-vertical btn-group-sm">
                                                     <a href="" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
-                                                    {% if people.isFriendOf(app.security.token.user) %}
+                                                    {% if app.security.token.user.isFriendOf(people) %}
                                                         In friends
-                                                    {% elseif people.hasRequest(app.security.token.user) %}
+                                                    {% elseif app.security.token.user.hasRequest(people) %}
                                                         Request sent
                                                     {% else %}
                                                         <a href="{{ path('user_add_friend',{ 'id': people.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-bell"></i> Add</a>
