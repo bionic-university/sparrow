@@ -42,7 +42,6 @@ class Post
 
     /**
      * @var Community
-     * @Assert\NotBlank()
      */
     private $community;
 

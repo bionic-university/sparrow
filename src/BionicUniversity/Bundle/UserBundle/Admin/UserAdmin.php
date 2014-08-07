@@ -85,7 +85,14 @@ class UserAdmin extends Admin
                 'empty_data' => null
 
             ])
-            ->add('enabled');
+            ->add('roles', 'choice',
+                [
+                    'multiple' =>true,
+                    'expanded' => true,
+                    'choices' => array(User::ROLE_01 => 'ROLE_USER', User::ROLE_02 => 'ROLE_SONATA_ADMIN'),
+                ]
+            )
+            ->add('enabled','checkbox',['required'=>false]);
     }
 
     /**

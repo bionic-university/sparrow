@@ -13,7 +13,9 @@ class BundleFixturesLoader extends DataFixtureLoader
     protected function getFixtures()
     {
         return  array(
+            __DIR__ . '/../../Resources/fixtures/departments.yml',
             __DIR__ . '/../../Resources/fixtures/user.yml',
+            __DIR__ . '/../../Resources/fixtures/interests.yml',
 
         );
     }

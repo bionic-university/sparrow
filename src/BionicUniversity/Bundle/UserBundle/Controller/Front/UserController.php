@@ -5,13 +5,10 @@ namespace BionicUniversity\Bundle\UserBundle\Controller\Front;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BionicUniversity\Bundle\UserBundle\Form\CreatePasswordType;
-
 use BionicUniversity\Bundle\UserBundle\Entity\User;
-use BionicUniversity\Bundle\UserBundle\Entity\Avatar;
 use BionicUniversity\Bundle\UserBundle\Entity\Friendship;
 use BionicUniversity\Bundle\UserBundle\Form\UserSettingsType;
 use BionicUniversity\Bundle\UserBundle\Doctrine\ORM\FriendshipRepository;
-
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use BionicUniversity\Bundle\WallBundle\Form\PostType;
 
@@ -21,21 +18,19 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BionicUniversityUserBundle:User')->find($id);
-        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findByAuthor($entity);
+        $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findBy(['author'=>$entity, 'community'=>null], ['createdAt'=>'desc' ]);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
         $form = $this->createPostForm();
-        $csrfToken = $this->get('form.csrf_provider')->generateCsrfToken('delete_post');
 
-        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', array(
+        return $this->render('BionicUniversityUserBundle:User/Front:profile.html.twig', [
             'entity' => $entity,
             'posts' => $posts,
             'form' => $form->createView(),
-            'csrfToken' => $csrfToken,
-        ));
+        ]);
     }
 
     public function aboutAction($id = null)
@@ -249,59 +244,6 @@ class UserController extends Controller
         return $this->redirect($this->generateUrl("user_friends"));
     }
 
-    public function friendRequestsAction()
-    {
-        $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-        /**
-         * @var User $entity
-         */
-        $entity = $em->getRepository("BionicUniversityUserBundle:User")->find($this->getUser());
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
-        }
-        $requests = $entity->getRequests();
-        $unconfirmedRequests = [];
-        /**
-         * @var Friendship $friendship
-         */
-        foreach($requests as $friendship)
-        {
-            if($friendship->getUserSender() == $user && $friendship->getAcceptanceStatus() != 1)
-            {
-                array_push($unconfirmedRequests, $friendship->getUserReceiver());
-            }
-        }
-
-        return $this->render('BionicUniversityUserBundle:User/Front:requests.html.twig', ['requests' => $unconfirmedRequests]);
-    }
-
-    public function friendInvitesAction()
-    {
-        $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-        /**
-         * @var User $entity
-         */
-        $entity = $em->getRepository("BionicUniversityUserBundle:User")->find($user);
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
-        }
-        $invites = $entity->getInvites();
-        $unconfirmedInvites = [];
-        /**
-         * @var Friendship $friendship
-         */
-        foreach($invites as $friendship)
-        {
-            if($friendship->getUserReceiver() == $user && $friendship->getAcceptanceStatus() != 1)
-            {
-                array_push($unconfirmedInvites, $friendship->getUserSender());
-            }
-        }
-
-        return $this->render('@BionicUniversityUser/User/Front/invites.html.twig', ['invites' => $unconfirmedInvites]);
-    }
 
     /**
      * Creates a form to create user posts.
@@ -312,14 +254,14 @@ class UserController extends Controller
      */
     private function createPostForm()
     {
-        $form = $this->createForm(new PostType(), null, array(
+        $form = $this->createForm(new PostType(), null, [
             'action' => $this->generateUrl('create_post'),
             'method' => 'POST',
             'show_legend' => true,
             'label' => 'Write a new post'
-        ));
+        ]);
 
-        $form->add('submit', 'submit', array('label' => 'Create new post', 'attr' => ['class' => 'pull-right btn btn-success']));
+        $form->add('submit', 'submit', ['label' => 'Create new post', 'attr' => ['class' => 'pull-right btn btn-success']]);
 
         return $form;
     }

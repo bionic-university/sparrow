@@ -31,21 +31,8 @@ class SendMessageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
-        $user = $this->securityContext->getToken()->getUser();
         $builder
-            ->add('toUser'
-                , 'entity', array(
-                    'class' => 'BionicUniversity\Bundle\UserBundle\Entity\User',
-                    'property' => 'firstName',
-                    'query_builder' => function (EntityRepository $er) use ($user) {
-                            return $er->createQueryBuilder('u')
-                                ->where('u !=:user')
-                                ->setParameter('user', $user);
-                        }
-                )
-            )
-            ->add('body');
+            ->add('body', null, ['label' => false]);
     }
 
     /**
@@ -53,9 +40,10 @@ class SendMessageType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'BionicUniversity\Bundle\MessageBundle\Entity\Message'
-        ));
+        $resolver->setDefaults([
+            'data_class' => 'BionicUniversity\Bundle\MessageBundle\Entity\Message',
+            'show_legend' => false
+        ]);
     }
 
     /**

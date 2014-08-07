@@ -14,4 +14,5 @@
 /web/uploads/avatar/
 !/web/uploads/avatar/no_avatar.jpg
 /web/uploads/community_logo/
-
+deploy.rb
+node_modules/

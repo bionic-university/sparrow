@@ -48,6 +48,7 @@ class UserManipulator
         $user->setGender(User::GENDER_MALE);
         $user->setSuperAdmin((Boolean)$superadmin);
         $user->addRole('ROLE_SONATA_ADMIN');
+//        $user->addRole('ROLE_USER');
         $this->userManager->updateUser($user);
 
         return $user;
