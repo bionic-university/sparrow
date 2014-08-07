@@ -29,6 +29,15 @@ class Interest
     private $name;
 
     /**
+     * @var string
+     * @Assert\Type(type="string")
+     * @Assert\Length(
+     *      max = "50",
+     *      )
+     * @Assert\NotBlank()
+     */
+    private $icon;
+    /**
      * @var ArrayCollection
      * @Assert\NotBlank()
      */

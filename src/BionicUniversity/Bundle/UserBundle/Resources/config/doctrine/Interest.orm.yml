@@ -11,9 +11,13 @@ BionicUniversity\Bundle\UserBundle\Entity\Interest:
         name:
             type: string
             length: '50'
+        icon:
+            type: string
+            length: '50'
     manyToMany:
         users:
           targetEntity: BionicUniversity\Bundle\UserBundle\Entity\User
           mappedBy: interests
+          cascade: ['persist']
 
 

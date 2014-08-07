@@ -7,7 +7,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class DepartmentAdmin extends Admin
+class InterestAdmin extends Admin
 {
     /**
      * @param DatagridMapper $datagridMapper
@@ -17,7 +17,6 @@ class DepartmentAdmin extends Admin
         $datagridMapper
             ->add('id')
             ->add('name')
-            ->add('imageUrl')
         ;
     }
 
@@ -29,7 +28,6 @@ class DepartmentAdmin extends Admin
         $listMapper
             ->add('id')
             ->add('name')
-            ->add('imageUrl')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -48,7 +46,6 @@ class DepartmentAdmin extends Admin
         $formMapper
             ->add('id')
             ->add('name')
-            ->add('imageUrl')
         ;
     }
 
@@ -60,7 +57,6 @@ class DepartmentAdmin extends Admin
         $showMapper
             ->add('id')
             ->add('name')
-            ->add('imageUrl')
         ;
     }
 }

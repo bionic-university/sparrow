@@ -61,3 +61,9 @@ services:
         arguments: [~, BionicUniversity\Bundle\UserBundle\Entity\Department, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: Department}
+
+    bionic_university_user.admin.interest:
+        class: BionicUniversity\Bundle\UserBundle\Admin\InterestAdmin
+        arguments: [~, BionicUniversity\Bundle\UserBundle\Entity\Interest, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Interest}

@@ -1,0 +1,4 @@
+BionicUniversity\Bundle\UserBundle\Entity\Department:
+    ceo:
+       name: CEO
+       imageUrl: "http://www.bmi.com/images/news/2014/cache/ONEILL2013-16x9-770x434.jpg"

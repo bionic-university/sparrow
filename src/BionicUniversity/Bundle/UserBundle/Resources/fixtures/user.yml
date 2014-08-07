@@ -6,7 +6,7 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         email: andrew@kovalyov.com
         plainPassword: 123456
         position: CEO
-        department: CEO room
+        department: @ceo
         dateOfBirth: <dateTime()>
         enabled: 1
         gender: m
