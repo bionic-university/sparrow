@@ -38,7 +38,7 @@ class UserAdmin extends Admin
             ->add('lastName')
             ->add('position')
             ->add('department')
-            ->add('dateOfBirth')
+//            ->add('dateOfBirth')
             ->add('gender');
     }
 
@@ -56,7 +56,7 @@ class UserAdmin extends Admin
             ->add('gender', null, [
 
             ])
-            ->add('dateOfBirth')
+//            ->add('dateOfBirth')
             ->add('enabled')
             ->add('_action', 'actions', array(
                 'actions' => array(
@@ -78,7 +78,7 @@ class UserAdmin extends Admin
             ->add('department')
             ->add('email')
             ->add('position')
-            ->add('dateOfBirth')
+//            ->add('dateOfBirth')
             ->add('gender', 'choice', [
                 'choices' => array(User::GENDER_MALE => 'Male', User::GENDER_FEMALE => 'Female'),
                 'empty_value' => 'Choose user gender',
@@ -89,7 +89,7 @@ class UserAdmin extends Admin
                 [
                     'multiple' =>true,
                     'expanded' => true,
-                    'choices' => array(User::ROLE_01 => 'ROLE_USER', User::ROLE_02 => 'ROLE_SONATA_ADMIN'),
+                    'choices' => array(User::ROLE_USER => 'ROLE_USER', User::ROLE_SONATA_ADMIN => 'ROLE_SONATA_ADMIN'),
                 ]
             )
             ->add('enabled','checkbox',['required'=>false]);
@@ -116,7 +116,7 @@ class UserAdmin extends Admin
             ->add('lastName')
             ->add('position')
             ->add('department')
-            ->add('dateOfBirth')
+//            ->add('dateOfBirth')
             ->add('gender')
             ->add('avatar');
     }

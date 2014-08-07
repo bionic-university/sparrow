@@ -49,7 +49,6 @@ class ArticleAdmin extends Admin
         $formMapper
             ->add('title')
             ->add('text')
-            ->add('createdAt')
         ;
     }
 

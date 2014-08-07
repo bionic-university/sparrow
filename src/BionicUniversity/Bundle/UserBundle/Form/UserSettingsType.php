@@ -32,6 +32,7 @@ class UserSettingsType extends AbstractType
             ->add('dateOfBirth', 'birthday', [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+                'required' => false
             ])
             ->add('interests', 'entity',
                 [

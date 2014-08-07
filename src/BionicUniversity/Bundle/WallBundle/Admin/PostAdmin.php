@@ -45,9 +45,7 @@ class PostAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('text')
-            ->add('community')
-            ->add('createdAt');
+            ->add('text');
     }
 
     /**
