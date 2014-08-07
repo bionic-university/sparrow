@@ -26,3 +26,7 @@ span.messagestatus p{
 form fieldset legend{
     display: none
 }
+
+.col-sm-9 {
+    width: 70% !important;
+}
