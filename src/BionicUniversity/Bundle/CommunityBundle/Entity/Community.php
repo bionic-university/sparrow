@@ -47,6 +47,22 @@ class Community
     private $posts;
 
     /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $posts
+     */
+    public function setPosts($posts)
+    {
+        $this->posts = $posts;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
      * @var ArrayCollection
      */
     private $memberships;
@@ -188,7 +204,7 @@ class Community
 
     public function getFullAvatar()
     {
-        return sprintf('/uploads/avatar/%s', $this->avatar);
+        return sprintf('/uploads/avatar/%s', $this->getAvatar());
     }
 
     /**
