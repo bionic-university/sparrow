@@ -11,7 +11,7 @@ class UserSettingsType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array                $options
+     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -21,6 +21,8 @@ class UserSettingsType extends AbstractType
             ->add('email', 'text', array('disabled' => 'disabled'))
             ->add('position')
             ->add('department')
+            ->add('phoneNumber')
+            ->add('aboutMe', 'textarea')
             ->add('gender', 'choice', array(
                     'choices' => array(User::GENDER_MALE => 'Male', User::GENDER_FEMALE => 'Female'),
                     'empty_value' => 'Choose user gender',
@@ -31,11 +33,14 @@ class UserSettingsType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
             ])
-            ->add('interests', 'genemu_jqueryselect2_entity',
+            ->add('interests', 'entity',
                 [
-                    'multiple' =>true,
                     'class' => 'BionicUniversity\Bundle\UserBundle\Entity\Interest',
-                    'property' =>'name'
+                    'property' => 'name',
+                    'multiple' => true,
+                    'attr' => ['
+                    class' => 'col-md-4'],
+                    'required' => false
                 ]
             );
     }

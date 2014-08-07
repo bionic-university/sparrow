@@ -1,0 +1,41 @@
+BionicUniversity\Bundle\UserBundle\Entity\Interest:
+    interest1:
+        name: Cinema
+        icon: "glyphicons film"
+        users: [@admin]
+    interest2:
+        name: Realtionships
+        icon: "glyphicons heart"
+        users: [@admin]
+    interest3:
+        name: Cars
+        icon: "glyphicons car"
+        users: [@admin]
+    interest4:
+        name: Money
+        icon: "glyphicons usd"
+        users: [@admin]
+    interest5:
+        name: Money
+        icon: "glyphicons usd"
+        users: [@admin]
+    interest6:
+        name: Shooting
+        icon: "glyphicons screenshot"
+        users: [@admin]
+    interest7:
+        name: Music
+        icon: "glyphicons music"
+        users: [@admin]
+    interest8:
+        name: Traveling
+        icon: "glyphicons luggage"
+        users: [@admin]
+    interest9:
+        name: Photos
+        icon: "glyphicons luggage"
+        users: [@admin]
+    interest10:
+        name: Reading
+        icon: "glyphicons book"
+        users: [@admin]

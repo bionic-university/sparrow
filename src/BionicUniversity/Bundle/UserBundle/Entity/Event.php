@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Interest
+class Event
 {
     /**
      * @var integer
@@ -27,28 +27,19 @@ class Interest
      * @Assert\NotBlank()
      */
     private $name;
-
     /**
-     * @var string
-     * @Assert\Type(type="string")
-     * @Assert\Length(
-     *      max = "50",
-     *      )
-     * @Assert\NotBlank()
+     * @var \DateTime
      */
-    private $icon;
+    private $date;
     /**
      * @var ArrayCollection
      * @Assert\NotBlank()
      */
     private $users;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->date = new \DateTime();
     }
 
     /**
@@ -64,8 +55,8 @@ class Interest
     /**
      * Set name
      *
-     * @param  string   $name
-     * @return Interest
+     * @param string $name
+     * @return Event
      */
     public function setName($name)
     {
@@ -85,10 +76,33 @@ class Interest
     }
 
     /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return Event
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
      * Add users
      *
-     * @param  \BionicUniversity\Bundle\UserBundle\Entity\User $users
-     * @return Interest
+     * @param \BionicUniversity\Bundle\UserBundle\Entity\User $users
+     * @return Event
      */
     public function addUser(\BionicUniversity\Bundle\UserBundle\Entity\User $users)
     {

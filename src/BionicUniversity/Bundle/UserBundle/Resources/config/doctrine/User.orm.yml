@@ -18,9 +18,6 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         position:
             type: string
             length: '100'
-        department:
-            type: string
-            length: '100'
         dateOfBirth:
             type: date
         gender:
@@ -32,8 +29,13 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
             nullable: true
         aboutMe:
             type: string
-            length: '255'
+            length: '1000'
             nullable: true
+        joined:
+            type: date
+        phoneNumber:
+            type: string
+            length: '15'
     manyToMany:
         interests:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\Interest
@@ -71,4 +73,8 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         myCommunities:
             targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Community
             mappedBy: owner
+    manyToOne:
+        department:
+            targetEntity: BionicUniversity\Bundle\UserBundle\Entity\Department
+            inversedBy: users
     lifecycleCallbacks: {  }

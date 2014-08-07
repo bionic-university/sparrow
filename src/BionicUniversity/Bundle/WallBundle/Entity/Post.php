@@ -16,6 +16,7 @@ class Post
     /**
      * @var integer
      * @Assert\Type(type="integer")
+     * @Assert\NotBlank()
      */
     private $id;
 
@@ -28,6 +29,7 @@ class Post
     /**
      * @var string
      * @Assert\Type(type="string")
+     * @Assert\NotBlank()
      */
     private $text;
 

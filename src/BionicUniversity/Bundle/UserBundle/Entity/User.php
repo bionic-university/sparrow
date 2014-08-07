@@ -82,17 +82,8 @@ class User extends BaseUser
     private $position;
 
     /**
-     * @var string
-     * @Assert\Type(
-     *      type="string",
-     *      message="These data must be a string"
-     *      )
-     * @Assert\Length(
-     *      min = "2",
-     *      max = "50",
-     *      minMessage = "Your department must be at least 2 characters length",
-     *      maxMessage = "Your department cannot be longer than 50 characters length"
-     *      )
+     * @var Department
+     *
      * @Assert\NotBlank()
      */
     private $department;
@@ -109,8 +100,28 @@ class User extends BaseUser
 
     /**
      * @var string
+     * @Assert\Length(
+     *      max = "1000",
+     *      maxMessage="Permissible length of the story itself is 1000 characters"
+     *      )
      */
     private $aboutMe;
+
+
+    /**
+     * @var \DateTime
+     * @Assert\DateTime()
+     * @Assert\NotBlank()
+     */
+    private $joined;
+
+    /**
+     * @return \DateTime
+     */
+    public function getJoined()
+    {
+        return $this->joined;
+    }
 
     /**
      * @param string $aboutMe
@@ -164,8 +175,36 @@ class User extends BaseUser
      * @var ArrayCollection
      */
     private $invites;
+
+    /**
+     * @var string
+     * @Assert\Length(max = "15", maxMessage="This value cannot be greater than 15 characters")
+     * @Assert\NotBlank()
+     */
+    private $phoneNumber;
+
+    /**
+     * @param string $phoneNumber
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
+    }
+
+
     /**
      * @var \DateTime
+     * @Assert\Date(
+     *      message = "This value must be YYYY-MM-DD format"
+     *      )
      * @Assert\NotBlank(
      *      message = "This value should not be blank"
      *      )
@@ -181,10 +220,12 @@ class User extends BaseUser
         $this->memberships = new ArrayCollection();
         $this->requests = new ArrayCollection();
         $this->invites = new ArrayCollection();
+        $this->groups = ['ROLE_USER'];
         $this->roles = ['ROLE_USER'];
         $this->interests = new ArrayCollection();
         $this->myCommunities = new ArrayCollection();
         $this->setEnabled(false);
+        $this->joined = new \DateTime();
     }
 
     public function __toString()
@@ -282,10 +323,10 @@ class User extends BaseUser
     /**
      * Set department
      *
-     * @param  string $department
+     * @param  Department $department
      * @return User
      */
-    public function setDepartment($department)
+    public function setDepartment(Department $department)
     {
         $this->department = $department;
 
@@ -295,7 +336,7 @@ class User extends BaseUser
     /**
      * Get department
      *
-     * @return string
+     * @return Department
      */
     public function getDepartment()
     {
@@ -609,6 +650,7 @@ class User extends BaseUser
     {
         return (null !== $this->avatar) ? $this->avatar : 'no_avatar.jpg';
     }
+
     public function getFullAvatar()
     {
         return sprintf('/uploads/avatar/%s', $this->avatar);
