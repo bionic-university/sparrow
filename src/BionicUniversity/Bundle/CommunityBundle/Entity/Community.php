@@ -68,6 +68,7 @@ class Community
         $this->posts = new ArrayCollection();
     }
 
+
     public function __toString()
     {
         return $this->getName();
@@ -182,7 +183,12 @@ class Community
      */
     public function getAvatar()
     {
-        return $this->avatar;
+        return (null !== $this->avatar) ? $this->avatar : 'no_avatar.jpg';
+    }
+
+    public function getFullAvatar()
+    {
+        return sprintf('/uploads/avatar/%s', $this->avatar);
     }
 
     /**

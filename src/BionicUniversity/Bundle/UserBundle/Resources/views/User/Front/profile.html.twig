@@ -15,7 +15,7 @@
                 {% else %}
                     <img src="{{ asset('uploads/avatar/') }}{{ entity.avatar }}" class="avatar media-object" alt="Your avatar">
                 {% endif %}
-
+            <a href="{{ path('user_about',{'id': entity.id}) }}" ><h2 class="strong margin-none">{{ entity.firstname }}</h2></a>
             <h2 class="strong margin-none">{{ entity.firstname }}</h2>
             <div class="innerB">Working at {{ entity.department }}</div>
             {% if app.security.token.user != entity %}
