@@ -610,8 +610,9 @@ class User extends BaseUser
         return (null !== $this->avatar) ? $this->avatar : 'no_avatar.jpg';
     }
 
-    public function getFullAvatar(){
-        return sprintf('<img src="/web/uploads/avatar/%s"/>', $this->avatar);
+    public function getFullAvatar()
+    {
+        return sprintf('/uploads/avatar/%s', $this->avatar);
     }
 
     public function hasRequest(User $user)
