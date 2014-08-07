@@ -39,6 +39,7 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         status:
             type: string
             length: '140'
+            nullable:  true
     manyToMany:
         interests:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\Interest
