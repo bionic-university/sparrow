@@ -12,3 +12,94 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         gender: m
         phoneNumber: 093 123 45 12
         roles: ['ROLE_SONATA_ADMIN']
+        status: 'my_status'
+    admin1:
+        username: valera@valera.com
+        firstName: Valera
+        lastName: Valerievich
+        email: valera@valera.com
+        plainPassword: 123456
+        position: CEO
+        department: @ceo
+        dateOfBirth: <dateTime()>
+        enabled: 1
+        gender: m
+        phoneNumber: 093 123 45 12
+        roles: ['ROLE_SONATA_ADMIN']
+        status: 'my_status'
+        avatar: 'valera.jpg'
+    user0:
+        username: zayceva@zayceva.com
+        firstName: Zayceva
+        lastName: Zaychenok
+        email: zayceva@zayceva.com
+        plainPassword: 123456
+        position: hr-manager
+        department: @hr
+        dateOfBirth: <dateTime()>
+        enabled: 1
+        gender: f
+        phoneNumber: 093 123 45 12
+        roles: ['ROLE_USER']
+        status: 'my_status'
+        avatar: 'zayceva.jpg'
+    user1:
+        username: sasha@grey.com
+        firstName: Sasha
+        lastName: Grey
+        email: sasha@grey.com
+        plainPassword: 123456
+        position: Sales manager
+        department: @sales_manager
+        dateOfBirth: <dateTime()>
+        enabled: 1
+        gender: f
+        phoneNumber: 093 123 45 12
+        roles: ['ROLE_USER']
+        status: 'my_status'
+        avatar: 'grey.jpg'
+    user2:
+        username: rick@rick.com
+        firstName: Rick
+        lastName: Ross
+        email: rick@rick.com
+        plainPassword: 123456
+        position: System administrator
+        department: @it
+        dateOfBirth: <dateTime()>
+        enabled: 1
+        gender: f
+        phoneNumber: 093 123 45 12
+        roles: ['ROLE_USER']
+        status: 'my_status'
+        avatar: 'rick.jpg'
+    user3:
+        username: tyga@tyga.com
+        firstName: Tyga
+        lastName: Tiger
+        email: tyga@tyga.com
+        plainPassword: 123456
+        position: Accountman
+        department: @accounting
+        dateOfBirth: <dateTime()>
+        enabled: 1
+        gender: f
+        phoneNumber: 093 123 45 12
+        roles: ['ROLE_USER']
+        status: 'my_status'
+        avatar: 'tyga.jpg'
+    user4:
+        username: tyler@tyler.com
+        firstName: Tyler
+        lastName: Creator
+        email: tyler@tyler.com
+        plainPassword: 123456
+        position: Accountman
+        department: @accounting
+        dateOfBirth: <dateTime()>
+        enabled: 1
+        gender: f
+        phoneNumber: 093 123 45 12
+        roles: ['ROLE_USER']
+        status: 'my_status'
+        avatar: 'tyler.jpg'

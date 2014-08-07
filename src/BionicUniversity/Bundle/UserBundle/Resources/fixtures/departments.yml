@@ -1,4 +1,16 @@
 BionicUniversity\Bundle\UserBundle\Entity\Department:
     ceo:
-       name: CEO
-       imageUrl: "http://www.bmi.com/images/news/2014/cache/ONEILL2013-16x9-770x434.jpg"
+        name: CEO
+        imageUrl: "http://www.bmi.com/images/news/2014/cache/ONEILL2013-16x9-770x434.jpg"
+    accounting:
+        name: Accounting
+        imageUrl: "http://www.bmi.com/images/news/2014/cache/ONEILL2013-16x9-770x434.jpg"
+    it:
+        name: IT
+        imageUrl: "http://www.bmi.com/images/news/2014/cache/ONEILL2013-16x9-770x434.jpg"
+    hr:
+        name: Human resources
+        imageUrl: "http://www.bmi.com/images/news/2014/cache/ONEILL2013-16x9-770x434.jpg"
+    sales_manager:
+        name: Sales managers
+        imageUrl: "http://www.bmi.com/images/news/2014/cache/ONEILL2013-16x9-770x434.jpg"
