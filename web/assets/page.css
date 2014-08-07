@@ -49,7 +49,8 @@ div.widget-body {
 .col-sm-9 {
     width: 70% !important;
 }
-/*hides annoying Text and star above posts form*/
-.form-group label {
-    display:none;
+
+#bionicuniversity_bundle_userbundle_user_submit
+{
+    float: right;
 }
