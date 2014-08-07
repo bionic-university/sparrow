@@ -2,6 +2,7 @@
 
 namespace BionicUniversity\Bundle\UserBundle\Entity;
 
+use BionicUniversity\Bundle\UserBundle\Entity\Department;
 use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
 use Doctrine\Common\Collections\ArrayCollection;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
@@ -82,17 +83,8 @@ class User extends BaseUser
     private $position;
 
     /**
-     * @var string
-     * @Assert\Type(
-     *      type="string",
-     *      message="These data must be a string"
-     *      )
-     * @Assert\Length(
-     *      min = "2",
-     *      max = "50",
-     *      minMessage = "Your department must be at least 2 characters length",
-     *      maxMessage = "Your department cannot be longer than 50 characters length"
-     *      )
+     * @var Department
+     *
      * @Assert\NotBlank()
      */
     private $department;
@@ -282,10 +274,10 @@ class User extends BaseUser
     /**
      * Set department
      *
-     * @param  string $department
+     * @param  Department $department
      * @return User
      */
-    public function setDepartment($department)
+    public function setDepartment(Department $department)
     {
         $this->department = $department;
 
@@ -295,7 +287,7 @@ class User extends BaseUser
     /**
      * Get department
      *
-     * @return string
+     * @return Department
      */
     public function getDepartment()
     {
@@ -610,8 +602,7 @@ class User extends BaseUser
         return (null !== $this->avatar) ? $this->avatar : 'no_avatar.jpg';
     }
 
-    public function getFullAvatar()
-    {
+    public function getFullAvatar(){
         return sprintf('/uploads/avatar/%s', $this->avatar);
     }
 

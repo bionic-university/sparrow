@@ -40,7 +40,8 @@
 {% block body %}{% endblock %}
 <script type="text/javascript" src="{{ asset('vendor/jquery/dist/jquery.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
-<script type="text/javascript" src="http://cdn2.mosaicpro.biz/shared/assets/plugins/forms_elements_select2/js/select2.js"></script>
+<script type="text/javascript"
+        src="http://cdn2.mosaicpro.biz/shared/assets/plugins/forms_elements_select2/js/select2.js"></script>
 <script type="text/javascript" src="{{ asset('vendor/redactor/redactor/redactor.min.js') }}"></script>
 <script data-id="App.Config">
     var App = {};
@@ -93,7 +94,8 @@
     //    });
     (function ($, document) {
         $(function () {
-            $('select').select2();
+            $("select").select2();
+//            $('select:not([multiple])').select2();
             $('textarea').redactor();
 
             Dropzone.options.myAwesomeDropzone = {
@@ -109,7 +111,8 @@
                 }
             };
         })
-    })(jQuery, document);
+    })
+            (jQuery, document);
     $(function () {
 
         // Configure/customize these variables.
