@@ -11,4 +11,5 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
         enabled: 1
         gender: m
         phoneNumber: 093 123 45 12
+        status: "my_status"
         roles: ['ROLE_SONATA_ADMIN']
