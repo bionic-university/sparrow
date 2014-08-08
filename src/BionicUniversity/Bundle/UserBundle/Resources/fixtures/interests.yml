@@ -39,3 +39,7 @@ BionicUniversity\Bundle\UserBundle\Entity\Interest:
         name: Reading
         icon: "glyphicons book"
         users: [@admin]
+    interest11:
+        name: Running
+        icon: "glyphicons book"
+        users: [@admin]
