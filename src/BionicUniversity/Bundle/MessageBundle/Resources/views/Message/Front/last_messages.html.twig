@@ -4,7 +4,7 @@
         <li class="media">
             <a class="pull-left" href="#"><img class="media-object thumb" src="{{ message.fromUser.fullAvatar }}" alt="50x50" width="50"/></a>
             <div class="media-body">
-                <span class="label label-default pull-right">5 min</span>
+                <span class="label label-default pull-right">{{ message.createdAt | date ('i:m d-M') }}</span>
                 <h5 class="media-heading">{{ message.fromUser }}</h5>
                 <p class="margin-none">{{ message.body | raw }}</p>
             </div>
