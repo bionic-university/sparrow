@@ -26,7 +26,9 @@ class InvalidTokenListener
         if (false !== strstr($event->getRequest()->attributes->get('_route'), 'user_login')) {
             return;
         }
-
+        if('GET' !== $event->getRequest()->getMethod()){
+            return;
+        }
         if (!$token) {
             throw new AccessDeniedException('Invalid token');
         }
