@@ -204,7 +204,7 @@ class Community
 
     public function getFullAvatar()
     {
-        return sprintf('/uploads/avatar/%s', $this->getAvatar());
+        return sprintf('/uploads/community_logo/%s', $this->getAvatar());
     }
 
     /**

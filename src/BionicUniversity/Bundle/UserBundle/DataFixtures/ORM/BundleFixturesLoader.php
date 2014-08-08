@@ -16,6 +16,7 @@ class BundleFixturesLoader extends DataFixtureLoader
             __DIR__ . '/../../Resources/fixtures/departments.yml',
             __DIR__ . '/../../Resources/fixtures/user.yml',
             __DIR__ . '/../../Resources/fixtures/interests.yml',
+            __DIR__ . '/../../Resources/fixtures/communities.orm.yml',
 
         );
     }

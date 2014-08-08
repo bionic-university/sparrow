@@ -1,7 +1,8 @@
 {% extends '::front.html.twig' %}
 {% block content %}
     <div class="squared">
-        <form action="{{ oneup_uploader_endpoint('avatar') }}" class="dropzone" id="my-awesome-dropzone">
+        <form action="{{ oneup_uploader_endpoint('community_logo') }}" class="dropzone" id="my-awesome-dropzone">
+            <input name="community" value="{{ edit_form.vars.data.id }}" type="hidden"/>
             <div class="dz-message message_dz"><h1>Drop</h1> file here to upload new avatar</div>
             <div class="fallback">
                 <input name="file" type="file"/>
