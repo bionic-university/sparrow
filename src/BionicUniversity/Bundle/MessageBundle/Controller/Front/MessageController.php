@@ -67,7 +67,7 @@ class MessageController extends Controller
             'messages' => $messages,
             'interlocutor' => $interlocutor,
             'userSearchForm' => $userSearchForm->createView(),
-            'token' => $this->get('form.csrf_provider')->generateCsrfToken(''),
+            'token' => $this->get('form.csrf_provider')->generateCsrfToken('anything'),
             'messageForm' => $messageForm,
         ]);
     }
