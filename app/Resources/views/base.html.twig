@@ -14,7 +14,7 @@
 {% block header %}
     <head>
         <meta charset="UTF-8"/>
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Sparrow - new way of company communication{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.css') }}"/>
         <link rel="stylesheet" href="{{ asset('vendor/select2/select2.css') }}"/>
         <link rel="stylesheet" href="{{ asset('vendor/select2/select2-bootstrap.css') }}"/>
@@ -25,6 +25,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
         <script src="{{ asset('assets/library/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/library/jquery/jquery-migrate.min.js') }}"></script>
+        <script src="{{ asset('assets/script.js') }}"></script>
         <script src="{{ asset('assets/library/modernizr/modernizr.js') }}"></script>
         <script src="{{ asset('assets/plugins/core_less-js/less.min.js') }}"></script>
         <script src="{{ asset('assets/plugins/charts_flot/excanvas.js') }}"></script>
@@ -39,7 +40,8 @@
 {% block body %}{% endblock %}
 <script type="text/javascript" src="{{ asset('vendor/jquery/dist/jquery.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
-<script type="text/javascript" src="http://cdn2.mosaicpro.biz/shared/assets/plugins/forms_elements_select2/js/select2.js"></script>
+<script type="text/javascript"
+        src="http://cdn2.mosaicpro.biz/shared/assets/plugins/forms_elements_select2/js/select2.js"></script>
 <script type="text/javascript" src="{{ asset('vendor/redactor/redactor/redactor.min.js') }}"></script>
 <script data-id="App.Config">
     var App = {};
@@ -64,9 +66,10 @@
 <script src="{{ asset('assets/plugins/core_preload/pace.min.js') }}"></script>
 <script src="{{ asset('assets/components/core_preload/preload.pace.init.js') }}"></script>
 <script src="{{ asset('assets/plugins/menu_sidr/jquery.sidr.js') }}"></script>
-<script src="https://raw.githubusercontent.com/xing/wysihtml5/master/dist/wysihtml5-0.3.0.js"></script>
+{#<script src="{{ asset('assets/plugins/forms_editors_wysihtml5/js/wysihtml5-0.3.0.js') }}"></script>#}
 {#<script src="https://raw.githubusercontent.com/jhollingworth/bootstrap-wysihtml5/master/src/bootstrap-wysihtml5.js"></script>#}
-<script src="{{ asset('assets/plugins/forms_editors_wysihtml5/js/bootstrap-wysihtml5-0.0.2.js') }}"></script>
+{#<script src="{{ asset('assets/plugins/forms_editors_wysihtml5/js/bootstrap-wysihtml5-0.0.2.js') }}"></script>#}
+<script src="http://cdn2.mosaicpro.biz/shared/assets/plugins/forms_elements_bootstrap-datepicker/js/bootstrap-datepicker.js?v=v2.0.1-rc1&sv=v0.0.1.2"></script>
 <script src="{{ asset('assets/components/widget_twitter/twitter.init.js') }}"></script>
 <script src="{{ asset('assets/plugins/media_holder/holder.js') }}"></script>
 <script src="{{ asset('assets/plugins/media_gridalicious/jquery.gridalicious.min.js') }}"></script>
@@ -76,24 +79,31 @@
 <script src="{{ asset('assets/plugins/ui_modals/bootbox.min.js') }}"></script>
 <script src="{{ asset('assets/components/menus/sidebar.main.init.js') }}"></script>
 <script src="{{ asset('assets/components/menus/sidebar.collapse.init.js') }}"></script>
-<script src="{{ asset('assets/components/menus/menus.sidebar.chat.init.js') }}"></script>
+{#<script src="{{ asset('assets/components/menus/menus.sidebar.chat.init.js') }}"></script>#}
 <script src="{{ asset('assets/plugins/other_mixitup/jquery.mixitup.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/other_mixitup/mixitup.init.js') }}"></script>
 <script src="{{ asset('assets/components/core/core.init.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/dropzone/downloads/dropzone.js') }}"></script>
 
 <script>
-//    $(window).on('load', function(){
-//        setTimeout(function(){
-//            /* wysihtml5 */
-//            if ($('textarea').size() > 0)
-//                $('textarea').wysihtml5();
-//        }, 200);
-//    });
+    //    $(window).on('load', function(){
+    //        setTimeout(function(){
+    //            /* wysihtml5 */
+    //            if ($('textarea').size() > 0)
+    //                $('textarea').wysihtml5();
+    //        }, 200);
+    //    });
     (function ($, document) {
         $(function () {
-            $('select').select2();
-            $('textarea').wysihtml5();
+            $("select").select2();
+//            $('select:not([multiple])').select2();
+            $('textarea').redactor(
+            {
+                fileUpload: '/redactor/upload'
+            });
+            $('input[type="date"]').datepicker({
+                format: 'yyyy-mm-dd'
+            });
 
             Dropzone.options.myAwesomeDropzone = {
                 maxFiles: 1,
@@ -108,7 +118,8 @@
                 }
             };
         })
-    })(jQuery, document);
+    })
+            (jQuery, document);
     $(function () {
 
         // Configure/customize these variables.

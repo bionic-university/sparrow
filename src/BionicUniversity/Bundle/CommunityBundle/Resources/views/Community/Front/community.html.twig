@@ -1,44 +1,151 @@
 {% extends "::front.html.twig" %}
-{% block wall %}
-<ul class="list">
-    <li class="list-item"> <img src="{{ asset('uploads/avatar/') }}{{ entity.avatar }}" class="avatar_mini media-object" alt="Your avatar">{{ entity.name }}</li>
-    <li class="list-item"> {{ entity.description}}</li>
-    {% if app.security.token.user == entity.owner %}
-        <div class="button"><a href="{{ path('front_community_edit',{'id':entity.id}) }}">Edit community</a></div>
-    {% endif %}
-</ul>
-<div class="row">
-    {% if null != users %}
-        {% for user in users %}
-            <div class="col-md-offset-2 col-md-8">
-                {% if app.security.token.user == entity.owner or user%}
-                    {{ form(form) }}
-                {% endif %}
+{% block profile %}
+    {% include('@BionicUniversityUser/User/Front/profile_block.html.twig') %}
+{% endblock profile %}
+
+{% block content %}
+    <h3>{{ entity }}</h3>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="innerAll bg-white">
+                <h5>Short Bio</h5>
+                <div class="media innerB ">
+                    <a href="" class="pull-left">
+                        <img src="{{ asset(entity.fullAvatar) }}" alt="" width="75"/>
+                    </a>
+                    <div class="media-body">
+                        <p>{% if null != entity.description %}{{ entity.description | raw}}{% else %}User has left this field blank{% endif %}</p>
+                    </div>
+                </div>
             </div>
-        {% endfor %}
-    {% endif %}
-</div>
-<div>
-    <h2>Recent posts</h2>
-    {% if null == post %}
-    {% else %}
-        {% for post_body in post %}
-            <div class="panel panel-default">
-                <div class="panel-body">{{ post_body.text|raw }}
-                    {% if app.security.token.user == post_body.author %}
-                        <a class="pull-right" href="{{ path('delete_community_post', {'id': post_body.id}) }}">
-                            Delete
+        </div>
+        <div class="col-sm-6">
+            <div class="widget">
+                <div class="widget-head border-bottom bg-gray">
+                    <h5 class="innerAll pull-left margin-none">Basic Info</h5>
+                    <div class="pull-right">
+                        {% if app.security.token.user == entity.owner %}
+                        <a href="{{ path('front_community_edit',{ 'id': entity.id }) }}" class="text-muted">
+                            <i class="fa fa-pencil innerL"></i>
                         </a>
-                    {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <div class="row">
+                        <div class="col-sm-6">Community:</div>
+                        <div class="col-sm-6 text-right">
+                            <span class="label label-default">{{ entity }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">Members:</div>
+                        <div class="col-sm-6 text-right">
+                            <span class="label label-default">{{ entity.memberships|length }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">Created:</div>
+                        <div class="col-sm-6 text-right">
+                            <span class="label label-default">{{ entity.createdAt|date }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">Owner:</div>
+                        <div class="col-sm-6 text-right">
+                            <span class="label label-default"><a href="{{ path('user_profile',{'id':entity.owner.id}) }}"> {{ entity.owner }}</a></span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        {% else %}
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    No posts added yet
+
+        </div>
+
+    </div>
+
+    <div class="innerT">
+        <div class="widget">
+            <div class="widget-head border-bottom bg-gray">
+                <h5 class="pull-left margin-none innerAll">Users <span class="text-muted">{{ entity.memberships |length }}</span></h5>
+                <div class="pull-right">
+                    <a href="" class="text-muted">
+                        <i class="fa fa-eye innerL"></i>
+                    </a>
                 </div>
             </div>
-        {% endfor %}
-    {% endif %}
-</div>
-{% endblock wall %}
+
+            <div class="widget-body margin-none">
+
+                {% for membership in entity.memberships %}
+                    <div style="display: inline" class="innerAll">
+                        <a style="display: inline" href="{{ path('user_profile', { 'id': membership.user.id}) }}">
+                            <img style="display: inline; width: 8%;" src="{{ asset(membership.user.fullAvatar)}}" class="innerR innerB half" alt="Your avatar">
+                        </a>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget widget-heading-simple widget-body-white">
+
+                        <div class="widget-body">
+                            <div class="innerLR">
+                                {{ form(form) }}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="gridalicious-row" data-toggle="gridalicious" data-gridalicious-width="340" data-gridalicious-gutter="12"
+            data-gridalicious-selector=".gridalicious-item">
+            <div class="innerAll inner-2x loading text-center text-medium"><i class="fa fa-fw fa-spinner fa-spin"></i>
+                Loading
+            </div>
+            <div class="loaded hide2">
+
+                {% for post in entity.posts %}
+                    <!-- Widget -->
+                    <div class="widget gridalicious-item not-responsive">
+                        <!-- Info -->
+                        <div class="bg-primary">
+                            <div class="media">
+                                <a href="" class="pull-left"><img src="{{ asset(post.author.fullAvatar) }}"
+                                                                  style=" min-height: 50px; max-height: 50px;"
+                                                                  class="media-object"></a>
+
+                                <div class="media-body innerTB half">
+
+                                    {% if app.security.token.user == entity.owner %}
+                                        <a href="{{ path('delete_post', {'id': post.id}) }}"
+                                           class="pull-right innerT innerR text-white">
+                                            <i class="icon-circle-delete fa fa-2x "></i>
+                                        </a>
+                                    {% endif %}
+
+                                    <a href="" class="text-white strong display-block">{{ post.author }}</a>
+                                    <span>on {{ post.createdAt | date }}</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <!-- Content -->
+                        <div class="innerAll text-justify">
+                            <p>
+                                <span class="readmore">
+                                    {{ post.text | raw }}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- //End Widget -->
+                {% endfor %}
+            </div>
+    </div>
+{% endblock content %}

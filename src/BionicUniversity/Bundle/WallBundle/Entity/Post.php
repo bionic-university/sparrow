@@ -28,6 +28,7 @@ class Post
     /**
      * @var string
      * @Assert\Type(type="string")
+     * @Assert\NotBlank()
      */
     private $text;
 
@@ -40,7 +41,6 @@ class Post
 
     /**
      * @var Community
-     * @Assert\NotBlank()
      */
     private $community;
 

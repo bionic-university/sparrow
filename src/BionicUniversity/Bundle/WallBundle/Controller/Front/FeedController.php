@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BionicUniversity\Bundle\UserBundle\Entity\Friendship;
 use BionicUniversity\Bundle\CommunityBundle\Entity\Membership;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
+use BionicUniversity\Bundle\UserBundle\Entity\User;
 
 /**
  * Feed controller.
@@ -18,9 +19,9 @@ class FeedController extends Controller
         $user = $this->getUser();
         $feeds = $this->findFeed($user);
 
-        return $this->render('BionicUniversityWallBundle:Feed:index.html.twig', array(
+        return $this->render('@BionicUniversityWall/Post/Front/news_feed.html.twig', [
             'feeds' => $feeds,
-        ));
+        ]);
     }
 
     public function findFeed($user)
@@ -28,7 +29,19 @@ class FeedController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $communities = $this->findCommunities($user);
-        $friends = $this->findFriends($user);
+        $myFriendships = $em->getRepository("BionicUniversityUserBundle:Friendship")->findFriends($user);
+        $friends = [];
+        /**
+         * @var Friendship $friendship
+         */
+        foreach ($myFriendships as $friendship) {
+            if ($friendship->getUserReceiver() == $user) {
+                array_push($friends, $friendship->getUserSender());
+            } else {
+                array_push($friends, $friendship->getUserReceiver());
+            }
+
+        }
 
         return $em->getRepository("BionicUniversityWallBundle:Post")->getFeed($communities, $friends, $user);
     }
@@ -44,19 +57,5 @@ class FeedController extends Controller
             ->getQuery();
 
         return $communities->getResult();
-    }
-
-    public function findFriends($user)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $friends = $em->getRepository("BionicUniversityUserBundle:User")
-            ->createQueryBuilder('user')
-            ->leftJoin('user.requests', 'request')
-            ->leftJoin('user.invites', 'invite')
-            ->where('(request.userReceiver = :user OR invite.userSender = :user) AND request.acceptanceStatus = 1 AND invite.acceptanceStatus = 1')
-            ->setParameter('user', $user)
-            ->getQuery();
-
-        return $friends->getResult();
     }
 }

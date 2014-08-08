@@ -9,17 +9,13 @@
     <div class="row row-merge borders">
     <div class="col-md-3 listWrapper">
         <div class="innerAll">
-            {#<form autocomplete="off" class="form-inline margin-none">#}
-                {#<div class="input-group input-group-sm">#}
                     {{ form(userSearchForm) }}
-                {#</div>#}
-            {#</form>#}
         </div>
-        <div class="bg-gray text-center strong border-top innerAll half"> {% if messages | length != 0 %}
-                {{ messages | length }}
-            {% else %}Haven't
+        <div class="bg-gray text-center strong border-top innerAll half"> <span class="conv_title">{% if messages | length != 0 %}
+                {{ messages | length }} messages in conversation
+            {% else %}Please select interlocutor
             {% endif %}
-            messages <i class="fa fa-circle-arrow-down"></i></div>
+            </span><i class="fa fa-circle-arrow-down"></i></div>
         <ul class="list-unstyled">
             {{ render(controller('BionicUniversityMessageBundle:Front/Message:recentConversation')) }}
         </ul>
@@ -34,11 +30,6 @@
                     <img src="{{ asset('/uploads/avatar/'~interlocutor.avatar) }}" width="65" class="media-object">
                 </a>
                 <div class="media-body innerTB innerR">
-                    <div class="innerT half pull-right">
-                        <a  href="#type" class=" btn btn-default bg-white btn-sm" data-toggle="collapse">
-                            <i class="fa fa-pencil"></i> Write
-                        </a>
-                    </div>
                     <h4 href="" class="text-white pull-left innerAll strong display-block margin-none">{{ interlocutor }}</h4>
 
 
@@ -48,14 +39,14 @@
         </div>
         <div class="bg-gray innerAll text-center margin-none"></div>
         <div  id="type" class=" border-top">
-            {{ form(messageForm) }}
+            {{ form(messageForm)  }}
         </div>
 
         <div class="widget border-top padding-none margin-none">
 
             {% for message in messages %}
             <!--  Message -->
-            <div class="media margin-none innerAll">
+            <div class="media margin-none innerAll" style="{% if message.isread == 0 %}background:#E0E0E0{% endif %}">
                 <a href="" class="pull-left hidden-xs">
                     <img src="{{ asset('/uploads/avatar/'~message.fromUser.avatar) }}" width="60" class="media-object">
                 </a>
@@ -75,7 +66,7 @@
                             </div>
                         </div>
                         <div class="col-sm-6 hidden-xs">
-                                			<span class="pull-right innerR innerT text-right  text-muted messagestatus">
+                                			<span class="pull-right innerR innerT text-right  text-muted messagestatus"  >
                                             <p>{% if message.isread != 0 %}read{% else %}unread{% endif %} message | received
 										{{ message.createdAt | date ('h:i d-m-Y')}}</p>
 										</span>

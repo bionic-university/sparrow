@@ -16,28 +16,33 @@ class UserSettingsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName', 'text', array('disabled' => 'disabled'))
-            ->add('lastName', 'text', array('disabled' => 'disabled'))
-            ->add('email', 'text', array('disabled' => 'disabled'))
+            ->add('firstName', 'text', ['disabled' => 'disabled'])
+            ->add('lastName', 'text', ['disabled' => 'disabled'])
+            ->add('email', 'text', ['disabled' => 'disabled'])
             ->add('position')
             ->add('department')
-            ->add('gender', 'choice', array(
-                    'choices' => array(User::GENDER_MALE => 'Male', User::GENDER_FEMALE => 'Female'),
-                    'empty_value' => 'Choose user gender',
-                    'empty_data' => null,
-                )
+            ->add('phoneNumber')
+            ->add('aboutMe', 'textarea', ['required' => false])
+            ->add('gender', 'choice', [
+                    'choices' => [User::GENDER_MALE => 'Male', User::GENDER_FEMALE => 'Female'],
+                    'empty_value' => false,
+                    'empty_data' => null
+                ]
             )
             ->add('dateOfBirth', 'birthday', [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+                'required' => false
             ])
             ->add('interests', 'genemu_jqueryselect2_entity',
                 [
-                    'multiple' =>true,
                     'class' => 'BionicUniversity\Bundle\UserBundle\Entity\Interest',
-                    'property' =>'name'
-                ]
-            );
+                    'property' => 'name',
+                    'multiple' => true,
+                    'attr' => ['
+                    class' => 'col-md-4'],
+                    'required' => false
+                ]);
     }
 
     /**
@@ -45,9 +50,9 @@ class UserSettingsType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'BionicUniversity\Bundle\UserBundle\Entity\User'
-        ));
+        ]);
     }
 
     /**

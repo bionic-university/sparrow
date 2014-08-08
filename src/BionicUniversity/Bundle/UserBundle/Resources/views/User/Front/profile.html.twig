@@ -3,21 +3,24 @@
 <div class="col-md-4 col-lg-3 k">
     <div class="widget">
         <div class="widget-body text-center">
-            {% if entity.avatar == false %}
-                <form action="{{ oneup_uploader_endpoint('avatar') }}" class="dropzone square drop_avatar">
-                    <div class="dz-message message_dz"><h1>Drop</h1> file here to upload new avatar</div>
-                    <div class="fallback">
-                        <input name="file" type="file"/>
-                    </div>
-                </form>
-            {% else %}
-                <img src="{{ asset('uploads/avatar/') }}{{ entity.avatar }}" class="avatar media-object" alt="Your avatar">
-            {% endif %}
-            <h2 class="strong margin-none">{{ entity.firstname }}</h2>
+            {#{% if app.security.token.user.id == entity.id %}#}
+                {#{% if entity.avatar == false %}#}
+                    {#<form action="{{ oneup_uploader_endpoint('avatar') }}" class="dropzone square drop_avatar">#}
+                        {#<div class="dz-message message_dz"><h1>Drop</h1> file here to upload new avatar</div>#}
+                        {#<div class="fallback">#}
+                            {#<input name="file" type="file"/>#}
+                        {#</div>#}
+                    {#</form>#}
+                {#{% endif %}#}
+                {#{% else %}#}
+                    <img src="{{ asset(entity.fullAvatar) }}" class="avatar media-object" alt="Your avatar">
+                {#{% endif %}#}
+            <a href="{{ path('user_about',{'id': entity.id}) }}" ><h2 class="strong margin-none">{{ entity.firstname }}</h2></a>
+            <h2 class="strong margin-none">{{ entity.lastname }}</h2>
             <div class="innerB">Working at {{ entity.department }}</div>
             {% if app.security.token.user != entity %}
                 {% if app.security.token.user.isFriendOf(entity) %}
-                    <a href="" class="btn btn-primary text-center btn-block">Send message</a>
+                    <a href="{{ path('message_conversation',{'id':entity.id}) }}" class="btn btn-primary text-center btn-block">Send message</a>
                 {% else %}
                 <a href="{{ path('user_add_friend', { 'id': entity.getid }) }}" class="btn btn-primary text-center btn-block">Add to friends</a>
                     <a href="" class="btn btn-primary text-center btn-block">Send message</a>
@@ -36,7 +39,7 @@
         {{ render(controller('BionicUniversityWallBundle:Front/Article:index')) }}
     {% endblock recent_news %}
 
-    <!-- Widget -->
+    <!-- Twitter Widget -->
     <div class="widget widget-heading-simple widget-body-white">
 
         <!-- Widget Heading -->
@@ -54,4 +57,5 @@
 
     {% block content %}
         {{ include ("BionicUniversityWallBundle:Post/Front:posts.html.twig", {'posts':posts, 'form':form}) }}
+        </div>
     {% endblock content %}

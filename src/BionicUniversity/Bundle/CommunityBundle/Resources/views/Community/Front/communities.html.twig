@@ -1,49 +1,111 @@
 {% extends "::front.html.twig" %}
-    {% block heading_profile %}
-        {{ app.User.getFirstName }}
-        {{ app.User.getLastName }}
-    {% endblock heading_profile %}
-    {% block profile %}
+{% block content %}
+    {{ render(controller('BionicUniversityCommunityBundle:Front/Community:new')) }}
+    <!-- Tabs -->
+    <div class="relativeWrap" >
+        <div class="box-generic">
 
-    {% endblock profile %}
-    {% block wall %}
-        <h1>My communities</h1>
-        <div class="button"><a href="{{ path('create_new') }}">Create community</a></div>
-        {% block communities %}
-            <ul class="nav nav-tabs" role="tablist" id="myTab">
-                <li><a href="#my" role="tab" data-toggle="tab">My communities</a></li>
-                <li><a href="#all" role="tab" data-toggle="tab">All communities</a></li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane active" id="my">
-                    <ul>
-                        {% for membership in my_memberships %}
-                            <div class="panel panel-danger communities_panel">
-                                <div class="panel-heading">
-                                    <li class="communities_list"><a href="{{ path('community_profile',{'id':membership.getcommunity.getid}) }}"> Name: {{ membership.getcommunity.getname }}</a></li>
-                                </div>
-                                <div class="panel-body"><li class="communities_list">{{ membership.getcommunity.getdescription }}</li></div>
-                                <div class="btn btn-default"><a href="{{ path('leave_community',{ 'id': membership.getid }) }}">Leave</a></div>
-                            </div>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="tab-pane" id="all">
-                    <ul>
-                        {% for community in all_communities %}
-                            <div class="panel panel-danger communities_panel">
-                                <div class="panel-heading">
-                                    <li class="communities_list"><a href="{{ path('community_profile',{'id':community.getid}) }}"> Name: {{ community.getname }}</a></li>
-                                </div>
-                                <div class="panel-body"><li class="communities_list">{{ community.getdescription }}</li></div>
-                                <div class="btn btn-default"><a href="{{ path('join_community',{ 'id': community.getid }) }}">Enter</a></div>
-                            </div>
-                        {% endfor %}
-                    </ul>
-                </div>
+            <!-- Tabs Heading -->
+            <div class="tabsbar tabsbar-2">
+                <ul class="row row-merge">
+                    <li class="col-md-3 glyphicons parents active"><a href="#tab1-4" data-toggle="tab"><i></i>My communities</a></li>
+                    <li class="col-md-3 glyphicons down_arrow"><a href="#tab2-4" data-toggle="tab"><i></i> <span>All communities</span></a></li>
+                </ul>
             </div>
-        {% endblock communities %}
-    {% endblock wall %}
-{% block body %}
-    {{ parent() }}
-{% endblock body %}
+            <!-- // Tabs Heading END -->
+
+            <div class="tab-content">
+                <!-- Tab content -->
+                <div class="tab-pane active" id="tab1-4">
+                    <div class="row row-merge">
+                        {% if memberships != null %}
+                            {% for membership in memberships %}
+                                <div class="col-md-12 col-lg-6 bg-white border-bottom">
+                                    <div class="row">
+
+                                        <div class="col-sm-9">
+                                            <div class="media">
+                                                <a class="pull-left margin-none" href="#">
+                                                    <img class="img-clean" src="{{ asset(membership.community.fullAvatar) }}" alt="..." width="100" height="100">
+                                                </a>
+                                                <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
+                                                    <h4 class="media-heading"><a href="{{ path('community_profile',{'id':membership.community.id}) }}" class="text-inverse">{{ membership.community.name }}</a></h4>
+                                                    <p>
+                                                        <!-- <span class="text-success strong"><i class="fa fa-check"></i> Friend</span> &nbsp;  -->
+                                                        <i class="fa fa-fw fa-map-marker text-muted"></i> {{ membership.community.description }} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="innerAll text-right">
+                                                <div class="btn-group-vertical btn-group-sm">
+                                                    <a href="{{ path('leave_community',{ 'id': membership.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-ban"></i>Leave</a>
+                                                    {% if app.security.token.user == membership.community.owner %}
+                                                    <a href="{{ path('front_community_edit',{ 'id': membership.community.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-gear"></i>Edit</a>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            0 community
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- // Tab content END -->
+                <!-- Tab content -->
+                <div class="tab-pane" id="tab2-4">
+                    <div class="row row-merge">
+                        {% for community in communities %}
+                                <div class="col-md-12 col-lg-6 bg-white border-bottom">
+                                    <div class="row">
+
+                                        <div class="col-sm-9">
+                                            <div class="media">
+                                                <a class="pull-left margin-none" href="#">
+                                                    <img class="img-clean" src="{{ asset(community.fullAvatar) }}" alt="..." width="100" height="100">
+                                                </a>
+                                                <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
+                                                    <h4 class="media-heading"><a href="{{ path('community_profile',{'id':community.id}) }}" class="text-inverse">{{ community.name }}</a></h4>
+                                                    <p>
+                                                        <!-- <span class="text-success strong"><i class="fa fa-check"></i> Friend</span> &nbsp;  -->
+                                                        <i class="fa fa-fw fa-map-marker text-muted"></i> {{ community.description | raw}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="innerAll text-right">
+                                                <div class="btn-group-vertical btn-group-sm">
+                                                        <a href="{{ path('join_community',{ 'id': community.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-bell"></i>Join</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- // Tab content END -->
+
+            </div>
+
+        </div></div>
+    <!-- // Tabs END -->
+{% endblock content %}
+
+
+{% block profile %}
+    {% include('@BionicUniversityUser/User/Front/profile_block.html.twig') %}
+{% endblock profile %}
+
+
+
+
+
+
+
+

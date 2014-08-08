@@ -7,6 +7,11 @@ a.pull-left img.media-object{
     height: 60px;
 }
 
+/*adjusts title above conversation*/
+span.conv_title {
+    font-size: 14px;
+    font-weight: 400;
+}
 
 div.media-object {
 
@@ -18,7 +23,34 @@ div.media-object img{
     min-width: 50px;
     height: 50px;
 }
-
+/*adjusts status text in msg body*/
 span.messagestatus p{
     font-size: 10px;
+    color:#636363;
+}
+
+form fieldset legend{
+    display: none
+}
+/*hides mr.Awesome title & right-side chat button*/
+#chat-notification, .sidechat {
+    visibility:hidden;
+}
+/*adaptive avatar on profile page*/
+div.widget-body img.avatar {
+    width:100%;
+    height:100%;
+}
+
+/*main page avatar fix*/
+div.widget-body {
+    padding:0px !important;
+}
+.col-sm-9 {
+    width: 70% !important;
+}
+
+#bionicuniversity_bundle_userbundle_user_submit
+{
+    float: right;
 }

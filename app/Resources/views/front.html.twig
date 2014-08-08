@@ -10,137 +10,148 @@
     <link rel="stylesheet" href="{{ asset('vendor/select2/select2.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/select2/select2-bootstrap.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/admin/module.admin.stylesheet-complete.min.css') }}" />
+    <link rel="stylesheet" href="http://cdn2.mosaicpro.biz/shared/assets/library/icons/fontawesome/assets/css/font-awesome.min.css?v=v2.0.1-rc1&amp;sv=v0.0.1.2"/>
+    <link rel="stylesheet" href="http://cdn2.mosaicpro.biz/shared/assets/library/icons/glyphicons/assets/css/glyphicons_filetypes.css?v=v2.0.1-rc1&amp;sv=v0.0.1.2"/>
+    <link rel="stylesheet" href="http://cdn2.mosaicpro.biz/shared/assets/library/icons/glyphicons/assets/css/glyphicons_regular.css?v=v2.0.1-rc1&amp;sv=v0.0.1.2"/>
+    <link rel="stylesheet" href="http://cdn2.mosaicpro.biz/shared/assets/library/icons/glyphicons/assets/css/glyphicons_social.css?v=v2.0.1-rc1&amp;sv=v0.0.1.2"/>
+    <link rel="stylesheet" href="http://cdn2.mosaicpro.biz/shared/assets/library/icons/pictoicons/css/picto.css?v=v2.0.1-rc1&amp;sv=v0.0.1.2"/>
     <link rel="stylesheet" href="{{ asset('assets/page.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/profile.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor.css') }}" />
     <link href="{{ asset('vendor/dropzone/downloads/css/dropzone.css') }}" type="text/css" rel="stylesheet" />
 {% endblock %}
 {% block body %}
     <div class="container-fluid">
-        <div id="menu" class="hidden-print hidden-xs sidebar-default sidebar-brand-primary">
-            <div id="sidebar-social-wrapper">
+    <div id="menu" class="hidden-print hidden-xs sidebar-default sidebar-brand-primary">
+        <div id="sidebar-social-wrapper">
 
-                <!-- LOGO / TEXT -->
-                <div id="brandWrapper">
-                    <a href="#"><span class="text">Sparrow</span></a>
-                </div>
+            <!-- LOGO / TEXT -->
+            <div id="brandWrapper">
+                <a href="/"><span class="text">Sparrow</span></a>
+            </div>
 
-                <ul class="menu list-unstyled">
-                    <li class="hasSubmenu">
-                        <a href="/" ><i class=" icon-home-1"></i><span>Profile</span></a>
+            <ul class="menu list-unstyled">
+                <li class="hasSubmenu">
+                    <a href="/" ><i class=" icon-identification"></i><span>Profile</span></a>
+                </li>
+                <li class="hasSubmenu">
+                    <a href="{{ path('user_friends') }}" ><i class="icon-group"></i><span>Friends</span></a>
+                </li>
+                <li class="hasSubmenu">
+                    <a href="{{ path('messages') }}" ><i class="icon-comment-typing"></i><span>Messages</span></a>
+                </li>
+                <li class="hasSubmenu">
+                    <a href="{{ path('communities') }}" ><i class="icon-earth"></i><span>Communities</span></a>
+                </li>
+                <li class="hasSubmenu">
+                    <a href="{{ path('user_setting') }}" ><i class="icon-settings-wheel-fill"></i><span>Settings</span></a>
+                </li>
+                <li class="hasSubmenu">
+                    <a href="{{ path('feed') }}" ><i class=" icon-space-shuttle"></i><span>Feed</span></a>
+                </li>
+                <li class="hasSubmenu">
+                    <a href="{{ path('user_about_me') }}" ><i class="icon-information"></i><span>About Me</span></a>
+                </li>
+                {% if app.security.isGranted("ROLE_SONATA_ADMIN") %}
+                    <li>
+                        <a href="{{ path('sonata_admin_dashboard') }}"><i class="icon-tv"></i><span>To admin</span></a>
                     </li>
-                    <li class="hasSubmenu">
-                        <a href="{{ path('user_friends') }}" ><i class="icon-group"></i><span>Friends</span></a>
-                    </li>
-                    <li class="hasSubmenu">
-                        <a href="{{ path('messages') }}" ><i class="icon-comment-typing"></i><span>Message</span></a>
-                    </li>
-                    <li class="hasSubmenu">
-                        <a href="{{ path('communities') }}" ><i class="icon-ghost"></i><span>Communities</span></a>
-                    </li>
-                    <li class="hasSubmenu">
-                        <a href="{{ path('user_setting') }}" ><i class="icon-toilet"></i><span>Settings</span></a>
-                    </li>
-                    <li class="hasSubmenu">
-                        <a href="{{ path('user_about_me') }}" ><i class="icon-looking-smirk"></i><span>About Me</span></a>
-                    </li>
-                    {% if app.security.isGranted("ROLE_SONATA_ADMIN") %}
-                        <li>
-                            <a href="{{ path('sonata_admin_dashboard') }}"><i class="icon-tv"></i><span>To admin</span></a>
-                        </li>
-                    {% endif %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+
+    <div id="content">
+    <div class="navbar hidden-print navbar-default box main" role="navigation">
+
+        <!--  RIGHT TOGGLE BUTTON FOR SIDEBAR CHAT  -->
+        <div class="user-action user-action-btn-navbar pull-right border-left sidechat">
+            <a href="#menu-right" class="btn btn-sm btn-navbar btn-open-right"><i class="fa fa-comments fa-2x"></i></a>
+        </div>
+
+        <!--  LEFT TOGGLE BUTTON FOR SIDEBAR MENU -->
+        <div class="user-action user-action-btn-navbar pull-left">
+            <a href="#menu" class="btn btn-sm btn-navbar btn-open-left"><i class="fa fa-bars fa-2x"></i></a>
+        </div>
+
+        <!-- ICON WITH DROPDOWN FOR NOTIFICATIONS    -->
+        <ul class="notifications pull-left hidden-xs">
+            <li class="dropdown notif">
+                <a href="{{ path('messages') }}" class="dropdown-toggle"  data-toggle="dropdown"><i class="notif-block icon-envelope-1"></i><span class="fa"></span></a>
+                {{ render(controller('BionicUniversityMessageBundle:Front/Message:lastMessage', {
+                'max': 3
+                })) }}
+            </li>
+        </ul>
+
+        <!--  USER DROPDOWN MENU-->
+        <div class="user-action pull-left menu-right-hidden-xs menu-left-hidden-xs border-left">
+            <div class="dropdown username pull-left">
+                <!-- DROPDOWN BUTTON -->
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<span class="media margin-none">
+					<span class="pull-left"><img src="{{ asset(app.security.token.user.fullAvatar) }}" alt="user" class="img-circle"></span>
+					<span class="media-body">{{ app.security.token.user.firstname }} <span class="caret"></span></span>
+				</span>
+                </a>
+                <!-- DROPDOWN ITEMS -->
+                <ul class="dropdown-menu">
+                    <li><a href="/">Profile</a></li>
+                    <li><a href="{{ path('user_friends') }}">Friends</a></li>
+                    <li><a href="{{ path('messages') }}">Messages</a></li>
+                    <li><a href="{{ path('communities') }}">Communities</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 </ul>
             </div>
         </div>
 
-        <div id="content">
-            <div class="navbar hidden-print navbar-default box main" role="navigation">
+        <!--  SEARCH INPUT 100% WIDTH-->
+        <div class="input-group hidden-xs pull-left">
+            <form action="{{ path('user_search') }}" method="POST">
+                <span class="input-group-addon"><i class="icon-search"></i></span>
+                <input type="text" class="form-control" placeholder="Search a friend" name="name"/>
+                <input type="submit" style="position: absolute; left: -9999px"/>
+            </form>
+        </div>
+    </div>
+    {% block wrapper %}
+    <!-- <div class="layout-app">  -->
+    <div class="innerAll">
+        <div class="row">
+            <div class="col-lg-9 col-md-8">
 
-                <!--  RIGHT TOGGLE BUTTON FOR SIDEBAR CHAT  -->
-                <div class="user-action user-action-btn-navbar pull-right border-left">
-                    <a href="#menu-right" class="btn btn-sm btn-navbar btn-open-right"><i class="fa fa-comments fa-2x"></i></a>
-                </div>
-
-                <!--  LEFT TOGGLE BUTTON FOR SIDEBAR MENU -->
-                <div class="user-action user-action-btn-navbar pull-left">
-                    <a href="#menu" class="btn btn-sm btn-navbar btn-open-left"><i class="fa fa-bars fa-2x"></i></a>
-                </div>
-
-                <!-- ICON WITH DROPDOWN FOR NOTIFICATIONS    -->
-                <ul class="notifications pull-left hidden-xs">
-                    <li class="dropdown notif">
-                        <a href="#" class="dropdown-toggle"  data-toggle="dropdown"><i class="notif-block icon-envelope-1"></i><span class="fa fa-star"></span></a>
-                        {{ render(controller('BionicUniversityMessageBundle:Front/Message:lastMessage', {
-                        'max': 3
-                        })) }}
-                    </li>
-                </ul>
-
-                <!--  USER DROPDOWN MENU-->
-                <div class="user-action pull-left menu-right-hidden-xs menu-left-hidden-xs border-left">
-                    <div class="dropdown username pull-left">
-                        <!-- DROPDOWN BUTTON -->
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-				<span class="media margin-none">
-					<span class="pull-left"><img src="{{ asset('/uploads/avatar/'~app.security.token.user.avatar) }}" alt="user" class="img-circle"></span>
-					<span class="media-body">{{ app.security.token.user.firstname }} <span class="caret"></span></span>
-				</span>
-                        </a>
-                        <!-- DROPDOWN ITEMS -->
-                        <ul class="dropdown-menu">
-                            <li><a href="/">Profile</a></li>
-                            <li><a href="{{ path('messages') }}">Messages</a></li>
-                            <li><a href="/logout">Logout</a></li>
+                <div class="timeline-cover">
+                    <div class="cover">
+                        <div class="top">
+                            <img src="{{ asset('assets/images/photodune-2755655-party-time-s.jpg') }}" class="img-responsive" />
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="active"><a href="{{ path('feed') }}"><i class="fa fa-fw fa-clock-o"></i> <span>Feed</span></a></li>
+                            <li><a href="{{ path('user_friends') }}"><i class="fa fa-fw icon-group"></i><span> Friends </span></a></li>
+                            <li><a href="{{ path('messages') }}"><i class="fa fa-fw icon-envelope-fill-1"></i> <span>Messages</span> <small>
+                                        {{ render(controller('BionicUniversityMessageBundle:Front/Message:unreadMessages', {
+                                        'max': 3
+                                        })) }}
+                                    </small></a></li>
                         </ul>
                     </div>
-                </div>
-
-                <!--  SEARCH INPUT 100% WIDTH-->
-                <div class="input-group hidden-xs pull-left">
-                    <span class="input-group-addon"><i class="icon-search"></i></span>
-                    <input type="text" class="form-control" placeholder="Search a friend"/>
-                </div>
-            </div>
-            {% block wrapper %}
-            <!-- <div class="layout-app">  -->
-            <div class="innerAll">
-                <div class="row">
-                    <div class="col-lg-9 col-md-8">
-
-                        <div class="timeline-cover">
-                            <div class="cover">
-                                <div class="top">
-                                    <img src="../assets//images/photodune-2755655-party-time-s.jpg" class="img-responsive" />
-                                </div>
-                                <ul class="list-unstyled">
-                                    <li class="active"><a href="index.html?lang=en"><i class="fa fa-fw fa-clock-o"></i> <span>Timeline</span></a></li>
-                                    <li><a href="{{ path('user_friends') }}{{ path('messages') }}"><i class="fa fa-fw icon-group"></i><span> Friends </span></a></li>
-                                    <li><a href="{{ path('messages') }}"><i class="fa fa-fw icon-envelope-fill-1"></i> <span>Messages</span> <small>
-                                                {{ render(controller('BionicUniversityMessageBundle:Front/Message:unreadMessages', {
-                                                'max': 3
-                                                })) }}
-                                    </small></a></li>
-                                </ul>
-                            </div>
-                            <div class="widget">
-                                <div class="widget-body padding-none margin-none">
-                                    <div class="innerAll">
-                                        <i class="fa fa-quote-left text-muted pull-left fa-fw"></i>
-                                        <p class="lead margin-none">What a fun Partyyy</p>
-                                    </div>
-                                </div>
+                    <div class="widget">
+                        <div class="widget-body padding-none margin-none">
+                            <div class="innerAll">
+                                    <i class="fa fa-quote-left text-muted pull-left fa-fw"></i>
+                                    <p class="lead margin-none">fdf</p>
                             </div>
                         </div>
-
-                        {% block content %}
-                        {% endblock content %}
-                        <!-- // Widget END -->
                     </div>
                 </div>
+
+                {% block content %}
+                {% endblock content %}
+                <!-- // Widget END -->
+
             </div>
 
-                    {% block profile %}
-                    {% endblock profile %}
+            {% block profile %}
+            {% endblock profile %}
             {% endblock wrapper %}
         </div>
 

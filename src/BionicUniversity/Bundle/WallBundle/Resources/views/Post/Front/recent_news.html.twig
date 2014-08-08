@@ -24,7 +24,7 @@
 
 
                     <div class="media border-bottom innerAll margin-none">
-                        <img src="../assets/images/people/35/22.jpg" class="pull-left media-object">
+                        <img src="{{ asset('assets/images/people/35/22.jpg') }}" class="pull-left media-object">
 
                         <div class="media-body">
                             <a href="" class="pull-right text-muted innerT half"></a>
@@ -38,7 +38,7 @@
         {% endfor %}
     {% else %}
         <div class="media border-bottom innerAll margin-none">
-            <h5 class="margin-none"><a href="" class="text-inverse">Have nothing</a></h5>
+            <h5 class="margin-none"><a href="" class="text-inverse">nothing to show yet...</a></h5>
         </div>
     {% endif %}
         </div>

@@ -2,7 +2,7 @@
 
     {% for message in lastMessages %}
         <li class="media">
-            <a class="pull-left" href="#"><img class="media-object thumb" src="{{ message.fromUser.avatar }}" alt="50x50" width="50"/></a>
+            <a class="pull-left" href="#"><img class="media-object thumb" src="{{ message.fromUser.fullAvatar }}" alt="50x50" width="50"/></a>
             <div class="media-body">
                 <span class="label label-default pull-right">5 min</span>
                 <h5 class="media-heading">{{ message.fromUser }}</h5>

@@ -39,3 +39,7 @@ user_about:
     path: /about/{id}
     defaults: { _controller: "BionicUniversityUserBundle:Front/User:about"}
 
+user_search:
+    path: /search
+    defaults: { _controller: "BionicUniversityUserBundle:Front/User:search"}
+

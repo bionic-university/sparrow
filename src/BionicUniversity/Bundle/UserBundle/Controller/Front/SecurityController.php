@@ -17,7 +17,8 @@ class SecurityController extends Base
         }
 
         return $this->redirect($this->getRouter()->generate('user_profile', [
-                'id' => $this->getSecurityContext()->getToken()->getUser()->getId()
+                'id' => $this->getSecurityContext()->getToken()->getUser()->getId(),
+                '_token' =>$this->get('form.csrf_provider')->generateCsrfToken('anything')
             ]
         ));
     }
