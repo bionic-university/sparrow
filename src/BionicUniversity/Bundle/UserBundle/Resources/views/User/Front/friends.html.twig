@@ -7,9 +7,9 @@
             <!-- Tabs Heading -->
             <div class="tabsbar tabsbar-2">
                 <ul class="row row-merge">
-                    <li class="col-md-3 glyphicons parents active"><a href="#tab1-4" data-toggle="tab"><i></i> Friends</a></li>
-                    <li class="col-md-3 glyphicons down_arrow"><a href="#tab2-4" data-toggle="tab"><i></i> <span>Requests</span></a></li>
-                    <li class="col-md-3 glyphicons up_arrow"><a href="#tab3-4" data-toggle="tab"><i></i> <span>Invites</span></a></li>
+                    <li class="col-md-3 glyphicons parents active"><a href="#tab1-4" data-toggle="tab"><i></i> Friends ({{ myfriendscount }})</a></li>
+                    <li class="col-md-3 glyphicons down_arrow"><a href="#tab2-4" data-toggle="tab"><i></i> <span>Requests ({{ requestscount }})</span></a></li>
+                    <li class="col-md-3 glyphicons up_arrow"><a href="#tab3-4" data-toggle="tab"><i></i> <span>Invites ({{ invitescount }})</span></a></li>
                     <li class="col-md-3 glyphicons globe"><a href="#tab4-4" data-toggle="tab"><i></i> <span>All people</span></a></li>
                 </ul>
             </div>
@@ -134,7 +134,7 @@
                                 </div>
                             {% endfor %}
                         {% else %}
-                            Have nothing
+                           Nothing to show yet...
                         {% endif %}
                     </div>
                 </div>

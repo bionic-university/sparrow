@@ -193,7 +193,10 @@ class UserController extends Controller
             'my_friends' => $myFriends,
             'all_people' => $em->getRepository("BionicUniversityUserBundle:User")->findAll(),
             'requests' => $unconfirmedRequests,
-            'invites' => $unconfirmedInvites
+            'invites' => $unconfirmedInvites,
+            'invitescount' => (string)count($unconfirmedInvites),
+            'myfriendscount' => (string)count($myFriends),
+            'requestscount' => (string)count($unconfirmedRequests)
         ]);
     }
 
