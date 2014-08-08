@@ -20,11 +20,18 @@ class InvalidTokenListener
             return;
         }
         $token = $event->getRequest()->get('_token');
-//        if (!$token) {
-//            throw new AccessDeniedException('Invalid token');
-//        }
-//        if ($token && (false === $this->provider->isCsrfTokenValid('anything', $token))) {
-//            throw new AccessDeniedException('Invalid token');
-//        }
+        if (false !== strstr($event->getRequest()->attributes->get('_route'), 'fos')) {
+            return;
+        }
+        if (false !== strstr($event->getRequest()->attributes->get('_route'), 'user_login')) {
+            return;
+        }
+
+        if (!$token) {
+            throw new AccessDeniedException('Invalid token');
+        }
+        if ($token && (false === $this->provider->isCsrfTokenValid('anything', $token))) {
+            throw new AccessDeniedException('Invalid token');
+        }
     }
 }
