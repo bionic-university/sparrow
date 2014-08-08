@@ -99,7 +99,7 @@
 //            $('select:not([multiple])').select2();
             $('textarea').redactor(
             {
-                fileUpload: '/redactor/upload'
+                fileUpload: '{{ path('redactor_file_upload') }}'
             });
             $('input[type="date"]').datepicker({
                 format: 'yyyy-mm-dd'
