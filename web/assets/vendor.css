@@ -7,3 +7,6 @@
 .timeline-cover .cover ul{
     background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.5);
 }
+.lock-wrapper.lock-bg-1 {
+    background: url('bg.png') repeat scroll 0% 0% transparent !important;
+}

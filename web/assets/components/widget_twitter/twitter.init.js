@@ -8,10 +8,10 @@ $(function() {
 			// hash: '%23jquery OR %23css'			    
 			//search: '%23heroes2013', //leave this blank if you want to show user's tweet
 			search: '', //leave this blank if you want to show user's tweet
-		    user: 'bionic_uni', //username
+		    user: 'quenesstestacc', //username
 			numTweets: 18, //number of tweets
 			appendTo: '.jstwitter',
-			useGridalicious: true,
+			useGridalicious: false,
 			template: '<div class="item">{IMG}<div class="tweet-wrapper"><span class="text">{TEXT}</span>\
 				<span class="time"><a href="{URL}" target="_blank">{AGO}</a></span>\
 				by <span class="user">{USER}</span></div></div>',
@@ -19,7 +19,7 @@ $(function() {
 			// core function of jqtweet
 			// https://dev.twitter.com/docs/using-search
 			loadTweets: function() {
-
+z
 				var request;
 
 				// different JSON request {hash|user}
