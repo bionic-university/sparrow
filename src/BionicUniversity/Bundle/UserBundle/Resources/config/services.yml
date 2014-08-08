@@ -4,6 +4,7 @@ parameters:
     bionic_university_user.event_listener.invalid_token_listener.class: BionicUniversity\Bundle\UserBundle\EventListener\InvalidTokenListener
     twig.extension.routing.class: BionicUniversity\Bundle\UserBundle\Twig\RoutingExtension
     bionic_university_user.form.transformer.html_purifier.class: Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer
+    router.class: BionicUniversity\Bundle\UserBundle\Routing\Router
 
 services:
     bionic.user.util.user_manipulator:
