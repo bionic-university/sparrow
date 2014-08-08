@@ -22,13 +22,13 @@ class UserSettingsType extends AbstractType
             ->add('position')
             ->add('department')
             ->add('phoneNumber')
+            ->add('status')
             ->add('aboutMe', 'textarea', ['required' => false])
             ->add('gender', 'choice', [
                     'choices' => [User::GENDER_MALE => 'Male', User::GENDER_FEMALE => 'Female'],
                     'empty_value' => false,
                     'empty_data' => null
-                ]
-            )
+                ])
             ->add('dateOfBirth', 'birthday', [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
