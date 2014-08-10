@@ -13,7 +13,7 @@
             <h1 class="strong innerTB">Oups!</h1>
             <h4 class="innerB">Something went wrong.</h4>
             <div class="well bg-white text-danger strong ">
-                {% if  status_code == 404 %} <br> This page is does not exist!
+                {% if  status_code == 404 %}This page is does not exist! <br>
                     {{ status_code }} {{ status_text }}
                 {% elseif status_code == 403 %}
                     {{ status_code }} {{ status_text }} <br> You went the wrong way!
