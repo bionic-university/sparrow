@@ -40,6 +40,8 @@ class MessageController extends Controller
             $interlocutor = null;
             $messages = null;
             $messageForm = null;
+
+
         }
 
         $friends = [];
