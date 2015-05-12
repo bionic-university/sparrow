@@ -5,6 +5,7 @@ namespace BionicUniversity\Bundle\CommunityBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use BionicUniversity\Bundle\UserBundle\Entity\User;
+use BionicUniversity\Bundle\CommunityBundle\Entity\ProjectTask;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -47,20 +48,9 @@ class Community
     private $posts;
 
     /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $posts
+     * @var ArrayCollection
      */
-    public function setPosts($posts)
-    {
-        $this->posts = $posts;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getPosts()
-    {
-        return $this->posts;
-    }
+    private $projectTasks;
 
     /**
      * @var ArrayCollection
@@ -82,6 +72,7 @@ class Community
         $this->createdAt = new \dateTime();
         $this->memberships = new ArrayCollection();
         $this->posts = new ArrayCollection();
+        $this->projectTasks = new ArrayCollection();
     }
 
 
@@ -195,6 +186,38 @@ class Community
     }
 
     /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $posts
+     */
+    public function setPosts($posts)
+    {
+        $this->posts = $posts;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * @param ProjectTask $projectTask
+     */
+    public function setProjectTasks($projectTask)
+    {
+        $this->projectTasks = $projectTask;
+    }
+
+    /**
+     * @return ProjectTask
+     */
+    public function getProjectTasks()
+    {
+        return $this->projectTasks;
+    }
+
+    /**
      * @return string
      */
     public function getAvatar()
@@ -251,5 +274,24 @@ class Community
     public function removePost(Post $post)
     {
         $this->posts->removeElement($post);
+    }
+
+    /**
+     * @param ProjectTask $projectTask
+     * @return ProjectTask
+     */
+    public function addProjectTask(ProjectTask $projectTask)
+    {
+        $this->projectTasks[] = $projectTask;
+
+        return $this;
+    }
+
+    /**
+     * @param ProjectTask $projectTask
+     */
+    public function removeProjectTask(ProjectTask $projectTask)
+    {
+        $this->projectTasks->removeElement($projectTask);
     }
 }

@@ -22,6 +22,7 @@ class StatisticsBlock extends BaseBlockService
         parent::__construct($name, $templating);
         $this->em = $entityManager;
     }
+
     /**
      * {@inheritdoc}
      */

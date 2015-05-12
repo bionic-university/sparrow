@@ -1,0 +1,50 @@
+community_projecttask:
+    path:     /
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/ProjectTask:index" }
+
+community_projecttask_show:
+    path:     /{taskId}/show
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/ProjectTask:show" }
+
+community_projecttask_new:
+    path:     /new
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/ProjectTask:new" }
+
+community_projecttask_create:
+    path:     /create
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/ProjectTask:create" }
+    requirements: { _method: post }
+
+community_projecttask_edit:
+    path:     /{taskId}/edit
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/ProjectTask:edit" }
+
+community_projecttask_update:
+    path:     /{taskId}/update
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/ProjectTask:update" }
+    requirements: { _method: post|put }
+
+community_projecttask_delete:
+    path:     /{taskId}/delete
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/ProjectTask:delete" }
+    requirements: { _method: post|delete }
+
+community_projecttask_remove:
+    path: /{taskId}/remove
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/ProjectTask:remove"}
+
+community_projecttask_taskmanager_add:
+    path: /{taskId}/taskManager/new
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/ProjectTask:newTaskManager" }
+
+community_projecttask_taskmanager_delete:
+    path: /{taskId}/taskManager/{taskManagerId}/delete
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/ProjectTask:deleteTaskManager" }
+
+community_projecttask_taskmanager_show:
+    path: /{taskId}/taskManager/{taskManagerId}/show
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/ProjectTask:showTaskManager" }
+
+community_projecttask_taskmanager_update:
+    path: /{taskId}/taskManager/{taskManagerId}/updateInfo
+    defaults: { _controller: "BionicUniversityCommunityBundle:Front/ProjectTask:updateTaskManager" }

@@ -32,7 +32,7 @@ class SecurityController extends Base
      * @param $id
      * @return object
      */
-    private function get($id)
+    public function get($id)
     {
         return $this->container->get($id);
     }
@@ -42,7 +42,7 @@ class SecurityController extends Base
      * @param  int              $status
      * @return RedirectResponse
      */
-    private function redirect($url, $status = 302)
+    public function redirect($url, $status = 302)
     {
         return new RedirectResponse($url, $status);
     }
@@ -69,7 +69,7 @@ class SecurityController extends Base
      * @param  Response $response
      * @return mixed
      */
-    private function render($view, array $parameters = array(), Response $response = null)
+    public function render($view, array $parameters = array(), Response $response = null)
     {
         return $this->get('templating')->renderResponse($view, $parameters, $response);
     }

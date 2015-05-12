@@ -1,0 +1,27 @@
+BionicUniversity\Bundle\CommunityBundle\Entity\ProjectTask:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 255
+        description:
+            type: text
+        createdAt:
+            type: datetime
+
+    manyToOne:
+        community:
+            targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Community
+            inversedBy: projectTasks
+    oneToOne:
+        taskManager:
+            targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\TaskManager
+            mappedBy: projectTask
+    lifecycleCallbacks: {  }
