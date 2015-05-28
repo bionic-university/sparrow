@@ -27,6 +27,11 @@ class TaskManager
      */
     private $projectTask;
 
+    function __construct()
+    {
+        $this->details = null;
+    }
+
     /**
      * Get id
      *

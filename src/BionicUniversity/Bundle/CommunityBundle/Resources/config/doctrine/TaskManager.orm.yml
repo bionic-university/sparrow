@@ -10,6 +10,7 @@ BionicUniversity\Bundle\CommunityBundle\Entity\TaskManager:
     fields:
             details:
                 type: text
+                nullable: true
     oneToMany:
            tasks:
                targetEntity: BionicUniversity\Bundle\CommunityBundle\Entity\Task

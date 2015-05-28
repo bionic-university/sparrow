@@ -46,7 +46,7 @@ class User extends BaseUser
      *      min = "2",
      *      max = "50",
      *      minMessage = "Your first name must be at least 2 characters length",
-     *      maxMessage = "Your first name cannot be longer than 50 characters length"
+     *      maxMessage = "Your first na me cannot be longer than 50 characters length"
      *      )
      * @Assert\NotBlank()
      */
@@ -125,6 +125,27 @@ class User extends BaseUser
      *      )
      */
     private $status;
+
+    /**
+     * @var integer
+     */
+    private $tasksCount;
+
+    /**
+     * @return mixed
+     */
+    public function getTasksCount()
+    {
+        return $this->tasksCount;
+    }
+
+    /**
+     * @param mixed $tasksCount
+     */
+    public function setTasksCount($tasksCount)
+    {
+        $this->tasksCount = $tasksCount;
+    }
 
     /**
      * @param string $status
@@ -549,7 +570,7 @@ class User extends BaseUser
      */
     public function removePost(\BionicUniversity\Bundle\WallBundle\Entity\Post $post)
     {
-        $this->post->removeElement($post);
+        $this->posts->removeElement($post);
     }
 
     /**
@@ -559,7 +580,7 @@ class User extends BaseUser
      */
     public function getPost()
     {
-        return $this->post;
+        return $this->posts;
     }
 
     /**

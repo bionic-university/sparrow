@@ -2142,12 +2142,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "1a4c53d0da0aab9a945a53b7c7f415c4cec41b7b"
+                "reference": "16474a3f6debe6a4a339238470d96b941904853a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/1a4c53d0da0aab9a945a53b7c7f415c4cec41b7b",
-                "reference": "1a4c53d0da0aab9a945a53b7c7f415c4cec41b7b",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/16474a3f6debe6a4a339238470d96b941904853a",
+                "reference": "16474a3f6debe6a4a339238470d96b941904853a",
                 "shasum": ""
             },
             "require": {
@@ -2218,7 +2218,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2015-05-06 09:17:40"
+            "time": "2015-05-11 13:32:06"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -3290,12 +3290,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/MinkExtension.git",
-                "reference": "9bff0ae65f32f9bf9df0afef91057a7bfeeeafc6"
+                "reference": "c7fb932533292567aa57bfbe4ec40f1490ae6d58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkExtension/zipball/9bff0ae65f32f9bf9df0afef91057a7bfeeeafc6",
-                "reference": "9bff0ae65f32f9bf9df0afef91057a7bfeeeafc6",
+                "url": "https://api.github.com/repos/Behat/MinkExtension/zipball/c7fb932533292567aa57bfbe4ec40f1490ae6d58",
+                "reference": "c7fb932533292567aa57bfbe4ec40f1490ae6d58",
                 "shasum": ""
             },
             "require": {
@@ -3341,7 +3341,7 @@
                 "test",
                 "web"
             ],
-            "time": "2015-03-25 17:21:25"
+            "time": "2015-05-07 13:06:09"
         },
         {
             "name": "behat/mink-goutte-driver",
@@ -3858,16 +3858,16 @@
         },
         {
             "name": "instaclick/php-webdriver",
-            "version": "1.4.1",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/instaclick/php-webdriver.git",
-                "reference": "a57b2bcd9467e217134a2248b261b8b3a90ccea0"
+                "reference": "6aa16bbc02a5897200ab70316e0d2a01664afc51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/instaclick/php-webdriver/zipball/a57b2bcd9467e217134a2248b261b8b3a90ccea0",
-                "reference": "a57b2bcd9467e217134a2248b261b8b3a90ccea0",
+                "url": "https://api.github.com/repos/instaclick/php-webdriver/zipball/6aa16bbc02a5897200ab70316e0d2a01664afc51",
+                "reference": "6aa16bbc02a5897200ab70316e0d2a01664afc51",
                 "shasum": ""
             },
             "require": {
@@ -3912,7 +3912,7 @@
                 "webdriver",
                 "webtest"
             ],
-            "time": "2014-05-12 21:03:05"
+            "time": "2015-04-05 19:52:55"
         },
         {
             "name": "knplabs/friendly-contexts",
@@ -3920,12 +3920,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/FriendlyContexts.git",
-                "reference": "9545445847aab36f2154db97dfd5f963d0dfb12e"
+                "reference": "f020e6ceb89bcc434390c3f288f91828ae11623e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/FriendlyContexts/zipball/9545445847aab36f2154db97dfd5f963d0dfb12e",
-                "reference": "9545445847aab36f2154db97dfd5f963d0dfb12e",
+                "url": "https://api.github.com/repos/KnpLabs/FriendlyContexts/zipball/f020e6ceb89bcc434390c3f288f91828ae11623e",
+                "reference": "f020e6ceb89bcc434390c3f288f91828ae11623e",
                 "shasum": ""
             },
             "require": {
@@ -3955,7 +3955,7 @@
             ],
             "authors": [
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -3964,7 +3964,7 @@
                 }
             ],
             "description": "Some BEHAT contexts",
-            "time": "2015-04-14 16:08:16"
+            "time": "2015-05-13 16:59:25"
         },
         {
             "name": "react/promise",

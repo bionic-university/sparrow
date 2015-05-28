@@ -9,8 +9,10 @@
 <!-- body -->
 <!-- real content is dynamically generated -->
 <footer>
-   
+
 </footer>
+
+
 
 <!-- behaviour -->
 <script src=http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.min.js></script>
@@ -30,9 +32,22 @@
 
         // CONSTANTS
         // ===========
+        {% autoescape false %}
+        var maxTaskCountPerUser = 5;
 
-        var HTML_CARD = "<section class=card><div class=text>",
+        var users = [];
 
+        {% for user in users %}
+        {{ user.tasksCount }}
+        users[{{ user.id }}] = {{ user.tasksCount }};
+        {% endfor %}
+
+        console.log(users);
+
+        var HTML_CARD = "<section class=card><select><option>Select user<option>" +
+                        "{% for user in users %}<option value='{{ user.id }}'>{{ user.firstName }} {{ user.lastName }}</option>{% endfor %}" +
+                        "</select><div class=text>",
+                {% endautoescape %}
         // some class names
                 DRAG = "drag",
                 EDIT = "edit",
@@ -71,7 +86,7 @@
                 TRUE  = !0 + "", // == "true"  //  little inconsistency, but I use "true" only as a string
                 FALSE = !1,      // == false   //  and false more as boolean
 
-                COLORS = [ 'green', 'blue', 'red', 'yellow'],
+                COLORS = [ 'red', 'yellow', 'blue', 'green','red', 'yellow', 'blue', 'green','red', 'yellow', 'blue', 'green','red', 'yellow', 'blue', 'green','red', 'yellow', 'blue', 'green','red', 'yellow', 'blue', 'green','red', 'yellow', 'blue', 'green'],
 
         // checks if class name contains one of the colors
                 R_COLORCLASS = new RegExp('\\b(' + COLORS.join(')|(') + ')\\b'),
@@ -224,6 +239,7 @@
 
 // saves current board state to local storage
         function save() {
+            console.log(users);
             var cards = [],
                     $card; // used in .each loop, but it saves one 'var' statement
 
@@ -231,7 +247,9 @@
                 $card = $(this);
                 cards.push($.extend($card.offset(), {
                     type: $card.color(),
-                    text: $card.data(VALUE) || ""
+                    text: $card.data(VALUE) || "",
+                    user: $card.find("option:selected").val(),
+                    date: $card.attr('data-time')
                 }));
             });
 
@@ -381,7 +399,6 @@
 
         $(function () { // $(document).ready() -- theoretically not needed, as we don't manipulate the document contents
             //                        and this script is loaded in the end anyway
-
             // loading data from storage (or using some dummy cards)
             storage.clear();
             {% if taskManager %}
@@ -393,9 +410,9 @@
             data = storage.getItem(STORAGE_KEY);
 
             data = data ? JSON.parse(data) : [
-                { type: COLORS[0], text: "<p><i>Welcome to</i></p><h2>Taskboard Lite</h2>", top: 40, left: 70 },
-                { type: COLORS[5], text: tip(), top: 120, left: 80 },
-                { type: COLORS[1], text: "<p><b>Have fun!</b></p>", top: 180, left: 90 }
+                { type: COLORS[0], text: "<p><i>Welcome to</i></p><h2>Taskboard </h2>", top: 40, left: 70, date: Date.now() },
+                { type: COLORS[5], text: tip(), top: 120, left: 80, date: Date.now()},
+                { type: COLORS[1], text: "<p><b>Have fun!</b></p>", top: 180, left: 90, date: Date.now()}
             ];
 
             // building the board
@@ -406,7 +423,13 @@
                         .aC(card.type || COLORS[5]) // .addClass
                         .css(card) // we are interested in top and left values only, rest will be hopefully ignored ;)
                         .saveText(card.text)
-                        .to($board);
+                        .to($board)
+                        .find('select').val(card.user);
+                        //.attr('data-time', card.date);
+                if(card.user % 1 === 0)
+                {
+                    $(HTML_CARD).find('select option[value='+card.user+']').attr('selected', 'selected');
+                }
             });
 
             // preparing toolbars
@@ -435,6 +458,7 @@
                             $card.clone()          // clone deck card and add it to the board
                                     .pick().aC(DRAG)
                                     .css($card.offset())
+                                    .attr('data-time', Date.now())
                                     .saveText(tip())
                                     .to($board)
                                     .trigger(event);   // start dragging new card
@@ -448,7 +472,7 @@
 
             // add a card to the deck for each color
             $.each(COLORS, function (i, color) {
-                i = 6 - i; // 6 is COLORS.length
+                i = 4 - i; // 6 is COLORS.length
                 $(HTML_CARD)
                         .to($deck)
                         .aC(color) // .addClass
@@ -551,6 +575,24 @@
                             $body.not(HAS_MARK).rC(MARK); // .removeClass
                         }
                     });
+            $('select').bind('change', function(){
+                users[$(this).val()]++;
+                if(users[$(this).val()] == 5 ) {
+                    alert('This is your last task. Max count is 5');
+                }
+                if(users[$(this).val()] > 5) {
+                    users[$(this).val()]--;
+                    $(this).val(0);
+                    alert('Sorry, you can not apply to task. Max count is 5');
+                }
+                console.log(users);
+
+            });
+            $('#board').before('<div style="float:left;  width: 25%; background-color: #E43; text-align:center;">Backlog</div>' +
+            '<div style="float:left;  width: 25%; background-color: #0AC; text-align:center;">Ready</div>' +
+            '<div style="float:left;  width: 25%; background-color: #FC3; text-align:center;">In progress</div>' +
+            '<div style="float:left;  width: 25%; background-color: #8C4; text-align:center;">Done</div>');
+            $('#board').before('<a style="float:right" href="{{ path('community_profile', {'id': communityId}) }}">Back to Community</a>');
 
 // We are almost at the end of out journey.
 // Last but not least, the event bound to the document itself.
@@ -567,12 +609,10 @@
                             $(DOT + MARK).rC(MARK).drop(); // .removeClass
                         }
                     });
-
         });
-
 // And that's all folks!
-
     })(document, jQuery, localStorage);
 
 
 </script>
+

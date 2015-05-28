@@ -6,7 +6,9 @@ use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
 use BionicUniversity\Bundle\CommunityBundle\Entity\TaskManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use BionicUniversity\Bundle\UserBundle\Entity\User;
 use BionicUniversity\Bundle\CommunityBundle\Entity\ProjectTask;
+use BionicUniversity\Bundle\CommunityBundle\Entity\Membership;
 use BionicUniversity\Bundle\CommunityBundle\Form\ProjectTaskType;
 
 /**
@@ -25,13 +27,52 @@ class ProjectTaskController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         /**
-         * @var ProjectTask $entities
+         * @var ProjectTask $projectTasks
          */
-        $entities = $em->getRepository('BionicUniversityCommunityBundle:ProjectTask')->findByCommunity($communityId);
+        $projectTasks =  $em->getRepository('BionicUniversityCommunityBundle:ProjectTask')->findByCommunity($communityId);
+        $taskManagers = $em->getRepository('BionicUniversityCommunityBundle:TaskManager')->findBy(['projectTask' => $projectTasks]);
+        $users = $em->getRepository('BionicUniversityUserBundle:User')->findAll();
+
+        /**
+         * @var User $user
+         */
+        foreach ($users as $user ) {
+            $users[$user->getId()] = $user;
+        }
+
+        $tasks = [];
+        /**
+         * @var TaskManager $taskManager
+         */
+        if(null != $taskManagers) {
+            foreach ($taskManagers as $taskManager) {
+                $projectTaskId = $taskManager->getProjectTask()->getId();
+                $tasks[$projectTaskId]['green'] = 0;
+                if(null != $taskManager->getDetails()) {
+                    $tasks[$projectTaskId]['count'] = count(json_decode($taskManager->getDetails(),true));
+                    foreach (json_decode($taskManager->getDetails()) as $detail) {
+                        $tasks[$projectTaskId]['tasks'][$detail->user][] = strip_tags($detail->text);
+                      //  $tasks[$projectTaskId]['dates'][$detail->user][] = $detail->date;
+                       // $tasks[$projectTaskId]['tasks']['task'] = $detail->text;
+                        if($detail->type == 'green') {
+                            $tasks[$projectTaskId]['green']++;
+                        }
+                    }
+                    foreach ($tasks[$projectTaskId] as $key => $value) {
+                        $tasks[$projectTaskId]['percent'] = ceil($tasks[$projectTaskId]['green'] * 100 / $tasks[$projectTaskId]['count']);
+                    }
+                }
+            }
+        }
+//        echo '<pre>';
+//        print_r($tasks);
+//        die;
 
         return $this->render('BionicUniversityCommunityBundle:ProjectTask:index.html.twig', array(
-            'entities' => $entities,
-            'communityId' => $communityId
+            'entities' => $projectTasks,
+            'communityId' => $communityId,
+            'tasks' => $tasks,
+            'users' => $users
         ));
     }
     /**
@@ -218,8 +259,12 @@ class ProjectTaskController extends Controller
     public function removeAction($communityId, $taskId)
     {
         $em = $this->getDoctrine()->getManager();
+        /**
+         * @var ProjectTask $removeProjectTask
+         */
         $removeProjectTask = $em->getRepository("BionicUniversityCommunityBundle:ProjectTask")->find($taskId);
         $em->remove($removeProjectTask);
+
         $em->flush();
 
         return $this->redirect($this->generateUrl('community_profile', ['id' => $communityId]));
@@ -271,7 +316,30 @@ class ProjectTaskController extends Controller
     public function deleteTaskManagerAction($communityId, $taskId, $taskManagerId)
     {
         $em = $this->getDoctrine()->getManager();
+        /**
+         * @var TaskManager $taskManager
+         */
         $taskManager = $em->getRepository('BionicUniversityCommunityBundle:TaskManager')->findOneBy(['id' => $taskManagerId]);
+        $details = json_decode($taskManager->getDetails());
+
+        $users = [];
+        if(null != $details)
+        {
+            foreach ($details as $item)
+            {
+                if(isset($item->user) && is_numeric($item->user))
+                {
+                    $users[] = $item->user;
+                    /**
+                     * @var User $user
+                     */
+                    $user = $em->getRepository('BionicUniversityUserBundle:User')->findOneById($item->user);
+                    $user->setTasksCount(0);
+                    $em->persist($user);
+                }
+            }
+        }
+
 
         $em->remove($taskManager);
         $em->flush();
@@ -282,13 +350,57 @@ class ProjectTaskController extends Controller
     public function showTaskManagerAction($communityId, $taskId, $taskManagerId)
     {
         $em = $this->getDoctrine()->getManager();
+
         /**
          * @var TaskManager $taskManager
          */
         $taskManager = $em->getRepository('BionicUniversityCommunityBundle:TaskManager')->findOneBy(['id' => $taskManagerId]);
 
+        $taskManagers = $em->getRepository('BionicUniversityCommunityBundle:TaskManager')->findAll();
+
+        $usersTaskCounts = [];
+        /**
+         * @var TaskManager $taskManager
+         */
+        foreach($taskManagers as $taskManager)
+        {
+            if(null != $taskManager->getDetails())
+            {
+                foreach(json_decode($taskManager->getDetails()) as $detail)
+                {
+                    if(isset($detail->user) && is_numeric($detail->user))
+                    {
+                        $usersTaskCounts[] =  $detail->user;
+                    }
+                }
+            }
+        }
+
+        foreach(array_count_values($usersTaskCounts) as $id => $count)
+        {
+            /**
+             * @var User $user
+             */
+            $user = $em->getRepository('BionicUniversityUserBundle:User')->findOneById($id);
+            $user->setTasksCount($count);
+            $em->persist($user);
+            $em->flush();
+        }
+
+        $users = [];
+        /**
+         * @var Membership $user
+         */
+        foreach($taskManager->getProjectTask()->getCommunity()->getMemberships() as $user)
+        {
+            $users[] = $user->getUser();
+        }
+
+        $taskManager = $em->getRepository('BionicUniversityCommunityBundle:TaskManager')->findOneBy(['id' => $taskManagerId]);
+
         return $this->render('@BionicUniversityCommunity/TaskManager/taskManager.html.twig',
             [
+                'users' => $users,
                 'taskManager' => $taskManager->getDetails(),
                 'communityId' => $communityId,
                 'taskId' => $taskId,
@@ -309,13 +421,14 @@ class ProjectTaskController extends Controller
              * @var TaskManager $taskManager
              */
             $taskManager = $em->getRepository('BionicUniversityCommunityBundle:TaskManager')->findOneBy(['id' => $taskManagerId]);
+
             $taskManager->setDetails($data);
             $em->persist($taskManager);
             $em->flush();
+
         }
 
         return $this->render('@BionicUniversityCommunity/TaskManager/details.html.twig', ['taskManager' => $taskManager->getDetails()]);
     }
-
 
 }

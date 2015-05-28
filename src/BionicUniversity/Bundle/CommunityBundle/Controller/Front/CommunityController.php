@@ -7,7 +7,7 @@ use BionicUniversity\Bundle\CommunityBundle\Entity\ProjectTask;
 use BionicUniversity\Bundle\CommunityBundle\Form\Type\ProjectTaskType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BionicUniversity\Bundle\UserBundle\Entity\Avatar;
-
+use BionicUniversity\Bundle\CommunityBundle\Entity\TaskManager;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use BionicUniversity\Bundle\CommunityBundle\Form\Type\PostType;
 use BionicUniversity\Bundle\CommunityBundle\Form\Type\FrontCommunityType;
