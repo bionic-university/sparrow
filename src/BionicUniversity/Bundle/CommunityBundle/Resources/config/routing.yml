@@ -7,6 +7,7 @@ BionicUniversityCommunityBundle_admin_membership:
 BionicUniversityCommunityBundle_user_community:
         resource: "@BionicUniversityCommunityBundle/Resources/config/routing/front/community.yml"
         prefix:   /community
+
 communities:
     path: /communities
     defaults: { _controller:"BionicUniversityCommunityBundle:Front/Community:communities" }

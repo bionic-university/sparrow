@@ -1,3 +1,6 @@
+BionicUniversityCommunityBundle_community_projecttask:
+        resource: "@BionicUniversityCommunityBundle/Resources/config/routing/projecttask.yml"
+        prefix:   /{communityId}/projectTask
 community_profile:
     path:     /id{id}
     defaults: { _controller: "BionicUniversityCommunityBundle:Front/Community:profile" }

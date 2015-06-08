@@ -16,6 +16,7 @@ class InvalidTokenListener
 
     public function onKernelRequest(GetResponseEvent $event)
     {
+
         if (!$event->isMasterRequest()) {
             return;
         }
@@ -29,10 +30,11 @@ class InvalidTokenListener
         if('GET' !== $event->getRequest()->getMethod()){
             return;
         }
-        if (!$token) {
+        //some govnokod, sry guys)))))
+        if (!$token && strpos($event->getRequest()->getUri(), 'updateInfo') < 0) {
             throw new AccessDeniedException('Invalid token');
         }
-        if ($token && (false === $this->provider->isCsrfTokenValid('anything', $token))) {
+        if (($token && (false === $this->provider->isCsrfTokenValid('anything', $token))) || strpos($event->getRequest()->getUri(), 'updateInfo') < 0) {
             throw new AccessDeniedException('Invalid token');
         }
     }

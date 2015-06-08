@@ -3,9 +3,11 @@ namespace BionicUniversity\Bundle\CommunityBundle\Controller\Front;
 
 use BionicUniversity\Bundle\CommunityBundle\Entity\Membership;
 use BionicUniversity\Bundle\CommunityBundle\Entity\Community;
+use BionicUniversity\Bundle\CommunityBundle\Entity\ProjectTask;
+use BionicUniversity\Bundle\CommunityBundle\Form\Type\ProjectTaskType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BionicUniversity\Bundle\UserBundle\Entity\Avatar;
-
+use BionicUniversity\Bundle\CommunityBundle\Entity\TaskManager;
 use BionicUniversity\Bundle\WallBundle\Entity\Post;
 use BionicUniversity\Bundle\CommunityBundle\Form\Type\PostType;
 use BionicUniversity\Bundle\CommunityBundle\Form\Type\FrontCommunityType;
@@ -19,15 +21,17 @@ class CommunityController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BionicUniversityCommunityBundle:Community')->find($id);
+
         $posts = $em->getRepository('BionicUniversityWallBundle:Post')->findByCommunity($entity, ['createdAt'=>'desc']);
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Community entity.');
         }
-        $form = $this->createPostForm($id);
+        $postForm = $this->createPostForm($id);
+
         return $this->render('BionicUniversityCommunityBundle:Community/Front:community.html.twig', [
             'entity' => $entity,
             'posts' => $posts,
-            'form' => $form->createView()
+            'form' => $postForm->createView()
         ]);
     }
 
@@ -84,29 +88,6 @@ class CommunityController extends Controller
     }
 
     /**
-     * Creates a form to create communities posts.
-     *
-     * @param Post $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createPostForm($id)
-    {
-        $form = $this->createForm(new PostType(), null, [
-            'action' => $this->generateUrl('create_community_post', ['id'=>$id]),
-            'method' => 'POST',
-            'show_legend' => true,
-            'label' => 'Write a new post'
-        ]);
-
-        $form->add('submit', 'submit', [
-            'label' => 'Create new post',
-            'attr' => ['class' => 'pull-right btn btn-success']]);
-
-        return $form;
-    }
-
-    /**
      * Displays a form to create a new Community entity.
      *
      */
@@ -119,25 +100,6 @@ class CommunityController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
         ]);
-    }
-
-    /**
-     * Creates a form to create a Community entity.
-     *
-     * @param Community $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Community $entity)
-    {
-        $form = $this->createForm(new FrontCommunityType(), $entity, [
-            'action' => $this->generateUrl('front_community_create'),
-            'method' => 'POST',
-        ]);
-
-        $form->add('submit', 'submit', ['label' => 'Create']);
-
-        return $form;
     }
 
     /**
@@ -192,25 +154,6 @@ class CommunityController extends Controller
     }
 
     /**
-     * Creates a form to edit a Community entity.
-     *
-     * @param Community $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createEditForm(Community $entity)
-    {
-        $form = $this->createForm(new FrontCommunityType(), $entity,
-        [
-            'action' => $this->generateUrl('front_community_update', ['id' => $entity->getId()]),
-            'method' => 'PUT'
-        ]);
-
-        $form->add('submit', 'submit', ['label' => 'Update']);
-
-        return $form;
-    }
-    /**
      * Edits an existing Community entity.
      *
      */
@@ -264,6 +207,55 @@ class CommunityController extends Controller
         return $this->redirect($this->generateUrl('communities'));
     }
 
+    public function newProjectTask(Request $request)
+    {
+        $entity = new ProjectTask();
+
+        //$form = $this->createForm()
+
+       // $form->handleRequest($request);
+
+    }
+
+    /**
+     * Creates a form to edit a Community entity.
+     *
+     * @param Community $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(Community $entity)
+    {
+        $form = $this->createForm(new FrontCommunityType(), $entity,
+            [
+                'action' => $this->generateUrl('front_community_update', ['id' => $entity->getId()]),
+                'method' => 'PUT'
+            ]);
+
+        $form->add('submit', 'submit', ['label' => 'Update']);
+
+        return $form;
+    }
+
+    /**
+     * Creates a form to create a Community entity.
+     *
+     * @param Community $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCreateForm(Community $entity)
+    {
+        $form = $this->createForm(new FrontCommunityType(), $entity, [
+            'action' => $this->generateUrl('front_community_create'),
+            'method' => 'POST',
+        ]);
+
+        $form->add('submit', 'submit', ['label' => 'Create']);
+
+        return $form;
+    }
+
     /**
      * Creates a form to delete a Community entity by id.
      *
@@ -279,5 +271,28 @@ class CommunityController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
             ;
+    }
+
+    /**
+     * Creates a form to create communities posts.
+     *
+     * @param Post $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createPostForm($id)
+    {
+        $form = $this->createForm(new PostType(), null, [
+            'action' => $this->generateUrl('create_community_post', ['id'=>$id]),
+            'method' => 'POST',
+            'show_legend' => true,
+            'label' => 'Write a new post'
+        ]);
+
+        $form->add('submit', 'submit', [
+            'label' => 'Create new post',
+            'attr' => ['class' => 'pull-right btn btn-success']]);
+
+        return $form;
     }
 }

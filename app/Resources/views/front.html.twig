@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('assets/page.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor.css') }}" />
     <link href="{{ asset('vendor/dropzone/downloads/css/dropzone.css') }}" type="text/css" rel="stylesheet" />
+
 {% endblock %}
 {% block body %}
     <div class="container-fluid">
@@ -122,7 +123,7 @@
                 <div class="timeline-cover">
                     <div class="cover">
                         <div class="top">
-                            <img src="http://memodigital.ru/upload/images/20121221174004fb5c81ed3a220004b71069645f112867_w974_h300_m5.png" class="img-responsive" />
+                            <img src="{{ asset('/uploads/logo_lal.png') }}" class="img-responsive" />
                         </div>
                         <ul class="list-unstyled">
                             <li><a href="{{ path('feed') }}"><i class="fa fa-fw fa-clock-o"></i> <span>Feed</span></a></li>

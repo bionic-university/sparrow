@@ -42,6 +42,8 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
             type: string
             length: '140'
             nullable:  true
+        tasksCount:
+            type: integer
     manyToMany:
         interests:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\Interest

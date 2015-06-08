@@ -1,0 +1,70 @@
+{% extends "::front.html.twig" %}
+{% block profile %}
+    {% include('@BionicUniversityUser/User/Front/profile_block.html.twig') %}
+{% endblock profile %}
+
+{% block content %}
+
+
+
+    <div class="table-responsive">
+
+        <!-- Pricing table -->
+        <table class="table panel panel-default table-pricing table-pricing-2">
+
+            <!-- Table heading -->
+            <thead>
+            <tr>
+                <th class="text-center">{{ entity.title }}</th>
+
+            </tr>
+            </thead>
+            <!-- // Table heading END -->
+
+            <!-- Table body -->
+            <tbody>
+
+            <!-- Table pricing row -->
+            <tr class="pricing">
+                <td class="text-center">
+                    <span class="label label-primary">{{ entity.createdAt|date('Y-m-d H:i:s') }}</span>
+                </td>
+
+            </tr>
+            <!-- // Table pricing row END -->
+
+            <!-- Table row -->
+            <tr>
+                <td class="text-center">
+                    <p>
+                        {{ entity.description|raw }}
+                    </p>
+                    <button class="btn ">
+                        <a href="{{ path('community_profile', {'id': communityId}) }}">
+                            Back to the list
+                        </a>
+
+                    </button>
+                    <button class="btn ">
+                        <a href="{{ path('community_projecttask_edit', {'communityId': communityId, 'taskId': entity.id }) }}">
+                            Edit
+                        </a>
+                    </button><br><Br>
+                    {{ form(delete_form) }}
+                </td>
+            </tr>
+            <!-- // Table row END -->
+
+            </tbody>
+            <!-- // Table body END -->
+
+        </table>
+        <!-- // Pricing table END -->
+
+    </div>
+
+
+
+
+
+{% endblock %}

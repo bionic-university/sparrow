@@ -58,8 +58,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
+        <a href="{{ path('community_projecttask', {'communityId':entity.id }) }}">ProjectTasks</a>
+        {{ render(controller('BionicUniversityCommunityBundle:Front/ProjectTask:index', {'communityId': entity.id})) }}
 
     </div>
 
@@ -90,7 +91,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="widget widget-heading-simple widget-body-white">
-
+                        <h3 class="center">Add new post</h3>
                         <div class="widget-body">
                             <div class="innerLR">
                                 {{ form(form) }}
