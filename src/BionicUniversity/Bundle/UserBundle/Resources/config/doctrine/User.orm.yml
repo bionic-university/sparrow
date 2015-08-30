@@ -44,6 +44,7 @@ BionicUniversity\Bundle\UserBundle\Entity\User:
             nullable:  true
         tasksCount:
             type: integer
+            nullable: true
     manyToMany:
         interests:
             targetEntity: BionicUniversity\Bundle\UserBundle\Entity\Interest
